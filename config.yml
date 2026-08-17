@@ -7,7 +7,7 @@
 
 horizon: 5                 # gameweeks the planner looks ahead
 plan_window_hours: 40      # only run the deadline plan within this many hours of it
-site_url: ""               # your GitHub Pages URL, shown at the bottom of each brief
+site_url: "https://aminou973.github.io/fpl-bot/"               # your GitHub Pages URL, shown at the bottom of each brief
 chip_deadline: "2027-01-02T13:30:00Z"   # first chip set expires before GW19
 
 teams:
