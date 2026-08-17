@@ -3,7 +3,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 33.2,
+  "selected_by": 33.3,
   "status": "a"
  },
  "10": {
@@ -206,7 +206,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 0.9,
+  "selected_by": 1.0,
   "status": "a"
  },
  "126": {
@@ -220,7 +220,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 2.7,
+  "selected_by": 2.8,
   "status": "a"
  },
  "128": {
@@ -1781,7 +1781,7 @@
   "chance": 75,
   "cost": 50,
   "news": "Knock - 75% chance of playing",
-  "selected_by": 0.4,
+  "selected_by": 0.3,
   "status": "d"
  },
  "329": {
@@ -1970,7 +1970,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 1.2,
+  "selected_by": 1.1,
   "status": "a"
  },
  "353": {
@@ -2047,7 +2047,7 @@
   "chance": 100,
   "cost": 50,
   "news": "",
-  "selected_by": 1.7,
+  "selected_by": 1.8,
   "status": "a"
  },
  "363": {
@@ -2089,7 +2089,7 @@
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 41.4,
+  "selected_by": 41.3,
   "status": "a"
  },
  "369": {
@@ -2173,7 +2173,7 @@
   "chance": null,
   "cost": 90,
   "news": "",
-  "selected_by": 14.8,
+  "selected_by": 14.9,
   "status": "a"
  },
  "38": {
@@ -2250,7 +2250,7 @@
   "chance": 75,
   "cost": 60,
   "news": "Knock - 75% chance of playing",
-  "selected_by": 3.8,
+  "selected_by": 3.7,
   "status": "d"
  },
  "39": {
@@ -2971,7 +2971,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 10.0,
+  "selected_by": 9.9,
   "status": "a"
  },
  "482": {
@@ -3027,7 +3027,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 6.5,
+  "selected_by": 6.4,
   "status": "a"
  },
  "49": {
@@ -3083,7 +3083,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 20.1,
+  "selected_by": 20.2,
   "status": "a"
  },
  "497": {
@@ -3122,11 +3122,11 @@
   "status": "a"
  },
  "500": {
-  "chance": null,
+  "chance": 0,
   "cost": 50,
-  "news": "",
+  "news": "Has joined Atletico Madrid permanently",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "u"
  },
  "501": {
   "chance": null,
@@ -3433,7 +3433,7 @@
   "chance": 0,
   "cost": 40,
   "news": "Has joined Konyaspor permanently",
-  "selected_by": 0.9,
+  "selected_by": 0.8,
   "status": "u"
  },
  "541": {
@@ -3559,7 +3559,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 11.7,
+  "selected_by": 11.8,
   "status": "a"
  },
  "558": {
@@ -3958,7 +3958,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 24.0,
+  "selected_by": 24.1,
   "status": "a"
  },
  "80": {
