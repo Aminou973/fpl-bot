@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd  # noqa: E402
 
-from fplbot import api, dashboard, notify, optimize, pipeline  # noqa: E402
+from fplbot import api, dashboard, history, notify, optimize, pipeline  # noqa: E402
 from fplbot.notify import esc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -122,7 +122,22 @@ def main():
                 print(f"[plan] live squad for {name} unavailable ({e}); using config")
         results[name] = pipeline.plan_team(ctx, t, state)
 
+    prev = {}
+    prev_path = ROOT / "site" / "bundle.json"
+    if prev_path.exists():
+        try:
+            prev = json.loads(prev_path.read_text())
+        except (ValueError, OSError):
+            prev = {}
+
     bundle = build_bundle(ctx, results, cfg)
+    bundle["changes"] = diff_since(prev, bundle, results)
+    if not a.offline:
+        entries = {n: t.get("entry_id") for n, t in cfg["teams"].items()}
+        bundle["history"] = history.build(ROOT, ctx["bootstrap"], entries,
+                                          df=df, gw=gws[0])
+    else:
+        bundle["history"] = {"teams": {}, "accuracy": []}
     (ROOT / "site").mkdir(exist_ok=True)
     (ROOT / "site" / "bundle.json").write_text(json.dumps(bundle))
     dashboard.build(ROOT / "site" / "bundle.json", ROOT / "site" / "index.html")
@@ -136,6 +151,45 @@ def main():
     print(text)
     if not a.no_notify:
         notify.send(text)
+
+
+def diff_since(prev, cur, results):
+    """What moved since the last run: prices, availability, and plan reversals."""
+    if not prev.get("players"):
+        return {"first_run": True, "prices": [], "news": [], "plan": []}
+    old = {p["id"]: p for p in prev["players"]}
+    prices, news = [], []
+    for p in cur["players"]:
+        o = old.get(p["id"])
+        if not o:
+            continue
+        if abs(p["price"] - o["price"]) > 1e-6:
+            prices.append({"name": p["name"], "team": p["team"], "pos": p["pos"],
+                           "from": o["price"], "to": p["price"],
+                           "owned": p["id"] in _owned(results)})
+        if (p.get("status") != o.get("status")) or ((p.get("news") or "") != (o.get("news") or "")):
+            news.append({"name": p["name"], "team": p["team"], "pos": p["pos"],
+                         "status": p.get("status"), "note": p.get("news") or "",
+                         "owned": p["id"] in _owned(results)})
+    plan = []
+    for name, res in results.items():
+        if "error" in res:
+            continue
+        now_in = set(res["plan"]["weeks"][0]["in"])
+        was = prev.get("builds", {}).get(name, {}).get("plan", {})
+        was_in = set((was.get("weeks") or [{}])[0].get("in", []))
+        if was_in and now_in != was_in:
+            plan.append({"team": name,
+                         "added": sorted(now_in - was_in),
+                         "dropped": sorted(was_in - now_in)})
+    return {"first_run": False, "prices": prices[:40], "news": news[:40], "plan": plan}
+
+
+def _owned(results):
+    out = set()
+    for res in results.values():
+        out |= set(res.get("squad") or [])
+    return out
 
 
 def build_bundle(ctx, results, cfg):
