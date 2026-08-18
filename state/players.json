@@ -3,14 +3,14 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 34.3,
+  "selected_by": 34.4,
   "status": "a"
  },
  "10": {
   "chance": 100,
   "cost": 55,
   "news": "",
-  "selected_by": 3.1,
+  "selected_by": 3.2,
   "status": "a"
  },
  "100": {
@@ -241,7 +241,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 19.9,
+  "selected_by": 19.8,
   "status": "a"
  },
  "130": {
@@ -346,7 +346,7 @@
   "chance": 0,
   "cost": 55,
   "news": "Has joined Como permanently",
-  "selected_by": 0.7,
+  "selected_by": 0.6,
   "status": "u"
  },
  "144": {
@@ -395,7 +395,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 5.5,
+  "selected_by": 5.6,
   "status": "a"
  },
  "150": {
@@ -885,7 +885,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 11.0,
+  "selected_by": 11.1,
   "status": "a"
  },
  "213": {
@@ -1249,7 +1249,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 4.4,
+  "selected_by": 4.5,
   "status": "a"
  },
  "260": {
@@ -1599,7 +1599,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 3.0,
+  "selected_by": 3.1,
   "status": "a"
  },
  "305": {
@@ -1641,7 +1641,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 14.9,
+  "selected_by": 14.8,
   "status": "a"
  },
  "310": {
@@ -2243,7 +2243,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 20.1,
+  "selected_by": 20.0,
   "status": "a"
  },
  "389": {
@@ -2341,15 +2341,15 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 26.6,
+  "selected_by": 26.5,
   "status": "a"
  },
  "400": {
-  "chance": null,
+  "chance": 75,
   "cost": 75,
-  "news": "",
-  "selected_by": 6.4,
-  "status": "a"
+  "news": "Calf injury - 75% chance of playing",
+  "selected_by": 6.3,
+  "status": "d"
  },
  "401": {
   "chance": null,
@@ -2390,7 +2390,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 0.0,
+  "selected_by": 0.1,
   "status": "a"
  },
  "407": {
@@ -2432,7 +2432,7 @@
   "chance": null,
   "cost": 155,
   "news": "",
-  "selected_by": 70.4,
+  "selected_by": 70.3,
   "status": "a"
  },
  "412": {
@@ -2551,7 +2551,7 @@
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 31.1,
+  "selected_by": 31.2,
   "status": "a"
  },
  "428": {
@@ -2740,7 +2740,7 @@
   "chance": 0,
   "cost": 40,
   "news": "Has joined FC Kaiserslautern on loan for the rest of the season",
-  "selected_by": 0.4,
+  "selected_by": 0.3,
   "status": "u"
  },
  "452": {
@@ -2908,7 +2908,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 4.1,
+  "selected_by": 4.0,
   "status": "a"
  },
  "474": {
@@ -3027,7 +3027,7 @@
   "chance": 75,
   "cost": 45,
   "news": "Unspecified injury - 75% chance of playing",
-  "selected_by": 5.6,
+  "selected_by": 5.5,
   "status": "d"
  },
  "49": {
@@ -3048,7 +3048,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 5.2,
+  "selected_by": 5.1,
   "status": "a"
  },
  "492": {
@@ -3083,7 +3083,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 20.9,
+  "selected_by": 21.0,
   "status": "a"
  },
  "497": {
@@ -3104,7 +3104,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 23.0,
+  "selected_by": 22.9,
   "status": "a"
  },
  "5": {
@@ -3125,7 +3125,7 @@
   "chance": 0,
   "cost": 50,
   "news": "Has joined Atletico Madrid permanently",
-  "selected_by": 0.8,
+  "selected_by": 0.7,
   "status": "u"
  },
  "501": {
@@ -3160,7 +3160,7 @@
   "chance": 0,
   "cost": 45,
   "news": "Has joined Internazionale permanently",
-  "selected_by": 4.0,
+  "selected_by": 3.9,
   "status": "u"
  },
  "506": {
@@ -3314,7 +3314,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 2.4,
+  "selected_by": 2.3,
   "status": "a"
  },
  "526": {
@@ -3559,7 +3559,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 15.3,
+  "selected_by": 15.5,
   "status": "a"
  },
  "558": {
@@ -3755,7 +3755,7 @@
   "chance": 0,
   "cost": 55,
   "news": "Unspecified injury - Unknown return date",
-  "selected_by": 1.0,
+  "selected_by": 0.9,
   "status": "i"
  },
  "583": {
@@ -3902,7 +3902,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 1.8,
+  "selected_by": 1.7,
   "status": "a"
  },
  "69": {
@@ -3993,7 +3993,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 27.4,
+  "selected_by": 27.5,
   "status": "a"
  },
  "80": {
