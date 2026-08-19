@@ -87,7 +87,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 11.0,
+  "selected_by": 10.9,
   "status": "a"
  },
  "110": {
@@ -1641,7 +1641,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 14.8,
+  "selected_by": 14.9,
   "status": "a"
  },
  "310": {
@@ -1781,7 +1781,7 @@
   "chance": 75,
   "cost": 50,
   "news": "Knock - 75% chance of playing",
-  "selected_by": 0.3,
+  "selected_by": 0.2,
   "status": "d"
  },
  "329": {
@@ -1820,11 +1820,11 @@
   "status": "a"
  },
  "333": {
-  "chance": null,
+  "chance": 0,
   "cost": 45,
-  "news": "",
+  "news": "Has joined Hamburg SV on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "u"
  },
  "334": {
   "chance": null,
@@ -1932,11 +1932,11 @@
   "status": "a"
  },
  "348": {
-  "chance": null,
+  "chance": 0,
   "cost": 50,
-  "news": "",
+  "news": "Has joined West Ham United on loan for the rest of the season",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "u"
  },
  "349": {
   "chance": 0,
@@ -2243,7 +2243,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 19.6,
+  "selected_by": 19.5,
   "status": "a"
  },
  "389": {
@@ -2254,11 +2254,11 @@
   "status": "d"
  },
  "39": {
-  "chance": null,
+  "chance": 0,
   "cost": 40,
-  "news": "",
+  "news": "Has joined Rangers on loan for the rest of the season",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "u"
  },
  "390": {
   "chance": null,
@@ -2320,7 +2320,7 @@
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 4.7,
+  "selected_by": 4.6,
   "status": "a"
  },
  "399": {
@@ -2348,7 +2348,7 @@
   "chance": 75,
   "cost": 75,
   "news": "Calf injury - 75% chance of playing",
-  "selected_by": 5.4,
+  "selected_by": 5.3,
   "status": "d"
  },
  "401": {
@@ -2432,14 +2432,14 @@
   "chance": null,
   "cost": 155,
   "news": "",
-  "selected_by": 70.0,
+  "selected_by": 69.9,
   "status": "a"
  },
  "412": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 18.2,
+  "selected_by": 18.1,
   "status": "a"
  },
  "413": {
@@ -2460,7 +2460,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 1.6,
+  "selected_by": 1.5,
   "status": "a"
  },
  "416": {
@@ -2481,7 +2481,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 13.7,
+  "selected_by": 13.8,
   "status": "a"
  },
  "419": {
@@ -3055,7 +3055,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 0.6,
+  "selected_by": 0.7,
   "status": "a"
  },
  "493": {
@@ -3066,11 +3066,11 @@
   "status": "a"
  },
  "494": {
-  "chance": null,
+  "chance": 0,
   "cost": 45,
-  "news": "",
+  "news": "Has joined Juventus on loan for the rest of the season",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "u"
  },
  "495": {
   "chance": null,
@@ -3160,7 +3160,7 @@
   "chance": 0,
   "cost": 45,
   "news": "Has joined Internazionale permanently",
-  "selected_by": 3.2,
+  "selected_by": 3.1,
   "status": "u"
  },
  "506": {
@@ -3321,7 +3321,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 1.7,
+  "selected_by": 1.6,
   "status": "a"
  },
  "527": {
@@ -3622,7 +3622,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 2.4,
+  "selected_by": 2.5,
   "status": "a"
  },
  "566": {
@@ -3993,7 +3993,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 29.3,
+  "selected_by": 29.4,
   "status": "a"
  },
  "80": {
