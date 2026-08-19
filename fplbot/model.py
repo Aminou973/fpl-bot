@@ -21,19 +21,88 @@ CS_PTS = {1: 4, 2: 4, 3: 1, 4: 0}
 LEAGUE_GPG = 1.45          # goals per team per game
 HOME_ADV = 1.12
 AWAY_ADV = 0.89
-SHRINK_TEAM = 0.25         # regression of team ratings toward league average
-PROMOTED_ATT = 0.74        # typical newly-promoted attack rating
-PROMOTED_DEF = 1.28        # typical newly-promoted defence rating (higher = leakier)
+# ---------------------------------------------------------------------------
+# Constants below are FITTED, not guessed. Sources, all measured over the
+# 2021-22 to 2025-26 seasons of official Fantasy data (Covid-hit 2020-21 and
+# 2021-22 excluded from the team-strength fit):
+#
+#   SHRINK_TEAM   a club's attack rating carries a slope of 0.56 into the next
+#                 season (r=0.62, n=68 club-seasons); defence 0.53. So a little
+#                 under half of last season's deviation from average should be
+#                 thrown away, not a quarter.
+#   PROMOTED_*    the twelve clubs promoted into the last four seasons averaged
+#                 0.719 attack and 1.309 defence in their first year back.
+#   SHRINK_K      regressing next-season goal involvement per 90 on a player's
+#                 own history and on their price prior over 1,006 paired
+#                 player-seasons gives 0.37 x history + 0.55 x price. The market
+#                 predicts a player better than his own last season does, which
+#                 works out at roughly 32 starts of shrinkage, not six.
+#   MINUTES_*     a least-squares fit over 2,040 paired player-seasons:
+#                   starts_next = 0.597*starts_prev + 0.053*apps_prev + 2.957
+#                 (R^2 0.42). Even a player who appeared 38 times and started 35
+#                 only starts about 68% of the following season - injuries,
+#                 transfers, age and lost places all live in that number. The
+#                 model previously assumed 90%+ for such players, which inflated
+#                 every projection it produced.
+# ---------------------------------------------------------------------------
+SHRINK_TEAM = 0.45
+PROMOTED_ATT = 0.719
+PROMOTED_DEF = 1.309
+SHRINK_K = 32.0          # with no current-season evidence
+SHRINK_K_LIVE = 7.0      # once this season has spoken for itself
+
+
+def shrink_k(n_cur):
+    """How hard to pull a player toward what his price implies.
+
+    The 32-start figure is calibrated for predicting a season before it starts,
+    when a player's price is genuinely the better guide. Inside a season that
+    stops being true: the market is slow to mark down a player who has stopped
+    producing, and anchoring to his price inherits that lag. A 2025-26 backtest
+    showed the cost plainly - the engine captained a collapsed Salah in 30 of 38
+    gameweeks because his price never fell far enough to say otherwise. So the
+    anchor loosens as this season's evidence accumulates.
+    """
+    try:
+        n = float(n_cur)
+    except (TypeError, ValueError):
+        n = 0.0
+    if n != n or n < 0:          # NaN is truthy, so it has to be tested for
+        n = 0.0
+    w = n / (n + 8.0)
+    return SHRINK_K * (1 - w) + SHRINK_K_LIVE * w
+
+MINUTES_B_STARTS = 0.5967
+MINUTES_B_APPS = 0.0532
+MINUTES_B0 = 2.957
+
+
+def minutes_prior(apps, starts):
+    """Expected share of gameweeks started next season, from the fitted model."""
+    if apps <= 0:
+        return None
+    pred = MINUTES_B_STARTS * starts + MINUTES_B_APPS * apps + MINUTES_B0
+    return float(min(max(pred / 38.0, 0.02), 0.85))
+
+
+# Premier League clubs win roughly 5.5 penalties a season and convert about 79%,
+# so being the designated taker is worth about 0.115 goals a game. Only the CHANGE
+# in that role is applied: a player who took them last season already has those
+# goals inside his own history, and counting them twice would inflate him.
+PEN_GOALS_PER_GAME = 0.115
 
 
 # ------------------------------------------------------------------- loading --
-def load(frames=None, gw26=None):
+def load(frames=None, gw26=None, prev_frames=None):
     """Load the model's inputs.
 
     frames: optional (players, teams, fixtures) DataFrames straight from the live
     API. When omitted the CSV snapshots in data/ are used, which keeps the whole
     engine runnable offline.
     gw26: optional current-season gameweek history (same shape as merged_gw.csv).
+    prev_frames: optional (players, teams, gameweeks) for the PREVIOUS season,
+        so a backtest can hand the engine the season that was actually behind it
+        rather than the one shipped in data/.
     """
     if frames is not None:
         p26, t26, fx = frames
@@ -41,10 +110,13 @@ def load(frames=None, gw26=None):
         p26 = pd.read_csv(DATA / "2026-27/players_raw.csv")
         t26 = pd.read_csv(DATA / "2026-27/teams.csv")
         fx = pd.read_csv(DATA / "2026-27/fixtures.csv")
-    p25 = pd.read_csv(DATA / "2025-26/players_raw.csv")
-    t25 = pd.read_csv(DATA / "2025-26/teams.csv")
-    gwp = DATA / "2025-26/gws/merged_gw.csv"
-    gw = pd.read_csv(gwp if gwp.exists() else DATA / "2025-26/merged_gw.csv")
+    if prev_frames is not None:
+        p25, t25, gw = prev_frames
+    else:
+        p25 = pd.read_csv(DATA / "2025-26/players_raw.csv")
+        t25 = pd.read_csv(DATA / "2025-26/teams.csv")
+        gwp = DATA / "2025-26/gws/merged_gw.csv"
+        gw = pd.read_csv(gwp if gwp.exists() else DATA / "2025-26/merged_gw.csv")
     # once the new season is under way the mirror publishes its own gameweek
     # files; those are far more relevant than last season's.
     if gw26 is None:
@@ -127,6 +199,7 @@ def blend_rates(prev, cur, comp):
         out[c] = (1 - w) * a + w * b
     out["n_starts"] = out.n_starts.fillna(0) + n_cur
     out["apps"] = out.apps.fillna(0) + cur.apps.reindex(out.index).fillna(0)
+    out["n_cur"] = n_cur
     return out
 
 
@@ -143,6 +216,15 @@ def player_rates(gw, p25, p26, teams25_to_short, t26):
     """Per-start scoring-component rates from 2025/26, keyed by player code."""
     g = gw.copy()
     g = g[g.minutes > 0]
+    # Seasons before 2025-26 predate defensive-contribution scoring and simply do
+    # not carry these columns. Treat them as zero rather than crashing, so the
+    # engine can be run against any season.
+    for c in ("clearances_blocks_interceptions", "recoveries", "tackles",
+              "defensive_contribution", "expected_goals", "expected_assists",
+              "expected_goals_conceded", "starts"):
+        if c not in g.columns:
+            g[c] = 0.0
+        g[c] = pd.to_numeric(g[c], errors="coerce").fillna(0.0)
 
     # per-appearance component points
     g["pos"] = g.position.map({"GK": 1, "GKP": 1, "DEF": 2, "MID": 3, "FWD": 4})
@@ -280,8 +362,9 @@ def next_gw(fx=None):
 
 
 # ----------------------------------------------------------------- projector --
-def build(horizon=5, start_gw=1, frames=None, gw26=None):
-    p26, t26, fx, p25, t25, gw, gw26 = load(frames=frames, gw26=gw26)
+def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None):
+    p26, t26, fx, p25, t25, gw, gw26 = load(frames=frames, gw26=gw26,
+                                            prev_frames=prev_frames)
     teams = team_ratings(gw, t25, t26)
     if gw26 is not None and gw26.GW.nunique() >= 3:
         teams = blend_team_ratings(teams, team_ratings(gw26, t26, t26),
@@ -295,6 +378,7 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None):
     short25 = dict(zip(t25.id, t25.short_name))
     short26 = {r.id: r.short_name for _, r in t26.iterrows()}
     old_team = dict(zip(p25.code, p25.team.map(short25)))
+    prev_pen = dict(zip(p25.code, p25.get("penalties_order", pd.Series(dtype=float))))
     att26_by_short = {v["short"]: v["att"] for v in teams.values()}
     def26_by_short = {v["short"]: v["def"] for v in teams.values()}
     # 2025/26 attack ratings, unshrunk-ish, for club-move rescaling
@@ -344,33 +428,34 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None):
         prior_share = price_prior(curve, et, r.now_cost)
         apps_n = 0 if pd.isna(r.apps) else float(r.apps)
         if apps_n > 0:
-            # Split last season into two questions so that an injury-hit season
-            # does not permanently mark a now-fit player as a rotation risk:
-            #   P(start) = P(available) x P(starts | available)
-            p_start_given_avail = n / apps_n
-            w1 = apps_n / (apps_n + 5.0)
-            p_start_given_avail = w1 * p_start_given_avail + (1 - w1) * prior_share
-            # availability regresses hard toward the league norm (~0.84 of GWs)
-            w2 = apps_n / (apps_n + 14.0)
-            p_avail = w2 * (apps_n / 38.0) + (1 - w2) * 0.87
-            p_avail = min(p_avail, 0.95)
-            share = p_start_given_avail * p_avail
+            # Two independent, separately calibrated estimates of next season's
+            # start share: what players with this appearance record actually went
+            # on to do, and what players at this price actually do. Averaged,
+            # because both are already unbiased - neither needs shrinking again.
+            hist = minutes_prior(apps_n, n)
+            share = 0.5 * hist + 0.5 * prior_share if hist is not None else prior_share
         else:
             share = prior_share
         avail = availability(r)
         if et == 1:
+            # Only one keeper plays, so the depth chart decides who - but the
+            # first choice gets the same calibrated share as everyone else
+            # rather than an assumed near-certainty. Measured: premium keepers
+            # start about 78% of a season, not 94%.
             rank = gk_rank.get(int(r.code), 1)
-            share = 0.94 if rank == 0 else (0.06 if rank == 1 else 0.02)
+            if rank > 0:
+                share = 0.05 if rank == 1 else 0.02
         elif n == 0 and apps_n == 0:
             share *= 0.88          # unproven in the Premier League
         share = float(np.clip(share, 0.02, 0.96)) * avail
 
         # --- per-start component rates, shrunk toward a price-conditioned prior
         pr = curve_prior(curves, et, r.now_cost, comp + ["h_xg", "h_xa"])
+        k_eff = shrink_k(r.get("n_cur"))
         rate = {}
         for c in comp:
             v = 0.0 if pd.isna(r.get(c)) else float(r.get(c))
-            rate[c] = shrink(v, pr[c], n, 6.0)
+            rate[c] = shrink(v, pr[c], n, k_eff)
 
         # blend underlying numbers (xG/xA) with actual returns to damp variance
         if n >= 6:
@@ -378,8 +463,19 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None):
             xa_pts = float(r.h_xa) * 3
             pr_xg = pr["h_xg"] * GOAL_PTS[et]
             pr_xa = pr["h_xa"] * 3
-            rate["p_goals"] = 0.5 * shrink(xg_pts, pr_xg, n, 6.0) + 0.5 * rate["p_goals"]
-            rate["p_assists"] = 0.5 * shrink(xa_pts, pr_xa, n, 6.0) + 0.5 * rate["p_assists"]
+            rate["p_goals"] = 0.5 * shrink(xg_pts, pr_xg, n, k_eff) + 0.5 * rate["p_goals"]
+            rate["p_assists"] = 0.5 * shrink(xa_pts, pr_xa, n, k_eff) + 0.5 * rate["p_assists"]
+
+        # --- penalties: credit the role only where it has actually changed
+        cur_pen = r.get("penalties_order")
+        was_taker = float(prev_pen.get(r.code, 99) or 99) == 1.0
+        is_taker = float(cur_pen) == 1.0 if pd.notna(cur_pen) else False
+        pen_delta = 0.0
+        if is_taker and not was_taker:
+            pen_delta = PEN_GOALS_PER_GAME * GOAL_PTS[et]
+        elif was_taker and not is_taker:
+            pen_delta = -PEN_GOALS_PER_GAME * GOAL_PTS[et]
+        rate["p_goals"] = max(rate["p_goals"] + pen_delta, 0.0)
 
         # --- club-move rescaling of attacking output
         ot = old_team.get(r.code)
@@ -452,6 +548,9 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None):
             "hist_starts": int(n), "hist_pts": 0 if pd.isna(r.tot_pts) else int(r.tot_pts),
             "selected_by": float(r.selected_by_percent) if "selected_by_percent" in r and not pd.isna(r.selected_by_percent) else 0.0,
             "promoted_club": teams[tid]["promoted"],
+            "penalties": None if pd.isna(r.get("penalties_order")) else int(r.get("penalties_order")),
+            "set_pieces": None if pd.isna(r.get("corners_and_indirect_freekicks_order"))
+                          else int(r.get("corners_and_indirect_freekicks_order")),
         }
         for g_ in gws:
             row[f"xp{g_}"] = round(per_gw.get(g_, 0.0), 3)

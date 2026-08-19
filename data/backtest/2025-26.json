@@ -1,0 +1,423 @@
+{
+ "season": "2025-26",
+ "weeks": [
+  {
+   "gw": 1,
+   "managed": 56,
+   "frozen": 56,
+   "captain": "M.Salah",
+   "transfers": 0,
+   "free_transfers": 1,
+   "in": []
+  },
+  {
+   "gw": 2,
+   "managed": 37,
+   "frozen": 46,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Raya"
+   ]
+  },
+  {
+   "gw": 3,
+   "managed": 33,
+   "frozen": 30,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "J.Timber"
+   ]
+  },
+  {
+   "gw": 4,
+   "managed": 59,
+   "frozen": 52,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Lacroix"
+   ]
+  },
+  {
+   "gw": 5,
+   "managed": 41,
+   "frozen": 34,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Burn"
+   ]
+  },
+  {
+   "gw": 6,
+   "managed": 35,
+   "frozen": 29,
+   "captain": "Semenyo",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Gu\u00e9hi"
+   ]
+  },
+  {
+   "gw": 7,
+   "managed": 73,
+   "frozen": 60,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Sarr"
+   ]
+  },
+  {
+   "gw": 8,
+   "managed": 43,
+   "frozen": 27,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Eze"
+   ]
+  },
+  {
+   "gw": 9,
+   "managed": 52,
+   "frozen": 36,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Enzo"
+   ]
+  },
+  {
+   "gw": 10,
+   "managed": 48,
+   "frozen": 38,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Mu\u00f1oz"
+   ]
+  },
+  {
+   "gw": 11,
+   "managed": 17,
+   "frozen": 29,
+   "captain": "Semenyo",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Gu\u00e9hi"
+   ]
+  },
+  {
+   "gw": 12,
+   "managed": 42,
+   "frozen": 29,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Mu\u00f1oz"
+   ]
+  },
+  {
+   "gw": 13,
+   "managed": 19,
+   "frozen": 19,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Lacroix"
+   ]
+  },
+  {
+   "gw": 14,
+   "managed": 54,
+   "frozen": 26,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Tuanzebe"
+   ]
+  },
+  {
+   "gw": 15,
+   "managed": 28,
+   "frozen": 38,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Wissa"
+   ]
+  },
+  {
+   "gw": 16,
+   "managed": 33,
+   "frozen": 43,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Gabriel"
+   ]
+  },
+  {
+   "gw": 17,
+   "managed": 38,
+   "frozen": 35,
+   "captain": "Semenyo",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Mateta"
+   ]
+  },
+  {
+   "gw": 18,
+   "managed": 13,
+   "frozen": 26,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Cunha"
+   ]
+  },
+  {
+   "gw": 19,
+   "managed": 39,
+   "frozen": 17,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Bowen"
+   ]
+  },
+  {
+   "gw": 20,
+   "managed": 39,
+   "frozen": 7,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Pickford"
+   ]
+  },
+  {
+   "gw": 21,
+   "managed": 40,
+   "frozen": 19,
+   "captain": "Semenyo",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Semenyo"
+   ]
+  },
+  {
+   "gw": 22,
+   "managed": 35,
+   "frozen": 32,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Trossard"
+   ]
+  },
+  {
+   "gw": 23,
+   "managed": 51,
+   "frozen": 52,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Eze"
+   ]
+  },
+  {
+   "gw": 24,
+   "managed": 53,
+   "frozen": 28,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Chalobah"
+   ]
+  },
+  {
+   "gw": 25,
+   "managed": 32,
+   "frozen": 20,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Fraser"
+   ]
+  },
+  {
+   "gw": 26,
+   "managed": 50,
+   "frozen": 55,
+   "captain": "Eze",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Jo\u00e3o Pedro"
+   ]
+  },
+  {
+   "gw": 27,
+   "managed": 42,
+   "frozen": 24,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Ndiaye"
+   ]
+  },
+  {
+   "gw": 28,
+   "managed": 45,
+   "frozen": 22,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Virgil"
+   ]
+  },
+  {
+   "gw": 29,
+   "managed": 76,
+   "frozen": 39,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Schade"
+   ]
+  },
+  {
+   "gw": 30,
+   "managed": 29,
+   "frozen": 26,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Lewis-Potter"
+   ]
+  },
+  {
+   "gw": 31,
+   "managed": 45,
+   "frozen": 40,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Cunha"
+   ]
+  },
+  {
+   "gw": 32,
+   "managed": 37,
+   "frozen": 27,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Eze"
+   ]
+  },
+  {
+   "gw": 33,
+   "managed": 36,
+   "frozen": 38,
+   "captain": "Semenyo",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Semenyo"
+   ]
+  },
+  {
+   "gw": 34,
+   "managed": 37,
+   "frozen": 42,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Sarr"
+   ]
+  },
+  {
+   "gw": 35,
+   "managed": 34,
+   "frozen": 10,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Gvardiol"
+   ]
+  },
+  {
+   "gw": 36,
+   "managed": 48,
+   "frozen": 29,
+   "captain": "Semenyo",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "A\u00eft-Nouri"
+   ]
+  },
+  {
+   "gw": 37,
+   "managed": 23,
+   "frozen": 16,
+   "captain": "Eze",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Gordon"
+   ]
+  },
+  {
+   "gw": 38,
+   "managed": 20,
+   "frozen": 38,
+   "captain": "M.Salah",
+   "transfers": 1,
+   "free_transfers": 1,
+   "in": [
+    "Raya"
+   ]
+  }
+ ],
+ "managed_total": 1532,
+ "frozen_total": 1234
+}
