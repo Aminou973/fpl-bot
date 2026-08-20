@@ -80,14 +80,14 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 19.9,
+  "selected_by": 20.0,
   "status": "a"
  },
  "11": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 8.8,
+  "selected_by": 8.7,
   "status": "a"
  },
  "110": {
@@ -241,7 +241,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 19.1,
+  "selected_by": 19.0,
   "status": "a"
  },
  "130": {
@@ -290,7 +290,7 @@
   "chance": 75,
   "cost": 60,
   "news": "Unspecified injury - 75% chance of playing",
-  "selected_by": 2.1,
+  "selected_by": 2.0,
   "status": "d"
  },
  "137": {
@@ -514,7 +514,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 62.2,
+  "selected_by": 62.3,
   "status": "a"
  },
  "166": {
@@ -766,7 +766,7 @@
   "chance": 75,
   "cost": 50,
   "news": "Ankle injury - 75% chance of playing",
-  "selected_by": 3.1,
+  "selected_by": 3.0,
   "status": "d"
  },
  "199": {
@@ -885,7 +885,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 11.4,
+  "selected_by": 11.5,
   "status": "a"
  },
  "213": {
@@ -1830,7 +1830,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 3.0,
+  "selected_by": 3.1,
   "status": "a"
  },
  "335": {
@@ -1921,7 +1921,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 29.1,
+  "selected_by": 29.2,
   "status": "a"
  },
  "347": {
@@ -2075,7 +2075,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 13.9,
+  "selected_by": 13.8,
   "status": "a"
  },
  "367": {
@@ -2215,7 +2215,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 8.9,
+  "selected_by": 8.8,
   "status": "a"
  },
  "385": {
@@ -2250,7 +2250,7 @@
   "chance": 75,
   "cost": 60,
   "news": "Knock - 75% chance of playing",
-  "selected_by": 2.0,
+  "selected_by": 1.9,
   "status": "d"
  },
  "39": {
@@ -2348,7 +2348,7 @@
   "chance": 75,
   "cost": 75,
   "news": "Calf injury - 75% chance of playing",
-  "selected_by": 4.1,
+  "selected_by": 4.0,
   "status": "d"
  },
  "401": {
@@ -2481,7 +2481,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 15.1,
+  "selected_by": 15.2,
   "status": "a"
  },
  "419": {
@@ -2551,7 +2551,7 @@
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 34.3,
+  "selected_by": 34.4,
   "status": "a"
  },
  "428": {
@@ -2572,7 +2572,7 @@
   "chance": 100,
   "cost": 60,
   "news": "",
-  "selected_by": 2.3,
+  "selected_by": 2.4,
   "status": "a"
  },
  "430": {
@@ -2726,15 +2726,15 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 3.2,
+  "selected_by": 3.3,
   "status": "a"
  },
  "450": {
-  "chance": 75,
+  "chance": 0,
   "cost": 50,
-  "news": "Calf injury - 75% chance of playing",
+  "news": "Calf injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "d"
+  "status": "i"
  },
  "451": {
   "chance": 0,
@@ -2887,7 +2887,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 0.1,
+  "selected_by": 0.0,
   "status": "a"
  },
  "471": {
@@ -3083,7 +3083,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 22.2,
+  "selected_by": 22.3,
   "status": "a"
  },
  "497": {
@@ -3139,7 +3139,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 3.3,
+  "selected_by": 3.4,
   "status": "a"
  },
  "503": {
@@ -3160,7 +3160,7 @@
   "chance": 0,
   "cost": 45,
   "news": "Has joined Internazionale permanently",
-  "selected_by": 2.2,
+  "selected_by": 2.1,
   "status": "u"
  },
  "506": {
@@ -3503,7 +3503,7 @@
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 11.5,
+  "selected_by": 11.4,
   "status": "a"
  },
  "550": {
@@ -3552,14 +3552,14 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 2.7,
+  "selected_by": 2.6,
   "status": "a"
  },
  "557": {
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 19.6,
+  "selected_by": 19.8,
   "status": "a"
  },
  "558": {
@@ -3867,7 +3867,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 0.0,
+  "selected_by": 0.1,
   "status": "a"
  },
  "598": {
@@ -4042,7 +4042,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 32.3,
+  "selected_by": 32.5,
   "status": "a"
  },
  "80": {
@@ -4056,7 +4056,7 @@
   "chance": 75,
   "cost": 60,
   "news": "Unspecified injury - 75% chance of playing",
-  "selected_by": 0.2,
+  "selected_by": 0.1,
   "status": "d"
  },
  "82": {
