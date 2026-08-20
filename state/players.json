@@ -3,7 +3,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 36.3,
+  "selected_by": 36.4,
   "status": "a"
  },
  "10": {
@@ -199,7 +199,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 13.4,
+  "selected_by": 13.5,
   "status": "a"
  },
  "125": {
@@ -395,7 +395,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 6.6,
+  "selected_by": 6.7,
   "status": "a"
  },
  "150": {
@@ -563,7 +563,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 1.9,
+  "selected_by": 1.8,
   "status": "a"
  },
  "172": {
@@ -1613,7 +1613,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 1.2,
+  "selected_by": 1.3,
   "status": "a"
  },
  "307": {
@@ -1641,7 +1641,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 15.8,
+  "selected_by": 15.7,
   "status": "a"
  },
  "310": {
@@ -1935,7 +1935,7 @@
   "chance": 0,
   "cost": 50,
   "news": "Has joined West Ham United on loan for the rest of the season",
-  "selected_by": 0.4,
+  "selected_by": 0.3,
   "status": "u"
  },
  "349": {
@@ -2173,7 +2173,7 @@
   "chance": null,
   "cost": 90,
   "news": "",
-  "selected_by": 16.2,
+  "selected_by": 16.3,
   "status": "a"
  },
  "38": {
@@ -2243,7 +2243,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 18.8,
+  "selected_by": 18.7,
   "status": "a"
  },
  "389": {
@@ -2341,7 +2341,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 25.8,
+  "selected_by": 25.7,
   "status": "a"
  },
  "400": {
@@ -2544,14 +2544,14 @@
   "chance": null,
   "cost": 120,
   "news": "",
-  "selected_by": 50.2,
+  "selected_by": 50.3,
   "status": "a"
  },
  "427": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 34.4,
+  "selected_by": 34.5,
   "status": "a"
  },
  "428": {
@@ -2744,11 +2744,11 @@
   "status": "u"
  },
  "452": {
-  "chance": null,
+  "chance": 75,
   "cost": 70,
-  "news": "",
-  "selected_by": 8.3,
-  "status": "a"
+  "news": "Unknown - 75% chance of playing",
+  "selected_by": 8.2,
+  "status": "d"
  },
  "453": {
   "chance": null,
@@ -2887,7 +2887,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 0.0,
+  "selected_by": 0.1,
   "status": "a"
  },
  "471": {
@@ -3027,7 +3027,7 @@
   "chance": 0,
   "cost": 45,
   "news": "Unspecified injury - Unknown return date",
-  "selected_by": 3.9,
+  "selected_by": 3.8,
   "status": "i"
  },
  "49": {
@@ -3090,21 +3090,21 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 20.9,
+  "selected_by": 20.8,
   "status": "a"
  },
  "498": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 9.0,
+  "selected_by": 8.9,
   "status": "a"
  },
  "499": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 22.8,
+  "selected_by": 22.7,
   "status": "a"
  },
  "5": {
@@ -3314,7 +3314,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 2.2,
+  "selected_by": 2.1,
   "status": "a"
  },
  "526": {
@@ -3335,7 +3335,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 1.6,
+  "selected_by": 1.7,
   "status": "a"
  },
  "529": {
@@ -3377,7 +3377,7 @@
   "chance": 100,
   "cost": 55,
   "news": "",
-  "selected_by": 2.0,
+  "selected_by": 2.1,
   "status": "a"
  },
  "534": {
@@ -3559,7 +3559,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 19.8,
+  "selected_by": 19.9,
   "status": "a"
  },
  "558": {
@@ -4028,7 +4028,7 @@
   "chance": 0,
   "cost": 75,
   "news": "Foot injury - Unknown return date",
-  "selected_by": 1.0,
+  "selected_by": 0.9,
   "status": "i"
  },
  "79": {
@@ -4042,7 +4042,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 32.5,
+  "selected_by": 32.7,
   "status": "a"
  },
  "80": {
