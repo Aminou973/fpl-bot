@@ -80,14 +80,14 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 21.0,
+  "selected_by": 21.1,
   "status": "a"
  },
  "11": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 7.6,
+  "selected_by": 7.5,
   "status": "a"
  },
  "110": {
@@ -199,7 +199,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 14.1,
+  "selected_by": 14.2,
   "status": "a"
  },
  "125": {
@@ -241,7 +241,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 18.6,
+  "selected_by": 18.5,
   "status": "a"
  },
  "130": {
@@ -395,7 +395,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 7.3,
+  "selected_by": 7.4,
   "status": "a"
  },
  "150": {
@@ -514,7 +514,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 63.4,
+  "selected_by": 63.5,
   "status": "a"
  },
  "166": {
@@ -766,7 +766,7 @@
   "chance": 75,
   "cost": 50,
   "news": "Ankle injury - 75% chance of playing",
-  "selected_by": 2.5,
+  "selected_by": 2.4,
   "status": "d"
  },
  "199": {
@@ -794,14 +794,14 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 9.5,
+  "selected_by": 9.4,
   "status": "a"
  },
  "201": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 10.1,
+  "selected_by": 10.0,
   "status": "a"
  },
  "202": {
@@ -885,7 +885,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 11.9,
+  "selected_by": 12.0,
   "status": "a"
  },
  "213": {
@@ -1011,7 +1011,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 9.0,
+  "selected_by": 8.9,
   "status": "a"
  },
  "23": {
@@ -1074,7 +1074,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 15.9,
+  "selected_by": 16.0,
   "status": "a"
  },
  "238": {
@@ -1242,7 +1242,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 18.1,
+  "selected_by": 18.2,
   "status": "a"
  },
  "26": {
@@ -1333,7 +1333,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 1.4,
+  "selected_by": 1.5,
   "status": "a"
  },
  "271": {
@@ -1428,11 +1428,11 @@
   "status": "a"
  },
  "283": {
-  "chance": 75,
+  "chance": 0,
   "cost": 40,
-  "news": "Hip injury - 75% chance of playing",
+  "news": "Hip injury - Expected back 29 Aug",
   "selected_by": 0.0,
-  "status": "d"
+  "status": "i"
  },
  "284": {
   "chance": null,
@@ -1543,7 +1543,7 @@
   "chance": 0,
   "cost": 45,
   "news": "Has joined Konyaspor permanently",
-  "selected_by": 0.7,
+  "selected_by": 0.6,
   "status": "u"
  },
  "299": {
@@ -1585,7 +1585,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 0.4,
+  "selected_by": 0.5,
   "status": "a"
  },
  "303": {
@@ -1641,7 +1641,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 15.0,
+  "selected_by": 14.9,
   "status": "a"
  },
  "310": {
@@ -1830,7 +1830,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 3.3,
+  "selected_by": 3.4,
   "status": "a"
  },
  "335": {
@@ -1921,7 +1921,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 30.4,
+  "selected_by": 30.5,
   "status": "a"
  },
  "347": {
@@ -1956,7 +1956,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 3.6,
+  "selected_by": 3.5,
   "status": "a"
  },
  "351": {
@@ -2012,7 +2012,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 3.9,
+  "selected_by": 3.8,
   "status": "a"
  },
  "359": {
@@ -2173,7 +2173,7 @@
   "chance": null,
   "cost": 90,
   "news": "",
-  "selected_by": 16.4,
+  "selected_by": 16.5,
   "status": "a"
  },
  "38": {
@@ -2215,7 +2215,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 8.5,
+  "selected_by": 8.4,
   "status": "a"
  },
  "385": {
@@ -2243,21 +2243,21 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 18.0,
+  "selected_by": 17.9,
   "status": "a"
  },
  "389": {
   "chance": 75,
   "cost": 60,
   "news": "Knock - 75% chance of playing",
-  "selected_by": 1.5,
+  "selected_by": 1.4,
   "status": "d"
  },
  "39": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined Rangers on loan for the rest of the season",
-  "selected_by": 0.5,
+  "selected_by": 0.4,
   "status": "u"
  },
  "390": {
@@ -2271,7 +2271,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 11.0,
+  "selected_by": 10.9,
   "status": "a"
  },
  "392": {
@@ -2341,7 +2341,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 25.2,
+  "selected_by": 25.1,
   "status": "a"
  },
  "400": {
@@ -2432,14 +2432,14 @@
   "chance": null,
   "cost": 155,
   "news": "",
-  "selected_by": 69.3,
+  "selected_by": 69.4,
   "status": "a"
  },
  "412": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 17.2,
+  "selected_by": 17.1,
   "status": "a"
  },
  "413": {
@@ -2481,7 +2481,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 16.6,
+  "selected_by": 16.7,
   "status": "a"
  },
  "419": {
@@ -2516,7 +2516,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 0.7,
+  "selected_by": 0.6,
   "status": "a"
  },
  "423": {
@@ -2544,14 +2544,14 @@
   "chance": null,
   "cost": 120,
   "news": "",
-  "selected_by": 51.1,
+  "selected_by": 51.2,
   "status": "a"
  },
  "427": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 36.6,
+  "selected_by": 36.8,
   "status": "a"
  },
  "428": {
@@ -2747,7 +2747,7 @@
   "chance": 75,
   "cost": 70,
   "news": "Thigh injury - 75% chance of playing",
-  "selected_by": 6.3,
+  "selected_by": 6.1,
   "status": "d"
  },
  "453": {
@@ -2908,7 +2908,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 3.8,
+  "selected_by": 3.7,
   "status": "a"
  },
  "474": {
@@ -3027,7 +3027,7 @@
   "chance": 0,
   "cost": 45,
   "news": "Unspecified injury - Unknown return date",
-  "selected_by": 2.9,
+  "selected_by": 2.8,
   "status": "i"
  },
  "49": {
@@ -3083,7 +3083,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 23.4,
+  "selected_by": 23.5,
   "status": "a"
  },
  "497": {
@@ -3111,7 +3111,7 @@
   "chance": 0,
   "cost": 65,
   "news": "Groin injury - Unknown return date",
-  "selected_by": 0.2,
+  "selected_by": 0.1,
   "status": "i"
  },
  "50": {
@@ -3160,7 +3160,7 @@
   "chance": 0,
   "cost": 45,
   "news": "Has joined Internazionale permanently",
-  "selected_by": 1.6,
+  "selected_by": 1.5,
   "status": "u"
  },
  "506": {
@@ -3181,7 +3181,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 1.0,
+  "selected_by": 1.1,
   "status": "a"
  },
  "509": {
@@ -3328,7 +3328,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 3.0,
+  "selected_by": 3.1,
   "status": "a"
  },
  "528": {
@@ -3370,7 +3370,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 5.3,
+  "selected_by": 5.4,
   "status": "a"
  },
  "533": {
@@ -3503,7 +3503,7 @@
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 10.9,
+  "selected_by": 10.8,
   "status": "a"
  },
  "550": {
@@ -3531,7 +3531,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 1.1,
+  "selected_by": 1.0,
   "status": "a"
  },
  "554": {
@@ -3552,14 +3552,14 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 2.6,
+  "selected_by": 2.5,
   "status": "a"
  },
  "557": {
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 22.2,
+  "selected_by": 22.5,
   "status": "a"
  },
  "558": {
@@ -3650,7 +3650,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 2.1,
+  "selected_by": 2.0,
   "status": "a"
  },
  "57": {
@@ -3832,7 +3832,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 0.7,
+  "selected_by": 0.8,
   "status": "a"
  },
  "593": {
@@ -4042,7 +4042,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 35.6,
+  "selected_by": 36.0,
   "status": "a"
  },
  "80": {
@@ -4098,14 +4098,14 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 2.8,
+  "selected_by": 2.9,
   "status": "a"
  },
  "88": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 3.3,
+  "selected_by": 3.2,
   "status": "a"
  },
  "89": {
