@@ -3,7 +3,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 37.6,
+  "selected_by": 37.7,
   "status": "a"
  },
  "10": {
@@ -763,11 +763,11 @@
   "status": "u"
  },
  "198": {
-  "chance": 75,
+  "chance": 100,
   "cost": 50,
-  "news": "Ankle injury - 75% chance of playing",
+  "news": "",
   "selected_by": 1.8,
-  "status": "d"
+  "status": "a"
  },
  "199": {
   "chance": null,
@@ -885,7 +885,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 12.2,
+  "selected_by": 12.1,
   "status": "a"
  },
  "213": {
@@ -990,7 +990,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 7.9,
+  "selected_by": 8.0,
   "status": "a"
  },
  "227": {
@@ -1085,11 +1085,11 @@
   "status": "a"
  },
  "239": {
-  "chance": 25,
+  "chance": 100,
   "cost": 60,
-  "news": "Groin injury - 25% chance of playing",
+  "news": "",
   "selected_by": 0.1,
-  "status": "d"
+  "status": "a"
  },
  "24": {
   "chance": null,
@@ -1172,7 +1172,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 8.9,
+  "selected_by": 8.8,
   "status": "a"
  },
  "250": {
@@ -2432,7 +2432,7 @@
   "chance": null,
   "cost": 155,
   "news": "",
-  "selected_by": 69.3,
+  "selected_by": 69.2,
   "status": "a"
  },
  "412": {
@@ -2551,7 +2551,7 @@
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 38.8,
+  "selected_by": 38.7,
   "status": "a"
  },
  "428": {
@@ -2747,7 +2747,7 @@
   "chance": 75,
   "cost": 70,
   "news": "Thigh injury - 75% chance of playing",
-  "selected_by": 4.1,
+  "selected_by": 4.0,
   "status": "d"
  },
  "453": {
@@ -3125,7 +3125,7 @@
   "chance": 0,
   "cost": 50,
   "news": "Has joined Atletico Madrid permanently",
-  "selected_by": 0.3,
+  "selected_by": 0.2,
   "status": "u"
  },
  "501": {
@@ -3552,7 +3552,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 2.5,
+  "selected_by": 2.4,
   "status": "a"
  },
  "557": {
@@ -3783,7 +3783,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 1.1,
+  "selected_by": 1.2,
   "status": "a"
  },
  "587": {
