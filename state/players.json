@@ -794,7 +794,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 9.0,
+  "selected_by": 9.1,
   "status": "a"
  },
  "201": {
@@ -822,7 +822,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 6.4,
+  "selected_by": 6.3,
   "status": "a"
  },
  "205": {
@@ -833,11 +833,11 @@
   "status": "a"
  },
  "206": {
-  "chance": null,
+  "chance": 50,
   "cost": 45,
-  "news": "",
+  "news": "Knee injury - 50% chance of playing",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "d"
  },
  "207": {
   "chance": null,
@@ -847,11 +847,11 @@
   "status": "a"
  },
  "208": {
-  "chance": null,
+  "chance": 75,
   "cost": 65,
-  "news": "",
+  "news": "Groin injury - 75% chance of playing",
   "selected_by": 4.6,
-  "status": "a"
+  "status": "d"
  },
  "209": {
   "chance": null,
@@ -1011,7 +1011,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 8.6,
+  "selected_by": 8.7,
   "status": "a"
  },
  "23": {
@@ -1067,7 +1067,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 3.3,
+  "selected_by": 3.4,
   "status": "a"
  },
  "237": {
@@ -1242,7 +1242,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 18.4,
+  "selected_by": 18.3,
   "status": "a"
  },
  "26": {
@@ -1395,8 +1395,8 @@
  "279": {
   "chance": 75,
   "cost": 40,
-  "news": "Unspecified injury - 75% chance of playing",
-  "selected_by": 1.1,
+  "news": "Hamstring injury - 75% chance of playing",
+  "selected_by": 1.2,
   "status": "d"
  },
  "28": {
@@ -1641,7 +1641,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 12.9,
+  "selected_by": 12.8,
   "status": "a"
  },
  "310": {
@@ -1690,7 +1690,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 0.4,
+  "selected_by": 0.5,
   "status": "a"
  },
  "317": {
@@ -1774,7 +1774,7 @@
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 0.3,
+  "selected_by": 0.4,
   "status": "a"
  },
  "328": {
@@ -1837,7 +1837,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 0.9,
+  "selected_by": 1.0,
   "status": "a"
  },
  "336": {
@@ -2523,7 +2523,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 21.4,
+  "selected_by": 21.3,
   "status": "a"
  },
  "424": {
@@ -2544,14 +2544,14 @@
   "chance": null,
   "cost": 120,
   "news": "",
-  "selected_by": 51.6,
+  "selected_by": 51.5,
   "status": "a"
  },
  "427": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 38.6,
+  "selected_by": 38.5,
   "status": "a"
  },
  "428": {
@@ -3083,7 +3083,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 24.3,
+  "selected_by": 24.2,
   "status": "a"
  },
  "497": {
@@ -3104,7 +3104,7 @@
   "chance": 0,
   "cost": 55,
   "news": "Lack of match fitness - Expected back 29 Aug",
-  "selected_by": 16.4,
+  "selected_by": 16.3,
   "status": "i"
  },
  "5": {
@@ -3559,7 +3559,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 25.2,
+  "selected_by": 25.3,
   "status": "a"
  },
  "558": {
@@ -3622,7 +3622,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 3.3,
+  "selected_by": 3.4,
   "status": "a"
  },
  "566": {
@@ -3727,7 +3727,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 2.6,
+  "selected_by": 2.7,
   "status": "a"
  },
  "58": {
@@ -3782,7 +3782,7 @@
  "586": {
   "chance": 75,
   "cost": 40,
-  "news": "Unspecified injury - 75% chance of playing",
+  "news": "Thigh injury - 75% chance of playing",
   "selected_by": 1.4,
   "status": "d"
  },
@@ -3822,11 +3822,11 @@
   "status": "a"
  },
  "591": {
-  "chance": null,
+  "chance": 75,
   "cost": 55,
-  "news": "",
+  "news": "Muscular injury - 75% chance of playing",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "d"
  },
  "592": {
   "chance": null,
@@ -4049,7 +4049,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 39.9,
+  "selected_by": 40.0,
   "status": "a"
  },
  "80": {
@@ -4112,7 +4112,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 3.2,
+  "selected_by": 3.3,
   "status": "a"
  },
  "89": {
