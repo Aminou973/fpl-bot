@@ -192,7 +192,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 0.9,
+  "selected_by": 1.0,
   "status": "a"
  },
  "124": {
@@ -206,7 +206,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 0.9,
+  "selected_by": 1.0,
   "status": "a"
  },
  "126": {
@@ -822,7 +822,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 6.2,
+  "selected_by": 6.1,
   "status": "a"
  },
  "205": {
@@ -885,7 +885,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 11.8,
+  "selected_by": 11.7,
   "status": "a"
  },
  "213": {
@@ -1242,7 +1242,7 @@
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 18.1,
+  "selected_by": 18.0,
   "status": "a"
  },
  "26": {
@@ -1347,7 +1347,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 7.4,
+  "selected_by": 7.3,
   "status": "a"
  },
  "273": {
@@ -2236,7 +2236,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 21.4,
+  "selected_by": 21.3,
   "status": "a"
  },
  "388": {
@@ -2572,7 +2572,7 @@
   "chance": 100,
   "cost": 60,
   "news": "",
-  "selected_by": 2.6,
+  "selected_by": 2.5,
   "status": "a"
  },
  "430": {
@@ -2838,7 +2838,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 1.9,
+  "selected_by": 2.0,
   "status": "a"
  },
  "465": {
@@ -2964,14 +2964,14 @@
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 11.4,
+  "selected_by": 11.3,
   "status": "a"
  },
  "481": {
   "chance": 75,
   "cost": 65,
   "news": "Knock - 75% chance of playing",
-  "selected_by": 7.6,
+  "selected_by": 7.5,
   "status": "d"
  },
  "482": {
@@ -3237,7 +3237,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 1.4,
+  "selected_by": 1.3,
   "status": "a"
  },
  "516": {
@@ -3622,7 +3622,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 4.4,
+  "selected_by": 4.5,
   "status": "a"
  },
  "566": {
