@@ -158,17 +158,46 @@ def best_xi(df, squad_ids, gw):
     return xi_, [bench_gk] + bench
 
 
-def squad_report(df, squad_ids, gws):
+def pick_vice(df, xi_ids, captain_id, gw, max_ownership=None):
+    """Best armband deputy: the vice only counts if the captain plays no minutes.
+
+    Taken from a different club than the captain, because the one scenario that
+    strands you is both of them in a match that never happens - a postponement,
+    an abandonment, a shared rest week.
+    """
+    s = df[df.id.isin(xi_ids) & (df.id != captain_id)]
+    cap = df[df.id == captain_id]
+    if len(cap):
+        s = s[s.team != cap.iloc[0].team]
+    s = s[s.pos.isin(["MID", "FWD"])]
+    if max_ownership is not None:
+        capped = s[s.selected_by <= max_ownership]
+        if len(capped):
+            s = capped
+    if not len(s):
+        s = df[df.id.isin(xi_ids) & (df.id != captain_id)]
+    if not len(s):
+        return None
+    return int(s.sort_values(f"xp{gw}", ascending=False).iloc[0].id)
+
+
+def squad_report(df, squad_ids, gws, max_captain_ownership=None):
     s = df[df.id.isin(squad_ids)]
     rep = {"cost": round(float(s.price.sum()), 1), "gws": {}}
     for gw in gws:
         xi_, bench = best_xi(df, squad_ids, gw)
         att = [r for r in xi_ if r.pos in ("MID", "FWD")] or xi_
+        if max_captain_ownership is not None:
+            capped = [r for r in att if r.selected_by <= max_captain_ownership]
+            att = capped or att
         cap = max(att, key=lambda r: r[f"xp{gw}"])
+        xi_ids = [int(r.id) for r in xi_]
+        vice = pick_vice(df, xi_ids, int(cap.id), gw, max_captain_ownership)
         rep["gws"][gw] = {
-            "xi": [int(r.id) for r in xi_],
+            "xi": xi_ids,
             "bench": [int(r.id) for r in bench],
             "captain": int(cap.id),
+            "vice": vice,
             "xp": round(sum(r[f"xp{gw}"] for r in xi_) + cap[f"xp{gw}"], 2),
         }
     rep["xp_total"] = round(sum(v["xp"] for v in rep["gws"].values()), 2)

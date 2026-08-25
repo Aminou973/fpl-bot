@@ -97,6 +97,56 @@ def next_event(boot=None):
     return pend[0] if pend else boot["events"][-1]
 
 
+def chip_windows(boot=None):
+    """When each chip may actually be played, straight from the game itself.
+
+    The API is the authority here: it publishes one entry per chip per half of
+    the season with the exact gameweek range. Reading it rather than hardcoding
+    means a rule change fixes itself.
+    """
+    boot = boot or bootstrap()
+    out = {}
+    for c in boot.get("chips", []) or []:
+        out.setdefault(c["name"], []).append(
+            {"start": c.get("start_event"), "stop": c.get("stop_event"),
+             "type": c.get("chip_type")})
+    for v in out.values():
+        v.sort(key=lambda w: (w["start"] or 0))
+    return out
+
+
+def settled_events(boot=None, fx=None, with_provisional=False):
+    """Gameweeks whose results can be trusted, which is not the same as "finished".
+
+    The game only sets ``finished``/``data_checked`` on an event once it has
+    audited the week, and that audit can lag the last whistle by more than a
+    day. The fixtures themselves flip ``finished_provisional`` as soon as bonus
+    is applied, and the points behind them stop moving at that point. Waiting on
+    the event flag leaves the dashboard blank on a gameweek that is, to anyone
+    looking at it, plainly over - so an event counts as settled when the game
+    says so, or when every one of its fixtures has provisionally finished.
+
+    The provisional ones carry a caveat: their bonus points are the live
+    calculation and the game has not written them down yet, so a player can
+    still move by a point or two. With ``with_provisional`` this returns
+    ``(settled, provisional)`` so the dashboard can say which weeks those are.
+    """
+    boot = boot or bootstrap()
+    by_event = {}
+    for m in (fx if fx is not None else fixtures()):
+        by_event.setdefault(m.get("event"), []).append(m)
+    ids, prov = [], []
+    for e in boot["events"]:
+        if e.get("finished") or e.get("data_checked"):
+            ids.append(e["id"])
+            continue
+        ms = by_event.get(e["id"]) or []
+        if ms and all(m.get("finished") or m.get("finished_provisional") for m in ms):
+            ids.append(e["id"])
+            prov.append(e["id"])
+    return (sorted(ids), sorted(prov)) if with_provisional else sorted(ids)
+
+
 def season_gameweeks(boot=None, fx=None, upto=None):
     """Rebuild a merged_gw-style frame for the current season from event/live.
 
@@ -108,7 +158,7 @@ def season_gameweeks(boot=None, fx=None, upto=None):
     elements = {e["id"]: e for e in boot["elements"]}
     team_name = {t["id"]: t["name"] for t in boot["teams"]}
     fixtures_by_id = {m["id"]: m for m in fx}
-    done = [e["id"] for e in boot["events"] if e.get("finished")]
+    done = settled_events(boot, fx)
     if upto:
         done = [g for g in done if g <= upto]
 

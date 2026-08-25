@@ -108,11 +108,14 @@ def grade_gameweek(boot, gw: int, projected: dict):
     }
 
 
-def grade_all(root: Path, boot):
-    """Grade every finished gameweek that has a stored projection."""
-    finished = [e["id"] for e in boot["events"] if e.get("finished")]
+def grade_all(root: Path, boot, fx=None):
+    """Grade every settled gameweek that has a stored projection.
+
+    Settled, not finished - see api.settled_events. Grading a week the moment its
+    bonus lands is the entire point of the accuracy panel.
+    """
     out = []
-    for gw in finished:
+    for gw in api.settled_events(boot, fx):
         proj = load_projections(root, gw)
         if not proj:
             continue
@@ -164,11 +167,14 @@ def team_series(entry_id: int, boot):
     }
 
 
-def build(root: Path, boot, entries: dict, df=None, gw=None):
+def build(root: Path, boot, entries: dict, df=None, gw=None, fx=None):
     """Everything the dashboard needs about the past."""
     if df is not None and gw is not None:
         save_projections(root, gw, df)
+    settled, provisional = api.settled_events(boot, fx, with_provisional=True)
     return {
         "teams": {name: team_series(eid, boot) for name, eid in entries.items() if eid},
-        "accuracy": grade_all(root, boot),
+        "accuracy": grade_all(root, boot, fx),
+        "settled": settled,
+        "provisional": provisional,
     }

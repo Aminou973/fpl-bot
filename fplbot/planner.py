@@ -15,11 +15,19 @@ import pandas as pd
 from scipy.optimize import milp, LinearConstraint, Bounds
 from scipy.sparse import lil_matrix, vstack
 
-from .optimize import POS_MIN, SQUAD_N, best_xi, squad_report
+from .optimize import POS_MIN, SQUAD_N, best_xi, pick_vice, squad_report
 
 HIT_COST = 4.0
 MAX_FT = 5
 DECAY = 0.85
+
+
+def attach_vice(df, weeks, max_captain_ownership=None):
+    """Fill in the vice-captain for every gameweek of a finished plan."""
+    for wk in weeks:
+        wk["vice"] = pick_vice(df, wk["xi"], wk["captain"], wk["gw"],
+                               max_captain_ownership)
+    return weeks
 
 
 def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,

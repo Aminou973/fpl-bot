@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd  # noqa: E402
 
-from fplbot import api, dashboard, history, notify, optimize, pipeline  # noqa: E402
+from fplbot import api, chips, dashboard, history, notify, optimize, pipeline  # noqa: E402
 from fplbot.notify import esc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -64,6 +64,11 @@ def brief(ctx, results, cfg):
                              f"{res['hit_policy']['threshold']} pt threshold")
         lines.append(f"Captain <b>{esc(cap['name'])}</b> "
                      f"({cap['team']}, {cap[f'xp{gws[0]}']:.1f} xP → {cap[f'xp{gws[0]}']*2:.1f})")
+        if wk.get("vice") in r.index:
+            vc = r.loc[wk["vice"]]
+            lines.append(f"Vice <b>{esc(vc['name'])}</b> ({vc['team']}, "
+                         f"{vc[f'xp{gws[0]}']:.1f} xP) — different club, so one "
+                         f"postponement cannot take both")
         flagged = [f"{r.loc[i,'name']} ({r.loc[i,'news'] or 'flagged'})"
                    for i in res["squad"]
                    if isinstance(r.loc[i, "status"], str) and r.loc[i, "status"] != "a"]
@@ -73,11 +78,24 @@ def brief(ctx, results, cfg):
                      f"gameweeks {gws[0]}–{gws[-1]} (squad untouched: {base:.0f})")
         if res["hit_policy"].get("advice"):
             lines.append("💡 " + esc(res["hit_policy"]["advice"]))
-        best_tc = max(res["chips"], key=lambda c: c["triple_captain"])
-        best_bb = max(res["chips"], key=lambda c: c["bench_boost"])
-        lines.append(f"Chips: best triple captain in this window is GW{best_tc['gw']} "
-                     f"(+{best_tc['triple_captain']:.1f}); best bench boost GW{best_bb['gw']} "
-                     f"(+{best_bb['bench_boost']:.1f})")
+        cal = (ctx.get("chip_calendar") or {}).get("picks", {}).get(name, {}).get("first", {})
+        if cal:
+            tc = (cal.get("triple_captain") or [None])[0]
+            bb = (cal.get("bench_boost") or [None])[0]
+            wc = (cal.get("wildcard") or [None])[0]
+            bits = []
+            if tc: bits.append(f"triple captain GW{tc['gw']}"
+                               + (f" on {esc(tc['player'])}" if tc.get("player") else ""))
+            if bb: bits.append(f"bench boost GW{bb['gw']}")
+            if wc: bits.append(f"wildcard around GW{wc['gw']}")
+            if bits:
+                lines.append("Chips, this half of the season: " + "; ".join(bits))
+        else:
+            best_tc = max(res["chips"], key=lambda c: c["triple_captain"])
+            best_bb = max(res["chips"], key=lambda c: c["bench_boost"])
+            lines.append(f"Chips: best triple captain in this window is GW{best_tc['gw']} "
+                         f"(+{best_tc['triple_captain']:.1f}); best bench boost "
+                         f"GW{best_bb['gw']} (+{best_bb['bench_boost']:.1f})")
         out.append("\n".join(lines))
 
     site = cfg.get("site_url")
@@ -98,6 +116,11 @@ def main():
                                      horizon=int(cfg.get("horizon", 5)))
     df, gws = ctx["df"], ctx["gws"]
 
+    # Far from a deadline there is no transfer advice worth pushing to a phone,
+    # but the results of the gameweek that just ended very much are worth
+    # publishing. So the run continues either way and only the Telegram brief is
+    # held back: the dashboard refreshes three times a day all week.
+    quiet = False
     if not a.offline:
         nxt = api.next_event(ctx["bootstrap"])
         ctx["next_event"] = nxt
@@ -105,8 +128,8 @@ def main():
             d = dt.datetime.fromisoformat(nxt["deadline_time"].replace("Z", "+00:00"))
             hrs = (d - dt.datetime.now(dt.timezone.utc)).total_seconds() / 3600
             if hrs > float(cfg.get("plan_window_hours", 40)) or hrs < 0:
-                print(f"[plan] deadline {hrs:.1f}h away — skipping")
-                return
+                quiet = True
+                print(f"[plan] deadline {hrs:.1f}h away — publishing results only")
 
     results = {}
     for name, t in cfg["teams"].items():
@@ -132,12 +155,26 @@ def main():
 
     bundle = build_bundle(ctx, results, cfg)
     bundle["changes"] = diff_since(prev, bundle, results)
+
+    # chips are once-a-season decisions, so they get their own full-season pass
+    try:
+        long_h = 39 - gws[0]
+        ldf, _, _, lgws = pipeline.long_projection(ctx, long_h)
+        squads = {n: r["squad"] for n, r in results.items() if "error" not in r}
+        caps = {n: cfg["teams"][n].get("max_captain_ownership") for n in squads}
+        win = api.chip_windows(ctx["bootstrap"]) if not a.offline else None
+        bundle["chip_calendar"] = chips.calendar(ldf, lgws, squads, caps, windows=win)
+        ctx["chip_calendar"] = bundle["chip_calendar"]
+    except Exception as e:                              # noqa: BLE001
+        print(f"[plan] chip calendar unavailable: {e}")
+        bundle["chip_calendar"] = None
     if not a.offline:
         entries = {n: t.get("entry_id") for n, t in cfg["teams"].items()}
         bundle["history"] = history.build(ROOT, ctx["bootstrap"], entries,
-                                          df=df, gw=gws[0])
+                                          df=df, gw=gws[0], fx=ctx.get("fx"))
     else:
-        bundle["history"] = {"teams": {}, "accuracy": []}
+        bundle["history"] = {"teams": {}, "accuracy": [], "settled": [],
+                             "provisional": []}
     (ROOT / "site").mkdir(exist_ok=True)
     (ROOT / "site" / "bundle.json").write_text(json.dumps(bundle))
     dashboard.build(ROOT / "site" / "bundle.json", ROOT / "site" / "index.html")
@@ -147,10 +184,64 @@ def main():
                       "out": v.get("plan", {}).get("weeks", [{}])[0].get("out", [])}
                   for k, v in results.items() if "error" not in v}})
 
+    # A week first reported while provisional is reported once more when the
+    # game confirms it, in case bonus moved anything.
+    told = pipeline.read_state("reported", {"gws": [], "final": []})
+    prov = set(bundle["history"].get("provisional") or [])
+    seen, final = set(told.get("gws", [])), set(told.get("final", []))
+    done = [g for g in (bundle["history"].get("settled") or [])
+            if g not in seen or (g not in prov and g not in final)]
+    if done and not a.offline:
+        rtext = results_brief(bundle["history"], max(done), cfg)
+        print(rtext)
+        if not a.no_notify and rtext:
+            notify.send(rtext)
+        pipeline.write_state("reported", {
+            "gws": sorted(seen | set(done)),
+            "final": sorted(final | {g for g in done if g not in prov})})
+
     text = brief(ctx, results, cfg)
     print(text)
-    if not a.no_notify:
+    if quiet:
+        print("[plan] outside the deadline window — brief printed, not sent")
+    elif not a.no_notify:
         notify.send(text)
+
+
+def results_brief(hist, gw, cfg):
+    """What actually happened last gameweek, for both teams, plus model accuracy."""
+    prov = gw in (hist.get("provisional") or [])
+    lines = [f"<b>Gameweek {gw} results</b>"
+             + (" — provisional, bonus not yet confirmed" if prov else "")]
+    for name, series in (hist.get("teams") or {}).items():
+        wk = next((w for w in series.get("weeks", []) if w["gw"] == gw), None)
+        if not wk:
+            continue
+        avg = wk.get("average")
+        vs = f" (average {avg}, {wk['net'] - avg:+d} vs field)" if avg else ""
+        rank = f"{wk['overall_rank']:,}" if wk.get("overall_rank") else "—"
+        delta = wk.get("rank_delta")
+        move = f", {'▲' if delta > 0 else '▼'}{abs(delta):,}" if delta else ""
+        lines.append(f"\n<b>{esc(name)}</b>  {wk['net']} pts{esc(vs)}"
+                     f"\nOverall rank {esc(rank)}{esc(move)}"
+                     f"\nBench {wk['bench']}, hits {wk['hits']}, "
+                     f"squad £{wk['value']:.1f}m")
+    acc = next((g for g in (hist.get("accuracy") or []) if g["gw"] == gw), None)
+    if acc:
+        lines.append(f"\nModel: {acc['mae']} pts average error over {acc['n']} "
+                     f"players, bias {acc['bias']:+.2f}")
+        if acc.get("worst_misses"):
+            m = acc["worst_misses"][0]
+            lines.append(f"Biggest miss {esc(m['name'])} "
+                         f"(projected {m['proj']}, scored {m['actual']})")
+        if acc.get("best_calls"):
+            b = acc["best_calls"][0]
+            lines.append(f"Best call {esc(b['name'])} "
+                         f"(projected {b['proj']}, scored {b['actual']})")
+    site = cfg.get("site_url")
+    if site:
+        lines.append(f"\nFull dashboard: {site}")
+    return "\n".join(lines) if len(lines) > 1 else ""
 
 
 def diff_since(prev, cur, results):

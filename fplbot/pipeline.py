@@ -37,6 +37,7 @@ def resolve_squad(df, element_ids=None, by_name=None):
 
 def build_projections(offline=False, horizon=5):
     """Projections plus the context needed by every job."""
+    fx = None
     if offline:
         frames = api.offline_frames(ROOT / "data")
         boot = None
@@ -52,7 +53,17 @@ def build_projections(offline=False, horizon=5):
     df, teams, fxdf, gws = model.build(horizon=len(gws), start_gw=start,
                                        frames=frames, gw26=gw26)
     return {"df": df, "teams": teams, "fixtures": fxdf, "gws": gws,
-            "bootstrap": boot, "start": start}
+            "bootstrap": boot, "start": start, "frames": frames, "gw26": gw26,
+            "fx": fx}
+
+
+def long_projection(ctx, horizon):
+    """Re-run the projection over the rest of the season, for chip planning.
+
+    Reuses the frames already fetched, so this costs arithmetic and no API calls.
+    """
+    return model.build(horizon=horizon, start_gw=ctx["gws"][0],
+                       frames=ctx.get("frames"), gw26=ctx.get("gw26"))
 
 
 def team_kwargs(df, cfg_team):
@@ -96,14 +107,17 @@ def plan_team(ctx, cfg_team, state, pool=None):
     if p is None:
         return {"error": info.get("advice", "planner infeasible") if info
                 else "planner infeasible"}
+    cap_own = kw.get("max_captain_ownership")
+    planner.attach_vice(df, p["weeks"], cap_own)
     plan_kw = {k: v for k, v in kw.items() if k != "max_captain_ownership"}
     target = optimize.solve(pool, gws, allow_infeasible=True, **plan_kw)
     return {
         "squad": squad,
-        "current_report": optimize.squad_report(df, squad, gws),
+        "current_report": optimize.squad_report(df, squad, gws, cap_own),
         "plan": p, "hit_policy": info,
         "target": target["squad"] if target else None,
-        "target_report": optimize.squad_report(df, target["squad"], gws) if target else None,
+        "target_report": optimize.squad_report(df, target["squad"], gws, cap_own)
+                         if target else None,
         "chips": planner.evaluate_chips(df, p["weeks"], gws),
         "free_transfers": ft, "bank": float(state.get("bank", 0.0)),
         "settings": kw_summary(cfg_team),

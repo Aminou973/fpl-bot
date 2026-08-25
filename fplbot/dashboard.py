@@ -122,6 +122,8 @@ tbody tr:hover{background:color-mix(in oklab,var(--s1) 9%,transparent)}
 .pl.flagged .nm{color:var(--critical)}
 .badge{position:absolute;top:-7px;left:-6px;background:var(--s1);color:#fff;
   font-size:10px;font-weight:700;border-radius:6px;padding:1px 5px}
+.badge.v{background:var(--raised);color:var(--ink2);border:1px solid var(--ring)}
+.pl.vice{outline:1px dashed var(--muted);outline-offset:1px}
 .bench{opacity:.7;margin-top:4px;border-top:1px dashed var(--axis);padding-top:10px}
 
 /* -------------------------------------------------------------- fixtures */
@@ -240,6 +242,7 @@ svg{display:block;max-width:100%}
     <div class="legend">
       <span><span class="sw" style="background:var(--s1)"></span>captain</span>
       <span><span class="sw" style="background:var(--s2)"></span>differential, under 8% owned</span>
+      <span class="hint">dashed outline = vice-captain</span>
       <span class="hint">the colour strip on each card is the club</span>
     </div>
   </div>
@@ -321,7 +324,13 @@ svg{display:block;max-width:100%}
   <div class="card">
     <header><div><h2>Chips</h2><p class="sub" id="chipSub"></p></div></header>
     <div class="chips" id="chipCards"></div>
-    <h3>Best three-gameweek runs</h3>
+    <div class="row" id="chipTabs" style="margin-top:16px"></div>
+    <h3>When to play each chip</h3>
+    <div id="chipPicks"></div>
+    <h3>Every gameweek, scored</h3>
+    <div id="chipStrips"></div>
+    <p class="note" id="chipNote"></p>
+    <h3>Best three-gameweek fixture runs</h3>
     <div class="split">
       <div><p class="hint">Before the first-set deadline</p><div id="win1"></div></div>
       <div><p class="hint">After it</p><div id="win2"></div></div>
@@ -696,13 +705,13 @@ function syncSquad() {
   $("#gwTabs").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.g === curGw));
   renderPitches();
 }
-function playerCard(p, gw, isCap) {
-  const c = el("div", "pl" + (isCap ? " cap" : "") + (p.selected_by < DIFF_OWN ? " diff" : "")
-    + (p.status !== "a" ? " flagged" : ""));
+function playerCard(p, gw, isCap, isVice) {
+  const c = el("div", "pl" + (isCap ? " cap" : "") + (isVice ? " vice" : "")
+    + (p.selected_by < DIFF_OWN ? " diff" : "") + (p.status !== "a" ? " flagged" : ""));
   c.style.setProperty("--club", clubOf(p.team));
   const fx = p["fx" + gw] || "";
   const fdr = p["fdr" + gw] || 3;
-  c.innerHTML = `${isCap ? '<span class="badge">C</span>' : ""}
+  c.innerHTML = `${isCap ? '<span class="badge">C</span>' : isVice ? '<span class="badge v">V</span>' : ""}
     <div class="nm">${p.name}</div>
     <div class="mt">${p.team} · £${fmt(p.price)}</div>
     <div class="fx" style="background:${cellColor(fdr)}">${fx}</div>
@@ -733,18 +742,21 @@ function renderPitches() {
     ["GKP", "DEF", "MID", "FWD"].forEach(k => {
       const row = el("div", "line");
       lines[k].sort((a, c) => c["xp" + curGw] - a["xp" + curGw])
-        .forEach(p => row.appendChild(playerCard(p, curGw, p.id === g.captain)));
+        .forEach(p => row.appendChild(
+          playerCard(p, curGw, p.id === g.captain, p.id === g.vice)));
       pitch.appendChild(row);
     });
     const bench = el("div", "line bench");
-    g.bench.forEach(i => byId[i] && bench.appendChild(playerCard(byId[i], curGw, false)));
+    g.bench.forEach(i => byId[i] && bench.appendChild(
+      playerCard(byId[i], curGw, false, byId[i].id === g.vice)));
     pitch.appendChild(bench);
     box.appendChild(pitch);
     const form = ["DEF", "MID", "FWD"].map(k => lines[k].length).join("-");
     const cap = byId[g.captain];
     const foot = el("p", "note");
-    foot.innerHTML = `<b>${form}</b> · ${fmt(g.xp, 1)} projected including captain
-      <b>${cap ? cap.name : "–"}</b> · ${b.blurb}`;
+    const vc = byId[g.vice];
+    foot.innerHTML = `<b>${form}</b> · ${fmt(g.xp, 1)} projected · captain
+      <b>${cap ? cap.name : "–"}</b>, vice <b>${vc ? vc.name : "–"}</b> · ${b.blurb}`;
     box.appendChild(foot);
     host.appendChild(box);
   });
@@ -773,6 +785,7 @@ function renderPlan() {
     <td class="l">${k.out.map(i => byId[i] ? byId[i].name : i).join(", ") || "<span class='hint'>roll</span>"}</td>
     <td class="l">${k.in.map(i => byId[i] ? `${byId[i].name} <span class='hint'>£${fmt(byId[i].price)}</span>` : i).join(", ") || "–"}</td>
     <td class="l">${byId[k.captain] ? byId[k.captain].name : "–"}</td>
+    <td class="l hide-s">${byId[k.vice] ? byId[k.vice].name : "–"}</td>
     <td class="hide-s">${k.free_transfers}</td>
     <td>${k.hits ? `<span class="down">−${k.hits * 4}</span>` : "0"}</td>
     <td class="hide-s">£${fmt(k.bank)}m</td>
@@ -782,7 +795,7 @@ function renderPlan() {
   const bestBb = chips.reduce((a, c) => (!a || c.bench_boost > a.bench_boost ? c : a), null);
   $("#planBody").innerHTML = `<table>
     <thead><tr><th class="l">Week</th><th class="l">Out</th><th class="l">In</th>
-      <th class="l">Captain</th><th class="hide-s">FT left</th><th>Hit</th>
+      <th class="l">Captain</th><th class="l hide-s">Vice</th><th class="hide-s">FT left</th><th>Hit</th>
       <th class="hide-s">Bank</th><th>Points</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
   $("#planNote").innerHTML =
@@ -913,8 +926,61 @@ function renderTicker() {
 }
 $("#tickSort").onchange = renderTicker;
 
+/** 38 thin columns, top three emphasised, deadline marked. */
+function chipStrip(host, weeks, key, opts) {
+  host.innerHTML = "";
+  const vals = weeks.filter(w => w[key] !== null && w[key] !== undefined);
+  const spread = vals.length ? Math.max(...vals.map(w => Math.abs(w[key]))) : 0;
+  if (!vals.length || spread === 0) {
+    host.innerHTML = `<div class="empty">${opts.empty || "No data."}</div>`;
+    return;
+  }
+  const W = Math.max(300, host.clientWidth || 640), H = 96;
+  const p = {t: 10, r: 8, b: 18, l: 40};
+  // bars always grow from zero, so a negative week reads as negative
+  const lo = Math.min(0, ...vals.map(w => w[key]));
+  const hi = Math.max(0.0001, ...vals.map(w => w[key]));
+  const gws = weeks.map(w => w.gw);
+  const bw = Math.max(3, Math.min(14, (W - p.l - p.r) / gws.length - 2));
+  const sx = g => p.l + (gws.indexOf(g) + 0.5) / gws.length * (W - p.l - p.r);
+  const sy = v => H - p.b - (v - lo) / (hi - lo || 1) * (H - p.t - p.b);
+  const top3 = new Set(vals.slice().sort((a, b) => b[key] - a[key]).slice(0, 3).map(w => w.gw));
+  const svg = svgEl("svg", {viewBox: `0 0 ${W} ${H}`, width: "100%", height: H,
+                            role: "img", "aria-label": opts.label || key});
+  svg.appendChild(svgEl("line", {x1: p.l, x2: W - p.r, y1: sy(0), y2: sy(0), class: "al"}));
+  const split = opts.split || 19;
+  if (gws.includes(split)) {
+    const x = sx(split) - bw / 2 - 2;
+    svg.appendChild(svgEl("line", {x1: x, x2: x, y1: p.t, y2: H - p.b, class: "al"}));
+    const t = svgEl("text", {x: x + 3, y: p.t + 8, class: "axis"});
+    t.textContent = "chip deadline"; svg.appendChild(t);
+  }
+  weeks.forEach(w => {
+    const v = w[key];
+    if (v === null || v === undefined) return;
+    const y = sy(v), y0 = sy(0);
+    const r = svgEl("rect", {x: sx(w.gw) - bw / 2, y: Math.min(y, y0),
+      width: bw, height: Math.max(1.5, Math.abs(y0 - y)), rx: 2,
+      fill: top3.has(w.gw) ? css("--s1") : css("--deemph"),
+      opacity: top3.has(w.gw) ? 1 : .5});
+    tipify(r, `<b>GW${w.gw}</b><br>${opts.label}: <b>${fmt(v, opts.dp === 0 ? 0 : 1)}</b>` +
+      (w.tc_player && key === "triple_captain" ? `<br>on ${w.tc_player}` : ""));
+    svg.appendChild(r);
+  });
+  [gws[0], gws[Math.floor(gws.length / 2)], gws[gws.length - 1]].forEach(g => {
+    const t = svgEl("text", {x: sx(g), y: H - 5, class: "axis", "text-anchor": "middle"});
+    t.textContent = "GW" + g; svg.appendChild(t);
+  });
+  [[hi, sy(hi)], lo < 0 ? [lo, sy(lo)] : null].filter(Boolean).forEach(([v, y]) => {
+    const t = svgEl("text", {x: p.l - 6, y: y + 4, class: "axis", "text-anchor": "end"});
+    t.textContent = fmt(v, opts.dp === 0 ? 0 : 1);
+    svg.appendChild(t);
+  });
+  host.appendChild(svg);
+}
+
 /* ================================================================= CHIPS */
-const CHIP_GW = 19;
+const CHIP_GW = (D.chip_calendar && D.chip_calendar.split) || 20;
 function runs(from, to, len) {
   const out = [];
   Object.entries(D.season_grid || {}).forEach(([club, row]) => {
@@ -939,17 +1005,22 @@ function winTable(rows) {
 }
 function renderChips() {
   const cd = D.chip_deadline ? new Date(D.chip_deadline) : null;
-  $("#chipSub").innerHTML = `Two full sets — Wildcard, Free Hit, Triple Captain, Bench Boost
-    in each. <b>The first set expires ${cd ? cd.toUTCString().slice(0, 16) : "2 Jan"} 13:30 GMT,
-    before gameweek ${CHIP_GW}</b>, and anything unused is lost.`;
+  const win = (D.chip_calendar && D.chip_calendar.windows) || {};
+  const w1 = (win.wildcard || [{}])[0] || {};
+  $("#chipSub").innerHTML = `Eight chips, in two sets of four — Wildcard, Free Hit,
+    Triple Captain, Bench Boost in each. <b>The first set runs through gameweek
+    ${CHIP_GW - 1} and anything unused is lost</b>; the second set opens at gameweek
+    ${CHIP_GW}. Wildcard and Free Hit cannot be played in gameweek
+    ${(w1.start || 2) - 1} — transfers are already unlimited then.`;
   $("#chipCards").innerHTML = [
-    ["Wildcard", "For a structural problem, not two injuries. Gameweeks 6–9 is when the season stops lying. Minoux_41 can fire earlier — the risk team is supposed to move."],
+    ["Wildcard", "For a structural problem, not two injuries. Gameweeks 6–9 is when the season stops lying. Playable from GW2 to the end of its half, so the first one dies with gameweek " + (CHIP_GW - 1) + "."],
     ["Triple Captain", "A premium attacker, home, against a weak defence, ideally in a double gameweek. Play it when the captain list has a clear leader, not merely a first."],
     ["Bench Boost", "Needs all fifteen playing. Pair it with a wildcard the week before that deliberately builds a bench, and aim at a double."],
     ["Free Hit", "Blank-gameweek insurance. Doubles and blanks are not in the fixture list yet; they appear once the cup rounds are drawn."],
   ].map(([k, v]) => `<div class="chip"><b>${k}</b><span class="hint">${v}</span></div>`).join("");
   $("#win1").innerHTML = winTable(runs(1, CHIP_GW - 1, 3));
   $("#win2").innerHTML = winTable(runs(CHIP_GW, 38, 3));
+  renderChipCalendar();
 
   const clubs = Object.keys(D.season_grid || {}).sort();
   const head = `<tr><td class="l"></td>` + Array.from({length: 38}, (_, i) =>
@@ -968,6 +1039,83 @@ function renderChips() {
     tipify(n, n.dataset.tip.split("|").join("<br>")));
 }
 
+/* ====================================================== CHIP CALENDAR */
+let chipTeam = NAMES[0];
+const CHIP_DEFS = [
+  ["tc_expected", "Triple captain", "best captain that week, weighted by how often this gameweek has been a double"],
+  ["bench_boost_expected", "Bench boost", "what your bench adds, weighted by the chance of a double"],
+  ["wildcard", "Wildcard", "how far your squad falls behind the best available, against your own season median"],
+  ["blank_risk", "Free hit", "blank exposure: fixtures already missing, or how often this week has blanked before"],
+  ["p_double", "Doubles, historically", "share of the last four seasons where this gameweek contained a double"],
+  ["p_blank", "Blanks, historically", "share of the last four seasons where this gameweek contained a blank"],
+];
+function renderChipTabs() {
+  const cc = D.chip_calendar;
+  if (!cc) return;
+  $("#chipTabs").innerHTML = Object.keys(cc.teams).map(n =>
+    `<button data-ct="${n}" aria-pressed="${n === chipTeam}">${n}</button>`).join("");
+  $("#chipTabs").onclick = e => {
+    if (!e.target.dataset.ct) return;
+    chipTeam = e.target.dataset.ct;
+    $("#chipTabs").querySelectorAll("button").forEach(b =>
+      b.setAttribute("aria-pressed", b.dataset.ct === chipTeam));
+    renderChipCalendar();
+  };
+}
+function renderChipCalendar() {
+  const cc = D.chip_calendar;
+  if (!cc || !cc.teams[chipTeam]) {
+    $("#chipPicks").innerHTML = `<div class="empty">Chip calendar unavailable.</div>`;
+    $("#chipStrips").innerHTML = "";
+    return;
+  }
+  const weeks = cc.teams[chipTeam];
+  const picks = cc.picks[chipTeam] || {};
+  const half = (h, lo, hi) => {
+    const p = picks[h] || {};
+    const row = (key, label) => {
+      const list = p[key] || [];
+      if (!list.length) return `<tr><td class="l">${label}</td>
+        <td class="l hint" colspan="2">no clear window in this half</td></tr>`;
+      return `<tr><td class="l">${label}</td>
+        <td class="l"><b>GW${list[0].gw}</b>${list[0].player ? " on " + list[0].player : ""}</td>
+        <td class="l hint">then ${list.slice(1).map(x => "GW" + x.gw).join(", ") || "–"}</td></tr>`;
+    };
+    return `<div><p class="hint">${h === "first" ? "First set — through GW" + (cc.split - 1)
+      : "Second set — gameweek " + CHIP_GW + " onward"}</p><table><tbody>
+      ${row("triple_captain", "Triple captain")}
+      ${row("bench_boost", "Bench boost")}
+      ${row("wildcard", "Wildcard")}
+      ${row("free_hit", "Free hit")}
+    </tbody></table></div>`;
+  };
+  $("#chipPicks").innerHTML = `<div class="split">${half("first")}${half("second")}</div>`;
+
+  $("#chipStrips").innerHTML = CHIP_DEFS.map(([k, label, why]) =>
+    `<div style="margin-bottom:12px"><div class="hint" style="margin-bottom:2px">
+      <b style="color:var(--ink)">${label}</b> — ${why}</div>
+      <div id="strip_${k}"></div></div>`).join("");
+  CHIP_DEFS.forEach(([k, label]) => {
+    chipStrip($("#strip_" + k), weeks, k,
+      {label, split: cc.split, dp: 1,
+       empty: k.startsWith("p_")
+         ? "No historical pattern data shipped."
+         : "Nothing to score here yet."});
+  });
+  const basis = (cc.basis || []).join(", ");
+  $("#chipNote").innerHTML = `Highlighted columns are the three best weeks in each row.
+    The bottom two rows are history, not forecast: how often each gameweek number
+    actually contained a double or a blank across ${basis || "recent seasons"}. Doubles
+    have clustered in GW25 and GW33–37, blanks around GW29 and GW34, driven by cup
+    rounds and European midweeks. Bench boost and triple captain are weighted by that
+    pattern, so a week that has usually doubled scores higher before the real fixtures
+    are known. It is a prior and nothing more — the actual doubles depend on cup draws
+    that have not happened, and every row re-scores itself the week they land. The
+    wildcard row is a deviation from ${chipTeam}'s own season median, so a tall column
+    means that week is unusually good to rebuild, not that a wildcard is worth that
+    many points.`;
+}
+
 /* ============================================================== ACCURACY */
 function renderAccuracy() {
   const acc = (D.history && D.history.accuracy) || [];
@@ -979,6 +1127,11 @@ function renderAccuracy() {
     return;
   }
   const last = acc[acc.length - 1];
+  const prov = (D.history && D.history.provisional) || [];
+  const provNote = prov.includes(last.gw)
+    ? `<div class="note">Gameweek ${last.gw} is graded on provisional bonus — the game has
+       not written the final bonus points down yet, so a player here can still move by a
+       point or two. It regrades itself on the next run after that lands.</div>` : "";
   const mae = acc.map(a => ({x: a.gw, y: a.mae}));
   const bias = acc.map(a => ({x: a.gw, y: a.bias}));
   const posRows = Object.entries(last.by_pos || {}).map(([p, v]) => `<tr>
@@ -995,7 +1148,7 @@ function renderAccuracy() {
     <td>${fmt(m.proj, 1)}</td><td>${m.actual}</td>
     <td class="up">+${fmt(m.actual - m.proj, 1)}</td></tr>`).join("");
 
-  $("#accBody").innerHTML = `
+  $("#accBody").innerHTML = provNote + `
     <div class="tiles" style="margin-bottom:14px">
       <div class="tile"><div class="k">Average error, GW${last.gw}</div>
         <div class="v">${fmt(last.mae, 2)}</div><div class="n">points per player, ${last.n} players judged</div></div>
@@ -1113,11 +1266,11 @@ $("#method").innerHTML = `
   played the model folds them in automatically and grades itself above.`;
 
 /* ================================================================== BOOT */
-function redrawCharts() { seasonCharts(); renderScatter(); renderAccuracy(); }
+function redrawCharts() { seasonCharts(); renderScatter(); renderAccuracy(); renderChipCalendar(); }
 let rt;
 addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(redrawCharts, 180); });
 
-tiles(); syncSquad(); renderPlan(); renderCap(); renderTemplate();
+tiles(); syncSquad(); renderPlan(); renderCap(); renderTemplate(); renderChipTabs();
 renderTicker(); renderChips(); renderTable(); renderChanges(); redrawCharts();
 </script>
 </body>
