@@ -122,14 +122,14 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 0.2,
+  "selected_by": 0.3,
   "status": "a"
  },
  "115": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 4.8,
+  "selected_by": 4.9,
   "status": "a"
  },
  "116": {
@@ -430,7 +430,7 @@
   "chance": 100,
   "cost": 95,
   "news": "",
-  "selected_by": 12.0,
+  "selected_by": 12.1,
   "status": "a"
  },
  "155": {
@@ -451,7 +451,7 @@
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 1.3,
+  "selected_by": 1.2,
   "status": "a"
  },
  "158": {
@@ -514,7 +514,7 @@
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 65.3,
+  "selected_by": 65.4,
   "status": "a"
  },
  "166": {
@@ -990,7 +990,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 8.5,
+  "selected_by": 8.6,
   "status": "a"
  },
  "227": {
@@ -1396,7 +1396,7 @@
   "chance": 75,
   "cost": 40,
   "news": "Hamstring injury - 75% chance of playing",
-  "selected_by": 1.4,
+  "selected_by": 1.5,
   "status": "d"
  },
  "28": {
@@ -1522,7 +1522,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 1.7,
+  "selected_by": 1.8,
   "status": "a"
  },
  "296": {
@@ -2082,7 +2082,7 @@
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 4.7,
+  "selected_by": 4.8,
   "status": "a"
  },
  "368": {
@@ -2243,7 +2243,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 18.3,
+  "selected_by": 18.4,
   "status": "a"
  },
  "389": {
@@ -2432,7 +2432,7 @@
   "chance": null,
   "cost": 155,
   "news": "",
-  "selected_by": 68.7,
+  "selected_by": 68.6,
   "status": "a"
  },
  "412": {
@@ -2747,7 +2747,7 @@
   "chance": 75,
   "cost": 70,
   "news": "Thigh injury - 75% chance of playing",
-  "selected_by": 3.4,
+  "selected_by": 3.3,
   "status": "d"
  },
  "453": {
@@ -2845,7 +2845,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 1.1,
+  "selected_by": 1.2,
   "status": "a"
  },
  "466": {
@@ -3104,7 +3104,7 @@
   "chance": 75,
   "cost": 55,
   "news": "Lack of match fitness - 75% chance of playing",
-  "selected_by": 14.3,
+  "selected_by": 14.2,
   "status": "d"
  },
  "5": {
@@ -3447,7 +3447,7 @@
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 9.5,
+  "selected_by": 9.4,
   "status": "a"
  },
  "543": {
@@ -3622,7 +3622,7 @@
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 5.7,
+  "selected_by": 5.8,
   "status": "a"
  },
  "566": {
@@ -3678,7 +3678,7 @@
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 1.5,
+  "selected_by": 1.6,
   "status": "a"
  },
  "573": {
