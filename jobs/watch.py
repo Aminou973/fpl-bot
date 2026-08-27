@@ -11,12 +11,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 from fplbot import api, notify, pipeline  # noqa: E402
 from fplbot.notify import esc  # noqa: E402
-
-# transfer momentum at which a price change becomes likely
-RISE_ALERT = 0.85
-FALL_ALERT = -0.85
 
 
 def status_word(p):
@@ -52,54 +51,41 @@ def main():
         old = prev.get(str(eid))
         if not old:
             continue
-        label = f"{esc(e['web_name'])} ({teams.get(e['team'],'')}, £{e['now_cost']/10:.1f}m)"
-        mine = " ★" if eid in owned else ""
+        label = f"{esc(e['web_name'])} ({teams.get(e['team'],'')})"
 
-        if e["now_cost"] != old["cost"]:
+        # prices only matter for players actually held — the game has 600+
+        # players and reporting every move in the game is noise
+        if e["now_cost"] != old["cost"] and eid in owned:
             arrow = "▲" if e["now_cost"] > old["cost"] else "▼"
             price_lines.append(
-                f"{arrow} {label}{mine} — was £{old['cost']/10:.1f}m")
+                f"{arrow} {label} £{old['cost']/10:.1f}m → £{e['now_cost']/10:.1f}m")
         if e["status"] != old["status"] or (e["news"] or "") != (old.get("news") or ""):
             if eid in interesting:
                 news_lines.append(
-                    f"• {label}{mine} — {status_word(e)}"
+                    f"• {label} — {status_word(e)}"
                     + (f": {esc(e['news'])}" if e["news"] else "")
-                    + (f" ({e['chance_of_playing_next_round']}% chance)"
+                    + (f" ({e['chance_of_playing_next_round']}%)"
                        if e.get("chance_of_playing_next_round") is not None else ""))
-
-    # price-change pressure among owned players, before the 00:30 UK update
-    pressure = []
-    for eid in sorted(owned):
-        e = els.get(eid)
-        if not e:
-            continue
-        tin, tout = e.get("transfers_in_event", 0), e.get("transfers_out_event", 0)
-        net = tin - tout
-        denom = max(tin + tout, 1)
-        score = net / denom
-        if abs(score) >= RISE_ALERT and denom > 20000:
-            pressure.append(
-                f"{'▲ likely rise' if score > 0 else '▼ likely fall'}: "
-                f"{esc(e['web_name'])} ({teams.get(e['team'],'')}) — net {net:+,}")
 
     msg = []
     if price_lines:
-        msg.append("<b>Price changes</b>\n" + "\n".join(price_lines[:25]))
+        msg.append("💰 <b>Your players — price moves</b>\n" + "\n".join(price_lines[:12]))
     if news_lines:
-        msg.append("<b>Team news</b>\n" + "\n".join(news_lines[:25]))
-    if pressure:
-        msg.append("<b>Price pressure on your players</b>\n" + "\n".join(pressure[:15]))
+        msg.append("🚑 <b>Team news</b>\n" + "\n".join(news_lines[:12]))
 
     nxt = api.next_event(boot)
     if nxt.get("deadline_time"):
         dl = dt.datetime.fromisoformat(nxt["deadline_time"].replace("Z", "+00:00"))
         hrs = (dl - dt.datetime.now(dt.timezone.utc)).total_seconds() / 3600
-        if 1.5 < hrs <= 2.5:
-            msg.append(f"⏰ <b>Gameweek {nxt['id']} deadline in {hrs:.1f} hours</b> — "
-                       f"last check on lineups and captain.")
+        meta = pipeline.read_state("watch_meta", {"warned_gw": None})
+        warned = meta.get("warned_gw") == nxt["id"]
+        if 2.0 <= hrs <= 26 and not warned:
+            msg.append(f"⏰ <b>Gameweek {nxt['id']} deadline in {hrs:.0f} hours</b> "
+                       f"— lineups and captain are set automatically.")
+            pipeline.write_state("watch_meta", {"warned_gw": nxt["id"]})
 
     if msg:
-        notify.send("\n\n".join(msg))
+        notify.send("\n\n".join(msg), kind="watch")
     else:
         print("[watch] nothing to report")
     pipeline.write_state("players", snapshot)

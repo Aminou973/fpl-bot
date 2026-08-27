@@ -12,6 +12,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 from fplbot import api, notify, pipeline  # noqa: E402
 from fplbot.notify import esc  # noqa: E402
 
@@ -84,22 +87,21 @@ def main():
             if s.get("minutes", 0) > 0:
                 played += 1
             if pts >= 6:
-                lines.append(f"  {esc(els[p['element']]['web_name'])} "
-                             f"{pts}{'×' + str(p['multiplier']) if p['multiplier'] > 1 else ''}")
+                lines.append(f"{esc(els[p['element']]['web_name'])} {pts}"
+                             f"{'×' + str(p['multiplier']) if p['multiplier'] > 1 else ''}")
         hits = picks.get("entry_history", {}).get("event_transfers_cost", 0)
         total -= hits
         snapshot["teams"][name] = total
         before = (prev.get("teams") or {}).get(name)
         if before is None or before != total:
-            block = [f"<b>{esc(name)}</b> — {total} pts, {played}/11 played"
-                     + (f" (−{hits} hits)" if hits else "")]
-            block += lines[:6]
+            block = [f"<b>{esc(name)}</b> — <b>{total}</b> pts · {played}/11 played"]
+            if lines:
+                block.append(" · ".join(lines[:4]))
             msg.append("\n".join(block))
 
     if msg:
-        notify.send(f"<b>Gameweek {gw} live</b>\n\n" + "\n\n".join(msg)
-                    + "\n\n<i>Bonus is provisional until matches are finalised.</i>",
-                    silent=True)
+        notify.send(f"⚽ <b>GW{gw} live</b>\n\n" + "\n\n".join(msg),
+                    kind="live")
     else:
         print("[live] no change")
     pipeline.write_state("live", snapshot)

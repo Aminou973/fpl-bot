@@ -35,6 +35,7 @@ def fmt_move(df, ids):
 
 
 def brief(ctx, results, cfg):
+    """Compact per-team plan message: what to do this week, nothing more."""
     df, gws = ctx["df"], ctx["gws"]
     r = df.set_index("id")
     nxt = ctx.get("next_event") or {}
@@ -42,71 +43,57 @@ def brief(ctx, results, cfg):
     if dl:
         d = dt.datetime.fromisoformat(dl.replace("Z", "+00:00"))
         dl = d.strftime("%a %d %b, %H:%M UTC")
-    out = [f"<b>Gameweek {gws[0]} plan</b>" + (f" — deadline {dl}" if dl else "")]
+    out = [f"📋 <b>GW{gws[0]} plan</b>" + (f" · deadline {dl}" if dl else "")]
 
     for name, res in results.items():
         if "error" in res:
-            out.append(f"\n<b>{esc(name)}</b>\n⚠️ {esc(res['error'])}")
+            out.append(f"\n<b>{esc(name)}</b> — ⚠️ {esc(res['error'])}")
             continue
         wk = res["plan"]["weeks"][0]
-        cap = r.loc[wk["captain"]]
-        base = res["current_report"]["xp_total"]
-        gain = res["plan"]["total_xp"]
-        lines = [f"\n<b>{esc(name)}</b> — {esc(res['settings'])}",
-                 f"Free transfers {res['free_transfers']}, bank £{res['bank']:.1f}m"]
+        lines = [f"\n<b>{esc(name)}</b> · {res['free_transfers']} FT · "
+                 f"£{res['bank']:.1f}m bank"]
         if wk["out"]:
-            lines.append(f"OUT {esc(fmt_move(df, wk['out']))}")
-            lines.append(f"IN  {esc(fmt_move(df, wk['in']))}")
+            for i in wk["out"]:
+                lines.append(f"▼ OUT {esc(r.loc[i, 'name'])} ({r.loc[i, 'team']})")
+            for i in wk["in"]:
+                lines.append(f"▲ IN  {esc(r.loc[i, 'name'])} "
+                             f"({r.loc[i, 'team']}, £{r.loc[i, 'price']:.1f}m)")
             if wk["hits"]:
-                lines.append(f"Cost: {wk['hits']} hit(s), −{wk['hits'] * 4} pts — "
-                             f"plan still gains {res['hit_policy'].get('gain_over_no_hit')} pts")
+                lines.append(f"Cost −{wk['hits'] * 4} pts ({wk['hits']} hit) "
+                             f"— gains {res['hit_policy'].get('gain_over_no_hit')} pts")
         else:
-            lines.append(f"No transfer — roll it (next week you have "
-                         f"{min(5, res['free_transfers'] + 1)})")
-            if res["hit_policy"].get("rejected_hits"):
-                lines.append(f"A hit was considered and rejected: it gained only "
-                             f"{res['hit_policy']['gain_over_no_hit']} pts against a "
-                             f"{res['hit_policy']['threshold']} pt threshold")
-        lines.append(f"Captain <b>{esc(cap['name'])}</b> "
-                     f"({cap['team']}, {cap[f'xp{gws[0]}']:.1f} xP → {cap[f'xp{gws[0]}']*2:.1f})")
+            roll = min(5, res["free_transfers"] + 1)
+            lines.append(f"↻ No transfer — FT rolls ({roll} next week)")
+        cap_line = (f"⚽ Captain <b>{esc(r.loc[wk['captain'], 'name'])}</b> "
+                    f"({r.loc[wk['captain'], 'team']})")
         if wk.get("vice") in r.index:
-            vc = r.loc[wk["vice"]]
-            lines.append(f"Vice <b>{esc(vc['name'])}</b> ({vc['team']}, "
-                         f"{vc[f'xp{gws[0]}']:.1f} xP) — different club, so one "
-                         f"postponement cannot take both")
-        flagged = [f"{r.loc[i,'name']} ({r.loc[i,'news'] or 'flagged'})"
+            cap_line += f" · Vice {esc(r.loc[wk['vice'], 'name'])}"
+        lines.append(cap_line)
+        flagged = [f"{r.loc[i, 'name']} ({r.loc[i, 'news'] or 'flagged'})"
                    for i in res["squad"]
                    if isinstance(r.loc[i, "status"], str) and r.loc[i, "status"] != "a"]
         if flagged:
             lines.append("⚠️ " + esc("; ".join(flagged)))
-        lines.append(f"Projected {wk['xp']:.1f} this week, {gain:.0f} over "
-                     f"gameweeks {gws[0]}–{gws[-1]} (squad untouched: {base:.0f})")
-        if res["hit_policy"].get("advice"):
-            lines.append("💡 " + esc(res["hit_policy"]["advice"]))
-        cal = (ctx.get("chip_calendar") or {}).get("picks", {}).get(name, {}).get("first", {})
-        if cal:
-            tc = (cal.get("triple_captain") or [None])[0]
-            bb = (cal.get("bench_boost") or [None])[0]
-            wc = (cal.get("wildcard") or [None])[0]
-            bits = []
-            if tc: bits.append(f"triple captain GW{tc['gw']}"
-                               + (f" on {esc(tc['player'])}" if tc.get("player") else ""))
-            if bb: bits.append(f"bench boost GW{bb['gw']}")
-            if wc: bits.append(f"wildcard around GW{wc['gw']}")
-            if bits:
-                lines.append("Chips, this half of the season: " + "; ".join(bits))
-        else:
-            best_tc = max(res["chips"], key=lambda c: c["triple_captain"])
-            best_bb = max(res["chips"], key=lambda c: c["bench_boost"])
-            lines.append(f"Chips: best triple captain in this window is GW{best_tc['gw']} "
-                         f"(+{best_tc['triple_captain']:.1f}); best bench boost "
-                         f"GW{best_bb['gw']} (+{best_bb['bench_boost']:.1f})")
+        lines.append(f"Projected <b>{wk['xp']:.1f}</b> this week")
         out.append("\n".join(lines))
 
     site = cfg.get("site_url")
     if site:
-        out.append(f"\nFull dashboard: {site}")
+        out.append(f"\n{site}")
     return "\n".join(out)
+
+
+def brief_signature(results):
+    """Whether the plan actually changed — out/in/captain/hits per team."""
+    sig = []
+    for name, res in results.items():
+        if "error" in res:
+            sig.append([name, "error", str(res["error"])])
+            continue
+        wk = res["plan"]["weeks"][0]
+        sig.append([name, sorted(wk["out"]), sorted(wk["in"]),
+                    wk["captain"], wk.get("vice"), wk["hits"]])
+    return json.dumps(sig, sort_keys=True)
 
 
 def last_plan_entry(df, res):
@@ -258,52 +245,51 @@ def main():
         rtext = results_brief(bundle["history"], max(done), cfg)
         print(rtext)
         if not a.no_notify and rtext:
-            notify.send(rtext)
+            notify.send(rtext, kind="alert")
         pipeline.write_state("reported", {
             "gws": sorted(seen | set(done)),
             "final": sorted(final | {g for g in done if g not in prov})})
 
     text = brief(ctx, results, cfg)
     print(text)
+    # send only when the plan itself changed, and only inside the deadline
+    # window: three runs a day of identical text is noise, not information
+    sig = brief_signature(results)
+    told = pipeline.read_state("plan_brief", {"gw": None, "sig": None})
+    unchanged = told.get("gw") == gws[0] and told.get("sig") == sig
     if quiet:
         print("[plan] outside the deadline window — brief printed, not sent")
     elif not a.no_notify:
-        notify.send(text)
+        if unchanged:
+            print("[plan] plan unchanged since the last send — not sent")
+        else:
+            notify.send(text, kind="alert")
+    if not unchanged:
+        pipeline.write_state("plan_brief", {"gw": gws[0], "sig": sig})
 
 
 def results_brief(hist, gw, cfg):
     """What actually happened last gameweek, for both teams, plus model accuracy."""
     prov = gw in (hist.get("provisional") or [])
-    lines = [f"<b>Gameweek {gw} results</b>"
-             + (" — provisional, bonus not yet confirmed" if prov else "")]
+    lines = [f"📊 <b>GW{gw} results</b>"
+             + (" · provisional" if prov else "")]
     for name, series in (hist.get("teams") or {}).items():
         wk = next((w for w in series.get("weeks", []) if w["gw"] == gw), None)
         if not wk:
             continue
         avg = wk.get("average")
-        vs = f" (average {avg}, {wk['net'] - avg:+d} vs field)" if avg else ""
+        vs = f" · field {avg} ({wk['net'] - avg:+d})" if avg else ""
         rank = f"{wk['overall_rank']:,}" if wk.get("overall_rank") else "—"
         delta = wk.get("rank_delta")
         move = f", {'▲' if delta > 0 else '▼'}{abs(delta):,}" if delta else ""
-        lines.append(f"\n<b>{esc(name)}</b>  {wk['net']} pts{esc(vs)}"
-                     f"\nOverall rank {esc(rank)}{esc(move)}"
-                     f"\nBench {wk['bench']}, hits {wk['hits']}, "
-                     f"squad £{wk['value']:.1f}m")
+        lines.append(f"\n<b>{esc(name)}</b> — <b>{wk['net']}</b> pts{esc(vs)}"
+                     f"\nRank {esc(rank)}{esc(move)}")
     acc = next((g for g in (hist.get("accuracy") or []) if g["gw"] == gw), None)
     if acc:
-        lines.append(f"\nModel: {acc['mae']} pts average error over {acc['n']} "
-                     f"players, bias {acc['bias']:+.2f}")
-        if acc.get("worst_misses"):
-            m = acc["worst_misses"][0]
-            lines.append(f"Biggest miss {esc(m['name'])} "
-                         f"(projected {m['proj']}, scored {m['actual']})")
-        if acc.get("best_calls"):
-            b = acc["best_calls"][0]
-            lines.append(f"Best call {esc(b['name'])} "
-                         f"(projected {b['proj']}, scored {b['actual']})")
+        lines.append(f"\nModel error {acc['mae']} pts ({acc['n']} players)")
     site = cfg.get("site_url")
     if site:
-        lines.append(f"\nFull dashboard: {site}")
+        lines.append(f"\n{site}")
     return "\n".join(lines) if len(lines) > 1 else ""
 
 

@@ -1,4 +1,17 @@
-"""Telegram delivery. Silent no-op when the secrets are not configured."""
+"""Telegram delivery, routed by alert tier.
+
+Three tiers, so the phone can be configured to only ring for what matters:
+
+- ``alert`` — things worth interrupting for: the plan when it changed, the
+  deadline warning, a lineup applied or failed, weekly results. Delivered
+  with sound, to TELEGRAM_CHAT_ALERT (falling back to TELEGRAM_CHAT_ID).
+- ``live``  — matchday scores. Silent, to TELEGRAM_CHAT_LIVE if set.
+- ``watch`` — prices and team-news noise. Silent, to TELEGRAM_CHAT_WATCH
+  if set.
+
+Without the optional per-tier secrets everything lands in the one default
+chat, with only the alert tier audible.
+"""
 from __future__ import annotations
 
 import json
@@ -9,6 +22,13 @@ import urllib.request
 
 API = "https://api.telegram.org/bot{token}/{method}"
 LIMIT = 4000
+
+# tier -> (silent by default, chat env var checked in order)
+TIERS = {
+    "alert": (False, ["TELEGRAM_CHAT_ALERT", "TELEGRAM_CHAT_ID"]),
+    "live": (True, ["TELEGRAM_CHAT_LIVE", "TELEGRAM_CHAT_ID"]),
+    "watch": (True, ["TELEGRAM_CHAT_WATCH", "TELEGRAM_CHAT_ID"]),
+}
 
 
 def _post(method, payload):
@@ -29,12 +49,24 @@ def _post(method, payload):
             time.sleep(2 * (attempt + 1))
 
 
-def send(text, chat_id=None, silent=False):
-    """Send one message, splitting on paragraph boundaries if it is too long."""
-    chat = chat_id or os.environ.get("TELEGRAM_CHAT_ID")
+def send(text, chat_id=None, silent=None, kind="alert"):
+    """Send one message (split on paragraphs if too long).
+
+    ``kind`` routes the message to its tier's chat and sound setting; an
+    explicit ``silent`` or ``chat_id`` argument overrides the tier.
+    """
+    silent_by_tier, envs = TIERS.get(kind, (False, ["TELEGRAM_CHAT_ID"]))
+    chat = chat_id
     if not chat:
-        print(f"[notify] TELEGRAM_CHAT_ID unset — would have sent:\n{text}")
+        for env in envs:
+            chat = os.environ.get(env)
+            if chat:
+                break
+    if not chat:
+        print(f"[notify] no chat configured for tier '{kind}' — would have sent:\n{text}")
         return
+    if silent is None:
+        silent = silent_by_tier
     for chunk in _split(text):
         _post("sendMessage", {
             "chat_id": chat, "text": chunk, "parse_mode": "HTML",

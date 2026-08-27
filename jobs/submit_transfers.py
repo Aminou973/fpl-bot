@@ -25,6 +25,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 from fplbot import api, notify, pipeline                      # noqa: E402
+from fplbot.notify import esc                                 # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -241,6 +242,22 @@ def main():
     print(f"[submit] {'applied' if a.apply else 'dry run'} for GW{gw}: "
           + ", ".join(f"{k}={v['status']}" for k, v in results.items()))
 
+    # audible alert when the bot actually acted (or could not)
+    if results:
+        marks = {"applied": "✅", "already-applied": "✔", "skipped": "⚠️",
+                 "dry-run": "•"}
+        body = "\n".join(f"{marks.get(v['status'], '•')} <b>{esc(k)}</b> — "
+                         f"{esc(v.get('note') or v['status'])}"
+                         for k, v in results.items())
+        notify.send(f"🤖 <b>GW{gw} {'lineup applied' if a.apply else 'dry run'}</b>\n\n"
+                    + body, kind="alert")
+
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as e:                              # noqa: BLE001
+        notify.send(f"🚨 <b>Submit failed</b>\n\n{esc(str(e))}", kind="alert")
+        raise
