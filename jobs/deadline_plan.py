@@ -83,7 +83,65 @@ def brief(ctx, results, cfg):
     return "\n".join(out)
 
 
-def brief_signature(results):
+def chip_alerts(ctx, results, cfg):
+    """Chip recommendations that have come due, as alert-tier messages.
+
+    The bot never plays a chip itself — they are irreversible — so the best
+    it can do is ring when the plan says this (or next) week is the window.
+    Each team+chip+gameweek combination is announced exactly once, tracked
+    in state so the three-times-a-day plan runs cannot repeat it.
+    """
+    cal = ctx.get("chip_calendar") or {}
+    picks = (cal.get("picks") or {})
+    if not picks:
+        return []
+    gws = ctx["gws"]
+    half = "first" if cal.get("split", 20) > gws[0] else "second"
+    label = {"triple_captain": "Triple Captain", "bench_boost": "Bench Boost",
+             "wildcard": "Wildcard", "free_hit": "Free Hit"}
+    told = pipeline.read_state("chip_alerts", {"sent": []})
+    sent = set(told.get("sent", []))
+
+    lines = []
+    now_gw, next_gw = gws[0], (gws[1] if len(gws) > 1 else None)
+    for name, per_half in picks.items():
+        if name not in results or "error" in results.get(name):
+            continue
+        for chip, options in (per_half.get(half) or {}).items():
+            best = options[0] if options else None
+            if not best:
+                continue
+            bgw = best.get("gw")
+            when = ("this week" if bgw == now_gw
+                    else f"next week (GW{bgw})" if bgw == next_gw else None)
+            if not when:
+                continue
+            key = f"{name}|{chip}|{bgw}|{'now' if bgw == now_gw else 'next'}"
+            if key in sent:
+                continue
+            sent.add(key)
+            why = {"triple_captain": f"best captain window — {best.get('player')} "
+                                     f"(+{best.get('value', 0):.1f} expected)",
+                   "bench_boost": f"best bench window — bench worth "
+                                  f"+{best.get('value', 0):.1f} expected"
+                                  + (", historically a double week"
+                                     if best.get("p_double") else ""),
+                   "wildcard": f"best rebuild window — squad gap "
+                               f"+{best.get('value', 0):.1f} above your median",
+                   "free_hit": "best blank insurance — flagged blank-week risk"
+                   }.get(chip, f"value {best.get('value')}")
+            lines.append(f"🎯 <b>{esc(name)}</b> — {label.get(chip, chip)} "
+                         f"is best {when}: {esc(why)}")
+
+    alerts = []
+    if lines:
+        alerts.append("🎯 <b>Chip window"
+                      + ("s" if len(lines) > 1 else "") + "</b>\n\n"
+                      + "\n".join(lines)
+                      + "\n\n<i>Play the chip yourself in the app before the "
+                        "deadline — chips are never auto-played.</i>")
+    pipeline.write_state("chip_alerts", {"sent": sorted(sent)})
+    return alerts
     """Whether the plan actually changed — out/in/captain/hits per team."""
     sig = []
     for name, res in results.items():
@@ -266,6 +324,13 @@ def main():
             notify.send(text, kind="alert")
     if not unchanged:
         pipeline.write_state("plan_brief", {"gw": gws[0], "sig": sig})
+
+    # chips are irreversible, so the bot never plays one — it rings instead,
+    # once per team+chip+gameweek, when the calendar says the window is now
+    for alert in chip_alerts(ctx, results, cfg):
+        print(alert)
+        if not quiet and not a.no_notify:
+            notify.send(alert, kind="alert")
 
 
 def results_brief(hist, gw, cfg):
