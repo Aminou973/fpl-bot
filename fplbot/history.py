@@ -39,7 +39,7 @@ def save_projections(root: Path, gw: int, df) -> None:
         str(int(r.id)): round(float(r[f"xp{gw}"]), 3)
         for _, r in df.iterrows() if f"xp{gw}" in df.columns
     }
-    (snapshot_dir(root) / f"gw{gw}.json").write_text(json.dumps(payload))
+    (snapshot_dir(root) / f"gw{gw}.json").write_text(json.dumps(payload), encoding="utf-8")
 
 
 def load_projections(root: Path, gw: int):

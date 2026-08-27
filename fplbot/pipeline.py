@@ -21,10 +21,24 @@ def load_config():
 
 def resolve_squad(df, element_ids=None, by_name=None):
     """Squad as model row ids. Element ids from the API are the model's ids."""
+    squad, _ = resolve_squad_traced(df, element_ids, by_name)
+    return squad
+
+
+def resolve_squad_traced(df, element_ids=None, by_name=None):
+    """Like resolve_squad but also reports where the squad came from.
+
+    "api" means the live picks resolved; "config" means the API picks were
+    unusable (missing/unknown players) and the config fallback won — which is
+    exactly the failure that used to be silent, so callers must surface it.
+    """
     if element_ids:
         found = [int(i) for i in element_ids if int(i) in set(df.id)]
         if len(found) == 15:
-            return found
+            return found, "api"
+        missing = sorted(set(map(int, element_ids)) - set(found))
+    else:
+        missing = []
     out = []
     for name, club in (by_name or []):
         m = df[(df.name == name) & (df.team == club)]
@@ -32,7 +46,8 @@ def resolve_squad(df, element_ids=None, by_name=None):
             m = df[df.name == name]
         if len(m) == 1:
             out.append(int(m.iloc[0].id))
-    return out
+    return out, f"config (api picks unusable: {len(element_ids or [])} given, " \
+                f"{len(found) if element_ids else 0} known to the model; missing ids {missing})"
 
 
 def build_projections(offline=False, horizon=5):
@@ -91,10 +106,14 @@ def plan_team(ctx, cfg_team, state, pool=None):
     """Transfer plan for one team, honouring its free transfers and hit policy."""
     df, gws = ctx["df"], ctx["gws"]
     kw = team_kwargs(df, cfg_team)
-    squad = resolve_squad(df, state.get("picks"),
-                          [tuple(x) for x in cfg_team.get("squad", [])])
+    squad, squad_source = resolve_squad_traced(
+        df, state.get("picks"), [tuple(x) for x in cfg_team.get("squad", [])])
     if len(squad) != 15:
-        return {"error": f"squad resolved to {len(squad)} players"}
+        return {"error": f"squad resolved to {len(squad)} players "
+                         f"(source {squad_source})"}
+    if squad_source != "api":
+        print(f"[plan] WARNING: {squad_source} — the plan is built on the "
+              f"config fallback squad, not the live API squad")
     if pool is None:
         pool = optimize.prune(df, gws, always=squad + list(kw.get("locked", [])))
     ft = int(state.get("free_transfers", 1))
@@ -112,7 +131,10 @@ def plan_team(ctx, cfg_team, state, pool=None):
     plan_kw = {k: v for k, v in kw.items() if k != "max_captain_ownership"}
     target = optimize.solve(pool, gws, allow_infeasible=True, **plan_kw)
     return {
-        "squad": squad,
+        "squad": squad, "squad_source": squad_source,
+        "entry_id": state.get("entry"),
+        "picks_error": state.get("picks_error"),
+        "picks_source": state.get("picks_source"),
         "current_report": optimize.squad_report(df, squad, gws, cap_own),
         "plan": p, "hit_policy": info,
         "target": target["squad"] if target else None,
@@ -148,4 +170,5 @@ def read_state(name, default=None):
 
 def write_state(name, obj):
     STATE.mkdir(exist_ok=True)
-    (STATE / f"{name}.json").write_text(json.dumps(obj, indent=1, sort_keys=True))
+    (STATE / f"{name}.json").write_text(json.dumps(obj, indent=1, sort_keys=True),
+                                        encoding="utf-8")

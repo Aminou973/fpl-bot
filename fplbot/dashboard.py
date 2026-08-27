@@ -9,7 +9,8 @@ def build(bundle_path=None, out=None):
     bundle_path = Path(bundle_path or HERE / "site" / "bundle.json")
     out = Path(out or HERE / "site" / "index.html")
     data = json.loads(bundle_path.read_text())
-    out.write_text(TEMPLATE.replace("__DATA__", json.dumps(data, separators=(",", ":"))))
+    out.write_text(TEMPLATE.replace("__DATA__", json.dumps(data, separators=(",", ":"))),
+                   encoding="utf-8")
     return out
 
 

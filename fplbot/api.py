@@ -208,9 +208,86 @@ def season_gameweeks(boot=None, fx=None, upto=None):
     return df
 
 
+# ----------------------------------------------------------------- logged in
+# These endpoints need a real login session. Nothing here is public-API: the
+# session cookie comes from the account login and every write goes through
+# my-team/{team_id}/. Credentials are expected to arrive from the environment
+# (FPL_EMAIL / FPL_PASSWORD), never from config or code.
+
+LOGIN_URL = "https://users.premierleague.com/api/user/login"
+
+
+def login(email: str, password: str):
+    """Authenticated session plus the my-team id for the caller's entries.
+
+    Returns (session, teams) where teams maps entry_id -> my-team id (the
+    internal id the my-team endpoints want, not the public entry id).
+    """
+    try:
+        import requests
+    except ImportError as e:                     # pragma: no cover
+        raise RuntimeError("auto-submit needs the requests package") from e
+    s = requests.Session()
+    s.headers.update({"User-Agent": UA, "Accept": "application/json"})
+    r = s.post(LOGIN_URL, data={
+        "login_username": email, "login_password": password,
+        "redirect_uri": "https://fantasy.premierleague.com/",
+        "app": "plfpl-web"}, timeout=45)
+    if r.status_code != 200:
+        raise RuntimeError(f"FPL login failed: HTTP {r.status_code}")
+    body = {}
+    try:
+        body = r.json()
+    except ValueError:
+        pass
+    if body.get("state") not in (None, "success") or not s.cookies:
+        raise RuntimeError(f"FPL login refused: {body or 'no session cookie'}")
+    me = s.get(f"{BASE}/me/", timeout=45)
+    if me.status_code != 200:
+        raise RuntimeError(f"FPL login did not stick: /me/ HTTP {me.status_code}")
+    teams = {}
+    for t in me.json().get("teams", []):
+        if t.get("entry"):
+            teams[int(t["entry"])] = int(t["id"])
+    if not teams:
+        raise RuntimeError("login succeeded but no teams are attached to this account")
+    return s, teams
+
+
+def my_team(session, team_id: int):
+    """Current picks, bank, chips and transfer state for a logged-in team."""
+    r = session.get(f"{BASE}/my-team/{team_id}/", timeout=45)
+    if r.status_code != 200:
+        raise RuntimeError(f"my-team/{team_id} read failed: HTTP {r.status_code}")
+    return r.json()
+
+
+def submit_picks(session, team_id: int, picks: list, chip=None):
+    """Write a full 15-player lineup (and optionally a chip) for one team.
+
+    ``picks`` is the standard payload: 15 dicts of
+    ``{element, position, is_captain, is_vice}``. Position 1-11 must form a
+    legal XI with the captain in it, which last_plan.json guarantees.
+    """
+    r = session.post(f"{BASE}/my-team/{team_id}/",
+                     json={"chip": chip, "picks": picks}, timeout=45)
+    if r.status_code != 200:
+        raise RuntimeError(f"my-team/{team_id} submit failed: "
+                           f"HTTP {r.status_code} {r.text[:300]}")
+    return r.json()
+
+
 # ------------------------------------------------------------- manager state
 def squad_state(entry_id: int, boot=None):
-    """Current picks, bank, squad value and free transfers for one team."""
+    """Current picks, bank, squad value and free transfers for one team.
+
+    The squad is the last published picks: the current gameweek's if the game
+    has opened it, otherwise the previous one (no transfers happen between a
+    deadline and the next one being scored, so that is the live squad). Which
+    source won is recorded in ``picks_source`` — "gw12" for published picks,
+    "none" when no picks could be read, so callers can degrade loudly instead
+    of quietly planning on stale data.
+    """
     boot = boot or bootstrap()
     cur = current_event(boot)
     info = entry(entry_id)
@@ -222,14 +299,23 @@ def squad_state(entry_id: int, boot=None):
         "bank": (info.get("last_deadline_bank") or 0) / 10.0,
         "value": (info.get("last_deadline_value") or 0) / 10.0,
         "picks": [], "free_transfers": 1, "chips_used": [],
+        "picks_source": None, "picks_error": None,
     }
-    if cur:
+    attempts = [cur] if not cur else [cur, cur - 1]
+    errors = []
+    for gw in attempts:
+        if not gw or gw < 1:
+            continue
         try:
-            picks = entry_picks(entry_id, cur)
+            picks = entry_picks(entry_id, gw)
             out["picks"] = [p["element"] for p in picks["picks"]]
             out["captain"] = next((p["element"] for p in picks["picks"] if p["is_captain"]), None)
-        except RuntimeError:
-            pass
+            out["picks_source"] = f"gw{gw}"
+            break
+        except RuntimeError as e:
+            errors.append(f"gw{gw}: {e}")
+    if not out["picks"] and errors:
+        out["picks_error"] = "; ".join(errors)
     try:
         hist = entry_history(entry_id)
         out["chips_used"] = [c["name"] for c in hist.get("chips", [])]

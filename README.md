@@ -7,7 +7,22 @@ dashboard that is always current. No server, no cost.
 ```
 watch.yml   hourly    price moves, injury news, deadline countdown  -> Telegram
 plan.yml    3x daily  full transfer + captain + chip plan            -> Telegram + Pages
+submit.yml  hourly    applies the plan to your FPL squad before each deadline (auto-transfers)
 live.yml    10 min    live points and provisional bonus during matches -> Telegram
+```
+
+The transfer plan is always built on the **live API squad** for both entries —
+if the API picks ever cannot be read, the run warns loudly and the submit job
+refuses to act, so a wrong squad can never be planned on or submitted. To arm
+the auto-transfers, set the FPL account credentials as repo secrets (the two
+squads live on two accounts, so four secrets — see
+`docs/2026-08-27-squad-fix/04-auto-transfers.md`):
+
+```bash
+gh secret set FPL_EMAIL      --body "first-account-email"
+gh secret set FPL_PASSWORD   --body "first-account-password"
+gh secret set FPL_EMAIL_2    --body "second-account-email"
+gh secret set FPL_PASSWORD_2 --body "second-account-password"
 ```
 
 ---

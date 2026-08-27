@@ -21,6 +21,11 @@ from fplbot.notify import esc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# Windows consoles default to cp1252 and crash on the arrows/accents in the
+# briefs; Linux (Actions) is already UTF-8, so this only patches what needs it.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 
 def fmt_move(df, ids):
     if not ids:
@@ -104,6 +109,40 @@ def brief(ctx, results, cfg):
     return "\n".join(out)
 
 
+def last_plan_entry(df, res):
+    """Everything an auto-submit job needs to act on the plan unsupervised.
+
+    ``picks_payload`` is the exact 15-entry list the FPL my-team endpoint
+    expects: the XI first in slot order, then the bench, with the plan's
+    captain and vice applied. Kept here so the submit job and the planner
+    can never disagree about ordering rules.
+    """
+    r = df.set_index("id")
+    wk = res["plan"]["weeks"][0]
+    pos_rank = {"GKP": 0, "DEF": 1, "MID": 2, "FWD": 3}
+    rank = lambda i: (pos_rank.get(r.loc[i, "pos"], 9), -r.loc[i, "price"])  # noqa: E731
+    xi = sorted(wk.get("xi", []), key=rank)
+    # the squad that matters here is the one after this week's transfers land
+    after = [i for i in wk.get("squad", []) if i not in set(wk.get("out", []))]
+    bench = sorted([i for i in after if i not in set(xi)], key=rank)
+    captain = wk.get("captain")
+    vice = wk.get("vice")
+    payload = []
+    for i in xi + bench:
+        payload.append({"element": int(i), "position": len(payload) + 1,
+                        "is_captain": i == captain, "is_vice": i == vice})
+    return {
+        "entry": res.get("entry_id"),
+        "in": wk.get("in", []), "out": wk.get("out", []),
+        "squad": res["squad"], "squad_after": after,
+        "xi": xi, "bench": bench,
+        "captain": captain, "vice": vice,
+        "hits": wk.get("hits", 0),
+        "squad_source": res.get("squad_source"),
+        "picks_payload": payload,
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true")
@@ -133,17 +172,25 @@ def main():
 
     results = {}
     for name, t in cfg["teams"].items():
-        state = {"picks": [], "free_transfers": t.get("free_transfers", 1),
+        state = {"picks": [], "picks_source": None,
+                 "free_transfers": t.get("free_transfers", 1),
                  "bank": t.get("bank", 0.0)}
         if not a.offline and t.get("entry_id"):
             try:
                 live = api.squad_state(t["entry_id"], ctx["bootstrap"])
                 if live.get("picks"):
                     state = live
+                    print(f"[plan] live squad for {name}: "
+                          f"{len(live['picks'])} picks "
+                          f"(source {live.get('picks_source')})")
+                else:
+                    print(f"[plan] live squad for {name} returned no picks "
+                          f"({live.get('picks_error')}); using config fallback")
                 state.setdefault("bank", 0.0)
             except Exception as e:                   # noqa: BLE001
                 print(f"[plan] live squad for {name} unavailable ({e}); using config")
         results[name] = pipeline.plan_team(ctx, t, state)
+        results[name].setdefault("entry_id", t.get("entry_id"))
 
     prev = {}
     prev_path = ROOT / "site" / "bundle.json"
@@ -176,13 +223,13 @@ def main():
         bundle["history"] = {"teams": {}, "accuracy": [], "settled": [],
                              "provisional": []}
     (ROOT / "site").mkdir(exist_ok=True)
-    (ROOT / "site" / "bundle.json").write_text(json.dumps(bundle))
+    (ROOT / "site" / "bundle.json").write_text(json.dumps(bundle), encoding="utf-8")
     dashboard.build(ROOT / "site" / "bundle.json", ROOT / "site" / "index.html")
     pipeline.write_state("last_plan", {
         "gw": gws[0], "generated": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "teams": {k: {"in": v.get("plan", {}).get("weeks", [{}])[0].get("in", []),
-                      "out": v.get("plan", {}).get("weeks", [{}])[0].get("out", [])}
-                  for k, v in results.items() if "error" not in v}})
+        "deadline": (ctx.get("next_event") or {}).get("deadline_time", ""),
+        "teams": {name: last_plan_entry(df, res)
+                  for name, res in results.items() if "error" not in res}})
 
     # A week first reported while provisional is reported once more when the
     # game confirms it, in case bonus moved anything.
@@ -311,6 +358,8 @@ def build_bundle(ctx, results, cfg):
     season = grid_for(range(1, 39))
     short = {k: [c[0] if c else None for c in v[gws[0] - 1: gws[-1]]] for k, v in season.items()}
 
+    # every player is published, not only the available ones: an owned player
+    # who is injured must still render on the pitch (flagged), never vanish
     keep = ["id", "name", "pos", "team", "price", "start_share", "status", "news",
             "hist_starts", "hist_pts", "selected_by", "xp_total", "value",
             "ceiling_total", "explosive", "b_app", "b_goals", "b_assists", "b_cs",
@@ -325,7 +374,8 @@ def build_bundle(ctx, results, cfg):
         builds[name] = {
             "role": cfg["teams"][name].get("role", "main"),
             "blurb": cfg["teams"][name].get("blurb", res["settings"]),
-            "current": res["squad"], "current_report": res["current_report"],
+            "current": res["squad"], "squad_source": res.get("squad_source"),
+            "current_report": res["current_report"],
             "target": res["target"], "target_report": res["target_report"],
             "plan": res["plan"], "hit_policy": res["hit_policy"],
             "chips": res["chips"],
@@ -341,7 +391,7 @@ def build_bundle(ctx, results, cfg):
         "gws": gws,
         "deadline": (ctx.get("next_event") or {}).get("deadline_time", ""),
         "chip_deadline": cfg.get("chip_deadline", "2027-01-02T13:30:00Z"),
-        "players": df[df.avail > 0][keep].round(3).to_dict("records"),
+        "players": df[keep].round(3).to_dict("records"),
         "teams": {v["short"]: {"name": v["name"], "att": round(v["att"], 3),
                               "def": round(v["def"], 3), "promoted": bool(v["promoted"])}
                   for v in teams.values()},

@@ -1,0 +1,62 @@
+name: submit
+
+# Applies the plan: logs in to FPL and writes the planned lineup for both
+# teams shortly before each deadline. The job itself decides whether the
+# deadline is close enough (36h window) and refuses stale plans or squads that
+# did not come from the API, so a stray schedule tick can never act on old data.
+#
+# Requires the FPL_EMAIL and FPL_PASSWORD repo secrets (account of the first
+# squad); if the second squad lives on a different account, also set
+# FPL_EMAIL_2 and FPL_PASSWORD_2. Dispatch runs are dry-runs by default;
+# check "apply" only when you mean it.
+
+on:
+  schedule:
+    - cron: "42 * * * *"
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "Actually submit (default: dry run)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: fpl-submit
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Submit planned lineup
+        env:
+          FPL_EMAIL: ${{ secrets.FPL_EMAIL }}
+          FPL_PASSWORD: ${{ secrets.FPL_PASSWORD }}
+          FPL_EMAIL_2: ${{ secrets.FPL_EMAIL_2 }}
+          FPL_PASSWORD_2: ${{ secrets.FPL_PASSWORD_2 }}
+        run: |
+          # scheduled runs submit for real (the job's own guards do the
+          # safety work); a dispatch is a dry run unless "apply" is ticked
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.apply }}" = "true" ]; then
+            python jobs/submit_transfers.py --apply
+          else
+            python jobs/submit_transfers.py
+          fi
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name  "fpl-bot"
+          git config user.email "fpl-bot@users.noreply.github.com"
+          git add state/ site/
+          git diff --staged --quiet || git commit -m "submit: auto transfer"
+          git pull --rebase --autostash || true
+          git push
