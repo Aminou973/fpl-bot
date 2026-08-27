@@ -14,17 +14,20 @@ live.yml    10 min    live points and provisional bonus during matches -> Telegr
 The transfer plan is always built on the **live API squad** for both entries —
 if the API picks ever cannot be read, the run warns loudly and the submit job
 refuses to act, so a wrong squad can never be planned on or submitted. To arm
-the auto-transfers, log in once per FPL account with the device flow (the two
+the auto-transfers, log in once per FPL account in the browser (the two
 squads live on two accounts, so two refresh-token secrets — see
 `docs/2026-08-27-squad-fix/04-auto-transfers.md`):
 
 ```bash
+arm_fpl_login.bat                     # Windows: does everything, both accounts
+# or manually:
 python jobs/fpl_login.py              # first account  → FPL_REFRESH_TOKEN
 python jobs/fpl_login.py --account 2  # second account → FPL_REFRESH_TOKEN_2
 ```
 
-Each run prints a URL and a code; approve it in the browser, then paste the
-printed `gh secret set FPL_REFRESH_TOKEN …` command. (FPL retired
+Each run opens the FPL sign-in page; sign in and paste back the redirected
+URL (it contains `?code=…`), and the token is stored with `gh secret set`.
+(FPL retired
 email/password login — `users.premierleague.com` is gone — so the old
 `FPL_EMAIL`/`FPL_PASSWORD` secrets are no longer used and can be deleted.)
 

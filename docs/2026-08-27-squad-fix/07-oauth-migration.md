@@ -14,18 +14,29 @@ site's own JS bundle and its discovery document):
 - Flow: Authorization Code + **PKCE**, Bearer tokens on API calls
   (`Authorization: Bearer …` and `X-API-Authorization: Bearer …`)
 - Scopes include **`offline_access`** → refresh tokens
-- Token endpoint supports the **device_code** grant — built for CLI tools
+- The client allows only the **Authorization Code + PKCE** grant — the
+  device-code grant is rejected (`unauthorized_client: missing DEVICE_CODE`),
+  and the only registered redirect is the web app's own origin
+  (`https://fantasy.premierleague.com/`), so a local loopback redirect is
+  rejected too.
 
 ## New arm procedure (one-time per account, ~1 minute each)
 
 ```bash
-python jobs/fpl_login.py            # first account  → secret FPL_REFRESH_TOKEN
+python jobs/fpl_login.py              # first account  → secret FPL_REFRESH_TOKEN
 python jobs/fpl_login.py --account 2  # second account → secret FPL_REFRESH_TOKEN_2
 ```
 
-Each run prints a URL and a code: open the URL, sign in to FPL, approve the
-code. The script then prints the **refresh token** and the exact
-`gh secret set` command. Paste the token into the secret. No email/password
+Or everything in one go (also triggers the verification dry run):
+
+```bat
+arm_fpl_login.bat
+```
+
+Each run opens the FPL sign-in page in your browser; sign in to that squad's
+account and you land on `fantasy.premierleague.com/?code=...` — copy the full
+address-bar URL and paste it back. The script exchanges the code (PKCE) for
+tokens and stores the **refresh token** with `gh secret set`. No email/password
 secrets are used anywhere anymore (the old `FPL_EMAIL`/`FPL_PASSWORD` secrets
 can be deleted).
 
@@ -50,8 +61,9 @@ gh workflow run submit   # dispatch = dry run, reads squads, no submission
 
 ## Files
 
-- `fplbot/api.py` — `device_authorization`, `poll_device_token`,
+- `fplbot/api.py` — `authorize_url`, `exchange_code` (PKCE),
   `refresh_tokens`, `api_session`, `me` (old `login()` removed)
-- `jobs/fpl_login.py` — **new** one-time device-flow helper
+- `jobs/fpl_login.py` — **new** one-time browser-login helper
+- `arm_fpl_login.bat` — both logins + secret storage + dry run, one click
 - `jobs/submit_transfers.py` — token-based authentication
 - `.github/workflows/submit.yml` — `FPL_REFRESH_TOKEN(_2)` env

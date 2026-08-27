@@ -211,14 +211,19 @@ def season_gameweeks(boot=None, fx=None, upto=None):
 # ----------------------------------------------------------------- logged in
 # These endpoints need an authenticated session. FPL retired the old form
 # login (users.premierleague.com is gone from DNS) for OAuth2/OIDC at
-# account.premierleague.com with Bearer tokens. A one-time interactive device
-# flow (jobs/fpl_login.py) yields a refresh token; every automated run then
-# exchanges it for a short-lived access token. Tokens arrive from the
-# environment (FPL_REFRESH_TOKEN, FPL_REFRESH_TOKEN_2, …), never from config.
+# account.premierleague.com with Bearer tokens. A one-time interactive browser
+# login (jobs/fpl_login.py, Authorization Code + PKCE) yields a refresh token;
+# every automated run then exchanges it for a short-lived access token. Tokens
+# arrive from the environment (FPL_REFRESH_TOKEN, FPL_REFRESH_TOKEN_2, …),
+# never from config.
 
 AUTH = "https://account.premierleague.com/as"
 CLIENT_ID = "bfcbaf69-aade-4c1b-8f00-c1cb8a193030"   # the official web app's
 SCOPES = "openid profile email offline_access"
+# The web app registers its own origin as the only redirect; a local loopback
+# is rejected ("Redirect URI mismatch"), so the interactive login reuses it and
+# the user pastes the redirected URL (?code=...) back into the login script.
+REDIRECT_URI = "https://fantasy.premierleague.com/"
 
 
 def _auth_post(path, data):
@@ -234,40 +239,29 @@ def _auth_post(path, data):
     return r.status_code, body
 
 
-def device_authorization():
-    """Start the interactive device flow: returns {verification_uri, user_code,
-    device_code, interval}. The user approves in a browser, then
-    poll_device_token() collects the tokens."""
-    code, body = _auth_post("device_authorization",
-                            {"client_id": CLIENT_ID, "scope": SCOPES})
-    if code != 200:
-        raise RuntimeError(f"device authorization failed: HTTP {code} {body}")
+def authorize_url(state: str, code_challenge: str) -> str:
+    """PKCE authorization URL: the user opens it, signs in, and lands on
+    REDIRECT_URI with ?code=... — that URL is pasted back and the code
+    exchanged by exchange_code()."""
+    import urllib.parse
+    q = urllib.parse.urlencode({
+        "response_type": "code", "client_id": CLIENT_ID,
+        "redirect_uri": REDIRECT_URI, "scope": SCOPES,
+        "code_challenge": code_challenge, "code_challenge_method": "S256",
+        "state": state})
+    return f"{AUTH}/authorize?{q}"
+
+
+def exchange_code(code: str, code_verifier: str):
+    """Swap an authorization code (plus its PKCE verifier) for tokens."""
+    status, body = _auth_post("token", {
+        "grant_type": "authorization_code", "code": code,
+        "redirect_uri": REDIRECT_URI, "client_id": CLIENT_ID,
+        "code_verifier": code_verifier})
+    if status != 200 or not body.get("access_token"):
+        raise RuntimeError(f"token exchange failed: HTTP {status} "
+                           f"{body.get('error', body)}")
     return body
-
-
-def poll_device_token(device_code: str, interval: float = 5.0, timeout: float = 600.0):
-    """Poll the token endpoint until the browser approval lands."""
-    import time
-    deadline = time.monotonic() + timeout
-    while True:
-        code, body = _auth_post("token", {
-            "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
-            "device_code": device_code, "client_id": CLIENT_ID})
-        if code == 200 and body.get("access_token"):
-            return body
-        err = body.get("error", "")
-        if err == "authorization_pending":
-            time.sleep(interval)
-            continue
-        if err in ("slow_down",):
-            interval += 2
-            time.sleep(interval)
-            continue
-        if err in ("expired_token", "access_denied"):
-            raise RuntimeError(f"device flow ended: {err}")
-        if time.monotonic() > deadline:
-            raise RuntimeError("device flow timed out waiting for approval")
-        time.sleep(interval)
 
 
 def refresh_tokens(refresh_token: str):
@@ -297,16 +291,27 @@ def api_session(access_token: str):
 
 
 def me(session):
-    """Logged-in account profile: maps entry_id -> my-team id."""
+    """Logged-in profile: maps entry_id -> my-team id.
+
+    The current /api/me/ shape is {"player": {..., "entry": N}, ...} and the
+    web app calls my-team/{entry}/ with that same id, so the two are the same
+    number. The older teams[] shape is kept as a fallback.
+    """
     r = session.get(f"{BASE}/me/", timeout=45)
     if r.status_code != 200:
         raise RuntimeError(f"/me/ read failed: HTTP {r.status_code}")
+    data = r.json()
+    player = data.get("player") or {}
+    if player.get("entry"):
+        entry_id = int(player["entry"])
+        return {entry_id: entry_id}
     teams = {}
-    for t in r.json().get("teams", []):
+    for t in data.get("teams", []) or []:
         if t.get("entry"):
-            teams[int(t["entry"])] = int(t["id"])
+            teams[int(t["entry"])] = int(t.get("id") or t["entry"])
     if not teams:
-        raise RuntimeError("authenticated but no teams are attached to this account")
+        raise RuntimeError("authenticated but no team is attached to this "
+                           f"account (me/ keys: {sorted(data)})")
     return teams
 
 

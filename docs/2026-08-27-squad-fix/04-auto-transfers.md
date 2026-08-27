@@ -35,7 +35,7 @@ unless every guard passes:
 5. `FPL_REFRESH_TOKEN` (and `_2` for the second account) must be set (repo
    secrets in Actions) — see step `07-oauth-migration.md`: FPL retired
    email/password login, so the job authenticates with a refresh token from
-   the one-time device flow.
+   the one-time browser login.
 
 ### `.github/workflows/submit.yml`
 
@@ -51,14 +51,16 @@ refreshes each token, lists the entries each account manages, and picks the
 one that actually manages each squad):
 
 ```bash
+arm_fpl_login.bat                     # does both accounts + secret + dry run
+# or manually:
 python jobs/fpl_login.py              # first account  (e.g. Minoux_69)
 python jobs/fpl_login.py --account 2  # second account (e.g. Minoux_41)
 ```
 
-Each run prints a URL + code; approve in the browser, then paste the printed
-`gh secret set FPL_REFRESH_TOKEN …` / `… FPL_REFRESH_TOKEN_2 …` command. The
-old `FPL_EMAIL` / `FPL_PASSWORD` secrets are no longer used and can be
-deleted. Full detail: `07-oauth-migration.md`.
+Each run opens the FPL sign-in page in the browser; sign in, then paste back
+the redirected URL (it contains `?code=…`) and the token is stored with
+`gh secret set`. The old `FPL_EMAIL` / `FPL_PASSWORD` secrets are no longer
+used and can be deleted. Full detail: `07-oauth-migration.md`.
 
 Then test read-only end-to-end:
 
