@@ -14,6 +14,8 @@ teams:
   Minoux_69:
     entry_id: 4894622            # <- put your real entry id here
     role: main
+    free_transfers: 1      # pinned 2026-08-27: the official app shows 1 FT
+                           # (unused GW1 transfer did not bank this season)
     blurb: >-
       Main team - template safe. Haaland locked in and a tilt toward well-owned
       players, so a big popular haul never costs you rank.
@@ -42,6 +44,7 @@ teams:
   Minoux_41:
     entry_id: 4896428            # <- put your real entry id here
     role: risk
+    free_transfers: 1      # pinned 2026-08-27: same as the other team
     blurb: >-
       Risk team - full differential. No Haaland, at least nine players under 8%
       ownership, optimised for ceiling rather than median.

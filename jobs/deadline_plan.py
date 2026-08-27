@@ -187,6 +187,13 @@ def main():
                     print(f"[plan] live squad for {name} returned no picks "
                           f"({live.get('picks_error')}); using config fallback")
                 state.setdefault("bank", 0.0)
+                if t.get("free_transfers") is not None:
+                    # config pin wins over the recomputed count: the game's own
+                    # screen is the authority on how many FTs are available
+                    # (e.g. a season where unused FTs do not bank)
+                    state["free_transfers"] = int(t["free_transfers"])
+                    print(f"[plan] free transfers pinned to "
+                          f"{state['free_transfers']} by config")
             except Exception as e:                   # noqa: BLE001
                 print(f"[plan] live squad for {name} unavailable ({e}); using config")
         results[name] = pipeline.plan_team(ctx, t, state)
