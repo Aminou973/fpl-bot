@@ -13,7 +13,7 @@ none distinguishable.
 
 | Tier | Sound | Chat secret | Contains |
 |---|---|---|---|
-| 🔴 `alert` | **rings** | `TELEGRAM_CHAT_ALERT` (fallback: `TELEGRAM_CHAT_ID`) | plan (only when it changed) · deadline warning · lineup applied / failed · weekly results |
+| 🔴 `alert` | **rings** | `TELEGRAM_CHAT_ALERT` (fallback: `TELEGRAM_CHAT_ID`) | plan (only when it changed) · deadline warning · lineup applied / failed · weekly results · 🎯 chip windows |
 | ⚽ `live` | silent | `TELEGRAM_CHAT_LIVE` (optional) | matchday scores, change-only |
 | 💰 `watch` | silent | `TELEGRAM_CHAT_WATCH` (optional) | price moves of **your** players · team news |
 
@@ -28,6 +28,12 @@ Rate/selection limits that came with it:
 - **live**: one tight line per team plus the top four scorers, silent.
 - **submit**: new alerts — ✅ when a lineup is written, 🚨 when a run fails.
   These are the ones worth hearing.
+- **chip windows** (added after the tiers went in): when the chip calendar
+  says the best window for a team's Wildcard / Free Hit / Bench Boost /
+  Triple Captain is this week — or next week (head-up) — the plan job rings
+  once per team+chip+gameweek. Chips are never auto-played (irreversible),
+  so the alert tells you to play it in the app before the deadline. Dedupe
+  state lives in `state/chip_alerts.json`.
 
 ## Optional: fully separate chats
 
