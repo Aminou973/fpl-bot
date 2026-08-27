@@ -1260,7 +1260,7 @@ let chipTeam = NAMES[0];
 const CHIP_DEFS = [
   ["tc_expected", "Triple captain", "best captain that week, weighted by how often this gameweek has been a double"],
   ["bench_boost_expected", "Bench boost", "what your bench adds, weighted by the chance of a double"],
-  ["wildcard", "Wildcard", "how far your squad falls behind the best available, against your own season median"],
+  ["wildcard_expected", "Wildcard", "squad gap vs your season median, plus expected points from loading a rebuilt squad onto likely doubles just ahead"],
   ["blank_risk", "Free hit", "blank exposure: fixtures already missing, or how often this week has blanked before"],
   ["p_double", "Doubles, historically", "share of the last four seasons where this gameweek contained a double"],
   ["p_blank", "Blanks, historically", "share of the last four seasons where this gameweek contained a blank"],
@@ -1327,9 +1327,10 @@ function renderChipCalendar() {
     pattern, so a week that has usually doubled scores higher before the real fixtures
     are known. It is a prior and nothing more — the actual doubles depend on cup draws
     that have not happened, and every row re-scores itself the week they land. The
-    wildcard row is a deviation from ${chipTeam}'s own season median, so a tall column
-    means that week is unusually good to rebuild, not that a wildcard is worth that
-    many points.`;
+    wildcard row is a deviation from ${chipTeam}'s own season median plus the expected
+    points from loading a rebuilt squad onto doubles in the following fortnight, so a
+    tall column means that week is unusually good to rebuild — especially with doubles
+    just ahead. It is a guide, not a points guarantee.`;
 }
 
 /* ============================================================== ACCURACY */

@@ -8,7 +8,10 @@ across all 38 gameweeks and scores each week for each chip.
 What it can and cannot know: double and blank gameweeks are not in the fixture
 list until the cup rounds are drawn, so bench boost and free hit are scored on
 fixture quality here and will re-score themselves the moment the real doubles
-appear. Triple captain and wildcard do not depend on doubles and are sound now.
+appear. Triple captain is likewise double-weighted. Wildcard is scored on when
+your squad is unusually far behind the best available, plus a bonus for weeks
+that precede likely doubles - the classic reason to wildcard early is that
+unlimited transfers can load the rebuilt squad onto doubled players.
 """
 from __future__ import annotations
 
@@ -120,6 +123,14 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
         # matters is when that gap is unusually wide, so it is reported as a
         # deviation from your own season median: positive means this is a better
         # week than most to tear the squad up.
+        #
+        # On top of the gap sits the double-capture tilt: unlimited transfers
+        # immediately before a likely double gameweek can load the rebuilt squad
+        # onto doubled players, which is the classic reason to wildcard early
+        # rather than late. Expected capture = sum over this week and the next
+        # two of (chance of a double) x (share of teams doubling) x (your squad's
+        # projected points that week), halved because a rebuilt squad cannot
+        # perfectly align every player with the doubles.
         top = _rolling_best(rows, gws, 5)
         gaps = []
         for i, w in enumerate(weeks):
@@ -132,8 +143,14 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
             gaps.append(top[w["gw"]] - mine_sum)
         real = sorted(g for g in gaps if g is not None)
         med = real[len(real) // 2] if real else 0.0
-        for w, g in zip(weeks, gaps):
+        for i, (w, g) in enumerate(zip(weeks, gaps)):
             w["wildcard"] = None if g is None else round(g - med, 1)
+            nxt = weeks[i:i + 3] if w["wildcard"] is not None else []
+            w["wc_capture"] = round(0.5 * sum(
+                wk["p_double"] * (wk["hist_teams_double"] / 20.0) * wk["squad_xp"]
+                for wk in nxt), 2)
+            w["wildcard_expected"] = (None if w["wildcard"] is None
+                                      else round(w["wildcard"] + w["wc_capture"], 1))
         out[name] = weeks
 
     return {
@@ -172,6 +189,29 @@ def _best(weeks, key, lo, hi, n=3, reverse=True):
     return sub[:n]
 
 
+def _deconflict(half_picks):
+    """One chip per gameweek is a hard FPL rule, so two chips must never be
+    told to share a week. Greedy: the chip whose best window is worth the most
+    keeps the week; the others fall back to their next-best week, and if a
+    chip's every candidate week is taken it gets no recommendation at all.
+
+    The values are not on one scale - free hit is a 0-1 blank-risk while the
+    rest are expected points - so free hit is stretched to a points-like scale
+    (~11 players rescued) for the comparison only.
+    """
+    order = sorted(
+        half_picks,
+        key=lambda c: -(((half_picks[c][0]["value"] or 0) * (11.0 if c == "free_hit" else 1.0))
+                        if half_picks[c] else -1e18))
+    taken, out = set(), {}
+    for chip in order:
+        keep = [o for o in half_picks[chip] if o["gw"] not in taken]
+        if keep:
+            taken.add(keep[0]["gw"])
+        out[chip] = keep
+    return out
+
+
 def _recommend(weeks, split, windows=None):
     """Best windows for each chip, split either side of the first-set deadline.
 
@@ -189,7 +229,7 @@ def _recommend(weeks, split, windows=None):
             if not allowed:
                 return None
             return max(lo0, allowed[0]), min(hi0, allowed[1])
-        picks[half] = {
+        picks[half] = _deconflict({
             "triple_captain": [
                 {"gw": w["gw"], "value": w["tc_expected"], "player": w["tc_player"],
                  "p_double": w["p_double"]}
@@ -199,11 +239,13 @@ def _recommend(weeks, split, windows=None):
                  "p_double": w["p_double"]}
                 for w in _best(weeks, "bench_boost_expected", *(bounds("bench_boost") or (0, -1)))],
             "wildcard": [
-                {"gw": w["gw"], "value": w["wildcard"]}
-                for w in _best(weeks, "wildcard", *(bounds("wildcard") or (0, -1)))],
+                {"gw": w["gw"], "value": w["wildcard_expected"],
+                 "capture": w["wc_capture"]}
+                for w in _best(weeks, "wildcard_expected",
+                               *(bounds("wildcard") or (0, -1)))],
             "free_hit": [
                 {"gw": w["gw"], "value": w["blank_risk"], "p_blank": w["p_blank"]}
                 for w in _best(weeks, "blank_risk", *(bounds("free_hit") or (0, -1)))
                 if w["blank_risk"] > 0],
-        }
+        })
     return picks

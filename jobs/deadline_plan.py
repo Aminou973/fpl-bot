@@ -127,7 +127,10 @@ def chip_alerts(ctx, results, cfg):
                                   + (", historically a double week"
                                      if best.get("p_double") else ""),
                    "wildcard": f"best rebuild window — squad gap "
-                               f"+{best.get('value', 0):.1f} above your median",
+                               f"+{best.get('value', 0):.1f} above your median"
+                               + (f", plus likely doubles to capture "
+                                  f"(+{best.get('capture', 0):.1f})"
+                                  if best.get("capture") else ""),
                    "free_hit": "best blank insurance — flagged blank-week risk"
                    }.get(chip, f"value {best.get('value')}")
             lines.append(f"🎯 <b>{esc(name)}</b> — {label.get(chip, chip)} "
@@ -142,6 +145,9 @@ def chip_alerts(ctx, results, cfg):
                         "deadline — chips are never auto-played.</i>")
     pipeline.write_state("chip_alerts", {"sent": sorted(sent)})
     return alerts
+
+
+def brief_signature(results):
     """Whether the plan actually changed — out/in/captain/hits per team."""
     sig = []
     for name, res in results.items():
