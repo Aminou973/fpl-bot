@@ -31,8 +31,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def live_picks_sig(mt):
     """Comparable signature of the squad as the game currently holds it."""
-    return [(p["element"], bool(p["is_captain"]), bool(p["is_vice"]))
-            for p in sorted(mt["picks"], key=lambda p: p["position"])]
+    return [(p["element"], bool(p.get("is_captain")), bool(p.get("is_vice")))
+            for p in sorted(mt["picks"], key=lambda p: p.get("position", 0))]
 
 
 def plan_sig(payload):
