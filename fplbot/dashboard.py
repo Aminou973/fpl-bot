@@ -177,6 +177,84 @@ svg{display:block;max-width:100%}
   .split,.teams2{grid-template-columns:1fr}
 }
 @media(max-width:640px){
+  .autogrid{grid-template-columns:1fr 1fr}
+}
+
+/* ==================================================== motion & upgrade */
+/* every animation honours the visitor's reduced-motion preference */
+@media (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+  body,.card,.tile,.top{transition:background-color .35s ease,color .35s ease}
+
+  /* reveal on scroll: sections/cards/tiles fade and rise in */
+  .reveal{opacity:0;transform:translateY(14px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.2,.7,.3,1),
+    transform .55s cubic-bezier(.2,.7,.3,1)}
+
+  /* main tab bar: animated pill that slides under the active tab */
+  #nav{position:relative}
+  #nav .tab{color:var(--ink2);text-decoration:none;font-size:13px;padding:8px 12px;
+    white-space:nowrap;border-radius:8px;position:relative;transition:color .25s}
+  #nav .tab:hover{color:var(--ink)}
+  #nav .tab[aria-current="true"]{color:var(--ink)}
+  #nav .tab::after{content:"";position:absolute;left:10%;right:10%;bottom:2px;height:2.5px;
+    border-radius:2px;background:var(--s1);opacity:0;transform:scaleX(.4);
+    transition:transform .3s cubic-bezier(.3,.8,.3,1),opacity .25s}
+  #nav .tab[aria-current="true"]::after{opacity:1;transform:scaleX(1)}
+  #navcursor{position:absolute;bottom:0;height:2.5px;border-radius:2px;background:var(--s1);
+    transition:left .3s cubic-bezier(.3,.8,.3,1),width .3s cubic-bezier(.3,.8,.3,1);
+    pointer-events:none;display:none}
+
+  /* stat tiles count up on first paint */
+  .tile .v{transition:opacity .4s}
+  .tile.hero .v{font-variant-numeric:tabular-nums}
+
+  /* bars grow from zero when they enter the viewport */
+  .bar{transform-origin:left;animation:barGrow .7s cubic-bezier(.2,.7,.3,1) backwards}
+  @keyframes barGrow{from{transform:scaleX(0)}}
+
+  /* pitch cards stagger in */
+  .pl{animation:plIn .4s cubic-bezier(.2,.7,.3,1) backwards}
+  @keyframes plIn{from{opacity:0;transform:translateY(8px) scale(.96)}}
+  .pl:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.25);
+    transition:transform .18s,box-shadow .18s}
+
+  /* plan chips */
+  .iochip{display:inline-flex;align-items:center;gap:4px;border-radius:6px;
+    padding:2px 8px;margin:1px 3px 1px 0;font-size:12px;font-weight:600;
+    border:1px solid var(--ring)}
+  .iochip.in{background:color-mix(in oklab,var(--s3) 18%,var(--surface));
+    color:var(--s3);border-color:color-mix(in oklab,var(--s3) 45%,transparent)}
+  .iochip.out{background:color-mix(in oklab,var(--critical) 14%,var(--surface));
+    color:var(--critical);border-color:color-mix(in oklab,var(--critical) 40%,transparent)}
+  .iochip.roll{background:var(--raised);color:var(--ink2);font-weight:500}
+
+  /* deadline countdown */
+  #cd{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+  #cd .u{font-size:26px;font-weight:650;letter-spacing:-.02em}
+  #cd .l{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  #cd.urgent .u{color:var(--serious);animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+  /* status badges */
+  .st{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+    padding:3px 9px;border-radius:999px;border:1px solid var(--ring);background:var(--raised)}
+  .st .dot{width:7px;height:7px;border-radius:50%;background:var(--muted);flex:none}
+  .st.ok .dot{background:var(--good);box-shadow:0 0 6px color-mix(in oklab,var(--good) 60%,transparent)}
+  .st.warn .dot{background:var(--warning)}
+  .st.bad .dot{background:var(--critical)}
+  .autogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px}
+  .autocell{border:1px solid var(--ring);border-radius:12px;padding:12px 14px;background:var(--raised)}
+  .autocell .k{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;
+    display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .autocell .v{font-size:19px;font-weight:600;margin-top:4px;letter-spacing:-.01em}
+  .autocell .n{color:var(--ink2);font-size:12px;margin-top:2px}
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1 !important;transform:none !important}
+  #navcursor{display:none !important}
+}
+@media(max-width:640px){
   .wrap{padding:0 12px 72px}
   .topin{padding:0 12px}
   h1{font-size:15.5px;line-height:1.25}
@@ -211,7 +289,7 @@ svg{display:block;max-width:100%}
       </div>
       <button id="theme" aria-label="Toggle colour theme">Light</button>
     </div>
-    <nav id="nav"></nav>
+    <nav id="nav"><span id="navcursor"></span></nav>
   </div>
 </div>
 
@@ -219,6 +297,16 @@ svg{display:block;max-width:100%}
 
 <section id="overview">
   <div class="tiles" id="tiles"></div>
+  <div class="card" id="autoCard">
+    <header><div>
+      <h2>Automation</h2>
+      <p class="sub">The bot's own state — live squad, transfer budget and what the
+        auto-submitter will do at the deadline.</p>
+    </div>
+    <div id="cd" aria-live="polite"></div></header>
+    <div class="autogrid" id="autoGrid"></div>
+    <p class="note" id="autoNote"></p>
+  </div>
   <div class="card">
     <header><div>
       <h2>Season</h2>
@@ -446,22 +534,145 @@ document.addEventListener("pointerdown", e => {
 const SECTIONS = [["overview","Overview"],["squads","Squads"],["plan","Plan"],
   ["captain","Captain"],["value","Value"],["fixtures","Fixtures"],["chips","Chips"],
   ["accuracy","Accuracy"],["players","Players"],["changes","Changes"]];
-$("#nav").innerHTML = SECTIONS.map(([id, label]) =>
-  `<a href="#${id}" data-s="${id}">${label}</a>`).join("");
-const navLinks = [...$("#nav").querySelectorAll("a")];
+const navEl = $("#nav");
+navEl.insertAdjacentHTML("beforeend", SECTIONS.map(([id, label]) =>
+  `<a class="tab" href="#${id}" data-s="${id}">${label}</a>`).join(""));
+const navLinks = [...navEl.querySelectorAll("a")];
+const cursor = $("#navcursor");
+function moveCursor() {
+  const act = navLinks.find(a => a.getAttribute("aria-current") === "true");
+  if (!act) { cursor.style.display = "none"; return; }
+  const nr = navEl.getBoundingClientRect(), ar = act.getBoundingClientRect();
+  cursor.style.display = "block";
+  cursor.style.left = (ar.left - nr.left) + "px";
+  cursor.style.width = ar.width + "px";
+}
 const spy = new IntersectionObserver(entries => {
   entries.forEach(en => {
     if (!en.isIntersecting) return;
     navLinks.forEach(a => a.setAttribute("aria-current", a.dataset.s === en.target.id));
+    moveCursor();
   });
 }, {rootMargin: "-110px 0px -70% 0px"});
 SECTIONS.forEach(([id]) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+addEventListener("resize", moveCursor);
+addEventListener("load", moveCursor);
+
+/* ------------------------------------------------- reveal on scroll */
+const revealIO = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); revealIO.unobserve(en.target); } });
+}, {threshold: 0.06});
+document.querySelectorAll(".card, .tile").forEach((n, i) => {
+  n.classList.add("reveal");
+  n.style.transitionDelay = `${Math.min(i * 40, 240)}ms`;
+  revealIO.observe(n);
+});
+
+/* ------------------------------------------------- count-up numbers */
+function countUp(node) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const m = node.textContent.match(/^\s*([\d.,]+)(.*)$/s);
+  if (!m) return;
+  const target = parseFloat(m[1].replace(/,/g, ""));
+  if (!Number.isFinite(target) || target === 0) return;
+  const dec = (m[1].split(".")[1] || "").length;
+  const suffix = m[2];
+  const t0 = performance.now(), dur = 900;
+  const step = t => {
+    const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+    node.textContent = (target * e).toLocaleString("en-GB",
+      {minimumFractionDigits: dec, maximumFractionDigits: dec}) + suffix;
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const tileIO = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    countUp(en.target.querySelector(".v"));
+    tileIO.unobserve(en.target);
+  });
+}, {threshold: 0.4});
+document.querySelectorAll(".tile").forEach(n => tileIO.observe(n));
 
 /* ----------------------------------------------------------------- strap */
 const dl = D.deadline ? new Date(D.deadline) : null;
 $("#strap").textContent =
   (dl ? `GW${G0} deadline ${dl.toUTCString().slice(0, 22)} UK · ` : "")
   + `projections GW${G0}–${GWS[GWS.length - 1]} · updated ${String(D.generated).slice(0, 16).replace("T", " ")}`;
+
+/* ======================================================== AUTOMATION */
+const AUTO = D.automation || {};
+function srcBadge(src) {
+  if (src === "api") return `<span class="st ok"><span class="dot"></span>live API</span>`;
+  if (!src) return `<span class="st warn"><span class="dot"></span>unknown</span>`;
+  return `<span class="st bad"><span class="dot"></span>${src}</span>`;
+}
+function stBadge(kind, text) {
+  return `<span class="st ${kind}"><span class="dot"></span>${text}</span>`;
+}
+function renderAutomation() {
+  const host = $("#autoGrid");
+  const cells = [];
+  NAMES.forEach(n => {
+    const b = D.builds[n] || {};
+    const src = (b.squad_source || "").startsWith("gw") || b.squad_source === "api"
+      ? "api" : b.squad_source;
+    const wk = b.plan && b.plan.weeks ? b.plan.weeks.find(w => w.gw === G0) : null;
+    const hits = wk ? wk.hits : 0;
+    const sub = ((AUTO.submit || {}).teams || {})[n];
+    const subTxt = sub ? (sub.status === "applied" ? "lineup written"
+      : sub.status === "already-applied" ? "already in place"
+      : sub.status === "dry-run" ? "verified, will apply"
+      : sub.status ? sub.status : "—") : "waiting for window";
+    cells.push(`<div class="autocell">
+      <div class="k">${n} <span class="hint">${b.role === "risk" ? "risk" : "main"}</span></div>
+      <div class="v">${b.free_transfers ?? "–"} FT <span class="hint">· ${hits} hit${hits === 1 ? "" : "s"} planned</span></div>
+      <div class="n">squad ${srcBadge(src)}<br>submit ${stBadge(
+        sub && (sub.status === "applied" || sub.status === "already-applied") ? "ok"
+        : sub && sub.status === "dry-run" ? "warn" : "", subTxt)}</div>
+    </div>`);
+  });
+  const bank = NAMES.map(n => `${n}: £${fmt((D.builds[n] || {}).bank, 1)}m`).join(" · ");
+  cells.push(`<div class="autocell">
+    <div class="k">Bank <span class="hint">combined</span></div>
+    <div class="v">£${fmt(NAMES.reduce((a, n) => a + ((D.builds[n] || {}).bank || 0), 0), 1)}m</div>
+    <div class="n">${bank}</div></div>`);
+  host.innerHTML = cells.join("");
+  const lastRun = (AUTO.submit || {}).at;
+  $("#autoNote").innerHTML =
+    (AUTO.apply_window ? `The submitter acts automatically within
+      <b>${AUTO.apply_window}h</b> of the deadline: it verifies first, applies an hour
+      later, and writes every change to the audit log.` : "")
+    + (lastRun ? ` Last submitter run ${String(lastRun).slice(0, 16).replace("T", " ")} UTC.` : "")
+    + (AUTO.ft_pin ? ` Free transfers are pinned by config this season (the official
+      app is the authority on banking).` : "");
+}
+
+/* deadline countdown, ticking every second */
+const dlDate = D.deadline ? new Date(D.deadline) : null;
+function renderCountdown() {
+  const cd = $("#cd");
+  if (!dlDate) { cd.textContent = ""; return; }
+  let s = Math.floor((dlDate - Date.now()) / 1000);
+  if (s <= 0) {
+    cd.classList.remove("urgent");
+    cd.innerHTML = `<span class="u">deadline passed</span>`;
+    return;
+  }
+  const d = Math.floor(s / 86400); s -= d * 86400;
+  const h = Math.floor(s / 3600); s -= h * 3600;
+  const m = Math.floor(s / 60); s -= m * 60;
+  cd.classList.toggle("urgent", dlDate - Date.now() < 24 * 3600e3);
+  cd.innerHTML =
+    (d ? `<span class="u">${d}</span><span class="l">d</span>` : "") +
+    `<span class="u">${h}</span><span class="l">h</span>
+     <span class="u">${String(m).padStart(2, "0")}</span><span class="l">m</span>
+     <span class="u">${String(s).padStart(2, "0")}</span><span class="l">s</span>`;
+}
+renderAutomation();
+renderCountdown();
+setInterval(renderCountdown, 1000);
 
 /* ============================================================== CHART KIT */
 const CH = {pad: {t: 14, r: 46, b: 26, l: 40}};
@@ -761,6 +972,7 @@ function renderPitches() {
     box.appendChild(foot);
     host.appendChild(box);
   });
+  host.querySelectorAll(".pl").forEach((n, i) => n.style.animationDelay = `${Math.min(i * 35, 500)}ms`);
   $("#squadSub").textContent = curView === "target"
     ? "What the optimiser would field, given each team's brief."
     : "Your squads exactly as they stand right now.";
@@ -781,10 +993,13 @@ function renderPlan() {
   $("#planSub").textContent = u.blurb;
   if (!u.plan) { $("#planBody").innerHTML = `<div class="empty">No plan available.</div>`; return; }
   const hp = u.hit_policy || {};
+  const chip = (id, kind) => byId[id]
+    ? `<span class="iochip ${kind}">${byId[id].name}${kind === "in" ? ` <span class="hint">£${fmt(byId[id].price)}</span>` : ""}</span>`
+    : id;
   const rows = u.plan.weeks.map(k => `<tr>
     <td class="l"><b>GW${k.gw}</b></td>
-    <td class="l">${k.out.map(i => byId[i] ? byId[i].name : i).join(", ") || "<span class='hint'>roll</span>"}</td>
-    <td class="l">${k.in.map(i => byId[i] ? `${byId[i].name} <span class='hint'>£${fmt(byId[i].price)}</span>` : i).join(", ") || "–"}</td>
+    <td class="l">${k.out.length ? k.out.map(i => chip(i, "out")).join("") : '<span class="iochip roll">roll</span>'}</td>
+    <td class="l">${k.in.length ? k.in.map(i => chip(i, "in")).join("") : "–"}</td>
     <td class="l">${byId[k.captain] ? byId[k.captain].name : "–"}</td>
     <td class="l hide-s">${byId[k.vice] ? byId[k.vice].name : "–"}</td>
     <td class="hide-s">${k.free_transfers}</td>

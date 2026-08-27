@@ -210,6 +210,15 @@ def main():
     bundle = build_bundle(ctx, results, cfg)
     bundle["changes"] = diff_since(prev, bundle, results)
 
+    # the submitter's audit log, so the dashboard can show its own state
+    automation = {"apply_window": 36, "ft_pin": any(
+        t.get("free_transfers") is not None for t in cfg["teams"].values())}
+    sub = pipeline.read_state("auto_submit", {"gws": {}})
+    last_gw = max(sub.get("gws", {}), key=int, default=None)
+    if last_gw is not None:
+        automation["submit"] = sub["gws"][last_gw]
+    bundle["automation"] = automation
+
     # chips are once-a-season decisions, so they get their own full-season pass
     try:
         long_h = 39 - gws[0]
