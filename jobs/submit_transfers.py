@@ -59,23 +59,41 @@ def diff_names(names, live, target):
 
 
 def credentials():
-    """Collect refresh tokens from the environment.
+    """Collect refresh tokens from the environment, as (secret_name, token).
 
     One per FPL account: FPL_REFRESH_TOKEN (or FPL_REFRESH_TOKEN_1) for the
     first, FPL_REFRESH_TOKEN_2, _3, … for further ones. Two squads on two
     separate accounts means two secrets. Tokens come from the one-time
-    device flow in jobs/fpl_login.py.
+    browser login in jobs/fpl_login.py.
     """
     import os
     out = []
     first = os.environ.get("FPL_REFRESH_TOKEN") or os.environ.get("FPL_REFRESH_TOKEN_1")
     if first:
-        out.append(first)
+        out.append(("FPL_REFRESH_TOKEN", first))
     for i in range(2, 6):
         rt = os.environ.get(f"FPL_REFRESH_TOKEN_{i}")
         if rt:
-            out.append(rt)
+            out.append((f"FPL_REFRESH_TOKEN_{i}", rt))
     return out
+
+
+def store_secret(name: str, value: str) -> bool:
+    """Write a rotated refresh token back to its repo secret.
+
+    FPL rotates (and invalidates) refresh tokens on every exchange, so the
+    new token must be persisted where the next run finds it. This works from
+    Actions when GH_TOKEN is a PAT with the Secrets write permission
+    (FPL_PAT); locally it uses the logged-in gh CLI. Returns True on success.
+    """
+    import os
+    import subprocess
+    try:
+        subprocess.run(["gh", "secret", "set", name, "--body", value],
+                       check=True, capture_output=True)
+        return True
+    except Exception:                                        # noqa: BLE001
+        return False
 
 
 def main():
@@ -139,10 +157,29 @@ def main():
         sys.exit("no submittable teams in the plan")
 
     # authenticate every account once via its refresh token; each entry is
-    # handled by the account that actually manages it
+    # handled by the account that actually manages it. A dead token only
+    # takes out its own account — the run continues with the rest.
     sessions = {}          # entry_id -> (session, my-team id)
-    for i, rt in enumerate(tokens, 1):
-        tok = api.refresh_tokens(rt)
+    for i, (secret_name, rt) in enumerate(tokens, 1):
+        try:
+            tok = api.refresh_tokens(rt)
+        except RuntimeError as e:
+            print(f"[auth] token {i} ({secret_name}) refresh FAILED: {e} — "
+                  f"re-run jobs/fpl_login.py for that account")
+            continue
+        new_rt = tok.get("refresh_token")
+        if new_rt and new_rt != rt:
+            # FPL rotates (and invalidates) refresh tokens on every exchange:
+            # persist the new one or the account dead-ends after this run
+            if store_secret(secret_name, new_rt):
+                print(f"[auth] refresh token rotated for {secret_name} — "
+                      f"secret updated")
+            else:
+                print(f"[auth] WARNING: refresh token rotated for "
+                      f"{secret_name} but the secret could NOT be updated "
+                      f"(needs FPL_PAT with Secrets write permission) — "
+                      f"this account will stop working after this run; "
+                      f"re-run jobs/fpl_login.py for it")
         s = api.api_session(tok["access_token"])
         account_teams = api.me(s)
         print(f"authenticated (token {i}); manages entries "

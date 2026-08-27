@@ -59,8 +59,11 @@ python jobs/fpl_login.py --account 2  # second account (e.g. Minoux_41)
 
 Each run opens the FPL sign-in page in the browser; sign in, then paste back
 the redirected URL (it contains `?code=…`) and the token is stored with
-`gh secret set`. The old `FPL_EMAIL` / `FPL_PASSWORD` secrets are no longer
-used and can be deleted. Full detail: `07-oauth-migration.md`.
+`gh secret set`. **Also set `FPL_PAT`** (fine-grained PAT, this repo only,
+*Secrets: read and write*) — FPL rotates refresh tokens on every use and the
+job writes the new one back with it. The old `FPL_EMAIL` / `FPL_PASSWORD`
+secrets are no longer used and can be deleted. Full detail:
+`07-oauth-migration.md`.
 
 Then test read-only end-to-end:
 

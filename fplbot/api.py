@@ -265,18 +265,18 @@ def exchange_code(code: str, code_verifier: str):
 
 
 def refresh_tokens(refresh_token: str):
-    """Exchange a refresh token for a fresh access token (headless)."""
+    """Exchange a refresh token for a fresh access token (headless).
+
+    Note: FPL rotates the refresh token on every exchange and invalidates
+    the previous one — the caller must persist the new refresh_token
+    (jobs/submit_transfers.py writes it back to the repo secret).
+    """
     code, body = _auth_post("token", {
         "grant_type": "refresh_token", "refresh_token": refresh_token,
         "client_id": CLIENT_ID})
     if code != 200 or not body.get("access_token"):
         raise RuntimeError(f"refresh failed: HTTP {code} "
                            f"{body.get('error', body)}")
-    new_rt = body.get("refresh_token")
-    if new_rt and new_rt != refresh_token:
-        print("[auth] note: FPL rotated the refresh token - keep using the "
-              "stored one; if a later run fails with 'refresh failed', "
-              "re-run jobs/fpl_login.py and update the secret")
     return body
 
 

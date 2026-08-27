@@ -42,6 +42,10 @@ jobs:
         env:
           FPL_REFRESH_TOKEN: ${{ secrets.FPL_REFRESH_TOKEN }}
           FPL_REFRESH_TOKEN_2: ${{ secrets.FPL_REFRESH_TOKEN_2 }}
+          # FPL rotates refresh tokens on every use; the job writes the new
+          # one back to the secret with gh. This PAT needs only the
+          # "Secrets: read and write" permission on this repository.
+          GH_TOKEN: ${{ secrets.FPL_PAT }}
         run: |
           # scheduled runs submit for real (the job's own guards do the
           # safety work); a dispatch is a dry run unless "apply" is ticked

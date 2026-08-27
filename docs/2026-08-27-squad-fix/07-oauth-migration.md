@@ -50,14 +50,24 @@ gh workflow run submit   # dispatch = dry run, reads squads, no submission
 
 - Each run: refresh token → access token (`POST /as/token`,
   `grant_type=refresh_token`) → `Authorization: Bearer` on
-  `/api/me/`, `/api/my-team/{id}/` (read) and (only when applying)
-  the picks write.
-- **Rotation caveat**: if FPL rotates refresh tokens, the printed note
-  appears. The stored secret normally keeps working; if a later run ever
-  fails with `refresh failed`, re-run `jobs/fpl_login.py` and update the
-  secret.
-- Revocation: approving a device flow signs you in like any other session;
-  you can end it from your FPL account's active sessions at any time.
+  `/api/me/` (shape: `player.entry` — the app calls `my-team/{entry}/`
+  with that same id), `/api/my-team/{id}/` (read) and (only when
+  applying) the picks write.
+- **Rotation is real and must be handled**: FPL issues a NEW refresh token
+  with every refresh-token grant and invalidates the old one immediately.
+  The submit job therefore writes the rotated token back to its secret
+  after every run. For that it needs one more secret:
+  **`FPL_PAT`** — a fine-grained PAT limited to this repo with the
+  *Secrets: read and write* permission
+  (github.com/settings/personal-access-tokens/new → Only select
+  repositories → Aminou973/fpl-bot → Repository permissions →
+  Secrets: Read and write). Without it, each run burns its refresh token
+  and the accounts need re-arming.
+- If a run ever logs `refresh FAILED` for an account, re-run
+  `jobs/fpl_login.py` (or the bat) for that account.
+- Revocation: the browser login is a normal sign-in session; you can end
+  it from your FPL account's active sessions, and the PAT can be revoked
+  from your GitHub settings at any time.
 
 ## Files
 

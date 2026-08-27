@@ -12,6 +12,24 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM FPL rotates refresh tokens on every use; the Actions job writes the new
+REM one back using a PAT with Secrets write permission. Warn if missing.
+gh secret list | findstr /C:"FPL_PAT" >nul 2>nul
+if errorlevel 1 (
+    echo [!] The FPL_PAT secret is not set yet. FPL refresh tokens rotate on
+    echo     every use, so the Actions job must write the new token back -
+    echo     that needs a PAT with the "Secrets: read and write" permission:
+    echo       1. Open https://github.com/settings/personal-access-tokens/new
+    echo       2. Token name: fpl-bot-secrets  -  Expiration: 90 days or more
+    echo       3. Repository access: Only select repositories - Aminou973/fpl-bot
+    echo       4. Permissions - Repository permissions - Secrets: Read and write
+    echo       5. Generate, copy the token, then run:
+    echo            gh secret set FPL_PAT --body "PASTE_TOKEN_HERE"
+    echo     Continuing anyway - tokens stored now will need re-arming later
+    echo     if the secret is not set.
+    echo.
+)
+
 echo ============================================
 echo  Step 1/3 - FPL login: account 1 (Minoux_69)
 echo ============================================
