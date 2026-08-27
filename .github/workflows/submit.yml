@@ -5,10 +5,11 @@ name: submit
 # deadline is close enough (36h window) and refuses stale plans or squads that
 # did not come from the API, so a stray schedule tick can never act on old data.
 #
-# Requires the FPL_EMAIL and FPL_PASSWORD repo secrets (account of the first
-# squad); if the second squad lives on a different account, also set
-# FPL_EMAIL_2 and FPL_PASSWORD_2. Dispatch runs are dry-runs by default;
-# check "apply" only when you mean it.
+# Requires the FPL_REFRESH_TOKEN repo secret (refresh token of the first
+# squad's account, from the one-time device flow in jobs/fpl_login.py); if
+# the second squad lives on a different account, also set
+# FPL_REFRESH_TOKEN_2. Dispatch runs are dry-runs by default; check "apply"
+# only when you mean it.
 
 on:
   schedule:
@@ -39,10 +40,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Submit planned lineup
         env:
-          FPL_EMAIL: ${{ secrets.FPL_EMAIL }}
-          FPL_PASSWORD: ${{ secrets.FPL_PASSWORD }}
-          FPL_EMAIL_2: ${{ secrets.FPL_EMAIL_2 }}
-          FPL_PASSWORD_2: ${{ secrets.FPL_PASSWORD_2 }}
+          FPL_REFRESH_TOKEN: ${{ secrets.FPL_REFRESH_TOKEN }}
+          FPL_REFRESH_TOKEN_2: ${{ secrets.FPL_REFRESH_TOKEN_2 }}
         run: |
           # scheduled runs submit for real (the job's own guards do the
           # safety work); a dispatch is a dry run unless "apply" is ticked

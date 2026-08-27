@@ -59,22 +59,23 @@ def diff_names(names, live, target):
 
 
 def credentials():
-    """Collect (email, password) pairs from the environment.
+    """Collect refresh tokens from the environment.
 
-    One or more FPL accounts: FPL_EMAIL/FPL_PASSWORD for the first, then
-    FPL_EMAIL_2/FPL_PASSWORD_2, _3, … for further ones (FPL_EMAIL_1 also
-    accepted). Two squads on two separate accounts means four secrets.
+    One per FPL account: FPL_REFRESH_TOKEN (or FPL_REFRESH_TOKEN_1) for the
+    first, FPL_REFRESH_TOKEN_2, _3, … for further ones. Two squads on two
+    separate accounts means two secrets. Tokens come from the one-time
+    device flow in jobs/fpl_login.py.
     """
     import os
-    pairs = []
-    first = (os.environ.get("FPL_EMAIL"), os.environ.get("FPL_PASSWORD"))
-    if all(first):
-        pairs.append(first)
-    for i in range(1, 6):
-        e, p = os.environ.get(f"FPL_EMAIL_{i}"), os.environ.get(f"FPL_PASSWORD_{i}")
-        if e and p:
-            pairs.append((e, p))
-    return pairs
+    out = []
+    first = os.environ.get("FPL_REFRESH_TOKEN") or os.environ.get("FPL_REFRESH_TOKEN_1")
+    if first:
+        out.append(first)
+    for i in range(2, 6):
+        rt = os.environ.get(f"FPL_REFRESH_TOKEN_{i}")
+        if rt:
+            out.append(rt)
+    return out
 
 
 def main():
@@ -91,10 +92,11 @@ def main():
                     help="hours before deadline inside which submission is allowed")
     a = ap.parse_args()
 
-    pairs = credentials()
-    if not pairs:
-        sys.exit("no FPL credentials set — FPL_EMAIL/FPL_PASSWORD (plus "
-                 "FPL_EMAIL_2/FPL_PASSWORD_2 … for extra accounts)")
+    tokens = credentials()
+    if not tokens:
+        sys.exit("no FPL refresh tokens set — run jobs/fpl_login.py once per "
+                 "account and store the tokens as FPL_REFRESH_TOKEN / "
+                 "FPL_REFRESH_TOKEN_2 repo secrets")
 
     cfg = pipeline.load_config()
     plan = pipeline.read_state("last_plan")
@@ -136,12 +138,15 @@ def main():
     if not wanted:
         sys.exit("no submittable teams in the plan")
 
-    # log in to every account once; each entry is handled by the account
-    # that actually manages it
+    # authenticate every account once via its refresh token; each entry is
+    # handled by the account that actually manages it
     sessions = {}          # entry_id -> (session, my-team id)
-    for email, password in pairs:
-        s, account_teams = api.login(email, password)
-        print(f"logged in ({email}); manages entries {sorted(account_teams)}")
+    for i, rt in enumerate(tokens, 1):
+        tok = api.refresh_tokens(rt)
+        s = api.api_session(tok["access_token"])
+        account_teams = api.me(s)
+        print(f"authenticated (token {i}); manages entries "
+              f"{sorted(account_teams)}")
         for entry_id, team_id in account_teams.items():
             sessions[entry_id] = (s, team_id)
 

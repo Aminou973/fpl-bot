@@ -209,49 +209,105 @@ def season_gameweeks(boot=None, fx=None, upto=None):
 
 
 # ----------------------------------------------------------------- logged in
-# These endpoints need a real login session. Nothing here is public-API: the
-# session cookie comes from the account login and every write goes through
-# my-team/{team_id}/. Credentials are expected to arrive from the environment
-# (FPL_EMAIL / FPL_PASSWORD), never from config or code.
+# These endpoints need an authenticated session. FPL retired the old form
+# login (users.premierleague.com is gone from DNS) for OAuth2/OIDC at
+# account.premierleague.com with Bearer tokens. A one-time interactive device
+# flow (jobs/fpl_login.py) yields a refresh token; every automated run then
+# exchanges it for a short-lived access token. Tokens arrive from the
+# environment (FPL_REFRESH_TOKEN, FPL_REFRESH_TOKEN_2, …), never from config.
 
-LOGIN_URL = "https://users.premierleague.com/api/user/login"
+AUTH = "https://account.premierleague.com/as"
+CLIENT_ID = "bfcbaf69-aade-4c1b-8f00-c1cb8a193030"   # the official web app's
+SCOPES = "openid profile email offline_access"
 
 
-def login(email: str, password: str):
-    """Authenticated session plus the my-team id for the caller's entries.
-
-    Returns (session, teams) where teams maps entry_id -> my-team id (the
-    internal id the my-team endpoints want, not the public entry id).
-    """
-    try:
-        import requests
-    except ImportError as e:                     # pragma: no cover
-        raise RuntimeError("auto-submit needs the requests package") from e
-    s = requests.Session()
-    s.headers.update({"User-Agent": UA, "Accept": "application/json"})
-    r = s.post(LOGIN_URL, data={
-        "login_username": email, "login_password": password,
-        "redirect_uri": "https://fantasy.premierleague.com/",
-        "app": "plfpl-web"}, timeout=45)
-    if r.status_code != 200:
-        raise RuntimeError(f"FPL login failed: HTTP {r.status_code}")
+def _auth_post(path, data):
+    import requests
+    r = requests.post(f"{AUTH}/{path}", data=data,
+                      headers={"User-Agent": UA, "Accept": "application/json"},
+                      timeout=45)
     body = {}
     try:
         body = r.json()
     except ValueError:
         pass
-    if body.get("state") not in (None, "success") or not s.cookies:
-        raise RuntimeError(f"FPL login refused: {body or 'no session cookie'}")
-    me = s.get(f"{BASE}/me/", timeout=45)
-    if me.status_code != 200:
-        raise RuntimeError(f"FPL login did not stick: /me/ HTTP {me.status_code}")
+    return r.status_code, body
+
+
+def device_authorization():
+    """Start the interactive device flow: returns {verification_uri, user_code,
+    device_code, interval}. The user approves in a browser, then
+    poll_device_token() collects the tokens."""
+    code, body = _auth_post("device_authorization",
+                            {"client_id": CLIENT_ID, "scope": SCOPES})
+    if code != 200:
+        raise RuntimeError(f"device authorization failed: HTTP {code} {body}")
+    return body
+
+
+def poll_device_token(device_code: str, interval: float = 5.0, timeout: float = 600.0):
+    """Poll the token endpoint until the browser approval lands."""
+    import time
+    deadline = time.monotonic() + timeout
+    while True:
+        code, body = _auth_post("token", {
+            "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
+            "device_code": device_code, "client_id": CLIENT_ID})
+        if code == 200 and body.get("access_token"):
+            return body
+        err = body.get("error", "")
+        if err == "authorization_pending":
+            time.sleep(interval)
+            continue
+        if err in ("slow_down",):
+            interval += 2
+            time.sleep(interval)
+            continue
+        if err in ("expired_token", "access_denied"):
+            raise RuntimeError(f"device flow ended: {err}")
+        if time.monotonic() > deadline:
+            raise RuntimeError("device flow timed out waiting for approval")
+        time.sleep(interval)
+
+
+def refresh_tokens(refresh_token: str):
+    """Exchange a refresh token for a fresh access token (headless)."""
+    code, body = _auth_post("token", {
+        "grant_type": "refresh_token", "refresh_token": refresh_token,
+        "client_id": CLIENT_ID})
+    if code != 200 or not body.get("access_token"):
+        raise RuntimeError(f"refresh failed: HTTP {code} "
+                           f"{body.get('error', body)}")
+    new_rt = body.get("refresh_token")
+    if new_rt and new_rt != refresh_token:
+        print("[auth] note: FPL rotated the refresh token - keep using the "
+              "stored one; if a later run fails with 'refresh failed', "
+              "re-run jobs/fpl_login.py and update the secret")
+    return body
+
+
+def api_session(access_token: str):
+    """Requests session carrying the Bearer token the fantasy API wants."""
+    import requests
+    s = requests.Session()
+    s.headers.update({"User-Agent": UA, "Accept": "application/json",
+                      "Authorization": f"Bearer {access_token}",
+                      "X-API-Authorization": f"Bearer {access_token}"})
+    return s
+
+
+def me(session):
+    """Logged-in account profile: maps entry_id -> my-team id."""
+    r = session.get(f"{BASE}/me/", timeout=45)
+    if r.status_code != 200:
+        raise RuntimeError(f"/me/ read failed: HTTP {r.status_code}")
     teams = {}
-    for t in me.json().get("teams", []):
+    for t in r.json().get("teams", []):
         if t.get("entry"):
             teams[int(t["entry"])] = int(t["id"])
     if not teams:
-        raise RuntimeError("login succeeded but no teams are attached to this account")
-    return s, teams
+        raise RuntimeError("authenticated but no teams are attached to this account")
+    return teams
 
 
 def my_team(session, team_id: int):

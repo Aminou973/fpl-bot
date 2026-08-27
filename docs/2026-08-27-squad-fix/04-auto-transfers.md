@@ -32,7 +32,10 @@ unless every guard passes:
 3. the plan's squads came **from the API** (a config-fallback squad is never
    submitted — this is the fix that makes wrong squads impossible to push);
 4. the live squad already matching the plan → nothing to do;
-5. `FPL_EMAIL` / `FPL_PASSWORD` must be set (repo secrets in Actions).
+5. `FPL_REFRESH_TOKEN` (and `_2` for the second account) must be set (repo
+   secrets in Actions) — see step `07-oauth-migration.md`: FPL retired
+   email/password login, so the job authenticates with a refresh token from
+   the one-time device flow.
 
 ### `.github/workflows/submit.yml`
 
@@ -41,19 +44,21 @@ unless every guard passes:
   (dispatch = dry run, always, unless explicitly ticked).
 - Commits `state/auto_submit.json` (audit log per gameweek: mode, results).
 
-## To arm it (one-time, ~2 minutes)
+## To arm it (one-time, ~1 minute per account)
 
-**Two squads on two different accounts → four secrets** (the job logs in to
-every account and picks the one that actually manages each entry):
+**Two squads on two different accounts → two refresh tokens** (the job
+refreshes each token, lists the entries each account manages, and picks the
+one that actually manages each squad):
 
 ```bash
-gh secret set FPL_EMAIL      --body "first-account-email"     # e.g. Minoux_69
-gh secret set FPL_PASSWORD   --body "first-account-password"
-gh secret set FPL_EMAIL_2    --body "second-account-email"    # e.g. Minoux_41
-gh secret set FPL_PASSWORD_2 --body "second-account-password"
+python jobs/fpl_login.py              # first account  (e.g. Minoux_69)
+python jobs/fpl_login.py --account 2  # second account (e.g. Minoux_41)
 ```
 
-(If both squads were ever on one account, only the first pair is needed.)
+Each run prints a URL + code; approve in the browser, then paste the printed
+`gh secret set FPL_REFRESH_TOKEN …` / `… FPL_REFRESH_TOKEN_2 …` command. The
+old `FPL_EMAIL` / `FPL_PASSWORD` secrets are no longer used and can be
+deleted. Full detail: `07-oauth-migration.md`.
 
 Then test read-only end-to-end:
 
