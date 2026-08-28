@@ -69,6 +69,28 @@ gh workflow run submit   # dispatch = dry run, reads squads, no submission
   it from your FPL account's active sessions, and the PAT can be revoked
   from your GitHub settings at any time.
 
+## The transfers endpoint (discovered 2026-08-28, first real submission)
+
+The `my-team/{entry}/` POST **only writes a lineup from players already in
+the squad** — submitting a planned XI containing a new signing fails with
+`Element N is not in the player's picks`. Transfers go through their own
+endpoint, which FPL's web bundle revealed (and which returned **200 with an
+empty body** on success — the first implementation crashed parsing it):
+
+```
+POST /api/transfers/
+{"chip": null, "entry": <entry_id>, "event": <gw>,
+ "transfers": [{"element_in": id, "element_out": id,
+                "purchase_price": <in-player now_cost, tenths>,
+                "selling_price": <out-player selling_price, tenths>}]}
+```
+
+`selling_price` comes from the authenticated my-team GET. Flow per team:
+make transfers → write lineup. A chip play posts to `transfers/` with an
+empty list first. Verified end-to-end 2026-08-28: Minoux_69 lineup-only,
+Minoux_41 Szoboszlai in for Gibbs-White, both `✔ applied` 3h before the
+GW2 deadline, with Telegram confirmation.
+
 ## Files
 
 - `fplbot/api.py` — `authorize_url`, `exchange_code` (PKCE),
