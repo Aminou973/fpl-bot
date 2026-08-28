@@ -338,7 +338,8 @@ def make_transfers(session, entry_id: int, gw: int, transfers: list, chip=None):
     if r.status_code != 200:
         raise RuntimeError(f"transfers/{entry_id} failed: "
                            f"HTTP {r.status_code} {r.text[:300]}")
-    return r.json()
+    # a 200 can come back with an empty body; that still means accepted
+    return r.json() if r.text.strip() else {}
 
 
 def submit_picks(session, team_id: int, picks: list, chip=None):
@@ -359,7 +360,8 @@ def submit_picks(session, team_id: int, picks: list, chip=None):
     if r.status_code != 200:
         raise RuntimeError(f"my-team/{team_id} submit failed: "
                            f"HTTP {r.status_code} {r.text[:300]}")
-    return r.json()
+    # success can be an empty body; only parse when there is one
+    return r.json() if r.text.strip() else {}
 
 
 # ------------------------------------------------------------- manager state
