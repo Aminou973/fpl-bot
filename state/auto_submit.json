@@ -1,15 +1,33 @@
 {
  "gws": {
   "2": {
-   "at": "2026-08-28T14:10:31.711917+00:00",
+   "at": "2026-08-28T14:11:45.079536+00:00",
    "deadline": "2026-08-28T17:30:00Z",
-   "mode": "dry-run",
+   "mode": "apply",
    "teams": {
     "Minoux_41": {
-     "status": "dry-run"
+     "captain": 106,
+     "gw": 2,
+     "in": [
+      368
+     ],
+     "out": [
+      480
+     ],
+     "status": "applied",
+     "team_id": 4896428
     },
     "Minoux_69": {
-     "status": "dry-run"
+     "captain": 411,
+     "gw": 2,
+     "in": [
+      165
+     ],
+     "out": [
+      106
+     ],
+     "status": "applied",
+     "team_id": 4894622
     }
    }
   }
