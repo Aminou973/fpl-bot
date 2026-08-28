@@ -448,6 +448,10 @@ def build_bundle(ctx, results, cfg):
             "role": cfg["teams"][name].get("role", "main"),
             "blurb": cfg["teams"][name].get("blurb", res["settings"]),
             "current": res["squad"], "squad_source": res.get("squad_source"),
+            # which deadline's confirmed picks the squad view shows ("gw12"):
+            # before the deadline FPL has not published this week's squad yet,
+            # so the page can flag the bot's applied changes as pending
+            "picks_source": res.get("picks_source"),
             "current_report": res["current_report"],
             "target": res["target"], "target_report": res["target_report"],
             "plan": res["plan"], "hit_policy": res["hit_policy"],

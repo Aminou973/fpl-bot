@@ -243,7 +243,7 @@ def main():
         session, team_id = sessions[entry_id]
         mt = api.my_team(session, team_id)
         if live_picks_sig(mt) == plan_sig(entry["picks_payload"]):
-            results[name] = {"status": "already-applied"}
+            results[name] = {"status": "already-applied", "gw": gw}
             print(f"[{name}] live squad already matches the plan — nothing to do")
             continue
         print(f"[{name}] entry {entry_id} (my-team id {team_id})")

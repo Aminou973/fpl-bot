@@ -258,6 +258,13 @@ svg{display:block;max-width:100%}
   color:var(--s3);border-color:color-mix(in oklab,var(--s3) 40%,transparent)}
 .iochip.roll{background:var(--raised);color:var(--ink2);font-weight:500}
 
+/* applied-but-not-yet-published transfer banner (squads go public at the deadline) */
+.pending{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px;
+  padding:8px 12px;border-radius:10px;font-size:12px;color:var(--ink2);
+  border:1px solid color-mix(in oklab,var(--s1) 35%,transparent);
+  background:color-mix(in oklab,var(--s1) 8%,var(--surface))}
+.pending .hint{margin-left:auto}
+
 /* deadline countdown */
 #cd{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
 #cd .u{font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--s1)}
@@ -635,6 +642,17 @@ function srcBadge(src) {
 function stBadge(kind, text) {
   return `<span class="st ${kind}"><span class="dot"></span>${text}</span>`;
 }
+/* Changes the bot applied for the gameweek now being planned, which FPL has
+   not published yet: picks only go public after the deadline, so until then
+   the squad view shows the last confirmed one while the real squad has moved. */
+function pendingFor(n) {
+  const sub = ((AUTO.submit || {}).teams || {})[n];
+  if (!sub || (sub.status !== "applied" && sub.status !== "already-applied")) return null;
+  if (sub.gw !== G0) return null;
+  const m = /^gw(\d+)$/.exec((D.builds[n] || {}).picks_source || "");
+  if (!m || +m[1] >= G0) return null;      // squad view is already current
+  return sub;
+}
 function renderAutomation() {
   const host = $("#autoGrid");
   const cells = [];
@@ -645,7 +663,9 @@ function renderAutomation() {
     const wk = b.plan && b.plan.weeks ? b.plan.weeks.find(w => w.gw === G0) : null;
     const hits = wk ? wk.hits : 0;
     const sub = ((AUTO.submit || {}).teams || {})[n];
-    const subTxt = sub ? (sub.status === "applied" ? "lineup written"
+    const pd = pendingFor(n);
+    const subTxt = pd ? "applied — squad updates at the deadline"
+      : sub ? (sub.status === "applied" ? "lineup written"
       : sub.status === "already-applied" ? "already in place"
       : sub.status === "dry-run" ? "verified, will apply"
       : sub.status ? sub.status : "—") : "waiting for window";
@@ -653,7 +673,7 @@ function renderAutomation() {
       <div class="k">${n} <span class="hint">${b.role === "risk" ? "risk" : "main"}</span></div>
       <div class="v">${b.free_transfers ?? "–"} FT <span class="hint">· ${hits} hit${hits === 1 ? "" : "s"} planned</span></div>
       <div class="n">squad ${srcBadge(src)}<br>submit ${stBadge(
-        sub && (sub.status === "applied" || sub.status === "already-applied") ? "ok"
+        pd || (sub && (sub.status === "applied" || sub.status === "already-applied")) ? "ok"
         : sub && sub.status === "dry-run" ? "warn" : "", subTxt)}</div>
     </div>`);
   });
@@ -941,6 +961,21 @@ function syncSquad() {
   $("#gwTabs").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.g === curGw));
   renderPitches();
 }
+/* green strip shown above a squad whose changes are applied but not yet
+   public — it names the moves so "what happened to my transfer?" is answered */
+function pendingBanner(pd) {
+  const chip = (id, kind) => byId[id]
+    ? `<span class="iochip ${kind}">${byId[id].name}</span>` : "";
+  const inn = (pd.in || []).map(i => chip(i, "in")).join(" ");
+  const out = (pd.out || []).map(i => chip(i, "out")).join(" ");
+  const moves = (inn || out)
+    ? `${out}${inn ? `${out ? " " : ""}<span class="hint">→</span> ${inn}` : ""}`
+    : "lineup and captain updated";
+  return `<div class="pending">
+    <span class="st ok"><span class="dot"></span>GW${pd.gw} changes applied</span>
+    ${moves}<span class="hint">FPL publishes the updated squad after the deadline —
+    this view shows the last one it confirmed.</span></div>`;
+}
 function playerCard(p, gw, isCap, isVice) {
   const c = el("div", "pl" + (isCap ? " cap" : "") + (isVice ? " vice" : "")
     + (p.selected_by < DIFF_OWN ? " diff" : "") + (p.status !== "a" ? " flagged" : ""));
@@ -971,6 +1006,8 @@ function renderPitches() {
     box.innerHTML = `<div class="row" style="justify-content:space-between;margin-bottom:6px">
       <b>${n}</b><span class="hint">£${fmt(rep ? rep.cost : 0)}m ·
       ${fmt(curView === "target" ? b.own_target : b.own_current, 0)}% owned</span></div>`;
+    const pd = curView === "current" ? pendingFor(n) : null;
+    if (pd) box.insertAdjacentHTML("beforeend", pendingBanner(pd));
     if (!g) { box.innerHTML += `<div class="empty">No squad.</div>`; host.appendChild(box); return; }
     const pitch = el("div", "pitch");
     const lines = {GKP: [], DEF: [], MID: [], FWD: []};
@@ -999,7 +1036,9 @@ function renderPitches() {
   host.querySelectorAll(".pl").forEach((n, i) => n.style.animationDelay = `${Math.min(i * 35, 500)}ms`);
   $("#squadSub").textContent = curView === "target"
     ? "What the optimiser would field, given each team's brief."
-    : "Your squads exactly as they stand right now.";
+    : NAMES.some(n => pendingFor(n))
+      ? "As FPL last published — the changes the bot applied appear here once the deadline passes."
+      : "Your squads exactly as they stand right now.";
 }
 
 /* ================================================================== PLAN */
