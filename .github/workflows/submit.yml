@@ -42,6 +42,9 @@ jobs:
         env:
           FPL_REFRESH_TOKEN: ${{ secrets.FPL_REFRESH_TOKEN }}
           FPL_REFRESH_TOKEN_2: ${{ secrets.FPL_REFRESH_TOKEN_2 }}
+          # applied/failed lineup alerts go to the alert tier
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           # FPL rotates refresh tokens on every use; the job writes the new
           # one back to the secret with gh. This PAT needs only the
           # "Secrets: read and write" permission on this repository.
