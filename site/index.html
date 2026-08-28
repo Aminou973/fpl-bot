@@ -461,6 +461,16 @@ svg{display:block;max-width:100%}
   </div>
 </section>
 
+<section id="livescore">
+  <div class="card">
+    <header><div><h2>Live gameweek</h2>
+      <p class="sub" id="liveSub">Scores, players and mini-leagues while the game is being
+        played. Refreshes automatically — the numbers are as fresh as the watcher's last run.</p></div>
+      <span class="hint" id="liveAge"></span></header>
+    <div id="liveBody"></div>
+  </div>
+</section>
+
 <section id="price">
   <div class="card">
     <header><div><h2>Price radar</h2>
@@ -580,8 +590,9 @@ document.addEventListener("pointerdown", e => {
 
 /* ------------------------------------------------------------------- nav */
 const SECTIONS = [["overview","Overview"],["squads","Squads"],["plan","Plan"],
-  ["captain","Captain"],["value","Value"],["fixtures","Fixtures"],["chips","Chips"],
-  ["price","Price"],["accuracy","Accuracy"],["players","Players"],["changes","Changes"]];
+  ["livescore","Live"],["captain","Captain"],["value","Value"],["fixtures","Fixtures"],
+  ["chips","Chips"],["price","Price"],["accuracy","Accuracy"],["players","Players"],
+  ["changes","Changes"]];
 const navEl = $("#nav");
 navEl.insertAdjacentHTML("beforeend", SECTIONS.map(([id, label]) =>
   `<a class="tab" href="#${id}" data-s="${id}">${label}</a>`).join(""));
@@ -1492,6 +1503,139 @@ function renderEngines() {
     <thead><tr><th class="l">Engine</th><th class="l">Latest evidence</th><th>Basis</th>
     <th>Status</th></tr></thead><tbody>${rows.join("")}</tbody></table>`;
 }
+
+/* ============================================================== LIVE GW */
+/* live.json is a watcher snapshot, not a websocket: this page re-fetches it
+   every 2 minutes and says on screen exactly how old it is. The per-player
+   "live" total comes from FPL (autosubs already applied by them) while rows
+   are computed from the picked XI, so an autosubbed-in player can show points
+   the live total does not include - stated on the card, not hidden. */
+let LIVE = null;
+function liveAge() {
+  if (!LIVE || !LIVE.generated) return "";
+  const age = (Date.now() - new Date(LIVE.generated).getTime()) / 60000;
+  if (!Number.isFinite(age)) return "";
+  const stale = age > 90;
+  $("#liveAge").textContent = `snapshot ${Math.round(age)} min old`;
+  $("#liveAge").style.color = stale ? css("--warning") : "";
+  return age;
+}
+function chipBadge(c) {
+  const name = {wc: "Wildcard", fh: "Free hit", tc: "Triple captain",
+                bb: "Bench boost"}[String(c || "").toLowerCase()];
+  return name ? `<span class="flag f-diff">${name} active</span>` : "";
+}
+function renderLivescore() {
+  const body = $("#liveBody");
+  if (!LIVE || !LIVE.status) {
+    $("#liveSub").textContent = "Nothing in play right now. This tab comes alive once the " +
+      "week's first fixture kicks off and the watcher stamps live.json.";
+    $("#liveAge").textContent = "";
+    body.innerHTML = "";
+    return;
+  }
+  liveAge();
+  const teams = LIVE.teams || {};
+  $("#liveSub").textContent = `Gameweek ${LIVE.gw} — live as of the watcher's last run, ` +
+    `re-fetched every 2 minutes.`;
+
+  if (LIVE.status === "pre_deadline") {
+    const fx = (LIVE.fixtures || []).map(f =>
+      `<tr><td class="l">${teams[f.home] || f.home}</td><td class="hint">vs</td>
+       <td class="l">${teams[f.away] || f.away}</td></tr>`).join("");
+    body.innerHTML = `<p class="note">Deadline has passed but no fixture has kicked off yet —
+      nothing to score. The week's fixtures:</p><table class="tight">${fx}</table>`;
+    return;
+  }
+
+  /* fixtures */
+  const fx = `<div class="tiles" style="margin-bottom:14px">` +
+    (LIVE.fixtures || []).map(f => {
+      const st = f.finished ? "finished" : f.started ? "in play" : "kick-off to come";
+      const dim = f.started && !f.finished ? "" : " hint";
+      return `<div class="tile"><div class="k">${teams[f.home] || f.home} — ${teams[f.away] || f.away}</div>
+        <div class="v">${f.started ? `${f.hs ?? 0} : ${f.as ?? 0}` : "vs"}</div>
+        <div class="n${dim}">${st}</div></div>`;
+    }).join("") + `</div>`;
+
+  /* one card per compared entry: live + projected + leagues, stated edges */
+  const cards = (LIVE.entries || []).map(en => {
+    const meta = en.meta || {};
+    const mine = (LIVE.entry_ids || []).includes(en.entry_id);
+    const dR = (meta.overall_rank && meta.prev_rank) ? meta.prev_rank - meta.overall_rank : null;
+    const lgs = ((en.leagues || {}).classic || []).slice(0, 4).map(l =>
+      `${l.name.slice(0, 26)}: ${num(l.rank)}/${num(l.size)}`).join(" · ");
+    const cups = ((en.leagues || {}).cups || []).map(c =>
+      `🏆 ${c.name.slice(0, 26)} — round ${c.round}, ${c.state || c.status}`).join(" · ");
+    const rows = [...(en.players || [])].sort((a, b) =>
+      (b.xi - a.xi) || (b.live - a.live));
+    const tbl = `<table><thead><tr><th class="l">Player</th><th class="l">Club</th>
+      <th class="l">Pos</th><th>Min</th><th>Live</th><th>Proj final</th><th></th></tr></thead>
+      <tbody>${rows.map(p => {
+        const gap = p.minutes > 0 ? p.live - p.proj_final : null;
+        const cls = gap > 0.5 ? "up" : gap < -0.5 ? "down" : "";
+        return `<tr${p.xi ? "" : ' class="hint"'}>
+          <td class="l">${p.captain ? "© " : ""}${p.name}</td>
+          <td class="l hint">${p.team}</td><td class="l hint">${p.pos}</td>
+          <td>${p.xi ? num(p.minutes) : "bench"}</td>
+          <td class="${cls}">${fmt(p.live, 0)}</td>
+          <td>${fmt(p.proj_final, 1)}</td>
+          <td class="hint">${p.xi ? "" : p.minutes > 0 ? "subbed on" : ""}</td></tr>`;
+      }).join("")}</tbody></table>`;
+    return `<div class="card" style="margin-top:14px">
+      <header><div><h3>${en.name} ${chipBadge(en.chip)}</h3>
+        <p class="sub">Live vs projected for this gameweek — the projection is the same
+        model the deadline plans use, not a live-updating guess.</p></div>
+        ${mine ? `<span class="flag f-diff">mine</span>` : ""}</header>
+      <div class="tiles" style="margin-bottom:12px">
+        <div class="tile"><div class="k">Live points</div><div class="v">${num(en.live_pts)}</div>
+          <div class="n">FPL's total, autosubs applied</div></div>
+        <div class="tile"><div class="k">Projected final</div><div class="v">${fmt(en.proj_final, 1)}</div>
+          <div class="n">model projection, bench counted</div></div>
+        <div class="tile"><div class="k">Overall rank</div><div class="v">${num(meta.overall_rank)}</div>
+          <div class="n">${num(meta.overall_pts)} pts overall</div></div>
+        <div class="tile"><div class="k">Rank move last gw</div>
+          <div class="v" style="color:${dR == null ? "inherit" : dR > 0 ? css("--s1") : css("--critical")}">${dR == null ? "–" : (dR > 0 ? "▲ " : dR < 0 ? "▼ " : "— ") + num(Math.abs(dR))}</div>
+          <div class="n">up means the rank fell toward 1</div></div>
+      </div>
+      ${lgs ? `<p class="sub" style="margin:0 0 4px"><b>Leagues:</b> ${lgs}</p>` : ""}
+      ${cups ? `<p class="sub" style="margin:0 0 8px">${cups}</p>` : ""}
+      ${tbl}
+<p class="note">The live total is FPL's (autosubs already applied); rows are computed from
+  the picked XI, so a bench player who autosubbed in can show points the live total does
+  not include. "Proj final" counts yet-to-feature players at their model projection.</p>
+    </div>`;
+  }).join("");
+
+  /* mini-league standings around the compared entries */
+  const tbls = Object.values(LIVE.leagues || {}).filter(t => t && t.name && t.rows && t.rows.length)
+    .map(t => {
+      const mineRanks = t.rows.filter(r => r.mine).map(r => r.rank);
+      const lo = mineRanks.length ? Math.min(...mineRanks) : null;
+      const show = t.rows.filter(r => r.mine ||
+        (lo != null && Math.abs(r.rank - lo) <= 2)).slice(0, 9);
+      return `<div class="card" style="margin-top:14px"><h3>${t.name}</h3>
+        <table><thead><tr><th>#</th><th class="l">Manager</th><th class="l">Team</th>
+          <th>Pts</th><th>GW</th></tr></thead><tbody>${show.map(r =>
+        `<tr${r.mine ? ' style="font-weight:700"' : ' class="hint"'}>
+          <td>${num(r.rank)}</td><td class="l">${r.player || r.manager}</td>
+          <td class="l hint">${r.manager}</td><td>${num(r.pts)}</td>
+          <td>${fmt(r.last, 0)}</td></tr>`).join("")}</tbody></table>
+        <p class="note">Your entries in bold, with rivals within two places for context.</p></div>`;
+    }).join("");
+
+  body.innerHTML = fx + cards + tbls;
+}
+async function fetchLive() {
+  try {
+    const r = await fetch("live.json", {cache: "no-store"});
+    if (!r.ok) throw 0;
+    LIVE = await r.json();
+  } catch (e) { LIVE = LIVE || {}; }
+  renderLivescore();
+}
+fetchLive();
+setInterval(fetchLive, 120000);
 
 /* ============================================================== ACCURACY */
 function renderAccuracy() {
