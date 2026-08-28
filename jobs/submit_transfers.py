@@ -160,15 +160,29 @@ def main():
 
     # authenticate every account once via its refresh token; each entry is
     # handled by the account that actually manages it. A dead token only
-    # takes out its own account — the run continues with the rest.
+    # takes out its own account — the run continues with the rest. Each
+    # failure rings once (tracked in state) and the silence resets the
+    # moment that account works again, so a fresh failure rings again.
     sessions = {}          # entry_id -> (session, my-team id)
+    auth_state = pipeline.read_state("auth_alerts", {"dead": [], "unstored": []})
+    dead = set(auth_state.get("dead", []))
+    unstored = set(auth_state.get("unstored", []))
     for i, (secret_name, rt) in enumerate(tokens, 1):
         try:
             tok = api.refresh_tokens(rt)
         except RuntimeError as e:
             print(f"[auth] token {i} ({secret_name}) refresh FAILED: {e} — "
                   f"re-run jobs/fpl_login.py for that account")
+            if secret_name not in dead:
+                notify.send(
+                    f"🔐 <b>FPL login failed — {esc(secret_name)}</b>\n\n"
+                    f"The stored login was rejected ({esc(str(e)[:100])}).\n"
+                    f"Run <code>python jobs/fpl_login.py --account {i} "
+                    f"--set-secret</code> and log in with that account. "
+                    f"Its squads are skipped until then.", kind="alert")
+            dead.add(secret_name)
             continue
+        dead.discard(secret_name)
         new_rt = tok.get("refresh_token")
         if new_rt and new_rt != rt:
             # FPL rotates (and invalidates) refresh tokens on every exchange:
@@ -176,18 +190,30 @@ def main():
             if store_secret(secret_name, new_rt):
                 print(f"[auth] refresh token rotated for {secret_name} — "
                       f"secret updated")
+                unstored.discard(secret_name)
             else:
                 print(f"[auth] WARNING: refresh token rotated for "
                       f"{secret_name} but the secret could NOT be updated "
                       f"(needs FPL_PAT with Secrets write permission) — "
                       f"this account will stop working after this run; "
                       f"re-run jobs/fpl_login.py for it")
+                if secret_name not in unstored:
+                    notify.send(
+                        f"⚠️ <b>Token not saved — {esc(secret_name)}</b>\n\n"
+                        f"FPL rotated the login but the repo secret could not "
+                        f"be updated (FPL_PAT missing or lacking Secrets "
+                        f"write). This account dies after this run — "
+                        f"re-set FPL_PAT, then re-run jobs/fpl_login.py.",
+                        kind="alert")
+                unstored.add(secret_name)
         s = api.api_session(tok["access_token"])
         account_teams = api.me(s)
         print(f"authenticated (token {i}); manages entries "
               f"{sorted(account_teams)}")
         for entry_id, team_id in account_teams.items():
             sessions[entry_id] = (s, team_id)
+    pipeline.write_state("auth_alerts", {"dead": sorted(dead),
+                                         "unstored": sorted(unstored)})
 
     names = name_lookup(boot)
 
@@ -211,7 +237,7 @@ def main():
                              "note": f"entry {entry_id} is on none of the "
                                      f"logged-in accounts"}
             print(f"[{name}] skipped: entry {entry_id} not on any logged-in "
-                  f"account — check FPL_EMAIL(_2) cover both squads")
+                  f"account — re-arm that account with jobs/fpl_login.py")
             continue
         session, team_id = sessions[entry_id]
         mt = api.my_team(session, team_id)
