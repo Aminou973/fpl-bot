@@ -24,6 +24,23 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements-dev.txt
+      - name: env probe (temporary debug)
+        run: |
+          python - <<'EOF'
+          import sys, scipy, numpy, pandas
+          print("versions:", sys.version.split()[0], "scipy", scipy.__version__,
+                "numpy", numpy.__version__, "pandas", pandas.__version__)
+          from tools.selfcheck import compute, projection_frame
+          from fplbot import model
+          df, teams, fx, gws = model.build(horizon=5, start_gw=3)
+          p = projection_frame(df, gws)
+          print("n players:", len(p))
+          print(p.head(12).to_string())
+          print("xp sums per gw:", [round(p[f"xp{g}"].sum(), 4) for g in gws])
+          print("start_share sum:", round(p["start_share"].sum(), 4))
+          c = compute()
+          print("sha:", c["projections_sha"])
+          EOF
       - name: golden files + invariant tests
         run: |
           python tools/selfcheck.py
