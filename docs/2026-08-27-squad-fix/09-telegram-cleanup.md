@@ -28,6 +28,11 @@ Rate/selection limits that came with it:
 - **live**: one tight line per team plus the top four scorers, silent.
 - **submit**: new alerts — ✅ when a lineup is written, 🚨 when a run fails.
   These are the ones worth hearing.
+- **auth failures** (added 2026-08-28): when a stored FPL login is rejected
+  (dead refresh token) or a rotated token cannot be saved back to its secret,
+  the submit job rings once per failure episode — not every hour. The silence
+  resets as soon as that account works again, so a *new* failure rings again.
+  Dedupe state: `state/auth_alerts.json`.
 - **chip windows** (added after the tiers went in): when the chip calendar
   says the best window for a team's Wildcard / Free Hit / Bench Boost /
   Triple Captain is this week — or next week (head-up) — the plan job rings
