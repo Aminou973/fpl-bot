@@ -1,0 +1,103 @@
+{
+ "season": "2025-26",
+ "field_pct_basis": "ownership",
+ "weeks": [
+  {
+   "gw": 1,
+   "managed": 71,
+   "frozen": 71,
+   "template": 41,
+   "captain": "M.Salah",
+   "transfers": 0,
+   "hits": 0,
+   "free_transfers": 15,
+   "in": [],
+   "field_pct": 98.4
+  },
+  {
+   "gw": 2,
+   "managed": 28,
+   "frozen": 32,
+   "template": 49,
+   "captain": "Haaland",
+   "transfers": 6,
+   "hits": 0,
+   "free_transfers": 1,
+   "in": [
+    "Palmer",
+    "Henderson",
+    "Lacroix",
+    "Tarkowski",
+    "Haaland",
+    "Mbeumo"
+   ],
+   "field_pct": 25.2
+  },
+  {
+   "gw": 3,
+   "managed": 36,
+   "frozen": 33,
+   "template": 49,
+   "captain": "M.Salah",
+   "transfers": 2,
+   "hits": 1,
+   "free_transfers": 1,
+   "in": [
+    "Cucurella",
+    "Isak"
+   ],
+   "field_pct": 45.5
+  },
+  {
+   "gw": 4,
+   "managed": 79,
+   "frozen": 64,
+   "template": 97,
+   "captain": "Haaland",
+   "transfers": 1,
+   "hits": 0,
+   "free_transfers": 1,
+   "in": [
+    "Sarr"
+   ],
+   "field_pct": 99.9
+  },
+  {
+   "gw": 5,
+   "managed": 32,
+   "frozen": 35,
+   "template": 50,
+   "captain": "Sarr",
+   "transfers": 1,
+   "hits": 0,
+   "free_transfers": 1,
+   "in": [
+    "J.Timber"
+   ],
+   "field_pct": 36.3
+  },
+  {
+   "gw": 6,
+   "managed": 72,
+   "frozen": 54,
+   "template": 54,
+   "captain": "Haaland",
+   "transfers": 1,
+   "hits": 0,
+   "free_transfers": 1,
+   "in": [
+    "Ndiaye"
+   ],
+   "field_pct": 98.7
+  }
+ ],
+ "totals": {
+  "managed": 318,
+  "frozen": 289,
+  "template": 340,
+  "hits": 1,
+  "transfers": 11,
+  "mean_field_pct": 67.33,
+  "worst5_managed": 239
+ }
+}

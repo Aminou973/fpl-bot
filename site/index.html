@@ -461,12 +461,29 @@ svg{display:block;max-width:100%}
   </div>
 </section>
 
+<section id="price">
+  <div class="card">
+    <header><div><h2>Price radar</h2>
+      <p class="sub">FPL prices move on an accumulator: net transfers fill a threshold that
+        scales with ownership. The engine watches the flow hourly and projects which prices
+        move in the next ~3 days — it has no inside knowledge, and the planner pays it off
+        only in saved budget, never in picks.</p></div></header>
+    <div id="priceBody"></div>
+  </div>
+</section>
+
 <section id="accuracy">
   <div class="card">
     <header><div><h2>Model accuracy</h2>
       <p class="sub">Every projection is stored before the deadline and graded once the
         gameweek finishes. This is the model marking its own homework in public.</p></div></header>
     <div id="accBody"></div>
+  </div>
+  <div class="card" id="engines">
+    <header><div><h2>Engine checks</h2>
+      <p class="sub">Each engine grades itself against reality. A check that fails
+        stays advisory — no engine is trusted until it has earned it.</p></div></header>
+    <div id="engineBody"></div>
   </div>
 </section>
 
@@ -564,7 +581,7 @@ document.addEventListener("pointerdown", e => {
 /* ------------------------------------------------------------------- nav */
 const SECTIONS = [["overview","Overview"],["squads","Squads"],["plan","Plan"],
   ["captain","Captain"],["value","Value"],["fixtures","Fixtures"],["chips","Chips"],
-  ["accuracy","Accuracy"],["players","Players"],["changes","Changes"]];
+  ["price","Price"],["accuracy","Accuracy"],["players","Players"],["changes","Changes"]];
 const navEl = $("#nav");
 navEl.insertAdjacentHTML("beforeend", SECTIONS.map(([id, label]) =>
   `<a class="tab" href="#${id}" data-s="${id}">${label}</a>`).join(""));
@@ -1396,6 +1413,86 @@ function renderChipCalendar() {
     just ahead. It is a guide, not a points guarantee.`;
 }
 
+/* ============================================================ PRICE RADAR */
+function renderPrice() {
+  const preds = D.price_pred || [];
+  const ev = D.price_eval;
+  const tiles = [];
+  tiles.push(`<div class="tile"><div class="k">Players watched</div>
+    <div class="v">${preds.length || "–"}</div>
+    <div class="n">${preds.length ? "with a directional projection" : "no predictions yet"}</div></div>`);
+  if (ev) {
+    tiles.push(`<div class="tile"><div class="k">Brier score</div>
+      <div class="v">${fmt(ev.brier_mean, 3)}</div>
+      <div class="n">${ev.scored} predictions graded, naive ${fmt(ev.brier_naive, 3)}</div></div>`);
+    const skill = ev.brier_naive - ev.brier_mean;
+    tiles.push(`<div class="tile"><div class="k">Edge vs naive</div>
+      <div class="v" style="color:${skill > 0.02 ? css("--s1") : skill > 0 ? css("--warning") : css("--critical")}" >${skill >= 0 ? "+" : ""}${fmt(skill, 3)}</div>
+      <div class="n">${skill > 0 ? "beats always-guessing the base rate" : "not yet better than the base rate"}</div></div>`);
+  }
+  const rise = preds.filter(p => p.p_rise >= 0.25).slice(0, 6);
+  const fall = preds.filter(p => p.p_fall >= 0.25).slice(0, 6);
+  const tbl = (rows, key) => {
+    if (!rows.length) return `<div class="empty">Nobody credible.</div>`;
+    return `<table><thead><tr><th class="l">Player</th><th class="l">Club</th><th class="l">Pos</th>
+      <th>Price</th><th>Own %</th><th>p</th><th>Conf</th></tr></thead><tbody>${rows.map(p =>
+      `<tr><td class="l">${p.name}</td><td class="l hint">${p.team}</td><td class="l hint">${p.pos}</td>
+      <td>£${fmt(p.price, 1)}</td><td>${fmt(p.own, 1)}</td>
+      <td class="${key === "rise" ? "up" : "down"}">${fmt(p[key === "rise" ? "p_rise" : "p_fall"], 2)}</td>
+      <td>${Math.round(p.conf * 100)}%</td></tr>`).join("")}</tbody></table>`;
+  };
+  let body;
+  if (!preds.length) {
+    body = `<div class="empty">The engine is still learning. The watch job's hourly price log
+      needs a few days of history before any prediction is trusted — until then the planner
+      runs bit-identical without it.</div>`;
+  } else {
+    body = `<div class="split">
+      <div><h3>May rise before the deadline</h3>${tbl(rise, "rise")}</div>
+      <div><h3>May fall</h3>${tbl(fall, "fall")}</div>
+    </div>
+    <p class="note">p is the probability of a price change over the next ~3 days; conf is how
+      much clean log history backs it (it grows toward 80%, never certainty). Ownership and price
+      come from the latest snapshot.</p>`;
+  }
+  $("#priceBody").innerHTML = `<div class="tiles" style="margin-bottom:14px">${tiles.join("")}</div>${body}`;
+}
+
+/* ==================================================== ENGINE CHECKS */
+function renderEngines() {
+  const pe = D.price_eval, ne = D.news_eval;
+  const badge = (ok, okText, badText) =>
+    `<span class="flag ${ok ? "f-diff" : "f-warn"}">${ok ? okText : badText}</span>`;
+  const rows = [];
+  if (pe) {
+    rows.push(`<tr><td class="l"><b>Price (engine 5)</b></td>
+      <td>${fmt(pe.brier_mean, 3)} Brier vs ${fmt(pe.brier_naive, 3)} naive</td>
+      <td>${pe.scored} graded</td>
+      <td>${badge(pe.brier_mean < pe.brier_naive, "beats base rate", "not yet better")}</td></tr>`);
+  }
+  if (ne) {
+    rows.push(`<tr><td class="l"><b>News (engine 6)</b></td>
+      <td>${Math.round(ne.precision * 100)}% agree with FPL on ruled-out players</td>
+      <td>${ne.signals} signals</td>
+      <td>${badge(ne.pass, "override unlocked at 90%", "advisory only")}</td></tr>`);
+  }
+  rows.push(`<tr><td class="l"><b>Rank (engine 1)</b></td><td>Both arms beat the baseline
+    on points and percentile in the 2025-26 replay</td><td>backtest</td>
+    <td>${badge(true, "live", "")}</td></tr>`);
+  rows.push(`<tr><td class="l"><b>Chips (engine 3)</b></td><td>TC once (GW2), BB once (GW3)
+    in the replay with once-per-season enforcement</td><td>backtest</td>
+    <td>${badge(true, "live", "")}</td></tr>`);
+  rows.push(`<tr><td class="l"><b>Scenarios (engine 2)</b></td><td>risk_lambda 0.6 cost points,
+    0.3 changed nothing — waiting on the tuning sweep</td><td>backtest</td>
+    <td>${badge(false, "tuned", "off pending tune")}</td></tr>`);
+  const empty = !pe && !ne
+    ? `<p class="note">The price and news engines have not accumulated enough history to be
+       graded yet — the watch job's logs are their exam papers.</p>` : "";
+  $("#engineBody").innerHTML = `${empty}<table>
+    <thead><tr><th class="l">Engine</th><th class="l">Latest evidence</th><th>Basis</th>
+    <th>Status</th></tr></thead><tbody>${rows.join("")}</tbody></table>`;
+}
+
 /* ============================================================== ACCURACY */
 function renderAccuracy() {
   const acc = (D.history && D.history.accuracy) || [];
@@ -1551,7 +1648,7 @@ let rt;
 addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(redrawCharts, 180); });
 
 tiles(); syncSquad(); renderPlan(); renderCap(); renderTemplate(); renderChipTabs();
-renderTicker(); renderChips(); renderTable(); renderChanges(); redrawCharts();
+renderTicker(); renderChips(); renderPrice(); renderEngines(); renderTable(); renderChanges(); redrawCharts();
 </script>
 </body>
 </html>

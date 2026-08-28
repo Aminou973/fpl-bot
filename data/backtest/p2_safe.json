@@ -1,0 +1,102 @@
+{
+ "season": "2025-26",
+ "field_pct_basis": "ownership",
+ "weeks": [
+  {
+   "gw": 1,
+   "managed": 71,
+   "frozen": 71,
+   "template": 41,
+   "captain": "M.Salah",
+   "transfers": 0,
+   "hits": 0,
+   "free_transfers": 15,
+   "in": [],
+   "field_pct": 98.4
+  },
+  {
+   "gw": 2,
+   "managed": 40,
+   "frozen": 32,
+   "template": 49,
+   "captain": "Haaland",
+   "transfers": 8,
+   "hits": 0,
+   "free_transfers": 1,
+   "in": [
+    "Saliba",
+    "Lacroix",
+    "Johnson",
+    "Pickford",
+    "Haaland",
+    "Mbeumo",
+    "B.Fernandes",
+    "Sels"
+   ],
+   "field_pct": 53.0
+  },
+  {
+   "gw": 3,
+   "managed": 45,
+   "frozen": 33,
+   "template": 49,
+   "captain": "M.Salah",
+   "transfers": 0,
+   "hits": 0,
+   "free_transfers": 2,
+   "in": [],
+   "field_pct": 61.9
+  },
+  {
+   "gw": 4,
+   "managed": 69,
+   "frozen": 64,
+   "template": 97,
+   "captain": "Haaland",
+   "transfers": 2,
+   "hits": 0,
+   "free_transfers": 1,
+   "in": [
+    "Raya",
+    "Bowen"
+   ],
+   "field_pct": 97.3
+  },
+  {
+   "gw": 5,
+   "managed": 50,
+   "frozen": 35,
+   "template": 50,
+   "captain": "Johnson",
+   "transfers": 0,
+   "hits": 0,
+   "free_transfers": 2,
+   "in": [],
+   "field_pct": 72.1
+  },
+  {
+   "gw": 6,
+   "managed": 57,
+   "frozen": 54,
+   "template": 54,
+   "captain": "Haaland",
+   "transfers": 2,
+   "hits": 0,
+   "free_transfers": 1,
+   "in": [
+    "Tarkowski",
+    "Ndiaye"
+   ],
+   "field_pct": 85.6
+  }
+ ],
+ "totals": {
+  "managed": 332,
+  "frozen": 289,
+  "template": 340,
+  "hits": 0,
+  "transfers": 12,
+  "mean_field_pct": 78.05,
+  "worst5_managed": 261
+ }
+}

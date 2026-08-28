@@ -49,11 +49,12 @@ def load_patterns():
         return {"basis": [], "gameweeks": {}}
 
 
-def _xp(p, gw):
-    return float(p.get(f"xp{gw}", 0.0) or 0.0)
+def _xp(p, gw, prefix="xp"):
+    return float(p.get(f"{prefix}{gw}", 0.0) or 0.0)
 
 
-def calendar(df, gws, squads, caps=None, windows=None, split=None):
+def calendar(df, gws, squads, caps=None, windows=None, split=None,
+             xp_prefix="xp"):
     """Score every gameweek for every chip.
 
     df    : projections covering all of `gws`
@@ -62,9 +63,12 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
     caps  : {team_name: max ownership for a captain} - the risk team refuses to
             triple-captain a player the whole field already owns, so its chip
             calendar has to refuse him too
+    xp_prefix: "xp" for the mean objective, "q85" for a ceiling-optimised team -
+            its calendar should score chips on the same numbers its plan uses
     """
     caps = caps or {}
     windows = windows or DEFAULT_WINDOWS
+    _pxp = lambda p, gw: _xp(p, gw, xp_prefix)      # noqa: E731 - local closure
     if split is None:
         wc = windows.get("wildcard") or DEFAULT_WINDOWS["wildcard"]
         split = wc[1]["start"] if len(wc) > 1 else CHIP_SPLIT
@@ -81,7 +85,7 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
         mine = [by_id[i] for i in ids]
         weeks = []
         for gw in gws:
-            xps = sorted(((_xp(p, gw), p) for p in mine), key=lambda t: -t[0])
+            xps = sorted(((_pxp(p, gw), p) for p in mine), key=lambda t: -t[0])
             xi = xps[:11]
             bench = xps[11:]
             att = [p for v, p in xps if p["pos"] in ("MID", "FWD")]
@@ -89,8 +93,8 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
             if cap_limit is not None:
                 capped = [p for p in att if p.get("selected_by", 0) <= cap_limit]
                 att = capped or att
-            best_cap = max((_xp(p, gw) for p in att), default=0.0)
-            cap_name = next((p["name"] for p in att if _xp(p, gw) == best_cap), None)
+            best_cap = max((_pxp(p, gw) for p in att), default=0.0)
+            cap_name = next((p["name"] for p in att if _pxp(p, gw) == best_cap), None)
             blanks = sum(1 for p in mine if not (p.get(f"fx{gw}") or "").strip()
                          or p.get(f"fx{gw}") == "BLANK")
             h = hist.get(str(gw), {})
@@ -131,7 +135,7 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
         # two of (chance of a double) x (share of teams doubling) x (your squad's
         # projected points that week), halved because a rebuilt squad cannot
         # perfectly align every player with the doubles.
-        top = _rolling_best(rows, gws, 5)
+        top = _rolling_best(rows, gws, 5, xp_prefix)
         gaps = []
         for i, w in enumerate(weeks):
             window = gws[i:i + 5]
@@ -139,7 +143,7 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
                 w["wildcard"] = None
                 gaps.append(None)
                 continue
-            mine_sum = sum(_xp(p, g) for p in mine for g in window)
+            mine_sum = sum(_pxp(p, g) for p in mine for g in window)
             gaps.append(top[w["gw"]] - mine_sum)
         real = sorted(g for g in gaps if g is not None)
         med = real[len(real) // 2] if real else 0.0
@@ -162,7 +166,7 @@ def calendar(df, gws, squads, caps=None, windows=None, split=None):
     }
 
 
-def _rolling_best(rows, gws, span):
+def _rolling_best(rows, gws, span, xp_prefix="xp"):
     """Total projection of the best 15 players over each five-gameweek window."""
     best = {}
     for i, g in enumerate(gws):
@@ -170,7 +174,8 @@ def _rolling_best(rows, gws, span):
         if len(window) < 3:
             best[g] = 0.0
             continue
-        tot = sorted((sum(_xp(p, w) for w in window) for p in rows), reverse=True)[:15]
+        tot = sorted((sum(_xp(p, w, xp_prefix) for w in window) for p in rows),
+                     reverse=True)[:15]
         best[g] = sum(tot)
     return best
 

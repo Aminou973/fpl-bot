@@ -1,0 +1,73 @@
+name: tune
+
+# Engine 4: backtest-driven tuning sweep. Dispatch-only (never blocks push
+# or a deadline), sharded 4 ways so a full sweep lands in ~30 minutes.
+# Results land in data/backtest/tuning.json in the run artifacts; promoting
+# them into config.yml is a deliberate human step (or tuning.auto_apply).
+
+on:
+  workflow_dispatch:
+    inputs:
+      n_iter:
+        description: "coarse configs to sample (per full sweep, split across shards)"
+        default: "24"
+      until:
+        description: "last replay gameweek"
+        default: "6"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fpl-tune
+  cancel-in-progress: true
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - name: coarse sweep shard ${{ matrix.shard }}
+        run: |
+          python tools/tune.py \
+            --n-iter ${{ github.event.inputs.n_iter || 24 }} \
+            --until ${{ github.event.inputs.until || 6 }} \
+            --shard ${{ matrix.shard }} --nshards 4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tuning-shard-${{ matrix.shard }}
+          path: data/backtest/tuning_shard*.json
+          if-no-files-found: warn
+
+  collect:
+    needs: sweep
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tuning-shard-*
+          path: data/backtest/
+          merge-multiple: true
+      - name: refine top configs + walk-forward
+        run: python tools/tune.py --collect --until ${{ github.event.inputs.until || 6 }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tuning-results
+          path: data/backtest/tuning.json

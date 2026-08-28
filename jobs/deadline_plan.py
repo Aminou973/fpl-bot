@@ -58,6 +58,10 @@ def brief(ctx, results, cfg):
             for i in wk["in"]:
                 lines.append(f"▲ IN  {esc(r.loc[i, 'name'])} "
                              f"({r.loc[i, 'team']}, £{r.loc[i, 'price']:.1f}m)")
+            for pp in (res.get("price_pred") or [])[:2]:
+                if pp["conf"] >= 0.3:
+                    lines.append(f"⏫ {esc(r.loc[pp['element'], 'name'])} may "
+                                 f"rise before the deadline (conf {pp['conf']:.0%})")
             if wk["hits"]:
                 lines.append(f"Cost −{wk['hits'] * 4} pts ({wk['hits']} hit) "
                              f"— gains {res['hit_policy'].get('gain_over_no_hit')} pts")
@@ -269,6 +273,12 @@ def main():
     if last_gw is not None:
         automation["submit"] = sub["gws"][last_gw]
     bundle["automation"] = automation
+    bundle["price_pred"] = price_predictions(ctx)
+    # engine grading files, inlined so the single-file dashboard can show them
+    for key, fname in (("price_eval", "price_eval.json"),
+                       ("news_eval", "news_eval.json")):
+        f = ROOT / "data" / "backtest" / fname
+        bundle[key] = json.loads(f.read_text()) if f.exists() else None
 
     # chips are once-a-season decisions, so they get their own full-season pass
     try:
@@ -400,6 +410,31 @@ def _owned(results):
     out = set()
     for res in results.values():
         out |= set(res.get("squad") or [])
+    return out
+
+
+def price_predictions(ctx, limit=10):
+    """Top price-move predictions for the dashboard; empty when the engine is dark."""
+    from fplbot import price as price_mod
+    try:
+        preds = price_mod.predict(price_mod.read_log())
+    except Exception:
+        return []
+    if not len(preds):
+        return []
+    r = ctx["df"].set_index("id")
+    out = []
+    for _, p in preds.sort_values("p_rise", ascending=False).head(limit).iterrows():
+        eid = int(p.element)
+        if eid in r.index:
+            out.append({"id": eid, "name": r.loc[eid, "name"],
+                        "team": r.loc[eid, "team"], "pos": r.loc[eid, "pos"],
+                        "price": float(p.price),
+                        "own": float(r.loc[eid, "selected_by"])
+                        if "selected_by" in ctx["df"].columns else None,
+                        "p_rise": round(float(p.p_rise), 3),
+                        "p_fall": round(float(p.p_fall), 3),
+                        "conf": round(float(p.conf), 3)})
     return out
 
 

@@ -10,6 +10,36 @@ plan_window_hours: 40      # only run the deadline plan within this many hours o
 site_url: "https://aminou973.github.io/fpl-bot/"               # your GitHub Pages URL, shown at the bottom of each brief
 chip_deadline: "2027-01-02T13:30:00Z"   # first chip set expires before GW19
 
+# engines: each validated on the 2025-26 replay before enabling.
+# rank: ON - both arms beat the deterministic baseline on points AND
+#       field percentile over GW1-6 (safe 332/78.0, diff 335/76.7 vs 331/74.6).
+# scenarios: OFF - risk_lambda 0.6 changed decisions and cost points, 0.3
+#       changed nothing; the useful range needs the P6 tuning sweep.
+engines:
+  rank:
+    enabled: true
+    alpha: 0.5
+  chips:
+    tier_a: true      # TC/BB decided in the ILP for the imminent week only
+    branching: true   # WC/FH branch evaluation at calendar-flagged weeks
+    branch_time_limit: 60
+  price:
+    enabled: true     # inert until state/price_log.jsonl has enough history
+    gamma: 0.05       # objective points per £0.1m of avoided rise
+    horizon_hours: 72
+  scenarios:
+    enabled: false
+    n: 32
+    risk_lambda: 0.6
+    cvar_beta: 0.75
+  news:
+    enabled: true     # watch-job scans only; may lower doubtful players'
+                      # availability, never raise it (pre-agreement rule)
+tuning:
+  auto_apply: false   # when true, deadline_plan overlays data/backtest/tuning.json
+                      # best params UNDER per-team config (explicit config wins)
+  results: data/backtest/tuning.json
+
 teams:
   Minoux_69:
     entry_id: 4894622            # <- put your real entry id here
@@ -20,7 +50,9 @@ teams:
       Main team - template safe. Haaland locked in and a tilt toward well-owned
       players, so a big popular haul never costs you rank.
     hit_threshold: 6       # only take a -4 if the plan gains more than this
-    ownership_bonus: 0.04  # points added per 1% ownership when picking
+    rank:                  # replaces ownership_bonus (xp-weighted, every week)
+      alpha: 0.5
+      tilt: 0.4            # template-safe: buys the field's players
     lock:
       - ["Haaland", "MCI"]
     # squad is only a fallback for when the API cannot be read
@@ -50,6 +82,10 @@ teams:
       ownership, optimised for ceiling rather than median.
     hit_threshold: 4       # the risk team is allowed to move faster
     objective: ceiling
+    rank:
+      alpha: 0.9
+      tilt: -0.4           # differential: fades the field's players
+      cap_tilt: 0.5        # extra reward for low-owned captains
     max_captain_ownership: 25   # never captain what the whole field owns
     ban:
       - ["Haaland", "MCI"]

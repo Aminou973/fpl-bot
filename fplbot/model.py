@@ -362,7 +362,11 @@ def next_gw(fx=None):
 
 
 # ----------------------------------------------------------------- projector --
-def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None):
+MODEL_VERSION = 2          # bump when projections change shape or meaning
+
+
+def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None,
+          with_components=True, news=None):
     p26, t26, fx, p25, t25, gw, gw26 = load(frames=frames, gw26=gw26,
                                             prev_frames=prev_frames)
     teams = team_ratings(gw, t25, t26)
@@ -393,6 +397,15 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None):
     curves = price_curves(gw, p25, rates, comp)
 
     # ---- availability -----------------------------------------------------
+    # engine 6: scraped team news, as {element_id: news_risk}. Pre-agreement
+    # constraint enforced here: a signal may only LOWER availability, and only
+    # for a player the API itself flags doubtful - it can never rescue a
+    # player FPL has ruled out, and never invents availability.
+    news_map = {}
+    if news is not None and len(news):
+        news_map = {int(e): float(v) for e, v in
+                    zip(news["element"], news["news_risk"])}
+
     def availability(r):
         st = r.status
         chance = r.chance_of_playing_next_round
@@ -437,6 +450,9 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None):
         else:
             share = prior_share
         avail = availability(r)
+        nr = news_map.get(int(r.id))
+        if nr is not None and nr < 1.0 and r.status == "d":
+            avail = avail * nr
         if et == 1:
             # Only one keeper plays, so the depth chart decides who - but the
             # first choice gets the same calibrated share as everyone else
@@ -519,6 +535,15 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None):
             cameo = 0.35 * (1 - share) * avail * (1.0 + 0.35 * rate["p_goals"])
             xp = share * pts_start + cameo
             gwno = int(f.event)
+            # distribution layer inputs (fplbot/dist.py): Poisson means for the
+            # sampling-variance components, and the CS probability as a real
+            # probability. Summed across fixtures, so a double gameweek adds
+            # its lambdas exactly as two independent Poisson draws would.
+            per_gw[f"lg_{gwno}"] = per_gw.get(f"lg_{gwno}", 0.0) + share * rate["p_goals"] * att_mult
+            per_gw[f"la_{gwno}"] = per_gw.get(f"la_{gwno}", 0.0) + share * rate["p_assists"] * att_mult
+            per_gw[f"cs_{gwno}"] = per_gw.get(f"cs_{gwno}", 0.0) + share * rate["p_cs"] * cs_mult
+            per_gw[f"csp_{gwno}"] = 1.0 - (1.0 - per_gw.get(f"csp_{gwno}", 0.0)) * (1.0 - float(cs_prob))
+            per_gw[f"nfx_{gwno}"] = per_gw.get(f"nfx_{gwno}", 0) + 1
             if gwno == gws[0] and "brk" not in per_gw:
                 per_gw["brk"] = {
                     "app": round(share * 2.0 + cameo, 2),
@@ -557,16 +582,20 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None):
             opps = per_gw.get(f"opp_{g_}", [])
             row[f"fx{g_}"] = ", ".join(f"{o}({s}){d}" for o, s, d in opps) if opps else "BLANK"
             row[f"fdr{g_}"] = int(np.mean([d for _, _, d in opps])) if opps else 5
-        # ceiling score: weight the explosive components (goals, assists, bonus)
-        # more heavily, because a captain or a differential is bought for its
-        # upside, not its median.
+            # distribution-layer columns consumed by fplbot/dist.py
+            row[f"p_start{g_}"] = round(float(share), 4)
+            row[f"lam_goals{g_}"] = round(per_gw.get(f"lg_{g_}", 0.0), 4)
+            row[f"lam_assists{g_}"] = round(per_gw.get(f"la_{g_}", 0.0), 4)
+            row[f"cmp_cs{g_}"] = round(per_gw.get(f"cs_{g_}", 0.0), 4)
+            row[f"csp{g_}"] = round(per_gw.get(f"csp_{g_}", 0.0), 4)
+            row[f"nfx{g_}"] = per_gw.get(f"nfx_{g_}", 0)
+        # explosive keeps its old meaning as a display feature (share of first-gw
+        # xp from goals/assists/bonus). The ceiling score itself is no longer a
+        # deterministic tilt on xp — cxp is now the simulated q85, attached below.
         b = per_gw.get("brk", {})
         expl = b.get("goals", 0.0) + b.get("assists", 0.0) + b.get("bonus", 0.0)
         base = max(row[f"xp{gws[0]}"], 0.01)
         row["explosive"] = round(min(expl / base, 1.0), 3)
-        for g_ in gws:
-            row[f"cxp{g_}"] = round(row[f"xp{g_}"] * (1 + 0.55 * row["explosive"]), 3)
-        row["ceiling_total"] = round(sum(row[f"cxp{g_}"] for g_ in gws), 3)
         row["xp_total"] = round(sum(row[f"xp{g_}"] for g_ in gws), 3)
         brk = per_gw.get("brk", {})
         for k_, v_ in brk.items():
@@ -575,6 +604,18 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None):
 
     df = pd.DataFrame(rows)
     df["value"] = (df.xp_total / df.price).round(3)
+
+    # ceiling from simulation, not from a heuristic: q85 of the sampled point
+    # distribution, with cxp kept as a deprecated alias for it
+    from . import dist as _dist
+    _dist.attach_quantiles(df, gws, seed=start_gw)
+
+    if not with_components:
+        # the full-season build (chip calendar) carries ~10 columns per gameweek
+        # of sampling inputs the downstream consumers never read
+        drop = [c for c in df.columns
+                if c.startswith(("lam_", "cmp_", "csp", "nfx"))]
+        df = df.drop(columns=drop)
     return df, teams, fx, gws
 
 

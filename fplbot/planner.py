@@ -6,9 +6,15 @@ gameweek: who to sell, who to buy, whether to spend a free transfer or bank it,
 whether a -4 hit is worth taking, the starting XI and the captain. Free transfers
 accumulate to a maximum of five, exactly as the 2026/27 rules allow.
 
-Chips are evaluated on top of the finished plan, because a chip is a season-level
-decision and forcing it into the same program makes the model worse at the thing
-it is actually good at.
+Chips are handled in two tiers, because they are not the same kind of decision.
+Bench boost and triple captain only change how the CURRENT squad scores in one
+gameweek, so they are pure objective/lineup changes and belong inside the ILP
+(blocks TC/BB/Y below) - sequencing them after the solve would score them
+against a plan built as if they did not exist. Wildcard and free hit rewrite
+the whole squad, which as an ILP constraint needs a big-M continuity
+relaxation that wrecks the model - so they are branch evaluations instead
+(wildcard_plan / freehit_plan), compared against the base plan by
+chip_branches at the calendar's flagged weeks.
 """
 import numpy as np
 import pandas as pd
@@ -33,12 +39,29 @@ def attach_vice(df, weeks, max_captain_ownership=None):
 def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
          bench_weight=0.12, max_per_club=3, allow_hits=True,
          locked=(), banned=(), own_bonus=0.0, min_differentials=None,
-         max_captain_ownership=None, xp_prefix="xp", decay=DECAY, time_limit=300):
+         max_captain_ownership=None, xp_prefix="xp", decay=DECAY, time_limit=300,
+         scenarios=None, scenario_weights=None, risk_lambda=0.0, cvar_beta=0.75,
+         rank_alpha=0.0, template_tilt=0.0, cap_tilt=0.0,
+         chips_tc_bb=False, chip_windows=None, chips_used=(),
+         price_matrix=None, sell_price=None, price_gamma=0.0):
     """Return the optimal transfer plan over `gws` starting from `current`.
 
     free_transfers: how many you have available for the first gameweek.
     bank: money in the bank, in millions.
     allow_hits: when False, no gameweek may exceed its free-transfer allowance.
+    scenarios: (S, n, G) point samples aligned with `pool`'s rows, from
+        fplbot.scenarios.scenario_set. With risk_lambda > 0 the objective
+        becomes mean + risk_lambda * CVaR over these scenarios (Rockafellar-
+        Uryasev epigraph), so correlated bad weeks are priced in. With
+        risk_lambda = 0 the scenario set is ignored entirely and the model is
+        bit-identical to the deterministic one - asserted in the test suite.
+    rank_alpha / template_tilt / cap_tilt: engine 1. rank_alpha > 0 rescales
+        each gameweek's weight by the field's score density at your squad's
+        projection (points are worth more when the field is bunched around
+        you); template_tilt adds a signed per-ownership term to squad picks
+        (positive = template-safe, negative = differential), cap_tilt rewards
+        low-owned captains. All three are scalars; the field model lives in
+        fplbot.template.
     """
     n, G = len(pool), len(gws)
     xp = np.array([[pool[f"{xp_prefix}{g}"].values[i] for g in gws] for i in range(n)])
@@ -55,17 +78,68 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
     if len(cur) != 15:
         raise ValueError(f"current squad resolved to {len(cur)} players, need 15")
     if budget is None:
-        budget = float(price[cur].sum()) + float(bank)
+        if sell_price is not None:
+            budget = float(np.asarray(sell_price)[cur].sum()) + float(bank)
+        else:
+            budget = float(price[cur].sum()) + float(bank)
 
     w = np.array([decay ** k for k in range(G)])
+
+    # engine 1: rescale the time weights by the field's density at your score
+    if rank_alpha and "selected_by" in pool and float(own.max()) > 0:
+        from .template import rank_weight
+        m = rank_weight(pool, gws, cur, alpha=float(rank_alpha))
+        w = w * m
+    tilt = float(np.clip(template_tilt, -1.0, 1.0))
+
+    # engine 5: buying a predicted riser now is cheaper than in three weeks,
+    # so the budget row uses an expected per-deadline price matrix; the sell
+    # haircut prices owned players at what FPL actually pays back for them
+    use_price = price_matrix is not None
+    if use_price:
+        pm = np.asarray(price_matrix, dtype=float)
+        if pm.shape != (n, G):
+            raise ValueError(f"price_matrix shape {pm.shape}, want {(n, G)}")
+    else:
+        pm = np.tile(price.reshape(n, 1), (1, G))
 
     # ---- variable layout -------------------------------------------------
     # x[i,g] squad | bin[i,g] transfer in | sout[i,g] transfer out
     # st[i,g] starts | cp[i,g] captain | ft[g] free transfers | ht[g] hits
+    # with risk active: zeta[g] CVaR pivot (free) | u[s,g] epigraph slack >= 0
     B = n * G
     OFF_X, OFF_IN, OFF_OUT, OFF_ST, OFF_CP = 0, B, 2 * B, 3 * B, 4 * B
     OFF_FT, OFF_HT = 5 * B, 5 * B + G
     N = 5 * B + 2 * G
+
+    use_risk = bool(risk_lambda) and scenarios is not None
+    OFF_ZETA = OFF_U = None
+    S = 0
+    if use_risk:
+        S = scenarios.shape[0]
+        OFF_ZETA, OFF_U = 5 * B + 2 * G, 5 * B + 2 * G + G
+        N = 5 * B + 2 * G + G + S * G
+        if scenario_weights is None:
+            scenario_weights = np.full(S, 1.0 / S)
+
+    # Tier A chips: triple captain and bench boost as ILP blocks. TC(i,g)
+    # triples the captain, BB(i,g) pays a bench player in full; Y are the
+    # one-chip-per-week switches. Window legality and already-used chips pin
+    # Y to 0 outside the legal weeks, so the solver cannot break either rule.
+    use_chips = bool(chips_tc_bb)
+    OFF_TC = OFF_BB = OFF_YTC = OFF_YBB = None
+    chip_ok = {"3xc": [], "bboost": []}
+    if use_chips:
+        OFF_TC, OFF_BB = N, N + B
+        OFF_YTC, OFF_YBB = N + 2 * B, N + 2 * B + G
+        N = N + 2 * B + 2 * G
+        used = set(chips_used or ())
+        for key, name in (("3xc", "3xc"), ("bboost", "bboost")):
+            if name in used:
+                chip_ok[key] = []
+                continue
+            for wdw in (chip_windows or {}).get(key, []):
+                chip_ok[key].append((wdw["start"], wdw["stop"]))
 
     def X(i, g): return OFF_X + g * n + i
     def IN(i, g): return OFF_IN + g * n + i
@@ -75,13 +149,43 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
 
     c = np.zeros(N)
     for g in range(G):
+        gw = gws[g]
+        tc_ok = any(a <= gw <= b for a, b in chip_ok["3xc"])
+        bb_ok = any(a <= gw <= b for a, b in chip_ok["bboost"])
         for i in range(n):
             c[ST(i, g)] -= (1 - bench_weight) * w[g] * xp[i, g]
+            # engine 1: the tilt is xp-weighted (a 14-pointer moves rank more
+            # than a 3-pointer per 1% owned) and applies every gameweek, not
+            # just the first. The own_bonus path below is the deprecated
+            # g==0-only form, kept only while engines.rank is disabled.
             c[X(i, g)] -= bench_weight * w[g] * xp[i, g]
-            c[CP(i, g)] -= w[g] * xp[i, g]
-            if own_bonus and g == 0:
+            if tilt:
+                c[X(i, g)] -= tilt * w[g] * (float(own[i]) / 100.0) * xp[i, g]
+            elif own_bonus and g == 0:
                 c[X(i, g)] -= own_bonus * float(own[i])
-        c[OFF_HT + g] += HIT_COST * w[g]
+            c[CP(i, g)] -= w[g] * xp[i, g] * (1.0 + cap_tilt * (1.0 - float(own[i]) / 100.0))
+            if use_price and price_gamma:
+                # bounded timing reward: buying a predicted riser before he
+                # rises earns gamma points per £0.1m of avoided rise
+                c[IN(i, g)] -= (price_gamma * w[g]
+                                * max(0.0, float(pm[i, g] - price[i])))
+        c[OFF_HT + g] += HIT_COST * decay ** g
+        if use_risk:
+            # CVaR_b(score) = max_zeta { zeta - E[(zeta - score)+] / (1 - b) };
+            # in minimisation terms the pivot is bought, the slack is paid for
+            c[OFF_ZETA + g] -= risk_lambda * w[g]
+            for s in range(S):
+                c[OFF_U + s * G + g] += (risk_lambda * w[g]
+                                         * float(scenario_weights[s])
+                                         / (1.0 - cvar_beta))
+        if tc_ok:
+            # the captain already earns double via CP; the chip adds the third
+            for i in range(n):
+                c[OFF_TC + g * n + i] -= 2 * w[g] * xp[i, g]
+        if bb_ok:
+            # bench players already earn bench_weight via X; the chip pays the rest
+            for i in range(n):
+                c[OFF_BB + g * n + i] -= (1 - bench_weight) * w[g] * xp[i, g]
 
     A, lb, ub = [], [], []
 
@@ -91,11 +195,28 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
             r[0, k] = v
         A.append(r); lb.append(lo); ub.append(hi)
 
+    if use_risk:
+        # epigraph: u[s,g] >= zeta[g] - score(s,g), where a scenario's score is
+        # the same bench-weighted lineup score as the mean objective, only with
+        # scenario points instead of expected points
+        for s in range(S):
+            ps = scenarios[s]                       # (n, G)
+            for g in range(G):
+                row = {OFF_U + s * G + g: 1.0, OFF_ZETA + g: -1.0}
+                for i in range(n):
+                    p = float(ps[i, g])
+                    if p:
+                        row[ST(i, g)] = (1 - bench_weight) * p
+                        row[X(i, g)] = row.get(X(i, g), 0.0) + bench_weight * p
+                        row[CP(i, g)] = row.get(CP(i, g), 0.0) + p
+                add(row, 0.0, np.inf)
+
     for g in range(G):
         add({X(i, g): 1 for i in range(n)}, 15, 15)
         for p, cnt in SQUAD_N.items():
             add({X(i, g): 1 for i in range(n) if pos[i] == p}, cnt, cnt)
-        add({X(i, g): float(price[i]) for i in range(n)}, 0, budget)
+        # budget at each deadline's expected prices, not today's
+        add({X(i, g): float(pm[i, g]) for i in range(n)}, 0, budget)
         for cl in set(club):
             add({X(i, g): 1 for i in range(n) if club[i] == cl}, 0, max_per_club)
 
@@ -140,7 +261,23 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
                 add({CP(i, g): 1}, 0, 0)   # a captain the whole field owns wins no rank
         add({CP(i, g): 1 for i in range(n)}, 1, 1)
 
+        # Tier A chip mechanics
+        if use_chips:
+            for i in range(n):
+                add({OFF_TC + g * n + i: 1, CP(i, g): -1}, -np.inf, 0)   # chip only on the captain
+                add({OFF_TC + g * n + i: 1, OFF_YTC + g: -1}, -np.inf, 0)
+                add({OFF_BB + g * n + i: 1, X(i, g): -1, ST(i, g): 1}, -np.inf, 0)
+            add({**{OFF_TC + g * n + i: 1 for i in range(n)}, OFF_YTC + g: -1}, 0, 0)
+            add({**{OFF_BB + g * n + i: 1 for i in range(n)},
+                 OFF_YBB + g: -1}, 0, 0)                     # exactly the 4 bench spots
+            add({OFF_YTC + g: 1, OFF_YBB + g: 1}, -np.inf, 1)  # one chip per week
+
     add({OFF_FT: 1}, free_transfers, free_transfers)
+
+    # each chip is a season resource: once per half, never twice
+    if use_chips:
+        add({OFF_YTC + g: 1 for g in range(G)}, 0, 1)
+        add({OFF_YBB + g: 1 for g in range(G)}, 0, 1)
 
     # Team-brief constraints describe where the squad should END UP, not where it
     # already is. Applying them to every gameweek makes the problem infeasible for
@@ -170,6 +307,17 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
         cap = max(MAX_FT, free_transfers) if g == 0 else MAX_FT
         lo_b[OFF_FT + g], hi_b[OFF_FT + g] = 0, cap
         lo_b[OFF_HT + g], hi_b[OFF_HT + g] = 0, (15 if allow_hits else 0)
+    if use_risk:
+        # zeta is free, the epigraph slacks are nonnegative and continuous
+        integrality[OFF_ZETA:] = 0
+        lo_b[OFF_ZETA:OFF_ZETA + G] = -np.inf
+        hi_b[OFF_ZETA:OFF_ZETA + G] = np.inf
+        hi_b[OFF_U:] = np.inf
+    if use_chips:
+        for g in range(G):
+            gw = gws[g]
+            hi_b[OFF_YTC + g] = 1 if any(a <= gw <= b for a, b in chip_ok["3xc"]) else 0
+            hi_b[OFF_YBB + g] = 1 if any(a <= gw <= b for a, b in chip_ok["bboost"]) else 0
 
     res = milp(c=c, constraints=LinearConstraint(vstack(A).tocsr(),
                                                  np.array(lb), np.array(ub)),
@@ -179,9 +327,34 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
         return None
 
     x = np.round(res.x).astype(int)
+    # HiGHS status 1 means the time/iteration limit stopped the search: the
+    # result is usable but no longer provably optimal, so callers comparing
+    # two solves must not treat the gap between them as exact
+    solve_info = {"status": int(res.status),
+                  "mip_gap": round(float(getattr(res, "mip_gap", 0.0) or 0.0), 6)}
+    # the hit policy must judge a -4 in points, not in risk-adjusted units, so
+    # the plan also reports the mean component alone (== objective when no risk)
+    mean_obj = -res.fun
+    if use_risk:
+        zeta = res.x[OFF_ZETA:OFF_ZETA + G]
+        # end the slice explicitly: with Tier A chips active the U block is
+        # not the tail of the variable vector - the TC/BB blocks follow it
+        u = res.x[OFF_U:OFF_U + S * G].reshape(S, G)
+        risk_val = sum(
+            risk_lambda * w[g] * (zeta[g]
+                                  + float(np.dot(scenario_weights, u[:, g]))
+                                  / (1.0 - cvar_beta))
+            for g in range(G))
+        mean_obj -= risk_val
     weeks = []
     for g in range(G):
         squad = [int(ids[i]) for i in range(n) if x[X(i, g)]]
+        chip = None
+        if use_chips:
+            if x[OFF_YTC + g]:
+                chip = "3xc"
+            elif x[OFF_YBB + g]:
+                chip = "bboost"
         weeks.append({
             "gw": gws[g],
             "squad": squad,
@@ -195,12 +368,18 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
                               + sum(xp_true[i, g] for i in range(n) if x[CP(i, g)])
                               - HIT_COST * x[OFF_HT + g]), 2),
             "bank": round(budget - float(sum(price[i] for i in range(n) if x[X(i, g)])), 1),
+            "chip": chip,
         })
+    played = [wk["chip"] for wk in weeks if wk["chip"]]
     return {"weeks": weeks,
             "objective": round(-res.fun, 2),
+            "mean_objective": round(mean_obj, 2),
             "total_xp": round(sum(wk["xp"] for wk in weeks), 2),
             "total_hits": sum(wk["hits"] for wk in weeks),
-            "transfers": sum(len(wk["in"]) for wk in weeks)}
+            "transfers": sum(len(wk["in"]) for wk in weeks),
+            "solve": solve_info,
+            **({"chips_played": played} if played else {}),
+            **({"risk_lambda": risk_lambda} if use_risk else {})}
 
 
 def plan_with_hit_policy(pool, gws, current, hit_threshold=6.0, **kw):
@@ -227,7 +406,17 @@ def plan_with_hit_policy(pool, gws, current, hit_threshold=6.0, **kw):
     if with_hits["total_hits"] == 0:
         return with_hits, {"took_hits": False, "gain_over_no_hit": 0.0,
                            "threshold": hit_threshold}
-    gain = with_hits["objective"] - no_hits["objective"]
+    # a solve that hit its time limit is not provably optimal, so the gap
+    # between the two arms could be search luck rather than plan quality -
+    # refuse the comparison and fall back to the free-transfer plan
+    if (with_hits["solve"]["status"] != 0 or no_hits["solve"]["status"] != 0):
+        return no_hits, {"took_hits": False, "gain_over_no_hit": None,
+                         "threshold": hit_threshold, "truncated": True,
+                         "advice": "a solve hit its time limit, so the hit/no-hit "
+                                   "comparison is not trustworthy - free transfers only"}
+    # compare on the mean component: a -4 is worth taking for points, never
+    # merely because it damps the CVaR tail (that is what squad choice is for)
+    gain = with_hits["mean_objective"] - no_hits["mean_objective"]
     if gain < hit_threshold:
         return no_hits, {"took_hits": False, "gain_over_no_hit": round(gain, 2),
                          "rejected_hits": with_hits["total_hits"],
@@ -259,14 +448,99 @@ def evaluate_chips(df, weeks, gws):
 
 
 def wildcard_gain(pool, df, gws, current, base_objective, **kw):
-    """How much a wildcard this gameweek would be worth versus the normal plan."""
+    """How much a wildcard this gameweek would be worth versus the normal plan.
+
+    Deprecated shim kept for callers; chip_branches is the real evaluator.
+    The whitelist is explicit because **kw used to carry persona kwargs that
+    silently vanished here - a Minoux_41 "wildcard" that forgot its
+    differentials constraint is worse than no suggestion at all.
+    """
     from .optimize import solve
-    kw = {k: v for k, v in kw.items()
-          if k in ("budget", "locked", "banned", "own_bonus",
-                   "min_differentials", "xp_prefix", "max_per_club")}
+    kw = {k: v for k, v in kw.items() if k in BRANCH_KW}
     wc = solve(pool, gws, allow_infeasible=True, **kw)
     if wc is None:
         return None
     rep = squad_report(df, wc["squad"], gws)
     return {"squad": wc["squad"], "xp_total": rep["xp_total"],
             "gain": round(rep["xp_total"] - base_objective, 2)}
+
+
+# kwargs the branch evaluators pass through to plan()/solve() - persona
+# settings survive a chip branch instead of being dropped by a **kw sieve
+BRANCH_KW = ("budget", "locked", "banned", "own_bonus", "min_differentials",
+             "max_captain_ownership", "xp_prefix", "max_per_club",
+             "bench_weight", "decay", "rank_alpha", "template_tilt",
+             "cap_tilt", "time_limit")
+
+
+def wildcard_plan(pool, gws, current, bank=0.0, **kw):
+    """A wildcard at `gws[0]`: unlimited free transfers that week, ft resets to 1.
+
+    A wildcard is exactly the unlimited-transfer window the ILP already models
+    for gameweek 1 - 15 free moves, no hits, continuity anchored to the current
+    squad, then back to one free transfer a week. So no new solver structure is
+    needed: the same program with an inflated first-week allowance IS the
+    wildcard branch. `pool`/`gws` must start at the chip week.
+    """
+    kw = {k: v for k, v in kw.items() if k in BRANCH_KW}
+    return plan(pool, gws, current, free_transfers=15, bank=bank,
+                allow_hits=False, **kw)
+
+
+def freehit_plan(pool, gws, current, bank=0.0, **kw):
+    """A free hit for `gws[0]` only: one week's squad rebuilt for free.
+
+    Solved as a single-gameweek squad selection (optimize.solve) with the
+    current squad's full sell value plus bank as budget - a free hit pays no
+    sell haircut and the squad reverts, so the following weeks keep the base
+    plan untouched. The caller composes the branch value from this week's
+    result plus the base plan's remaining weeks.
+    """
+    from .optimize import solve
+    if len(gws) != 1:
+        raise ValueError("freehit_plan takes exactly one gameweek")
+    cur_idx = [i for i in range(len(pool)) if int(pool.id.values[i]) in set(current)]
+    budget = float(pool.price.values[cur_idx].sum()) + float(bank)
+    kw = {k: v for k, v in kw.items() if k in BRANCH_KW}
+    res = solve(pool, gws, allow_infeasible=True, budget=budget, **kw)
+    return res
+
+
+def chip_branches(pool, gws, current, base, candidates, bank=0.0, **kw):
+    """Value of each chip play against the base plan.
+
+    candidates: [{"chip": "wildcard"|"free_hit", "gw": <gameweek number>}],
+    typically the top weeks chips.calendar flags. Each branch is scored on
+    plain xp (mean points, not the risk-adjusted objective) so the gain reads
+    in the same units as the chip calendar's own estimates. Returns one dict
+    per candidate with "gain" = branch xp over the remaining horizon minus the
+    base plan's xp over the same weeks.
+    """
+    out = []
+    for cand in candidates:
+        chip, gw = cand["chip"], cand["gw"]
+        if gw not in gws:
+            continue
+        at = gws.index(gw)
+        base_rest = sum(wk["xp"] for wk in base["weeks"][at:])
+        entry = {"chip": chip, "gw": gw, "gain": None}
+        if chip == "wildcard":
+            wc = wildcard_plan(pool, gws[at:], current, bank=bank, **kw)
+            if wc is not None:
+                entry.update(squad=wc["weeks"][0]["squad"],
+                             xp=wc["total_xp"],
+                             gain=round(wc["total_xp"] - base_rest, 2))
+        elif chip == "free_hit":
+            fh = freehit_plan(pool, [gw], current, bank=bank, **kw)
+            if fh is not None:
+                xi, _ = best_xi(pool, fh["squad"], gw)
+                pos = pool.set_index("id").pos.to_dict()
+                xm = pool.set_index("id")[f"xp{gw}"].to_dict()
+                pts = sum(xm[int(r.id)] for r in xi)
+                att = [r for r in xi if pos[int(r.id)] in ("MID", "FWD")] or xi
+                pts += xm[int(max(att, key=lambda r: xm[int(r.id)]).id)]
+                after = sum(wk["xp"] for wk in base["weeks"][at + 1:])
+                entry.update(squad=fh["squad"], xp=round(pts + after, 2),
+                             gain=round(pts + after - base_rest, 2))
+        out.append(entry)
+    return out

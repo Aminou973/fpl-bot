@@ -396,6 +396,13 @@ def squad_state(entry_id: int, boot=None):
         try:
             picks = entry_picks(entry_id, gw)
             out["picks"] = [p["element"] for p in picks["picks"]]
+            # what each held player would actually sell for — the game tracks
+            # price rises you paid for, and the planner must not assume it
+            # recovers a player's full risen price
+            out["picks_detail"] = [{"element": p["element"],
+                                    "selling_price": p.get("selling_price"),
+                                    "purchase_price": p.get("purchase_price")}
+                                   for p in picks["picks"]]
             out["captain"] = next((p["element"] for p in picks["picks"] if p["is_captain"]), None)
             out["picks_source"] = f"gw{gw}"
             break
