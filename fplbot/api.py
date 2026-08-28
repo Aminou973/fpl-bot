@@ -328,10 +328,16 @@ def submit_picks(session, team_id: int, picks: list, chip=None):
 
     ``picks`` is the standard payload: 15 dicts of
     ``{element, position, is_captain, is_vice}``. Position 1-11 must form a
-    legal XI with the captain in it, which last_plan.json guarantees.
+    legal XI with the captain in it, which last_plan.json guarantees. The
+    endpoint's schema names the vice flag ``is_vice_captain`` and calls it
+    required, so it is mapped here rather than trusted from callers.
     """
+    body = [{"element": p["element"], "position": p["position"],
+             "is_captain": bool(p.get("is_captain")),
+             "is_vice_captain": bool(p.get("is_vice_captain", p.get("is_vice")))}
+            for p in picks]
     r = session.post(f"{BASE}/my-team/{team_id}/",
-                     json={"chip": chip, "picks": picks}, timeout=45)
+                     json={"chip": chip, "picks": body}, timeout=45)
     if r.status_code != 200:
         raise RuntimeError(f"my-team/{team_id} submit failed: "
                            f"HTTP {r.status_code} {r.text[:300]}")
