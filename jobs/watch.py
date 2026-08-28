@@ -26,6 +26,7 @@ from fplbot.notify import esc  # noqa: E402
 
 PRICE_LOG = Path(__file__).resolve().parent.parent / "state" / "price_log.jsonl"
 NEWS_CACHE = Path(__file__).resolve().parent.parent / "state" / "news_cache.json"
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def append_price_log(els, prev, gw, h_deadline):
@@ -217,7 +218,35 @@ def main():
     print(f"[watch] price log: {n_logged} elements changed, "
           f"{'full snapshot' if n_logged else 'delta-only'}")
     print(f"[watch] news scan: {n_signals} signals")
+    write_live_state(cfg, boot)
     pipeline.write_state("players", snapshot)
+
+
+def write_live_state(cfg, boot):
+    """Engine snapshot for the dashboard's Live tab: only while a gw is in play.
+
+    The bundle (last plan) supplies each player's projection, so live.json is
+    never built from a stale projection silently - the bundle's own generated
+    stamp is copied into the snapshot so the dashboard can age it too.
+    """
+    if not cfg.get("live", {}).get("enabled", True):
+        return
+    try:
+        from fplbot import live as live_mod
+        mine = [t["entry_id"] for t in cfg["teams"].values() if t.get("entry_id")]
+        bundle = None
+        f = ROOT / "site" / "bundle.json"
+        if f.exists():
+            bundle = json.loads(f.read_text())
+        snap = live_mod.build(boot=boot, entry_ids=mine,
+                              compare=cfg.get("compare") or (), bundle=bundle)
+        (ROOT / "site").mkdir(exist_ok=True)
+        (ROOT / "site" / "live.json").write_text(json.dumps(snap), encoding="utf-8")
+        n = len((snap or {}).get("entries") or [])
+        print(f"[watch] live: status {(snap or {}).get('status', 'none')} - "
+              f"{n} entries in site/live.json")
+    except Exception as e:                           # noqa: BLE001
+        print(f"[watch] live snapshot failed: {e}")
 
 
 if __name__ == "__main__":

@@ -54,8 +54,23 @@ def entry(entry_id: int):
     return get(f"entry/{entry_id}/")
 
 
+def entry_event(entry_id: int, gw: int):
+    """An entry's live gameweek history: {points: {total, ...}, active_chip, ...}."""
+    return get(f"entry/{entry_id}/event/{gw}/")
+
+
 def entry_picks(entry_id: int, gw: int):
     return get(f"entry/{entry_id}/event/{gw}/picks/")
+
+
+def entry_cup(entry_id: int):
+    """This entry's classic cup run; 404/None before or after the cup."""
+    return get(f"entry/{entry_id}/cup/")
+
+
+def league_classic(league_id: int, page: int = 1):
+    """One page (50 managers) of a classic league's standings."""
+    return get(f"leagues-classic/{league_id}/standings/?page={page}")
 
 
 def entry_history(entry_id: int):
