@@ -41,6 +41,7 @@ jobs:
           c = compute()
           print("sha:", c["projections_sha"])
           EOF
+          python tools/proj_diff.py
       - name: golden files + invariant tests
         run: |
           python tools/selfcheck.py
