@@ -216,6 +216,7 @@ def main():
                                          "unstored": sorted(unstored)})
 
     names = name_lookup(boot)
+    boot_el_cost = {p["id"]: p["now_cost"] for p in boot["elements"]}
 
     # a real submission must be preceded by a successful dry run for this
     # gameweek: the first scheduled tick verifies login and prints the diff,
@@ -255,6 +256,29 @@ def main():
         if not a.apply:
             results[name] = {"status": "dry-run"}
             continue
+        # the my-team endpoint only writes a lineup from players already in
+        # the squad — transfers go through /transfers/ first, priced with the
+        # in-player's current cost and the out-player's selling price
+        owned = {p["element"]: p for p in mt["picks"]}
+        legs = []
+        for el_in, el_out in zip(entry["in"], entry["out"]):
+            if el_in in owned:
+                print(f"  transfer {names.get(el_in, el_in)} already owned — skipped")
+                continue
+            if el_out not in owned:
+                print(f"  cannot sell {names.get(el_out, el_out)} — not owned "
+                      f"(already sold?) — skipped")
+                continue
+            legs.append({"element_in": el_in, "element_out": el_out,
+                         "purchase_price": boot_el_cost[el_in],
+                         "selling_price": owned[el_out].get("selling_price", 0)})
+        if legs:
+            api.make_transfers(session, entry_id, gw, legs)
+            print(f"  ✔ transfers made: "
+                  + ", ".join(f"{names.get(l['element_in'])} in for "
+                              f"{names.get(l['element_out'])}" for l in legs))
+        else:
+            print("  no transfers to make — lineup only")
         api.submit_picks(session, team_id, entry["picks_payload"])
         results[name] = {"status": "applied", "team_id": team_id,
                          "gw": gw, "in": entry["in"], "out": entry["out"],

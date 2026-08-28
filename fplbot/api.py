@@ -323,6 +323,24 @@ def my_team(session, team_id: int):
     return r.json()
 
 
+def make_transfers(session, entry_id: int, gw: int, transfers: list, chip=None):
+    """Execute transfers for one entry in one gameweek.
+
+    ``transfers`` is the payload the web app builds: a list of
+    ``{element_in, element_out, purchase_price, selling_price}`` with prices in
+    tenths of a million — the in-player's current cost and the out-player's
+    selling price (from the my-team read). The endpoint also takes the chip
+    being played this week (a chip play posts here with an empty list).
+    """
+    r = session.post(f"{BASE}/transfers/",
+                     json={"chip": chip, "entry": entry_id, "event": gw,
+                           "transfers": transfers}, timeout=45)
+    if r.status_code != 200:
+        raise RuntimeError(f"transfers/{entry_id} failed: "
+                           f"HTTP {r.status_code} {r.text[:300]}")
+    return r.json()
+
+
 def submit_picks(session, team_id: int, picks: list, chip=None):
     """Write a full 15-player lineup (and optionally a chip) for one team.
 
