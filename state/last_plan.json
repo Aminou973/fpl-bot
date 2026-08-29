@@ -1,6 +1,6 @@
 {
  "deadline": "2026-09-04T17:30:00Z",
- "generated": "2026-08-29T21:23:29.489304+00:00",
+ "generated": "2026-08-29T21:40:14.038780+00:00",
  "gw": 3,
  "teams": {
   "Minoux_41": {
@@ -10,7 +10,7 @@
     248,
     441
    ],
-   "captain": 397,
+   "captain": 368,
    "entry": 4896428,
    "hits": 0,
    "in": [],
@@ -60,14 +60,14 @@
     },
     {
      "element": 397,
-     "is_captain": true,
-     "is_vice": false,
+     "is_captain": false,
+     "is_vice": true,
      "position": 8
     },
     {
      "element": 368,
-     "is_captain": false,
-     "is_vice": true,
+     "is_captain": true,
+     "is_vice": false,
      "position": 9
     },
     {
@@ -142,7 +142,7 @@
     529
    ],
    "squad_source": "api",
-   "vice": 368,
+   "vice": 397,
    "xi": [
     82,
     4,
