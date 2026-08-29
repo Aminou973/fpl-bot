@@ -1,0 +1,30 @@
+{
+ "sources": {
+  "ffscout": {
+   "ok": true,
+   "ts": "2026-08-29T02:15:42.333748+00:00",
+   "n": 0
+  },
+  "bbc": {
+   "ok": true,
+   "ts": "2026-08-29T02:15:42.333748+00:00",
+   "n": 4
+  }
+ },
+ "etag": {
+  "ffscout": {
+   "etag": "\"66d04e0b69654cb0d1a8aa56f956c80e\"",
+   "last_modified": "Fri, 28 Aug 2026 22:02:10 GMT"
+  },
+  "bbc": {
+   "etag": null,
+   "last_modified": null
+  }
+ },
+ "failures": {
+  "physioroom": 1,
+  "ffscout": 0,
+  "bbc": 0
+ },
+ "skip_until": {}
+}

@@ -4,4339 +4,5597 @@
   "cost": 60,
   "news": "",
   "selected_by": 38.3,
-  "status": "a"
+  "status": "a",
+  "tin": 7435,
+  "tout": 7591
  },
  "10": {
   "chance": 100,
   "cost": 55,
   "news": "",
-  "selected_by": 6.8,
-  "status": "a"
+  "selected_by": 6.9,
+  "status": "a",
+  "tin": 5847,
+  "tout": 5399
  },
  "100": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 40,
+  "tout": 12
  },
  "101": {
   "chance": 75,
   "cost": 50,
   "news": "Wrist injury - 75% chance of playing",
   "selected_by": 0.0,
-  "status": "d"
+  "status": "d",
+  "tin": 19,
+  "tout": 51
  },
  "102": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 59,
+  "tout": 659
  },
  "103": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 12,
+  "tout": 26
  },
  "104": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 34,
+  "tout": 108
  },
  "105": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 126,
+  "tout": 140
  },
  "106": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 16.5,
-  "status": "a"
+  "selected_by": 16.4,
+  "status": "a",
+  "tin": 3556,
+  "tout": 12190
  },
  "107": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 858,
+  "tout": 410
  },
  "108": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 283,
+  "tout": 247
  },
  "109": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 21.5,
-  "status": "a"
+  "status": "a",
+  "tin": 8814,
+  "tout": 4766
  },
  "11": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 5.7,
-  "status": "a"
+  "status": "a",
+  "tin": 690,
+  "tout": 5133
  },
  "110": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 145,
+  "tout": 950
  },
  "111": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 4.0,
-  "status": "a"
+  "status": "a",
+  "tin": 1767,
+  "tout": 641
  },
  "112": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 9.6,
-  "status": "a"
+  "selected_by": 9.5,
+  "status": "a",
+  "tin": 1525,
+  "tout": 4842
  },
  "113": {
   "chance": 100,
-  "cost": 45,
+  "cost": 44,
   "news": "",
   "selected_by": 2.2,
-  "status": "a"
+  "status": "a",
+  "tin": 349,
+  "tout": 1317
  },
  "114": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 515,
+  "tout": 94
  },
  "115": {
   "chance": null,
   "cost": 46,
   "news": "",
-  "selected_by": 8.4,
-  "status": "a"
+  "selected_by": 8.9,
+  "status": "a",
+  "tin": 39016,
+  "tout": 1264
  },
  "116": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 1215,
+  "tout": 240
  },
  "117": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 15,
+  "tout": 9
  },
  "118": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 20,
+  "tout": 30
  },
  "119": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 14,
+  "tout": 9
  },
  "12": {
   "chance": null,
   "cost": 95,
   "news": "",
   "selected_by": 10.4,
-  "status": "a"
+  "status": "a",
+  "tin": 2454,
+  "tout": 3959
  },
  "120": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 41,
+  "tout": 31
  },
  "121": {
   "chance": 0,
   "cost": 60,
   "news": "Hamstring injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 9,
+  "tout": 66
  },
  "122": {
   "chance": 0,
-  "cost": 60,
+  "cost": 59,
   "news": "Leg injury - Expected back 28 Nov",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 6,
+  "tout": 160
  },
  "123": {
   "chance": 25,
   "cost": 60,
   "news": "Unspecified injury - 25% chance of playing",
-  "selected_by": 2.3,
-  "status": "d"
+  "selected_by": 2.2,
+  "status": "d",
+  "tin": 891,
+  "tout": 9741
  },
  "124": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 12.8,
-  "status": "a"
+  "selected_by": 12.7,
+  "status": "a",
+  "tin": 3029,
+  "tout": 6267
  },
  "125": {
   "chance": 75,
   "cost": 55,
   "news": "Unspecified injury - 75% chance of playing",
   "selected_by": 1.0,
-  "status": "d"
+  "status": "d",
+  "tin": 622,
+  "tout": 1113
  },
  "126": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 55,
+  "tout": 78
  },
  "127": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 3.8,
-  "status": "a"
+  "status": "a",
+  "tin": 3332,
+  "tout": 1919
  },
  "128": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Elche on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 5
  },
  "129": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 325,
+  "tout": 454
  },
  "13": {
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 16.8,
-  "status": "a"
+  "selected_by": 16.7,
+  "status": "a",
+  "tin": 1478,
+  "tout": 12496
  },
  "130": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 919,
+  "tout": 174
  },
  "131": {
   "chance": 0,
   "cost": 50,
   "news": "Ankle injury - Expected back 19 Sep",
   "selected_by": 0.2,
-  "status": "i"
+  "status": "i",
+  "tin": 152,
+  "tout": 363
  },
  "132": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Leicester City on loan for the rest of the season",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 80
  },
  "133": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Leicester City on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 0
  },
  "134": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 145,
+  "tout": 139
  },
  "135": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 28,
+  "tout": 55
  },
  "136": {
   "chance": 100,
   "cost": 60,
   "news": "",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "a",
+  "tin": 712,
+  "tout": 727
  },
  "137": {
   "chance": 0,
   "cost": 55,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 2,
+  "tout": 12
  },
  "138": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 203,
+  "tout": 108
  },
  "139": {
   "chance": 0,
   "cost": 50,
   "news": "Ankle injury - Expected back 10 Oct",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 40,
+  "tout": 50
  },
  "14": {
   "chance": null,
-  "cost": 65,
+  "cost": 64,
   "news": "",
   "selected_by": 1.7,
-  "status": "a"
+  "status": "a",
+  "tin": 526,
+  "tout": 1655
  },
  "140": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 2.2,
-  "status": "a"
+  "status": "a",
+  "tin": 267,
+  "tout": 2047
  },
  "141": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined RC Strasbourg on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 14
  },
  "142": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 10.0,
-  "status": "a"
+  "status": "a",
+  "tin": 3090,
+  "tout": 4967
  },
  "143": {
   "chance": 0,
   "cost": 55,
   "news": "Has joined Como permanently",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 290
  },
  "144": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 665,
+  "tout": 589
  },
  "145": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 91,
+  "tout": 28
  },
  "146": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Napoli on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 80
  },
  "147": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 14,
+  "tout": 72
  },
  "148": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 229,
+  "tout": 232
  },
  "149": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 497,
+  "tout": 1102
  },
  "15": {
   "chance": null,
   "cost": 66,
   "news": "",
-  "selected_by": 11.7,
-  "status": "a"
+  "selected_by": 11.8,
+  "status": "a",
+  "tin": 7080,
+  "tout": 3857
  },
  "150": {
-  "chance": null,
+  "chance": 0,
   "cost": 45,
-  "news": "",
+  "news": "Has joined Real Sociedad on loan for the rest of the season",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "u",
+  "tin": 24,
+  "tout": 75
  },
  "151": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 629,
+  "tout": 212
  },
  "152": {
   "chance": 75,
   "cost": 55,
   "news": "Unspecified injury - 75% chance of playing",
   "selected_by": 2.1,
-  "status": "d"
+  "status": "d",
+  "tin": 61,
+  "tout": 4581
  },
  "153": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 69,
+  "tout": 57
  },
  "154": {
   "chance": 100,
-  "cost": 95,
+  "cost": 96,
   "news": "",
-  "selected_by": 16.3,
-  "status": "a"
+  "selected_by": 16.8,
+  "status": "a",
+  "tin": 36156,
+  "tout": 4069
  },
  "155": {
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 4.4,
-  "status": "a"
+  "selected_by": 4.3,
+  "status": "a",
+  "tin": 551,
+  "tout": 6160
  },
  "156": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 255,
+  "tout": 1317
  },
  "157": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 374,
+  "tout": 1446
  },
  "158": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 25,
+  "tout": 46
  },
  "159": {
   "chance": 75,
   "cost": 55,
   "news": "Unspecified injury - 75% chance of playing",
-  "selected_by": 2.9,
-  "status": "d"
+  "selected_by": 2.8,
+  "status": "d",
+  "tin": 176,
+  "tout": 6570
  },
  "16": {
   "chance": null,
   "cost": 64,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 154,
+  "tout": 254
  },
  "160": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 141,
+  "tout": 517
  },
  "161": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 87,
+  "tout": 55
  },
  "162": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "a",
+  "tin": 636,
+  "tout": 977
  },
  "163": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 96,
+  "tout": 154
  },
  "164": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 14,
+  "tout": 57
  },
  "165": {
   "chance": null,
   "cost": 76,
   "news": "",
-  "selected_by": 68.3,
-  "status": "a"
+  "selected_by": 68.4,
+  "status": "a",
+  "tin": 15196,
+  "tout": 4864
  },
  "166": {
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 0.3,
-  "status": "a"
+  "selected_by": 0.4,
+  "status": "a",
+  "tin": 2411,
+  "tout": 472
  },
  "167": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 1673,
+  "tout": 395
  },
  "168": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 196,
+  "tout": 372
  },
  "169": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 281,
+  "tout": 226
  },
  "17": {
   "chance": null,
-  "cost": 60,
+  "cost": 59,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 284,
+  "tout": 811
  },
  "170": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 147,
+  "tout": 169
  },
  "171": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 516,
+  "tout": 244
  },
  "172": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 9,
+  "tout": 135
  },
  "173": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 7.9,
-  "status": "a"
+  "status": "a",
+  "tin": 2465,
+  "tout": 2081
  },
  "174": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 36,
+  "tout": 146
  },
  "175": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 13.0,
-  "status": "a"
+  "status": "a",
+  "tin": 2332,
+  "tout": 4125
  },
  "176": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 72,
+  "tout": 208
  },
  "177": {
   "chance": 0,
   "cost": 40,
   "news": "Hamstring injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 6,
+  "tout": 94
  },
  "178": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 10,
+  "tout": 25
  },
  "179": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 14,
+  "tout": 11
  },
  "18": {
   "chance": null,
   "cost": 64,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 112,
+  "tout": 254
  },
  "180": {
   "chance": 0,
   "cost": 40,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.2,
-  "status": "i"
+  "status": "i",
+  "tin": 17,
+  "tout": 231
  },
  "181": {
-  "chance": null,
+  "chance": 0,
   "cost": 40,
-  "news": "",
+  "news": "Has joined Academico de Viseu on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "u",
+  "tin": 19,
+  "tout": 22
  },
  "182": {
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 0.9,
-  "status": "a"
+  "selected_by": 0.8,
+  "status": "a",
+  "tin": 110,
+  "tout": 407
  },
  "183": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 48,
+  "tout": 86
  },
  "184": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 31,
+  "tout": 136
  },
  "185": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 8,
+  "tout": 49
  },
  "186": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 18,
+  "tout": 65
  },
  "187": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 5,
+  "tout": 11
  },
  "188": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 9,
+  "tout": 97
  },
  "189": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 63,
+  "tout": 117
  },
  "19": {
   "chance": null,
-  "cost": 55,
+  "cost": 54,
   "news": "",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "a",
+  "tin": 180,
+  "tout": 847
  },
  "190": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 86
  },
  "191": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 57,
+  "tout": 81
  },
  "192": {
-  "chance": null,
+  "chance": 0,
   "cost": 45,
-  "news": "",
+  "news": "Has joined Oxford United on loan for the rest of the season",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "u",
+  "tin": 142,
+  "tout": 410
  },
  "193": {
   "chance": 0,
   "cost": 55,
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 6,
+  "tout": 245
  },
  "194": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 850,
+  "tout": 461
  },
  "195": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "a",
+  "tin": 1131,
+  "tout": 661
  },
  "196": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Shabab Al-Ahli Dubai permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 21
  },
  "197": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined KVC Westerlo on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 35
  },
  "198": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 1.8,
-  "status": "a"
+  "status": "a",
+  "tin": 614,
+  "tout": 700
  },
  "199": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 25,
+  "tout": 64
  },
  "2": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 36,
+  "tout": 48
  },
  "20": {
   "chance": null,
   "cost": 54,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 84,
+  "tout": 91
  },
  "200": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 9.5,
-  "status": "a"
+  "status": "a",
+  "tin": 3565,
+  "tout": 3291
  },
  "201": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 8.3,
-  "status": "a"
+  "selected_by": 8.1,
+  "status": "a",
+  "tin": 627,
+  "tout": 14455
  },
  "202": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 325,
+  "tout": 545
  },
  "203": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 113,
+  "tout": 273
  },
  "204": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 5.6,
-  "status": "a"
+  "selected_by": 5.5,
+  "status": "a",
+  "tin": 539,
+  "tout": 2726
  },
  "205": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 8,
+  "tout": 17
  },
  "206": {
   "chance": 0,
-  "cost": 45,
+  "cost": 44,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 21,
+  "tout": 182
  },
  "207": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 20,
+  "tout": 73
  },
  "208": {
   "chance": 0,
   "cost": 64,
   "news": "Groin injury - Unknown return date",
-  "selected_by": 2.3,
-  "status": "i"
+  "selected_by": 2.2,
+  "status": "i",
+  "tin": 28,
+  "tout": 10419
  },
  "209": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 54,
+  "tout": 112
  },
  "21": {
   "chance": 0,
   "cost": 50,
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 9,
+  "tout": 127
  },
  "210": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 928,
+  "tout": 639
  },
  "211": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 416,
+  "tout": 120
  },
  "212": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 10.8,
-  "status": "a"
+  "selected_by": 10.7,
+  "status": "a",
+  "tin": 1739,
+  "tout": 6634
  },
  "213": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 15,
+  "tout": 97
  },
  "214": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 301,
+  "tout": 202
  },
  "215": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 4,
+  "tout": 13
  },
  "216": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 18,
+  "tout": 43
  },
  "217": {
   "chance": null,
-  "cost": 50,
+  "cost": 49,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 30,
+  "tout": 75
  },
  "218": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 20,
+  "tout": 84
  },
  "219": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 3,
+  "tout": 6
  },
  "22": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 8,
+  "tout": 14
  },
  "220": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Bristol City on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 4
  },
  "221": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 29,
+  "tout": 66
  },
  "222": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 601,
+  "tout": 389
  },
  "223": {
-  "chance": null,
+  "chance": 0,
   "cost": 65,
-  "news": "",
-  "selected_by": 5.2,
-  "status": "a"
+  "news": "Hamstring injury - Expected back 11 Oct",
+  "selected_by": 5.0,
+  "status": "i",
+  "tin": 698,
+  "tout": 20460
  },
  "224": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 604,
+  "tout": 329
  },
  "225": {
   "chance": 0,
   "cost": 50,
   "news": "has returned to Getafe CF",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 0
  },
  "226": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 8.8,
-  "status": "a"
+  "status": "a",
+  "tin": 3246,
+  "tout": 1849
  },
  "227": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 18,
+  "tout": 24
  },
  "228": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 19,
+  "tout": 26
  },
  "229": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 8.7,
-  "status": "a"
+  "selected_by": 8.6,
+  "status": "a",
+  "tin": 1683,
+  "tout": 3474
  },
  "23": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 7
  },
  "230": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 1.8,
-  "status": "a"
+  "status": "a",
+  "tin": 689,
+  "tout": 578
  },
  "231": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.4,
-  "status": "a"
+  "status": "a",
+  "tin": 118,
+  "tout": 672
  },
  "232": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 54,
+  "tout": 226
  },
  "233": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 1.6,
-  "status": "a"
+  "selected_by": 1.7,
+  "status": "a",
+  "tin": 1242,
+  "tout": 510
  },
  "234": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 13,
+  "tout": 8
  },
  "235": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 67,
+  "tout": 73
  },
  "236": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 4.7,
-  "status": "a"
+  "status": "a",
+  "tin": 4201,
+  "tout": 2730
  },
  "237": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 16.1,
-  "status": "a"
+  "selected_by": 16.0,
+  "status": "a",
+  "tin": 5713,
+  "tout": 11187
  },
  "238": {
   "chance": 100,
   "cost": 65,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 84,
+  "tout": 448
  },
  "239": {
   "chance": 100,
   "cost": 60,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 160,
+  "tout": 130
  },
  "24": {
-  "chance": null,
+  "chance": 0,
   "cost": 55,
-  "news": "",
+  "news": "has departed the club as a free agent.",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "u",
+  "tin": 4,
+  "tout": 11
  },
  "240": {
   "chance": 0,
   "cost": 50,
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 3,
+  "tout": 23
  },
  "241": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 35,
+  "tout": 138
  },
  "242": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 114,
+  "tout": 141
  },
  "243": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 41,
+  "tout": 52
  },
  "244": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 0.2,
-  "status": "a"
+  "selected_by": 0.3,
+  "status": "a",
+  "tin": 907,
+  "tout": 158
  },
  "245": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 14,
+  "tout": 29
  },
  "246": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 40,
+  "tout": 32
  },
  "247": {
   "chance": 50,
   "cost": 55,
   "news": "Ankle injury - 50% chance of playing",
   "selected_by": 0.2,
-  "status": "d"
+  "status": "d",
+  "tin": 12,
+  "tout": 385
  },
  "248": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 2.3,
-  "status": "a"
+  "status": "a",
+  "tin": 478,
+  "tout": 1646
  },
  "249": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 3.5,
-  "status": "a"
+  "selected_by": 3.6,
+  "status": "a",
+  "tin": 9616,
+  "tout": 1998
  },
  "25": {
   "chance": null,
   "cost": 74,
   "news": "",
   "selected_by": 6.6,
-  "status": "a"
+  "status": "a",
+  "tin": 505,
+  "tout": 5739
  },
  "250": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 3.0,
-  "status": "a"
+  "status": "a",
+  "tin": 913,
+  "tout": 634
  },
  "251": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 289,
+  "tout": 175
  },
  "252": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 289,
+  "tout": 42
  },
  "253": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 268,
+  "tout": 57
  },
  "254": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 1.7,
-  "status": "a"
+  "status": "a",
+  "tin": 637,
+  "tout": 473
  },
  "255": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 34,
+  "tout": 15
  },
  "256": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 16,
+  "tout": 71
  },
  "257": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 278,
+  "tout": 280
  },
  "258": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 645,
+  "tout": 114
  },
  "259": {
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 17.0,
-  "status": "a"
+  "selected_by": 16.9,
+  "status": "a",
+  "tin": 2071,
+  "tout": 3687
  },
  "26": {
   "chance": null,
   "cost": 75,
   "news": "",
   "selected_by": 7.5,
-  "status": "a"
+  "status": "a",
+  "tin": 4605,
+  "tout": 4714
  },
  "260": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 5.6,
-  "status": "a"
+  "status": "a",
+  "tin": 488,
+  "tout": 4922
  },
  "261": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "a",
+  "tin": 352,
+  "tout": 643
  },
  "262": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 89,
+  "tout": 236
  },
  "263": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 28,
+  "tout": 62
  },
  "264": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 266,
+  "tout": 262
  },
  "265": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 103,
+  "tout": 199
  },
  "266": {
   "chance": 0,
   "cost": 50,
   "news": "Knee injury - Expected back 10 Oct",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 1,
+  "tout": 5
  },
  "267": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 54,
+  "tout": 62
  },
  "268": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 1570,
+  "tout": 341
  },
  "269": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 50,
+  "tout": 126
  },
  "27": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 250,
+  "tout": 343
  },
  "270": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 1.4,
-  "status": "a"
+  "status": "a",
+  "tin": 381,
+  "tout": 684
  },
  "271": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 195,
+  "tout": 354
  },
  "272": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 6.9,
-  "status": "a"
+  "status": "a",
+  "tin": 2480,
+  "tout": 2148
  },
  "273": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 325,
+  "tout": 254
  },
  "274": {
   "chance": 0,
   "cost": 45,
   "news": "Arm injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 9,
+  "tout": 73
  },
  "275": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined Grimsby Town on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 7
  },
  "276": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined Colchester United on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 20
  },
  "277": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 2.0,
-  "status": "a"
+  "status": "a",
+  "tin": 1655,
+  "tout": 438
  },
  "278": {
   "chance": 0,
   "cost": 40,
   "news": "Groin injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 7,
+  "tout": 92
  },
  "279": {
   "chance": 100,
   "cost": 40,
   "news": "",
-  "selected_by": 2.0,
-  "status": "a"
+  "selected_by": 2.1,
+  "status": "a",
+  "tin": 7499,
+  "tout": 599
  },
  "28": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 4.1,
-  "status": "a"
+  "status": "a",
+  "tin": 3132,
+  "tout": 2107
  },
  "280": {
   "chance": 100,
   "cost": 40,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 227,
+  "tout": 100
  },
  "281": {
   "chance": 100,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 35,
+  "tout": 29
  },
  "282": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 354,
+  "tout": 178
  },
  "283": {
   "chance": 0,
   "cost": 40,
   "news": "Hip injury - Expected back 5 Sep",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 8,
+  "tout": 6
  },
  "284": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 24,
+  "tout": 26
  },
  "285": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 23,
+  "tout": 33
  },
  "286": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 482,
+  "tout": 231
  },
  "287": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 19,
+  "tout": 32
  },
  "288": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 140,
+  "tout": 195
  },
  "289": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 602,
+  "tout": 357
  },
  "29": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 114,
+  "tout": 41
  },
  "290": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 3.9,
-  "status": "a"
+  "selected_by": 4.0,
+  "status": "a",
+  "tin": 7446,
+  "tout": 1736
  },
  "291": {
   "chance": 0,
   "cost": 45,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 7,
+  "tout": 5
  },
  "292": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 10,
+  "tout": 15
  },
  "293": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Portsmouth permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 6
  },
  "294": {
   "chance": 0,
   "cost": 45,
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 48,
+  "tout": 117
  },
  "295": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 2.2,
-  "status": "a"
+  "status": "a",
+  "tin": 2077,
+  "tout": 1495
  },
  "296": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 78,
+  "tout": 46
  },
  "297": {
   "chance": 0,
   "cost": 45,
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 6,
+  "tout": 32
  },
  "298": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Konyaspor permanently",
   "selected_by": 0.3,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 396
  },
  "299": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Sheffield Wednesday on loan for the rest of the season",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 60
  },
  "3": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 20
  },
  "30": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Paris Saint-Germain permanently",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 169
  },
  "300": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 12,
+  "tout": 141
  },
  "301": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 4.5,
-  "status": "a"
+  "status": "a",
+  "tin": 1301,
+  "tout": 834
  },
  "302": {
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 0.4,
-  "status": "a"
+  "selected_by": 0.5,
+  "status": "a",
+  "tin": 479,
+  "tout": 97
  },
  "303": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 26,
+  "tout": 132
  },
  "304": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 3.4,
-  "status": "a"
+  "status": "a",
+  "tin": 1886,
+  "tout": 1080
  },
  "305": {
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 4.9,
-  "status": "a"
+  "selected_by": 4.8,
+  "status": "a",
+  "tin": 666,
+  "tout": 1640
  },
  "306": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.4,
-  "status": "a"
+  "status": "a",
+  "tin": 107,
+  "tout": 228
  },
  "307": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 38,
+  "tout": 52
  },
  "308": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 17,
+  "tout": 171
  },
  "309": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 83,
+  "tout": 48
  },
  "31": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 10.8,
-  "status": "a"
+  "selected_by": 10.7,
+  "status": "a",
+  "tin": 7285,
+  "tout": 8449
  },
  "310": {
   "chance": 0,
   "cost": 50,
   "news": "Muscular injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 0,
+  "tout": 3
  },
  "311": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Leicester City permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 5
  },
  "312": {
   "chance": 0,
   "cost": 45,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 9,
+  "tout": 59
  },
  "313": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 140,
+  "tout": 145
  },
  "314": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 4,
+  "tout": 11
  },
  "315": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 29,
+  "tout": 150
  },
  "316": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 1.8,
-  "status": "a"
+  "selected_by": 1.9,
+  "status": "a",
+  "tin": 2931,
+  "tout": 1511
  },
  "317": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Stoke City permanently",
   "selected_by": 0.2,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 303
  },
  "318": {
   "chance": 0,
   "cost": 55,
   "news": "Ankle injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 0,
+  "tout": 262
  },
  "319": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Derby County on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 20
  },
  "32": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 7.6,
-  "status": "a"
+  "status": "a",
+  "tin": 1179,
+  "tout": 2897
  },
  "320": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 413,
+  "tout": 308
  },
  "321": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 2.5,
-  "status": "a"
+  "status": "a",
+  "tin": 5132,
+  "tout": 1361
  },
  "322": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Sheffield Wednesday on loan for the rest of the season",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 382
  },
  "323": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 1.4,
-  "status": "a"
+  "selected_by": 1.3,
+  "status": "a",
+  "tin": 412,
+  "tout": 616
  },
  "324": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 3,
+  "tout": 34
  },
  "325": {
   "chance": 100,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 25,
+  "tout": 22
  },
  "326": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 0.6,
-  "status": "a"
+  "selected_by": 0.5,
+  "status": "a",
+  "tin": 18,
+  "tout": 160
  },
  "327": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 0.9,
-  "status": "a"
+  "selected_by": 1.0,
+  "status": "a",
+  "tin": 1417,
+  "tout": 412
  },
  "328": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 72,
+  "tout": 95
  },
  "329": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 3.6,
-  "status": "a"
+  "status": "a",
+  "tin": 1457,
+  "tout": 1051
  },
  "33": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 149,
+  "tout": 131
  },
  "330": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 0.6,
-  "status": "a"
+  "selected_by": 0.5,
+  "status": "a",
+  "tin": 195,
+  "tout": 132
  },
  "331": {
   "chance": 75,
   "cost": 45,
   "news": "Hamstring injury - 75% chance of playing",
   "selected_by": 0.0,
-  "status": "d"
+  "status": "d",
+  "tin": 3,
+  "tout": 23
  },
  "332": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 1.2,
-  "status": "a"
+  "selected_by": 1.3,
+  "status": "a",
+  "tin": 2613,
+  "tout": 459
  },
  "333": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Hamburg SV on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 0
  },
  "334": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 3.4,
-  "status": "a"
+  "status": "a",
+  "tin": 1474,
+  "tout": 1553
  },
  "335": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 2.5,
-  "status": "a"
+  "selected_by": 2.7,
+  "status": "a",
+  "tin": 4795,
+  "tout": 1551
  },
  "336": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 57,
+  "tout": 475
  },
  "337": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 157,
+  "tout": 509
  },
  "338": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 1.4,
-  "status": "a"
+  "selected_by": 1.3,
+  "status": "a",
+  "tin": 222,
+  "tout": 600
  },
  "339": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 40,
+  "tout": 79
  },
  "34": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 97,
+  "tout": 169
  },
  "340": {
   "chance": 0,
   "cost": 50,
   "news": "Ankle injury - Expected back 5 Sep",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 3,
+  "tout": 11
  },
  "341": {
   "chance": 75,
   "cost": 50,
   "news": "Hamstring injury - 75% chance of playing",
   "selected_by": 0.0,
-  "status": "d"
+  "status": "d",
+  "tin": 3,
+  "tout": 19
  },
  "342": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined New England Revolution permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 2
  },
  "343": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 100,
+  "tout": 82
  },
  "344": {
   "chance": 0,
   "cost": 50,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 2,
+  "tout": 5
  },
  "345": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 69,
+  "tout": 209
  },
  "346": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 28.5,
-  "status": "a"
+  "selected_by": 28.3,
+  "status": "a",
+  "tin": 4884,
+  "tout": 19028
  },
  "347": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 150,
+  "tout": 376
  },
  "348": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined West Ham United on loan for the rest of the season",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 220
  },
  "349": {
   "chance": 0,
   "cost": 45,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 65,
+  "tout": 52
  },
  "35": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 46,
+  "tout": 46
  },
  "350": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 3.8,
-  "status": "a"
+  "status": "a",
+  "tin": 2215,
+  "tout": 1053
  },
  "351": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 59,
+  "tout": 112
  },
  "352": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 393,
+  "tout": 278
  },
  "353": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined TSV Hartberg on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 14
  },
  "354": {
   "chance": 0,
   "cost": 40,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 30,
+  "tout": 10
  },
  "355": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 84,
+  "tout": 49
  },
  "356": {
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 19.5,
-  "status": "a"
+  "selected_by": 19.6,
+  "status": "a",
+  "tin": 4992,
+  "tout": 5673
  },
  "357": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 3.4,
-  "status": "a"
+  "status": "a",
+  "tin": 1277,
+  "tout": 2170
  },
  "358": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 3.5,
-  "status": "a"
+  "status": "a",
+  "tin": 835,
+  "tout": 1642
  },
  "359": {
   "chance": 0,
   "cost": 50,
   "news": "Muscular injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 10,
+  "tout": 19
  },
  "36": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 168,
+  "tout": 284
  },
  "360": {
   "chance": 0,
   "cost": 50,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 10,
+  "tout": 8
  },
  "361": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 81,
+  "tout": 38
  },
  "362": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 2.4,
-  "status": "a"
+  "status": "a",
+  "tin": 1687,
+  "tout": 1076
  },
  "363": {
   "chance": 0,
   "cost": 40,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 18,
+  "tout": 33
  },
  "364": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 21,
+  "tout": 39
  },
  "365": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined St Mirren on loan for the rest of the season",
   "selected_by": 0.2,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 611
  },
  "366": {
   "chance": null,
   "cost": 75,
   "news": "",
-  "selected_by": 11.3,
-  "status": "a"
+  "selected_by": 11.1,
+  "status": "a",
+  "tin": 1212,
+  "tout": 15465
  },
  "367": {
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 6.5,
-  "status": "a"
+  "selected_by": 6.6,
+  "status": "a",
+  "tin": 7502,
+  "tout": 3819
  },
  "368": {
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 43.3,
-  "status": "a"
+  "selected_by": 43.4,
+  "status": "a",
+  "tin": 15473,
+  "tout": 11132
  },
  "369": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 291,
+  "tout": 1031
  },
  "37": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 70,
+  "tout": 118
  },
  "370": {
   "chance": 0,
   "cost": 55,
   "news": "Back injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 5,
+  "tout": 521
  },
  "371": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 2.0,
-  "status": "a"
+  "status": "a",
+  "tin": 1021,
+  "tout": 1138
  },
  "372": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 1.6,
-  "status": "a"
+  "status": "a",
+  "tin": 671,
+  "tout": 1116
  },
  "373": {
-  "chance": 75,
+  "chance": 0,
   "cost": 55,
-  "news": "Hip injury - 75% chance of playing",
+  "news": "Has joined Internazionale permanently",
   "selected_by": 0.0,
-  "status": "d"
+  "status": "u",
+  "tin": 1,
+  "tout": 42
  },
  "374": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 66,
+  "tout": 61
  },
  "375": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 13,
+  "tout": 36
  },
  "376": {
   "chance": 0,
   "cost": 50,
   "news": "Hamstring injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 0,
+  "tout": 2
  },
  "377": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 252,
+  "tout": 477
  },
  "378": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 73,
+  "tout": 150
  },
  "379": {
   "chance": null,
   "cost": 90,
   "news": "",
-  "selected_by": 16.4,
-  "status": "a"
+  "selected_by": 16.3,
+  "status": "a",
+  "tin": 3052,
+  "tout": 16209
  },
  "38": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.7,
-  "status": "a"
+  "status": "a",
+  "tin": 718,
+  "tout": 578
  },
  "380": {
   "chance": 0,
   "cost": 75,
   "news": "Achilles injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 56,
+  "tout": 271
  },
  "381": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 13,
+  "tout": 20
  },
  "382": {
   "chance": 0,
   "cost": 45,
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 38,
+  "tout": 43
  },
  "383": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 64,
+  "tout": 72
  },
  "384": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 8.4,
-  "status": "a"
+  "selected_by": 8.3,
+  "status": "a",
+  "tin": 1889,
+  "tout": 9041
  },
  "385": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 4.4,
-  "status": "a"
+  "selected_by": 4.5,
+  "status": "a",
+  "tin": 3900,
+  "tout": 1102
  },
  "386": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 11,
+  "tout": 24
  },
  "387": {
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 20.9,
-  "status": "a"
+  "selected_by": 20.7,
+  "status": "a",
+  "tin": 5273,
+  "tout": 19304
  },
  "388": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 19.6,
-  "status": "a"
+  "status": "a",
+  "tin": 8304,
+  "tout": 9832
  },
  "389": {
   "chance": 75,
   "cost": 60,
   "news": "Unspecified injury - 75% chance of playing",
   "selected_by": 1.4,
-  "status": "d"
+  "status": "d",
+  "tin": 8,
+  "tout": 3265
  },
  "39": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined Rangers on loan for the rest of the season",
   "selected_by": 0.2,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 243
  },
  "390": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 1.8,
-  "status": "a"
+  "status": "a",
+  "tin": 647,
+  "tout": 1583
  },
  "391": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 13.8,
-  "status": "a"
+  "selected_by": 14.4,
+  "status": "a",
+  "tin": 49756,
+  "tout": 3159
  },
  "392": {
   "chance": null,
-  "cost": 55,
+  "cost": 54,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 123,
+  "tout": 2798
  },
  "393": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 1.7,
-  "status": "a"
+  "status": "a",
+  "tin": 358,
+  "tout": 1604
  },
  "394": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Burnley on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 8
  },
  "395": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 0.3,
-  "status": "a"
+  "selected_by": 0.2,
+  "status": "a",
+  "tin": 101,
+  "tout": 506
  },
  "396": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 24
  },
  "397": {
   "chance": null,
   "cost": 85,
   "news": "",
-  "selected_by": 24.0,
-  "status": "a"
+  "selected_by": 23.6,
+  "status": "a",
+  "tin": 5941,
+  "tout": 39520
  },
  "398": {
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 4.0,
-  "status": "a"
+  "selected_by": 4.1,
+  "status": "a",
+  "tin": 7817,
+  "tout": 5211
  },
  "399": {
   "chance": null,
-  "cost": 75,
+  "cost": 76,
   "news": "",
-  "selected_by": 10.7,
-  "status": "a"
+  "selected_by": 13.1,
+  "status": "a",
+  "tin": 218428,
+  "tout": 1909
  },
  "4": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 29.0,
-  "status": "a"
+  "selected_by": 28.9,
+  "status": "a",
+  "tin": 2444,
+  "tout": 16434
  },
  "40": {
   "chance": null,
   "cost": 75,
   "news": "",
   "selected_by": 26.2,
-  "status": "a"
+  "status": "a",
+  "tin": 15505,
+  "tout": 14089
  },
  "400": {
   "chance": 0,
-  "cost": 75,
+  "cost": 74,
   "news": "Calf injury - Expected back 5 Sep",
-  "selected_by": 1.3,
-  "status": "i"
+  "selected_by": 1.2,
+  "status": "i",
+  "tin": 44,
+  "tout": 3572
  },
  "401": {
   "chance": null,
   "cost": 70,
   "news": "",
-  "selected_by": 1.3,
-  "status": "a"
+  "selected_by": 1.4,
+  "status": "a",
+  "tin": 8355,
+  "tout": 1027
  },
  "402": {
   "chance": 0,
   "cost": 65,
   "news": "Has joined Barcelona permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 31
  },
  "403": {
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 0.9,
-  "status": "a"
+  "selected_by": 1.0,
+  "status": "a",
+  "tin": 4348,
+  "tout": 565
  },
  "404": {
   "chance": 0,
   "cost": 60,
   "news": "Has joined Al Qadsiah permanently",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 170
  },
  "405": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 390,
+  "tout": 95
  },
  "406": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 67,
+  "tout": 161
  },
  "407": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 12,
+  "tout": 35
  },
  "408": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Sheffield United on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 13
  },
  "409": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 50,
+  "tout": 268
  },
  "41": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 597,
+  "tout": 1100
  },
  "410": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 6,
+  "tout": 27
  },
  "411": {
   "chance": null,
   "cost": 155,
   "news": "",
-  "selected_by": 67.8,
-  "status": "a"
+  "selected_by": 68.2,
+  "status": "a",
+  "tin": 30309,
+  "tout": 1628
  },
  "412": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 15.6,
-  "status": "a"
+  "selected_by": 15.5,
+  "status": "a",
+  "tin": 1342,
+  "tout": 6710
  },
  "413": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Celta Vigo on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 21
  },
  "414": {
   "chance": 0,
   "cost": 40,
   "news": "Hamstring injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 34,
+  "tout": 51
  },
  "415": {
   "chance": null,
-  "cost": 60,
+  "cost": 59,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 282,
+  "tout": 1579
  },
  "416": {
   "chance": 0,
   "cost": 50,
   "news": "Back injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 10,
+  "tout": 38
  },
  "417": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 2.5,
-  "status": "a"
+  "selected_by": 2.4,
+  "status": "a",
+  "tin": 310,
+  "tout": 1375
  },
  "418": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 17.0,
-  "status": "a"
+  "selected_by": 16.8,
+  "status": "a",
+  "tin": 1572,
+  "tout": 18316
  },
  "419": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 1.3,
-  "status": "a"
+  "status": "a",
+  "tin": 304,
+  "tout": 719
  },
  "42": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 74,
+  "tout": 93
  },
  "420": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 68,
+  "tout": 404
  },
  "421": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 123,
+  "tout": 225
  },
  "422": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 242,
+  "tout": 325
  },
  "423": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 19.5,
-  "status": "a"
+  "selected_by": 19.4,
+  "status": "a",
+  "tin": 1570,
+  "tout": 10137
  },
  "424": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 86,
+  "tout": 95
  },
  "425": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined Lausanne-Sport permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 29
  },
  "426": {
   "chance": null,
   "cost": 120,
   "news": "",
-  "selected_by": 48.1,
-  "status": "a"
+  "selected_by": 47.5,
+  "status": "a",
+  "tin": 1350,
+  "tout": 52427
  },
  "427": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 35.7,
-  "status": "a"
+  "selected_by": 34.8,
+  "status": "a",
+  "tin": 2420,
+  "tout": 73194
  },
  "428": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 9.3,
-  "status": "a"
+  "selected_by": 9.2,
+  "status": "a",
+  "tin": 828,
+  "tout": 11557
  },
  "429": {
   "chance": null,
   "cost": 70,
   "news": "",
   "selected_by": 1.7,
-  "status": "a"
+  "status": "a",
+  "tin": 414,
+  "tout": 1756
  },
  "43": {
   "chance": 100,
   "cost": 60,
   "news": "",
-  "selected_by": 2.4,
-  "status": "a"
+  "selected_by": 2.3,
+  "status": "a",
+  "tin": 738,
+  "tout": 2243
  },
  "430": {
   "chance": 75,
   "cost": 55,
   "news": "Foot injury - 75% chance of playing",
   "selected_by": 0.0,
-  "status": "d"
+  "status": "d",
+  "tin": 3,
+  "tout": 30
  },
  "431": {
   "chance": 0,
   "cost": 59,
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.9,
-  "status": "i"
+  "status": "i",
+  "tin": 25,
+  "tout": 3809
  },
  "432": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 290,
+  "tout": 775
  },
  "433": {
   "chance": 0,
   "cost": 50,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 6,
+  "tout": 4
  },
  "434": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 4,
+  "tout": 12
  },
  "435": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 24,
+  "tout": 51
  },
  "436": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 12,
+  "tout": 6
  },
  "437": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 76,
+  "tout": 142
  },
  "438": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 106,
+  "tout": 209
  },
  "439": {
   "chance": 100,
   "cost": 70,
   "news": "",
   "selected_by": 1.8,
-  "status": "a"
+  "status": "a",
+  "tin": 1354,
+  "tout": 1267
  },
  "44": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 96,
+  "tout": 146
  },
  "440": {
   "chance": null,
-  "cost": 55,
+  "cost": 54,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 194,
+  "tout": 547
  },
  "441": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 786,
+  "tout": 656
  },
  "442": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.3,
-  "status": "a"
+  "status": "a",
+  "tin": 171,
+  "tout": 451
  },
  "443": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 14
  },
  "444": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 12,
+  "tout": 17
  },
  "445": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.8,
-  "status": "a"
+  "status": "a",
+  "tin": 3201,
+  "tout": 708
  },
  "446": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 95,
+  "tout": 84
  },
  "447": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 460,
+  "tout": 204
  },
  "448": {
   "chance": 0,
   "cost": 50,
   "news": "Ankle injury - Expected back 14 Sep",
   "selected_by": 1.6,
-  "status": "i"
+  "status": "i",
+  "tin": 30,
+  "tout": 4109
  },
  "449": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 4.1,
-  "status": "a"
+  "selected_by": 4.2,
+  "status": "a",
+  "tin": 2843,
+  "tout": 1086
  },
  "45": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 2.8,
-  "status": "a"
+  "status": "a",
+  "tin": 732,
+  "tout": 1886
  },
  "450": {
   "chance": 0,
   "cost": 50,
   "news": "Calf injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 3,
+  "tout": 52
  },
  "451": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined FC Kaiserslautern on loan for the rest of the season",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 125
  },
  "452": {
   "chance": 75,
   "cost": 69,
   "news": "Thigh injury - 75% chance of playing",
   "selected_by": 2.7,
-  "status": "d"
+  "status": "d",
+  "tin": 79,
+  "tout": 4382
  },
  "453": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 1032,
+  "tout": 674
  },
  "454": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 2.1,
-  "status": "a"
+  "selected_by": 2.2,
+  "status": "a",
+  "tin": 5161,
+  "tout": 976
  },
  "455": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 3.7,
-  "status": "a"
+  "status": "a",
+  "tin": 770,
+  "tout": 2780
  },
  "456": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 116,
+  "tout": 242
  },
  "457": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 47,
+  "tout": 112
  },
  "458": {
   "chance": 0,
   "cost": 55,
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 0,
+  "tout": 36
  },
  "459": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 62,
+  "tout": 43
  },
  "46": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 186,
+  "tout": 158
  },
  "460": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 0.2,
-  "status": "a"
+  "selected_by": 0.3,
+  "status": "a",
+  "tin": 764,
+  "tout": 142
  },
  "461": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 38,
+  "tout": 237
  },
  "462": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 38,
+  "tout": 63
  },
  "463": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 516,
+  "tout": 1451
  },
  "464": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 3.6,
-  "status": "a"
+  "selected_by": 3.7,
+  "status": "a",
+  "tin": 15845,
+  "tout": 1727
  },
  "465": {
   "chance": 0,
   "cost": 60,
   "news": "Foot injury - Unknown return date",
   "selected_by": 0.9,
-  "status": "i"
+  "status": "i",
+  "tin": 55,
+  "tout": 3446
  },
  "466": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 690,
+  "tout": 397
  },
  "467": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 132,
+  "tout": 458
  },
  "468": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 9,
+  "tout": 15
  },
  "469": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 8.9,
-  "status": "a"
+  "selected_by": 8.8,
+  "status": "a",
+  "tin": 632,
+  "tout": 6293
  },
  "47": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 230,
+  "tout": 289
  },
  "470": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 15,
+  "tout": 24
  },
  "471": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 1.8,
-  "status": "a"
+  "status": "a",
+  "tin": 146,
+  "tout": 652
  },
  "472": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 1.6,
-  "status": "a"
+  "status": "a",
+  "tin": 368,
+  "tout": 535
  },
  "473": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 3.5,
-  "status": "a"
+  "status": "a",
+  "tin": 946,
+  "tout": 1310
  },
  "474": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 12,
+  "tout": 61
  },
  "475": {
   "chance": 0,
   "cost": 45,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 2,
+  "tout": 4
  },
  "476": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 31,
+  "tout": 79
  },
  "477": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 74,
+  "tout": 91
  },
  "478": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 5,
+  "tout": 19
  },
  "479": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 30,
+  "tout": 63
  },
  "48": {
   "chance": 0,
   "cost": 50,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 14,
+  "tout": 35
  },
  "480": {
   "chance": 100,
-  "cost": 80,
+  "cost": 79,
   "news": "",
-  "selected_by": 8.3,
-  "status": "a"
+  "selected_by": 8.2,
+  "status": "a",
+  "tin": 666,
+  "tout": 14048
  },
  "481": {
   "chance": 100,
   "cost": 64,
   "news": "",
-  "selected_by": 6.1,
-  "status": "a"
+  "selected_by": 6.0,
+  "status": "a",
+  "tin": 2007,
+  "tout": 9781
  },
  "482": {
   "chance": 100,
-  "cost": 60,
+  "cost": 59,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 75,
+  "tout": 186
  },
  "483": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 78,
+  "tout": 294
  },
  "484": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 22,
+  "tout": 92
  },
  "485": {
   "chance": 0,
   "cost": 55,
   "news": "Has joined Lille on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 75
  },
  "486": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 33,
+  "tout": 38
  },
  "487": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 16,
+  "tout": 46
  },
  "488": {
   "chance": 0,
   "cost": 50,
   "news": "Calf injury - Unknown return date",
   "selected_by": 0.9,
-  "status": "i"
+  "status": "i",
+  "tin": 32,
+  "tout": 2235
  },
  "489": {
   "chance": 100,
   "cost": 45,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 1106,
+  "tout": 819
  },
  "49": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Bolton Wanderers on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 4
  },
  "490": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 1.6,
-  "status": "a"
+  "selected_by": 1.5,
+  "status": "a",
+  "tin": 362,
+  "tout": 1172
  },
  "491": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 3.7,
-  "status": "a"
+  "selected_by": 3.6,
+  "status": "a",
+  "tin": 642,
+  "tout": 2534
  },
  "492": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 246,
+  "tout": 562
  },
  "493": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 24,
+  "tout": 42
  },
  "494": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Juventus on loan for the rest of the season",
   "selected_by": 0.2,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 489
  },
  "495": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 375,
+  "tout": 169
  },
  "496": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 22.7,
-  "status": "a"
+  "selected_by": 22.6,
+  "status": "a",
+  "tin": 3317,
+  "tout": 7143
  },
  "497": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 18.5,
-  "status": "a"
+  "status": "a",
+  "tin": 4875,
+  "tout": 3007
  },
  "498": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 7.6,
-  "status": "a"
+  "selected_by": 7.5,
+  "status": "a",
+  "tin": 689,
+  "tout": 3192
  },
  "499": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 13.5,
-  "status": "a"
+  "status": "a",
+  "tin": 3298,
+  "tout": 4333
  },
  "5": {
   "chance": 0,
   "cost": 65,
   "news": "Groin injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 42,
+  "tout": 176
  },
  "50": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 381,
+  "tout": 368
  },
  "500": {
   "chance": 0,
   "cost": 50,
   "news": "Has joined Atletico Madrid permanently",
-  "selected_by": 0.2,
-  "status": "u"
+  "selected_by": 0.1,
+  "status": "u",
+  "tin": 0,
+  "tout": 358
  },
  "501": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 64,
+  "tout": 85
  },
  "502": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 3.8,
-  "status": "a"
+  "status": "a",
+  "tin": 993,
+  "tout": 1221
  },
  "503": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 4.3,
-  "status": "a"
+  "status": "a",
+  "tin": 1329,
+  "tout": 1529
  },
  "504": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 2.5,
-  "status": "a"
+  "status": "a",
+  "tin": 1899,
+  "tout": 887
  },
  "505": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Internazionale permanently",
   "selected_by": 0.5,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 1357
  },
  "506": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 82,
+  "tout": 187
  },
  "507": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Middlesbrough permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 22
  },
  "508": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "a",
+  "tin": 202,
+  "tout": 320
  },
  "509": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 21,
+  "tout": 23
  },
  "51": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 921,
+  "tout": 402
  },
  "510": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 39,
+  "tout": 31
  },
  "511": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 119,
+  "tout": 118
  },
  "512": {
   "chance": 75,
   "cost": 65,
   "news": "Thigh injury - 75% chance of playing",
   "selected_by": 0.1,
-  "status": "d"
+  "status": "d",
+  "tin": 21,
+  "tout": 139
  },
  "513": {
   "chance": 0,
   "cost": 60,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 6,
+  "tout": 33
  },
  "514": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 63,
+  "tout": 710
  },
  "515": {
   "chance": 75,
-  "cost": 65,
+  "cost": 64,
   "news": "Shoulder injury - 75% chance of playing",
   "selected_by": 1.0,
-  "status": "d"
+  "status": "d",
+  "tin": 15,
+  "tout": 2499
  },
  "516": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 42,
+  "tout": 105
  },
  "517": {
   "chance": 0,
   "cost": 55,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 4,
+  "tout": 5
  },
  "518": {
   "chance": 100,
   "cost": 49,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 475,
+  "tout": 133
  },
  "519": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 86,
+  "tout": 214
  },
  "52": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 26,
+  "tout": 43
  },
  "520": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 58,
+  "tout": 109
  },
  "521": {
   "chance": 0,
   "cost": 65,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 2,
+  "tout": 7
  },
  "522": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 159,
+  "tout": 177
  },
  "523": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 148,
+  "tout": 149
  },
  "524": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 101,
+  "tout": 445
  },
  "525": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.6,
-  "status": "a"
+  "status": "a",
+  "tin": 254,
+  "tout": 1590
  },
  "526": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.3,
-  "status": "a"
+  "status": "a",
+  "tin": 653,
+  "tout": 943
  },
  "527": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 2.8,
-  "status": "a"
+  "status": "a",
+  "tin": 606,
+  "tout": 3635
  },
  "528": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 1.7,
-  "status": "a"
+  "status": "a",
+  "tin": 1574,
+  "tout": 921
  },
  "529": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 3.9,
-  "status": "a"
+  "status": "a",
+  "tin": 151,
+  "tout": 3574
  },
  "53": {
   "chance": 0,
   "cost": 60,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.2,
-  "status": "i"
+  "status": "i",
+  "tin": 33,
+  "tout": 416
  },
  "530": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined Wrexham permanently",
   "selected_by": 0.2,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 116
  },
  "531": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 15,
+  "tout": 18
  },
  "532": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 5.0,
-  "status": "a"
+  "selected_by": 4.9,
+  "status": "a",
+  "tin": 372,
+  "tout": 8049
  },
  "533": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 2.5,
-  "status": "a"
+  "status": "a",
+  "tin": 196,
+  "tout": 1543
  },
  "534": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 6.4,
-  "status": "a"
+  "selected_by": 6.3,
+  "status": "a",
+  "tin": 429,
+  "tout": 4605
  },
  "535": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 95,
+  "tout": 232
  },
  "536": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 33,
+  "tout": 183
  },
  "537": {
-  "chance": null,
+  "chance": 0,
   "cost": 45,
-  "news": "",
+  "news": "Has joined Swansea City on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "u",
+  "tin": 3,
+  "tout": 14
  },
  "538": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined KV Mechelen on loan for the rest of the season",
   "selected_by": 0.1,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 47
  },
  "539": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 3.4,
-  "status": "a"
+  "status": "a",
+  "tin": 248,
+  "tout": 871
  },
  "54": {
   "chance": 0,
   "cost": 55,
   "news": "Suspended until 19 Sep",
   "selected_by": 0.1,
-  "status": "s"
+  "status": "s",
+  "tin": 5,
+  "tout": 79
  },
  "540": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined Konyaspor permanently",
   "selected_by": 0.2,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 205
  },
  "541": {
   "chance": 100,
   "cost": 45,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 21,
+  "tout": 82
  },
  "542": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 8.6,
-  "status": "a"
+  "selected_by": 8.5,
+  "status": "a",
+  "tin": 414,
+  "tout": 12955
  },
  "543": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 15,
+  "tout": 57
  },
  "544": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 4.7,
-  "status": "a"
+  "status": "a",
+  "tin": 1848,
+  "tout": 1649
  },
  "545": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 72,
+  "tout": 205
  },
  "546": {
   "chance": 0,
-  "cost": 50,
+  "cost": 49,
   "news": "Ankle injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 6,
+  "tout": 114
  },
  "547": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 6,
+  "tout": 7
  },
  "548": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 5,
+  "tout": 29
  },
  "549": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 15,
+  "tout": 140
  },
  "55": {
   "chance": null,
   "cost": 79,
   "news": "",
-  "selected_by": 7.5,
-  "status": "a"
+  "selected_by": 7.3,
+  "status": "a",
+  "tin": 450,
+  "tout": 12787
  },
  "550": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 3,
+  "tout": 2
  },
  "551": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 214,
+  "tout": 97
  },
  "552": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 12.8,
-  "status": "a"
+  "selected_by": 12.6,
+  "status": "a",
+  "tin": 2049,
+  "tout": 10704
  },
  "553": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 150,
+  "tout": 528
  },
  "554": {
   "chance": 0,
   "cost": 45,
   "news": "Has joined Valencia on loan for the rest of the season",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 65
  },
  "555": {
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 1.8,
-  "status": "a"
+  "selected_by": 1.9,
+  "status": "a",
+  "tin": 838,
+  "tout": 351
  },
  "556": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 2.3,
-  "status": "a"
+  "status": "a",
+  "tin": 301,
+  "tout": 612
  },
  "557": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 26.1,
-  "status": "a"
+  "status": "a",
+  "tin": 14392,
+  "tout": 7544
  },
  "558": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 14,
+  "tout": 50
  },
  "559": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 51,
+  "tout": 83
  },
  "56": {
   "chance": 50,
   "cost": 55,
   "news": "Knock - 50% chance of playing",
   "selected_by": 0.1,
-  "status": "d"
+  "status": "d",
+  "tin": 38,
+  "tout": 180
  },
  "560": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 24,
+  "tout": 53
  },
  "561": {
   "chance": 100,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 9,
+  "tout": 13
  },
  "562": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 23,
+  "tout": 223
  },
  "563": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 13
  },
  "564": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 56,
+  "tout": 328
  },
  "565": {
   "chance": null,
   "cost": 56,
   "news": "",
-  "selected_by": 9.0,
-  "status": "a"
+  "selected_by": 9.3,
+  "status": "a",
+  "tin": 22447,
+  "tout": 2644
  },
  "566": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 142,
+  "tout": 136
  },
  "567": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 303,
+  "tout": 211
  },
  "568": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 116,
+  "tout": 85
  },
  "569": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 4.0,
-  "status": "a"
+  "selected_by": 4.2,
+  "status": "a",
+  "tin": 17405,
+  "tout": 1365
  },
  "57": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 3.3,
-  "status": "a"
+  "status": "a",
+  "tin": 955,
+  "tout": 874
  },
  "570": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 57,
+  "tout": 131
  },
  "571": {
   "chance": 75,
   "cost": 50,
   "news": "Calf injury - 75% chance of playing",
   "selected_by": 0.1,
-  "status": "d"
+  "status": "d",
+  "tin": 2,
+  "tout": 119
  },
  "572": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 3.0,
-  "status": "a"
+  "selected_by": 3.1,
+  "status": "a",
+  "tin": 5005,
+  "tout": 898
  },
  "573": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 23,
+  "tout": 69
  },
  "574": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 23,
+  "tout": 40
  },
  "575": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 45,
+  "tout": 185
  },
  "576": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 47,
+  "tout": 38
  },
  "577": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 0.4,
-  "status": "a"
+  "selected_by": 0.3,
+  "status": "a",
+  "tin": 118,
+  "tout": 116
  },
  "578": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 17,
+  "tout": 60
  },
  "579": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 2.7,
-  "status": "a"
+  "status": "a",
+  "tin": 1303,
+  "tout": 1871
  },
  "58": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 3.2,
-  "status": "a"
+  "status": "a",
+  "tin": 1452,
+  "tout": 410
  },
  "580": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 19,
+  "tout": 61
  },
  "581": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 208,
+  "tout": 442
  },
  "582": {
   "chance": 0,
   "cost": 55,
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.4,
-  "status": "i"
+  "status": "i",
+  "tin": 63,
+  "tout": 579
  },
  "583": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 58,
+  "tout": 142
  },
  "584": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 13,
+  "tout": 79
  },
  "585": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.6,
-  "status": "a"
+  "status": "a",
+  "tin": 126,
+  "tout": 130
  },
  "586": {
   "chance": 100,
   "cost": 40,
   "news": "",
-  "selected_by": 4.1,
-  "status": "a"
+  "selected_by": 4.4,
+  "status": "a",
+  "tin": 17561,
+  "tout": 1046
  },
  "587": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 6,
+  "tout": 22
  },
  "588": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 171,
+  "tout": 61
  },
  "589": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 14,
+  "tout": 16
  },
  "59": {
   "chance": 0,
   "cost": 40,
   "news": "Has joined MK Dons permanently",
   "selected_by": 0.2,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 275
  },
  "590": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 51,
+  "tout": 31
  },
  "591": {
   "chance": 100,
   "cost": 55,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 740,
+  "tout": 251
  },
  "592": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 1.0,
-  "status": "a"
+  "status": "a",
+  "tin": 149,
+  "tout": 212
  },
  "593": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.4,
-  "status": "a"
+  "status": "a",
+  "tin": 1099,
+  "tout": 172
  },
  "594": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.3,
-  "status": "a"
+  "status": "a",
+  "tin": 245,
+  "tout": 198
  },
  "595": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 13,
+  "tout": 10
  },
  "596": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 51,
+  "tout": 44
  },
  "597": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.8,
-  "status": "a"
+  "status": "a",
+  "tin": 414,
+  "tout": 306
  },
  "598": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 15,
+  "tout": 10
  },
  "599": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 133,
+  "tout": 70
  },
  "6": {
   "chance": 0,
   "cost": 60,
   "news": "Back injury - Unknown return date",
   "selected_by": 0.3,
-  "status": "i"
+  "status": "i",
+  "tin": 105,
+  "tout": 422
  },
  "60": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.9,
-  "status": "a"
+  "status": "a",
+  "tin": 298,
+  "tout": 406
  },
  "600": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 12,
+  "tout": 8
  },
  "601": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 245,
+  "tout": 84
  },
  "602": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 109,
+  "tout": 45
  },
  "603": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 75,
+  "tout": 39
  },
  "604": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 241,
+  "tout": 81
  },
  "605": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 384,
+  "tout": 108
  },
  "606": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 292,
+  "tout": 58
  },
  "607": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 281,
+  "tout": 96
  },
  "608": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 247,
+  "tout": 60
  },
  "609": {
   "chance": null,
   "cost": 40,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 625,
+  "tout": 95
  },
  "61": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 4.2,
-  "status": "a"
+  "status": "a",
+  "tin": 547,
+  "tout": 1456
  },
  "610": {
   "chance": 75,
   "cost": 40,
   "news": "Unspecified injury - 75% chance of playing",
   "selected_by": 0.1,
-  "status": "d"
+  "status": "d",
+  "tin": 160,
+  "tout": 117
  },
  "611": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 0.0,
-  "status": "a"
+  "selected_by": 0.1,
+  "status": "a",
+  "tin": 348,
+  "tout": 32
  },
  "612": {
   "chance": 0,
   "cost": 45,
   "news": "Suspended until 5 Sep",
   "selected_by": 0.0,
-  "status": "s"
+  "status": "s",
+  "tin": 7,
+  "tout": 3
  },
  "613": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 908,
+  "tout": 136
  },
  "614": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 241,
+  "tout": 10
  },
  "615": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 88,
+  "tout": 15
  },
  "616": {
   "chance": null,
   "cost": 55,
   "news": "",
-  "selected_by": 0.0,
-  "status": "a"
+  "selected_by": 0.1,
+  "status": "a",
+  "tin": 1228,
+  "tout": 195
  },
  "617": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 34,
+  "tout": 6
  },
  "618": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 285,
+  "tout": 17
  },
  "619": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 159,
+  "tout": 8
  },
  "62": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 113,
+  "tout": 90
  },
  "620": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 1280,
+  "tout": 108
+ },
+ "621": {
+  "chance": null,
+  "cost": 45,
+  "news": "",
+  "selected_by": 0.0,
+  "status": "a",
+  "tin": 124,
+  "tout": 12
+ },
+ "622": {
+  "chance": null,
+  "cost": 40,
+  "news": "",
+  "selected_by": 0.0,
+  "status": "a",
+  "tin": 86,
+  "tout": 13
  },
  "63": {
   "chance": 0,
   "cost": 50,
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 5,
+  "tout": 12
  },
  "64": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 70,
+  "tout": 28
  },
  "65": {
   "chance": 0,
   "cost": 45,
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 7,
+  "tout": 32
  },
  "66": {
   "chance": 75,
   "cost": 40,
   "news": "Hamstring injury - 75% chance of playing",
   "selected_by": 0.2,
-  "status": "d"
+  "status": "d",
+  "tin": 68,
+  "tout": 120
  },
  "67": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 2.8,
-  "status": "a"
+  "status": "a",
+  "tin": 733,
+  "tout": 2352
  },
  "68": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 2.5,
-  "status": "a"
+  "status": "a",
+  "tin": 2961,
+  "tout": 1239
  },
  "69": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 399,
+  "tout": 957
  },
  "7": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.7,
-  "status": "a"
+  "status": "a",
+  "tin": 461,
+  "tout": 520
  },
  "70": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 639,
+  "tout": 857
  },
  "71": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 229,
+  "tout": 107
  },
  "72": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 27,
+  "tout": 49
  },
  "73": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 347,
+  "tout": 212
  },
  "74": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 52,
+  "tout": 37
  },
  "75": {
   "chance": 100,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 67,
+  "tout": 26
  },
  "76": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 17
  },
  "77": {
   "chance": 0,
   "cost": 50,
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 4,
+  "tout": 49
  },
  "78": {
   "chance": 0,
   "cost": 75,
   "news": "Foot injury - Unknown return date",
   "selected_by": 0.3,
-  "status": "i"
+  "status": "i",
+  "tin": 20,
+  "tout": 744
  },
  "79": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 3.0,
-  "status": "a"
+  "status": "a",
+  "tin": 2826,
+  "tout": 1442
  },
  "8": {
   "chance": null,
   "cost": 56,
   "news": "",
   "selected_by": 41.7,
-  "status": "a"
+  "status": "a",
+  "tin": 11094,
+  "tout": 4327
  },
  "80": {
   "chance": 0,
   "cost": 55,
   "news": "Has joined Getafe permanently",
   "selected_by": 0.0,
-  "status": "u"
+  "status": "u",
+  "tin": 0,
+  "tout": 49
  },
  "81": {
   "chance": 100,
   "cost": 60,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 77,
+  "tout": 61
  },
  "82": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 6.5,
-  "status": "a"
+  "selected_by": 6.6,
+  "status": "a",
+  "tin": 4510,
+  "tout": 1048
  },
  "83": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 47,
+  "tout": 45
  },
  "84": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 2.1,
-  "status": "a"
+  "status": "a",
+  "tin": 1118,
+  "tout": 567
  },
  "85": {
   "chance": 0,
   "cost": 50,
   "news": "Groin injury - Unknown return date",
   "selected_by": 0.1,
-  "status": "i"
+  "status": "i",
+  "tin": 7,
+  "tout": 163
  },
  "86": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 1.2,
-  "status": "a"
+  "status": "a",
+  "tin": 2550,
+  "tout": 563
  },
  "87": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 4.1,
-  "status": "a"
+  "selected_by": 4.2,
+  "status": "a",
+  "tin": 5559,
+  "tout": 1256
  },
  "88": {
   "chance": null,
   "cost": 46,
   "news": "",
-  "selected_by": 7.7,
-  "status": "a"
+  "selected_by": 7.9,
+  "status": "a",
+  "tin": 8849,
+  "tout": 1237
  },
  "89": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 31,
+  "tout": 68
  },
  "9": {
   "chance": null,
   "cost": 54,
   "news": "",
   "selected_by": 1.5,
-  "status": "a"
+  "status": "a",
+  "tin": 373,
+  "tout": 1094
  },
  "90": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 42,
+  "tout": 27
  },
  "91": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.1,
-  "status": "a"
+  "status": "a",
+  "tin": 45,
+  "tout": 39
  },
  "92": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.0,
-  "status": "a"
+  "status": "a",
+  "tin": 11,
+  "tout": 10
  },
  "93": {
   "chance": null,
   "cost": 45,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 7,
+  "tout": 32
  },
  "94": {
   "chance": null,
   "cost": 60,
   "news": "",
   "selected_by": 3.5,
-  "status": "a"
+  "status": "a",
+  "tin": 1289,
+  "tout": 2659
  },
  "95": {
   "chance": null,
   "cost": 65,
   "news": "",
   "selected_by": 1.1,
-  "status": "a"
+  "status": "a",
+  "tin": 343,
+  "tout": 961
  },
  "96": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 156,
+  "tout": 292
  },
  "97": {
   "chance": null,
   "cost": 55,
   "news": "",
   "selected_by": 0.2,
-  "status": "a"
+  "status": "a",
+  "tin": 148,
+  "tout": 83
  },
  "98": {
   "chance": null,
   "cost": 50,
   "news": "",
   "selected_by": 0.5,
-  "status": "a"
+  "status": "a",
+  "tin": 2625,
+  "tout": 326
  },
  "99": {
   "chance": 0,
   "cost": 50,
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
-  "status": "i"
+  "status": "i",
+  "tin": 4,
+  "tout": 3
  }
 }
