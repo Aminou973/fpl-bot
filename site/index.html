@@ -1554,7 +1554,7 @@ function renderLivescore() {
       const st = f.finished ? "finished" : f.started ? "in play" : "kick-off to come";
       const dim = f.started && !f.finished ? "" : " hint";
       return `<div class="tile"><div class="k">${teams[f.home] || f.home} — ${teams[f.away] || f.away}</div>
-        <div class="v">${f.started ? `${f.hs ?? 0} : ${f.as ?? 0}` : "vs"}</div>
+        <div class="v">${f.started ? `${f.hs ?? "–"} : ${f.as ?? "–"}` : "vs"}</div>
         <div class="n${dim}">${st}</div></div>`;
     }).join("") + `</div>`;
 
