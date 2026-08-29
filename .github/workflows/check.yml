@@ -42,6 +42,24 @@ jobs:
           print("sha:", c["projections_sha"])
           EOF
           python tools/proj_diff.py
+          python - <<'EOF'
+          import hashlib, json, os
+          from tools.selfcheck import projection_frame
+          from fplbot import model, pipeline, optimize
+          df, teams, fx, gws = model.build(horizon=5, start_gw=3)
+          proj = projection_frame(df, gws).to_csv(index=False)
+          print("raw bytes[:80]:", repr(proj[:80]))
+          print("sha LF:", hashlib.sha256(proj.replace("\r\n", "\n").encode()).hexdigest())
+          print("has CR:", "\r" in proj)
+          for team, t in pipeline.load_config()["teams"].items():
+              squad, source = pipeline.resolve_squad_traced(
+                  df, None, by_name=[tuple(x) for x in t["squad"]])
+              print(team, "squad n:", len(squad), "source:", source,
+                    "ids:", sorted(squad), "kw:", json.dumps(pipeline.team_kwargs(df, t), default=str))
+              pool = optimize.prune(df, gws, always=squad)
+              print(team, "pool n:", len(pool))
+          print("hashseed:", os.environ.get("PYTHONHASHSEED", "<unset>"))
+          EOF
       - name: golden files + invariant tests
         run: |
           python tools/selfcheck.py
