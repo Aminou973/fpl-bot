@@ -31,6 +31,13 @@ def _multiplier(pick, chip):
     return 1
 
 
+def _nearest_xp(info, gw):
+    """The player's projection for the closest gameweek the bundle knows."""
+    keys = [(abs(int(k[2:]) - gw), k) for k in info
+            if k.startswith("xp") and len(k) > 2 and k[2:].isdigit()]
+    return info[min(keys)[1]] if keys else None
+
+
 def _live_gw(boot):
     """The gameweek being played: deadline passed, provisional results not in."""
     for e in boot["events"]:
@@ -67,8 +74,8 @@ def build(boot=None, entry_ids=None, compare=(), bundle=None, max_leagues=6):
     entries = []
     for eid in list(entry_ids) + list(compare):
         try:
-            snap = _entry_live(eid, gw, live_by_id, xp_by_id, ev)
-            snap["meta"] = _entry_meta(eid)
+            snap = _entry_live(eid, gw, live_by_id, xp_by_id)
+            snap["meta"]["prev_rank"] = _prev_rank(eid)
             snap["leagues"] = _leagues(eid, max_leagues)
             entries.append(snap)
         except Exception:                                    # noqa: BLE001
@@ -101,11 +108,17 @@ def _fx_rows(fixtures):
     } for f in fixtures]
 
 
-def _entry_live(entry_id, gw, live_by_id, xp_by_id, event):
-    """Live + projected rows for one entry; the live total is FPL's own."""
+def _entry_live(entry_id, gw, live_by_id, xp_by_id):
+    """Live + projected rows for one entry; the live total is FPL's own.
+
+    entry/{id}/event/{gw}/ 404s while the gameweek is in play, so everything
+    comes from the picks payload: entry_history carries the live gameweek
+    total and live overall rank (autosubs already applied by FPL), and
+    active_chip the chip in play.
+    """
     picks = api.entry_picks(entry_id, gw)
-    e = api.entry_event(entry_id, gw)
-    chip = e.get("active_chip")
+    chip = picks.get("active_chip")
+    hist = picks.get("entry_history") or {}
     players = []
     proj_final = 0.0
     for p in picks["picks"]:
@@ -115,12 +128,15 @@ def _entry_live(entry_id, gw, live_by_id, xp_by_id, event):
         minutes = int(st.get("minutes") or 0)
         mult = _multiplier(p, chip)
         info = xp_by_id.get(eid, {})
-        xp = float(info.get(f"xp{gw}") or 0.0)
+        xp = info.get(f"xp{gw}")
+        if xp is None:
+            # the bundle's horizon starts after the gw being played (plan runs
+            # ahead mid-gameweek) - fall back to the nearest projected gw
+            # rather than zeroing out yet-to-feature players
+            xp = _nearest_xp(info, gw)
+        xp = float(xp or 0.0)
         # yet to feature: count the model's projection, not zero
-        if minutes > 0:
-            final = raw
-        else:
-            final = xp
+        final = raw if minutes > 0 else xp
         players.append({
             "id": eid,
             "name": info.get("name", info.get("full_name", f"#{eid}")),
@@ -133,34 +149,34 @@ def _entry_live(entry_id, gw, live_by_id, xp_by_id, event):
         })
         # bench players count too - they can still autosub in
         proj_final += final * mult
+    try:
+        name = api.entry(entry_id).get("name") or f"entry {entry_id}"
+    except Exception:                                        # noqa: BLE001
+        name = f"entry {entry_id}"
     return {
         "entry_id": entry_id,
-        "name": e.get("entry_name") or picks.get("entryname") or f"entry {entry_id}",
+        "name": name,
         "gw": gw,
-        "live_pts": (e.get("points") or {}).get("total"),
+        "live_pts": hist.get("points"),
         "proj_final": round(proj_final, 1),
         "chip": chip,
         "players": players,
+        "meta": {
+            "overall_pts": hist.get("total_points"),
+            "overall_rank": hist.get("overall_rank"),
+        },
     }
 
 
-def _entry_meta(entry_id):
-    """Overall rank / points as of the last settled gameweek, plus a delta."""
+def _prev_rank(entry_id):
+    """Overall rank after the last settled gameweek, for the rank-move tile."""
     try:
         hist = api.entry_history(entry_id)["current"]
     except Exception:                                        # noqa: BLE001
-        return {"name": f"entry {entry_id}"}
+        return None
     if not hist:
-        return {"name": f"entry {entry_id}"}
-    last = hist[-1]
-    prev = hist[-2] if len(hist) > 1 else None
-    return {
-        "overall_pts": last.get("total_points"),
-        "overall_rank": last.get("overall_rank"),
-        "prev_rank": prev.get("overall_rank") if prev else None,
-        "last_gw": last.get("event_points"),
-        "season": last.get("season_name") or "",
-    }
+        return None
+    return hist[-1].get("overall_rank")
 
 
 def _leagues(entry_id, max_classic):

@@ -64,11 +64,26 @@ function fail(when, miss, html) {
 }
 
 // fetch #0 was served during boot; assert the live render landed.
+function expectedWords(snap) {
+  const need = ["Live points", "Proj final"];
+  const en = (snap.entries || [])[0];
+  if (en && (en.players || []) [0]) need.push(en.players[0].name);
+  // the dashboard builds mini-league tables only for entries[0]'s first
+  // three leagues (LIVE.leagues keys) - expect exactly those
+  for (const t of Object.values(snap.leagues || {})) {
+    if (t && t.name && t.rows && t.rows.length) need.push(t.name);
+  }
+  for (const f of snap.fixtures || []) {
+    const st = f.finished ? "finished" : f.started ? "in play" : "kick-off to come";
+    if (!need.includes(st)) need.push(st);
+  }
+  return need.filter(Boolean);
+}
+
 setTimeout(() => {
   if (bootErr) { console.error("dashboard script failed to load:", bootErr); process.exit(1); }
   const liveHtml = el("#liveBody").innerHTML;
-  const miss = ["Live points", "Proj final", "Saka", "Palmer", "in play"]
-    .filter(w => !liveHtml.includes(w));
+  const miss = expectedWords(liveSnap).filter(w => !liveHtml.includes(w));
   if (miss.length) fail("live snapshot render", miss, liveHtml);
   console.log("fetch #0: live state rendered,", liveHtml.length, "chars");
 
@@ -89,8 +104,7 @@ setTimeout(() => {
 
 setTimeout(() => {
   const liveHtml = el("#liveBody").innerHTML;
-  const miss = ["Live points", "Proj final", "Saka", "Palmer", "in play"]
-    .filter(w => !liveHtml.includes(w));
+  const miss = expectedWords(liveSnap).filter(w => !liveHtml.includes(w));
   if (miss.length) fail("live re-render", miss, liveHtml);
   console.log("fetch #2: live state restored,", liveHtml.length, "chars - OK");
   process.exit(0);
