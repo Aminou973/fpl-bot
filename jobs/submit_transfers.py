@@ -10,6 +10,9 @@ guess:
   2. the plan must be fresh (deadline within the act window, default 36h)
   3. the plan's squads must have come from the API (never the config fallback)
   4. if the live squad already equals the plan, do nothing
+  5. a chip in the plan (engine 7's wildcard) must be unspent in the live
+     entry history and must activate together with its transfer batch — if
+     the activation is refused, the moves are NOT sent as paid transfers
 Credentials come from FPL_EMAIL / FPL_PASSWORD environment variables.
 """
 from __future__ import annotations
@@ -28,6 +31,11 @@ from fplbot import api, notify, pipeline                      # noqa: E402
 from fplbot.notify import esc                                 # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
+
+# chips that ride ON the lineup write rather than the transfers endpoint ——
+# triple captain and bench boost do not change the squad, so they activate
+# with the picks (a wildcard activates WITH its transfer batch instead)
+PICK_CHIPS = ("3xc", "bboost")
 
 
 def live_picks_sig(mt):
@@ -253,6 +261,21 @@ def main():
                 print(f"  {line}")
         print(f"  planned hits {entry['hits']}, squad after submit: "
               f"{len(entry['picks_payload'])} players")
+        chip = entry.get("chip")
+        if chip:
+            how = ("rides on the lineup write"
+                   if chip in PICK_CHIPS else "activates with the transfers")
+            print(f"  🃏 chip {chip.upper()} in the plan — {how}"
+                  + (f" (modelled gain +{entry.get('chip_gain')} xp)"
+                     if entry.get("chip_gain") is not None else ""))
+            used = {c.get("name")
+                    for c in (api.entry_history(entry_id).get("chips") or [])}
+            if chip in used:
+                results[name] = {"status": "refused", "gw": gw,
+                                 "note": f"chip {chip} is already spent — "
+                                         f"not arming it again"}
+                print(f"  ✘ refusing: {chip} already spent")
+                continue
         if not a.apply:
             results[name] = {"status": "dry-run"}
             continue
@@ -272,17 +295,44 @@ def main():
             legs.append({"element_in": el_in, "element_out": el_out,
                          "purchase_price": boot_el_cost[el_in],
                          "selling_price": owned[el_out].get("selling_price", 0)})
-        if legs:
-            api.make_transfers(session, entry_id, gw, legs)
-            print(f"  ✔ transfers made: "
-                  + ", ".join(f"{names.get(l['element_in'])} in for "
-                              f"{names.get(l['element_out'])}" for l in legs))
+        if legs or chip:
+            if chip and chip not in PICK_CHIPS:
+                # wildcard (and a future free hit): the chip and its whole
+                # transfer batch go in ONE call, so the game can never take
+                # the moves without the chip. If the activation is refused,
+                # stop dead: un-chipping a wildcard's moves means paying a
+                # fortune in points for them.
+                try:
+                    api.make_transfers(session, entry_id, gw, legs, chip=chip)
+                except Exception as e:                       # noqa: BLE001
+                    msg = (f"chip {chip} activation failed — transfers NOT "
+                           f"sent as paid moves: {e}")
+                    notify.send(
+                        f"🚨 <b>{esc(name)} — {esc(chip.upper())} FAILED</b>\n\n"
+                        f"{esc(str(e)[:300])}\n\nThe moves were not paid for. "
+                        f"Play the chip manually or re-arm after fixing.",
+                        kind="alert")
+                    results[name] = {"status": "chip-failed", "gw": gw,
+                                     "chip": chip, "note": msg}
+                    print(f"  ✘ {msg}")
+                    continue
+                print(f"  ✔ {chip} activated with {len(legs)} moves")
+            elif legs:
+                api.make_transfers(session, entry_id, gw, legs)
+                print(f"  ✔ transfers made: "
+                      + ", ".join(f"{names.get(l['element_in'])} in for "
+                                  f"{names.get(l['element_out'])}" for l in legs))
         else:
             print("  no transfers to make — lineup only")
-        api.submit_picks(session, team_id, entry["picks_payload"])
+        # a triple captain or bench boost rides ON the lineup write (it does
+        # not touch transfers); a wildcard was already activated above
+        api.submit_picks(session, team_id, entry["picks_payload"],
+                         chip=chip if chip in PICK_CHIPS else None)
         results[name] = {"status": "applied", "team_id": team_id,
                          "gw": gw, "in": entry["in"], "out": entry["out"],
                          "captain": entry["captain"]}
+        if chip:
+            results[name]["chip"] = chip
         print(f"  ✔ applied")
 
     log["gws"][str(gw)] = {
@@ -296,12 +346,23 @@ def main():
     # audible alert when the bot actually acted (or could not)
     if results:
         marks = {"applied": "✅", "already-applied": "✔", "skipped": "⚠️",
-                 "dry-run": "•"}
+                 "dry-run": "•", "chip-failed": "🚨", "refused": "🚫"}
         body = "\n".join(f"{marks.get(v['status'], '•')} <b>{esc(k)}</b> — "
                          f"{esc(v.get('note') or v['status'])}"
                          for k, v in results.items())
         notify.send(f"🤖 <b>GW{gw} {'lineup applied' if a.apply else 'dry run'}</b>\n\n"
                     + body, kind="alert")
+    played = {k: v["chip"] for k, v in results.items()
+              if v.get("status") == "applied" and v.get("chip")}
+    if played and a.apply:
+        # chips are once-a-season: a played one is worth its own alert, not a
+        # line inside a routine summary
+        notify.send(
+            "🃏 <b>CHIP PLAYED</b>\n\n" + "\n".join(
+                f"<b>{esc(k)}</b> — {esc(v.upper())} played for GW{gw}"
+                + (f" (modelled gain +{esc(str(wanted[k].get('chip_gain')))} xp)"
+                   if wanted[k].get("chip_gain") else "")
+                for k, v in played.items()), kind="alert")
 
 
 if __name__ == "__main__":

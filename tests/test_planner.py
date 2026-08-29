@@ -77,14 +77,24 @@ def test_hit_threshold_respected():
         assert plan["total_hits"] == 0
 
 
-def test_min_differentials_honoured_at_horizon_end():
+def test_team_constraints_honoured_at_horizon_end():
+    """Whatever the config still demands of Minoux_41's squad must hold.
+
+    The elite-chase flip of 2026-08-29 deliberately removed the team's
+    min_differentials block, so the old pinned quota of nine differentials
+    went with it - this now honours whatever the config says, and stipulates
+    nothing when it stipulates nothing.
+    """
     df, _, _, gws = build()
+    cfg = pipeline.load_config()["teams"].get("Minoux_41", {})
     plan, _, _ = team_plan(df, gws, "Minoux_41")
     own = df.set_index("id").selected_by.to_dict()
     final = plan["weeks"][-1]["squad"]
-    # config asks for 9 players owned by under 8% at the end of the horizon
-    n_diff = sum(1 for i in final if own.get(i, 0) < 8.0)
-    assert n_diff >= 9, f"only {n_diff} differentials in final squad"
+    d = cfg.get("min_differentials")
+    if d:
+        n_diff = sum(1 for i in final if own.get(i, 0) < float(d["max_ownership"]))
+        assert n_diff >= int(d["count"]), \
+            f"only {n_diff} differentials in final squad"
 
 
 def test_planner_deterministic():

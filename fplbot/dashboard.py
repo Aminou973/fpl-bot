@@ -469,6 +469,7 @@ svg{display:block;max-width:100%}
 <section id="chips">
   <div class="card">
     <header><div><h2>Chips</h2><p class="sub" id="chipSub"></p></div></header>
+    <div id="chipArmed"></div>
     <div class="chips" id="chipCards"></div>
     <div class="row" id="chipTabs" style="margin-top:16px"></div>
     <h3>When to play each chip</h3>
@@ -1481,6 +1482,16 @@ function renderChips() {
   ].map(([k, v]) => `<div class="chip"><b>${k}</b><span class="hint">${v}</span></div>`).join("");
   $("#win1").innerHTML = winTable(runs(1, CHIP_GW - 1, 3));
   $("#win2").innerHTML = winTable(runs(CHIP_GW, 38, 3));
+  // engine 7: a chip the bot has armed for itself (owner-approved autoplay)
+  const armed = Object.entries(D.builds || {})
+    .filter(([, b]) => b.chip_play)
+    .map(([name, b]) => `<div class="chip" style="border-color:var(--good)"><b>🃏 ${name}
+      — ${b.chip_play.chip.toUpperCase()} armed for GW${b.chip_play.gw}</b>
+      <span class="hint">Modelled gain +${(+b.chip_play.gain).toFixed(1)} points over
+      GW${D.gws[0]}–${D.gws[D.gws.length - 1]}. The bot plays it at the deadline
+      (${(b.chip_play.chip === "wildcard" ? "activates with the transfer batch — the moves are never sent un-chipped"
+          : "rides on the lineup write")}).</span></div>`);
+  $("#chipArmed").innerHTML = armed.join("");
   renderChipCalendar();
 
   const clubs = Object.keys(D.season_grid || {}).sort();

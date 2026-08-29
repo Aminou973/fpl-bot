@@ -476,7 +476,8 @@ def wildcard_gain(pool, df, gws, current, base_objective, **kw):
 BRANCH_KW = ("budget", "locked", "banned", "own_bonus", "min_differentials",
              "max_captain_ownership", "xp_prefix", "max_per_club",
              "bench_weight", "decay", "rank_alpha", "template_tilt",
-             "cap_tilt", "time_limit")
+             "cap_tilt", "elite_weight", "price_matrix", "sell_price",
+             "price_gamma", "time_limit")
 
 
 def wildcard_plan(pool, gws, current, bank=0.0, **kw):

@@ -94,6 +94,12 @@ teams:
       alpha: 0.5
       tilt: 0.4            # template-safe: buys the field's players
       elite_weight: 0.5    # the chaser leans on the top-50 template hardest
+    # engine 7 — the bot PLAYS these chips itself for this team when all three
+    # gates hold: chip unspent, API window open for the deadline week, and the
+    # modelled gain over the horizon clears the number below. Approved by the
+    # owner 2026-08-29 ("use the chips auto by you, you take control").
+    chips_auto:
+      wildcard: 5.0        # xp gain over the horizon the wildcard must beat
     squad:
       - ["Raya", "ARS"]
       - ["Palmer", "IPS"]

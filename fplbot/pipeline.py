@@ -299,6 +299,49 @@ def plan_team(ctx, cfg_team, state, pool=None):
         price_pred.sort(key=lambda d: -d["p_rise"])
     cap_own = kw.get("max_captain_ownership")
     planner.attach_vice(df, p["weeks"], cap_own)
+    # engine 7: chips the bot plays ITSELF when config.chips_auto says so (the
+    # user delegated this, specifically for Minoux_41). Three gates, all hard:
+    # the chip is not yet spent (live entry history), the API's own window is
+    # open for the imminent gameweek, and the modelled gain over the horizon
+    # clears the config threshold. The winning branch's ILP week becomes the
+    # submit payload — the submit job activates the chip, never pays for the
+    # moves. TC/BB stay tier-A (inside the plan) and free hit stays advisory.
+    chip_play = None
+    auto = cfg_team.get("chips_auto") or {}
+    used = set(state.get("chips_used") or ())
+    try:
+        wins = ctx.get("chip_windows") or api.chip_windows(ctx.get("bootstrap"))
+    except Exception:
+        wins = None
+    if wins is None:
+        from .chips import DEFAULT_WINDOWS as wins
+    wc_gate = float(auto.get("wildcard") or 0)
+    if wc_gate and "wildcard" not in used and \
+            any(w["start"] <= gws[0] <= w["stop"] for w in (wins.get("wildcard") or [])):
+        [wc] = planner.chip_branches(
+            pool, gws, squad, p, [{"chip": "wildcard", "gw": gws[0]}],
+            bank=float(state.get("bank", 0.0)), **kw)
+        gain = wc.get("gain")
+        if gain is not None and gain >= wc_gate:
+            chip_play = {"chip": "wildcard", "gw": gws[0], "gain": float(gain),
+                         "week": None}
+            wc_full = planner.wildcard_plan(
+                pool, gws, squad, bank=float(state.get("bank", 0.0)), **kw)
+            if wc_full is not None:
+                chip_play["week"] = wc_full["weeks"][0]
+    fh_gate = float(auto.get("free_hit") or 0)
+    if fh_gate and chip_play is None and "freehit" not in used and \
+            any(w["start"] <= gws[0] <= w["stop"] for w in (wins.get("freehit") or [])):
+        [fh] = planner.chip_branches(
+            pool, gws, squad, p, [{"chip": "free_hit", "gw": gws[0]}],
+            bank=float(state.get("bank", 0.0)), **kw)
+        gain = fh.get("gain")
+        if gain is not None and gain >= fh_gate:
+            chip_play = {"chip": "free_hit", "gw": gws[0], "gain": float(gain),
+                         "squad": fh.get("squad"), "week": None}
+    if chip_play:
+        print(f"[plan] CHIP ARMED: {chip_play['chip']} for GW{chip_play['gw']} "
+              f"(+{chip_play['gain']} xp over the horizon)")
     plan_kw = {k: v for k, v in kw.items()
                if k not in ("max_captain_ownership", "scenarios",
                             "scenario_weights", "risk_lambda", "cvar_beta",
@@ -318,6 +361,7 @@ def plan_team(ctx, cfg_team, state, pool=None):
         "target_report": optimize.squad_report(df, target["squad"], gws, cap_own)
                          if target else None,
         "chips": planner.evaluate_chips(df, p["weeks"], gws),
+        "chip_play": chip_play,
         "price_pred": price_pred,
         "tuned": tuned_applied,
         "free_transfers": ft, "bank": float(state.get("bank", 0.0)),

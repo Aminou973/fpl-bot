@@ -79,6 +79,14 @@ def brief(ctx, results, cfg):
         if flagged:
             lines.append("⚠️ " + esc("; ".join(flagged)))
         lines.append(f"Projected <b>{wk['xp']:.1f}</b> this week")
+        cp = res.get("chip_play")
+        if cp:
+            how = ("the bot plays it at the deadline"
+                   if cp["chip"] == "wildcard"
+                   else "play it manually — it is alert-only for now")
+            lines.append(
+                f"🃏 <b>{esc(cp['chip'].upper())} suggested</b> for GW{cp['gw']} "
+                f"(+{cp['gain']:.1f} xp over the horizon) — {how}")
         out.append("\n".join(lines))
 
     site = cfg.get("site_url")
@@ -174,6 +182,12 @@ def last_plan_entry(df, res):
     """
     r = df.set_index("id")
     wk = res["plan"]["weeks"][0]
+    # engine 7: if the planner armed a chip for this week, its ILP week is the
+    # plan — the wildcard's rebuild replaces the transfer plan wholesale
+    cp = res.get("chip_play")
+    wk_chip = wk.get("chip")
+    if cp and cp["chip"] == "wildcard" and cp.get("week"):
+        wk = cp["week"]
     pos_rank = {"GKP": 0, "DEF": 1, "MID": 2, "FWD": 3}
     rank = lambda i: (pos_rank.get(r.loc[i, "pos"], 9), -r.loc[i, "price"])  # noqa: E731
     xi = sorted(wk.get("xi", []), key=rank)
@@ -193,6 +207,8 @@ def last_plan_entry(df, res):
         "xi": xi, "bench": bench,
         "captain": captain, "vice": vice,
         "hits": wk.get("hits", 0),
+        "chip": (cp or {}).get("chip") if cp and cp.get("week") else wk_chip,
+        "chip_gain": (cp or {}).get("gain") if cp else None,
         "squad_source": res.get("squad_source"),
         "picks_payload": payload,
     }
@@ -507,6 +523,7 @@ def build_bundle(ctx, results, cfg):
             "target": res["target"], "target_report": res["target_report"],
             "plan": res["plan"], "hit_policy": res["hit_policy"],
             "chips": res["chips"],
+            "chip_play": res.get("chip_play"),
             "free_transfers": res["free_transfers"], "bank": res["bank"],
             "own_current": round(float(df[df.id.isin(res["squad"])].selected_by.mean()), 1),
             "own_target": round(float(df[df.id.isin(res["target"])].selected_by.mean()), 1)
