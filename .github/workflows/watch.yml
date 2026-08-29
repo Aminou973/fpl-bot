@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: fpl-state
@@ -31,7 +33,19 @@ jobs:
         run: |
           git config user.name  "fpl-bot"
           git config user.email "fpl-bot@users.noreply.github.com"
-          git add state/
+          git add state/ site/live.json
           git diff --staged --quiet || git commit -m "state: price and news snapshot"
-          git pull --rebase --autostash || true
+          # a concurrent plan run may have just pushed fresher generated files;
+          # on rebase conflict take the remote's - ours are same-purpose
+          git pull --rebase --autostash || {
+            git rebase --abort
+            git reset --hard origin/main
+          }
           git push
+      # publish the fresh live.json so the dashboard's Live tab follows the
+      # watcher hourly instead of only when the plan job happens to run
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+      - id: deployment
+        uses: actions/deploy-pages@v4
