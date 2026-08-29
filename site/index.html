@@ -656,9 +656,11 @@ document.querySelectorAll(".tile").forEach(n => tileIO.observe(n));
 
 /* ----------------------------------------------------------------- strap */
 const dl = D.deadline ? new Date(D.deadline) : null;
-$("#strap").textContent =
+const fmtStamp = t => String(t || "").slice(0, 16).replace("T", " ");
+$("#strap").innerHTML =
   (dl ? `GW${G0} deadline ${dl.toUTCString().slice(0, 22)} UK · ` : "")
-  + `projections GW${G0}–${GWS[GWS.length - 1]} · updated ${String(D.generated).slice(0, 16).replace("T", " ")}`;
+  + `projections GW${G0}–${GWS[GWS.length - 1]} · plan ${fmtStamp(D.generated)}`
+  + `<span id="strapLive"></span>`;
 
 /* ======================================================== AUTOMATION */
 const AUTO = D.automation || {};
@@ -1518,6 +1520,10 @@ function liveAge() {
   const stale = age > 90;
   $("#liveAge").textContent = `snapshot ${Math.round(age)} min old`;
   $("#liveAge").style.color = stale ? css("--warning") : "";
+  // the strap's plan stamp only moves when the plan job reruns - keep a live
+  // stamp next to it so the two clocks are never mistaken for each other
+  const strapLive = $("#strapLive");
+  if (strapLive) strapLive.textContent = ` · live ${fmtStamp(LIVE.generated)}`;
   return age;
 }
 function chipBadge(c) {
@@ -1531,6 +1537,8 @@ function renderLivescore() {
     $("#liveSub").textContent = "Nothing in play right now. This tab comes alive once the " +
       "week's first fixture kicks off and the watcher stamps live.json.";
     $("#liveAge").textContent = "";
+    const strapLive = $("#strapLive");
+    if (strapLive) strapLive.textContent = "";
     body.innerHTML = "";
     return;
   }
