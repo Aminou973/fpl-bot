@@ -81,23 +81,17 @@ teams:
 
   Minoux_41:
     entry_id: 4896428            # <- put your real entry id here
-    role: risk
+    role: template
     free_transfers: 1      # pinned 2026-08-27: same as the other team
     blurb: >-
-      Risk team - full differential. No Haaland, at least nine players under 8%
-      ownership, optimised for ceiling rather than median.
-    hit_threshold: 4       # the risk team is allowed to move faster
-    objective: ceiling
+      Elite-chase team - mirrors the template the game's top managers play:
+      template-safe squad, Haaland allowed, captains picked on expected points
+      rather than rarity. Differentiated 2026-08-29 after the differential
+      strategy fell behind the field.
+    hit_threshold: 6       # same trade discipline as the main team
     rank:
-      alpha: 0.9
-      tilt: -0.4           # differential: fades the field's players
-      cap_tilt: 0.5        # extra reward for low-owned captains
-    max_captain_ownership: 25   # never captain what the whole field owns
-    ban:
-      - ["Haaland", "MCI"]
-    min_differentials:
-      count: 9
-      max_ownership: 8
+      alpha: 0.5
+      tilt: 0.4            # template-safe: buys the field's players
     squad:
       - ["Raya", "ARS"]
       - ["Palmer", "IPS"]
