@@ -1,8 +1,9 @@
 'use strict';
-// Functional check of the dashboard's Live tab: run the dashboard <script>
-// under a minimal DOM stub whose fetch() serves site/live.json in a
-// three-beat sequence - a live snapshot, then an empty one, then the live
-// snapshot again - and assert each state rendered correctly.
+// Functional check of the dashboard's Live tab and tab navigation: run the
+// dashboard <script> under a minimal DOM stub whose fetch() serves
+// site/live.json in a three-beat sequence - a live snapshot, then an empty
+// one, then the live snapshot again - and assert each state rendered
+// correctly, then exercise the group/sub-tab navigation via hashchange.
 // Run:  node tools/dash_live_check.js [site/live.json]
 const fs = require("fs");
 const path = require("path");
@@ -16,8 +17,10 @@ global.fetch = async () => {
   return {ok: true, status: 200, json: async () => payload};
 };
 
+const SECTIONS = ["overview", "squads", "plan", "captain", "livescore", "value",
+  "fixtures", "chips", "price", "accuracy", "players", "changes"];
 function mkEl() {
-  return {innerHTML: "", textContent: "", dataset: {}, value: "",
+  return {innerHTML: "", textContent: "", dataset: {}, value: "", hidden: false,
           style: {setProperty() {}, color: "", getPropertyValue: () => ""},
           classList: {add() {}, remove() {}, toggle() {}, contains: () => false},
           addEventListener() {}, insertAdjacentHTML() {}, appendChild() {},
@@ -27,8 +30,10 @@ function mkEl() {
 }
 const store = {};
 function el(sel) { return (store[sel] = store[sel] || mkEl()); }
+const sections = SECTIONS.map(id => Object.assign(el("#" + id), {id}));
 global.document = {
-  querySelector: el, querySelectorAll: () => [],
+  querySelector: el,
+  querySelectorAll: sel => sel === "section" ? sections : [],
   getElementById: id => el("#" + id),
   addEventListener() {},
   createElement: () => mkEl(),
@@ -39,7 +44,8 @@ global.getComputedStyle = () => ({getPropertyValue: () => ""});
 global.matchMedia = () => ({matches: false, addEventListener() {}});
 global.requestAnimationFrame = () => 0;
 global.window = global;
-global.addEventListener = () => {};      // bare addEventListener(...) in the script
+const listeners = {};
+global.addEventListener = (ev, fn) => { listeners[ev] = fn; };
 global.IntersectionObserver = class { observe() {} unobserve() {} disconnect() {} };
 let tick = null;
 global.setInterval = (fn) => (tick = fn, 0);
@@ -107,5 +113,32 @@ setTimeout(() => {
   const miss = expectedWords(liveSnap).filter(w => !liveHtml.includes(w));
   if (miss.length) fail("live re-render", miss, liveHtml);
   console.log("fetch #2: live state restored,", liveHtml.length, "chars - OK");
+
+  /* --- navigation: switch tabs through the hash listener --------------- */
+  const bootSub = el("#subnav").innerHTML;
+  if (!/Overview/.test(bootSub))
+    fail("boot tab", ["Overview in subnav"], bootSub);
+  const shown = sections.filter(s => !s.hidden).map(s => s.id);
+  if (shown.join(",") !== "overview")
+    fail("boot tab", ["only overview visible, got " + shown.join(",")], "");
+
+  global.location = {hash: "#plan"};
+  listeners.hashchange();
+  const planSub = el("#subnav").innerHTML;
+  for (const w of ["Squads", "Transfers", "Captain"]) {
+    if (!planSub.includes(w)) fail("nav #plan", [w + " in subnav"], planSub);
+  }
+  const vis = sections.filter(s => !s.hidden).map(s => s.id);
+  if (vis.join(",") !== "plan")
+    fail("nav #plan", ["only plan visible, got " + vis.join(",")], "");
+  console.log("nav #plan: group pills + sub tabs rebuilt, single section visible");
+
+  // an unknown hash lands on the overview safely
+  global.location = {hash: "#nonsense"};
+  listeners.hashchange();
+  if (sections.find(s => s.id === "overview").hidden !== false)
+    fail("nav fallback", ["overview visible for unknown hash"], "");
+  console.log("nav unknown hash: falls back to overview - OK");
+  console.log("nav OK");
   process.exit(0);
-}, 240);
+}, 340);

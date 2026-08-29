@@ -59,13 +59,23 @@ h1{font-size:17px;margin:0;letter-spacing:.02em;text-transform:uppercase;
   border-radius:9px;background:linear-gradient(135deg,var(--s1),#00c46a);
   color:#0b0210;font-size:16px;box-shadow:var(--glow);flex:none}
 .sub{color:var(--muted);font-size:12.5px;margin:2px 0 0}
-nav{display:flex;gap:2px;overflow-x:auto;margin-top:10px;scrollbar-width:none}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 nav::-webkit-scrollbar{display:none}
-nav a{color:var(--ink2);text-decoration:none;font-size:12.5px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.03em;padding:8px 11px;
-  border-bottom:2.5px solid transparent;white-space:nowrap;border-radius:8px 8px 0 0}
-nav a:hover{color:var(--ink)}
-nav a[aria-current="true"]{color:var(--s1);border-bottom-color:var(--s1)}
+/* tier 1 - group pills, one per area of the dashboard */
+#nav{position:relative;margin-top:12px}
+#nav a{color:var(--ink2);text-decoration:none;font-size:12.5px;font-weight:700;
+  letter-spacing:.02em;padding:6.5px 14px;border-radius:999px;flex:none;
+  border:1px solid transparent;white-space:nowrap}
+#nav a:hover{color:var(--ink);border-color:var(--ring)}
+#nav a[aria-current="true"]{background:linear-gradient(135deg,var(--s1),#00c46a);
+  color:#0b0210;border-color:transparent;box-shadow:var(--glow)}
+/* tier 2 - the active group's tabs */
+#subnav{position:relative;margin-top:11px;gap:2px;
+  border-bottom:1px solid var(--grid)}
+#subnav a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;
+  padding:8px 11px;white-space:nowrap;flex:none}
+#subnav a:hover{color:var(--ink)}
+#subnav a[aria-current="true"]{color:var(--s1)}
 
 h2{font-size:16px;margin:0;letter-spacing:-.005em;font-weight:700}
 h3{font-size:11.5px;margin:18px 0 8px;color:var(--muted);font-weight:700;
@@ -77,6 +87,7 @@ button:hover{border-color:var(--s1);color:var(--s1)}
 button[aria-pressed="true"]{background:var(--s1);border-color:var(--s1);color:#0b0210}
 :focus-visible{outline:2px solid var(--s1);outline-offset:2px}
 section{scroll-margin-top:104px}
+section[hidden]{display:none}
 .card{background:linear-gradient(165deg,rgba(255,255,255,.045),transparent 45%),var(--surface);
   border:1px solid var(--ring);border-radius:18px;
   padding:18px 20px;margin:16px 0;box-shadow:0 12px 34px rgba(10,0,14,.35)}
@@ -190,6 +201,9 @@ tbody tr:hover{background:color-mix(in oklab,var(--s1) 9%,transparent)}
   z-index:60;display:none;max-width:min(300px,80vw);line-height:1.45}
 .tt b{color:var(--ink)}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.foot{max-width:1300px;margin:0 auto;padding:0 18px 34px;color:var(--muted);
+  font-size:12px;line-height:1.6}
+.foot .st{margin:0 4px 0 0}
 svg{display:block;max-width:100%}
 .axis{fill:var(--muted);font-size:10.5px}
 .gl{stroke:var(--grid);stroke-width:1}
@@ -214,16 +228,10 @@ svg{display:block;max-width:100%}
   .reveal.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.2,.7,.3,1),
     transform .55s cubic-bezier(.2,.7,.3,1)}
 
-  /* main tab bar: glowing underline that slides under the active tab */
-  #nav{position:relative}
-  #nav .tab{transition:color .25s}
-  #nav .tab::after{content:"";position:absolute;left:10%;right:10%;bottom:-1px;height:2.5px;
-    border-radius:2px;background:var(--s1);opacity:0;transform:scaleX(.4);
-    transition:transform .3s cubic-bezier(.3,.8,.3,1),opacity .25s}
-  #nav .tab[aria-current="true"]::after{opacity:1;transform:scaleX(1);
-    box-shadow:0 0 10px var(--s1)}
-  #navcursor{position:absolute;bottom:0;height:2.5px;border-radius:2px;background:var(--s1);
-    box-shadow:0 0 10px var(--s1);
+  /* tab bars: a glowing underline slides under the active sub tab */
+  #nav a,#subnav a{transition:color .25s}
+  #navcursor,#subcursor{position:absolute;bottom:0;height:2.5px;border-radius:2px;
+    background:var(--s1);box-shadow:0 0 10px var(--s1);
     transition:left .3s cubic-bezier(.3,.8,.3,1),width .3s cubic-bezier(.3,.8,.3,1);
     pointer-events:none;display:none}
 
@@ -245,7 +253,7 @@ svg{display:block;max-width:100%}
 }
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1 !important;transform:none !important}
-  #navcursor{display:none !important}
+  #navcursor,#subcursor{display:none !important}
 }
 
 /* ---- these are structure, not motion: styled for everyone, motion or not */
@@ -291,7 +299,8 @@ svg{display:block;max-width:100%}
   h1{font-size:15.5px;line-height:1.25}
   #theme{padding:5px 9px;min-height:30px;font-size:12.5px}
   .top{padding-top:10px}
-  nav a{padding:7px 9px;font-size:12.5px}
+  nav a{padding:6px 11px;font-size:12px}
+  #subnav a{padding:7px 9px;font-size:12.5px}
   .card{padding:13px 13px;border-radius:12px}
   .tiles{grid-template-columns:1fr 1fr;gap:8px}
   .tile .v{font-size:22px}
@@ -321,6 +330,7 @@ svg{display:block;max-width:100%}
       <button id="theme" aria-label="Toggle colour theme">Light</button>
     </div>
     <nav id="nav"><span id="navcursor"></span></nav>
+    <nav id="subnav"><span id="subcursor"></span></nav>
   </div>
 </div>
 
@@ -530,6 +540,7 @@ svg{display:block;max-width:100%}
 </section>
 
 </div>
+<footer class="foot" id="foot"></footer>
 <div class="tt" id="tt" role="tooltip"></div>
 
 <script>
@@ -589,33 +600,82 @@ document.addEventListener("pointerdown", e => {
 }, true);
 
 /* ------------------------------------------------------------------- nav */
-const SECTIONS = [["overview","Overview"],["squads","Squads"],["plan","Plan"],
-  ["livescore","Live"],["captain","Captain"],["value","Value"],["fixtures","Fixtures"],
-  ["chips","Chips"],["price","Price"],["accuracy","Accuracy"],["players","Players"],
-  ["changes","Changes"]];
-const navEl = $("#nav");
-navEl.insertAdjacentHTML("beforeend", SECTIONS.map(([id, label]) =>
-  `<a class="tab" href="#${id}" data-s="${id}">${label}</a>`).join(""));
-const navLinks = [...navEl.querySelectorAll("a")];
-const cursor = $("#navcursor");
-function moveCursor() {
-  const act = navLinks.find(a => a.getAttribute("aria-current") === "true");
+/* Two-tier tabs instead of one endless scrolling page: six group pills,
+   each opening a short row of sub tabs, exactly one section on screen.
+   The view is in the URL (#plan, #live) so any tab can be linked or
+   bookmarked, and the last-visited tab is remembered. */
+const GROUPS = [
+  ["home", "Home", [["overview", "Overview"]]],
+  ["team", "Team", [["squads", "Squads"], ["plan", "Transfers"], ["captain", "Captain"]]],
+  ["live", "Live", [["livescore", "Live scores"]]],
+  ["game", "Game", [["fixtures", "Fixtures"], ["chips", "Chips"]]],
+  ["market", "Market", [["value", "Value"], ["price", "Price radar"], ["players", "Players"]]],
+  ["model", "Model", [["accuracy", "Accuracy"], ["changes", "Changes"]]],
+];
+const TAB = new Map();
+GROUPS.forEach(([g, gl, tabs], gi) => tabs.forEach(([id, label], ti) =>
+  TAB.set(id, {g, gl, gi, ti, label})));
+const navEl = $("#nav"), subEl = $("#subnav");
+navEl.insertAdjacentHTML("beforeend", GROUPS.map(([g, label]) =>
+  `<a href="#${g}" data-g="${g}">${label}</a>`).join(""));
+
+let curTab = null, subCursor = $("#subcursor");
+const lastIn = {};                 // last tab visited inside each group
+const storeSet = (k, v) => { try { localStorage.setItem("fpldash:" + k, v); } catch (e) {} };
+const storeGet = k => { try { return localStorage.getItem("fpldash:" + k); } catch (e) { return null; } };
+
+function slide(bar, cursor, act) {
   if (!act) { cursor.style.display = "none"; return; }
-  const nr = navEl.getBoundingClientRect(), ar = act.getBoundingClientRect();
-  cursor.style.display = "block";
-  cursor.style.left = (ar.left - nr.left) + "px";
-  cursor.style.width = ar.width + "px";
+  try {
+    const br = bar.getBoundingClientRect(), ar = act.getBoundingClientRect();
+    cursor.style.display = "block";
+    cursor.style.left = (ar.left - br.left) + "px";
+    cursor.style.width = ar.width + "px";
+  } catch (e) { cursor.style.display = "none"; }
 }
-const spy = new IntersectionObserver(entries => {
-  entries.forEach(en => {
-    if (!en.isIntersecting) return;
-    navLinks.forEach(a => a.setAttribute("aria-current", a.dataset.s === en.target.id));
-    moveCursor();
+function positionCursors() {
+  slide(navEl, $("#navcursor"), navEl.querySelector('a[aria-current="true"]'));
+  slide(subEl, subCursor, subEl.querySelector('a[aria-current="true"]'));
+}
+
+function showTab(id) {
+  id = TAB.has(id) ? id : "overview";
+  if (id === curTab) return;
+  curTab = id;
+  const meta = TAB.get(id);
+  lastIn[meta.g] = id;
+  storeSet("tab", id);
+
+  navEl.querySelectorAll("a").forEach(a =>
+    a.setAttribute("aria-current", a.dataset.g === meta.g));
+  subEl.innerHTML = GROUPS[meta.gi][2].map(([tid, label]) =>
+    `<a href="#${tid}" data-s="${tid}"${tid === id ? ' aria-current="true"' : ""}>${label}</a>`).join("")
+    + `<span id="subcursor"></span>`;
+  subCursor = $("#subcursor");
+
+  document.querySelectorAll("section").forEach(s => { s.hidden = s.id !== id; });
+  const sec = document.getElementById(id);
+  /* charts sized themselves while the section was hidden - remeasure now
+     that it is visible, and let the cards replay their reveal stagger */
+  if (sec) requestAnimationFrame(() => {
+    sec.querySelectorAll(".reveal").forEach(n => n.classList.add("in"));
+    redrawCharts(); renderChips();
+    positionCursors();
   });
-}, {rootMargin: "-110px 0px -70% 0px"});
-SECTIONS.forEach(([id]) => { const s = document.getElementById(id); if (s) spy.observe(s); });
-addEventListener("resize", moveCursor);
-addEventListener("load", moveCursor);
+  try { scrollTo(0, 0); } catch (e) {}
+}
+
+function fromHash() {
+  const id = ((typeof location !== "undefined" && location.hash) || "").slice(1);
+  if (TAB.has(id)) return id;
+  const grp = GROUPS.find(([g]) => g === id);
+  if (grp) return lastIn[grp[0]] || grp[2][0][0];
+  return storeGet("tab") || "overview";
+}
+addEventListener("hashchange", () => showTab(fromHash()));
+let rtNav;
+addEventListener("resize", () => { clearTimeout(rtNav); rtNav = setTimeout(positionCursors, 120); });
+showTab(fromHash());
 
 /* ------------------------------------------------- reveal on scroll */
 const revealIO = new IntersectionObserver(entries => {
@@ -661,6 +721,11 @@ $("#strap").innerHTML =
   (dl ? `GW${G0} deadline ${dl.toUTCString().slice(0, 22)} UK · ` : "")
   + `projections GW${G0}–${GWS[GWS.length - 1]} · plan ${fmtStamp(D.generated)}`
   + `<span id="strapLive"></span>`;
+$("#foot").innerHTML =
+  `Every number on this page comes from the official FPL game API — no
+   projections are hand-picked. Plans <b>${fmtStamp(D.generated)}</b> ·
+   live data <span id="footLive">–</span> · model and methodology
+   described in the <a href="#model" style="color:var(--ink2)">Model</a> tab.`;
 
 /* ======================================================== AUTOMATION */
 const AUTO = D.automation || {};
@@ -1524,6 +1589,8 @@ function liveAge() {
   // stamp next to it so the two clocks are never mistaken for each other
   const strapLive = $("#strapLive");
   if (strapLive) strapLive.textContent = ` · live ${fmtStamp(LIVE.generated)}`;
+  const footLive = $("#footLive");
+  if (footLive) footLive.textContent = fmtStamp(LIVE.generated);
   return age;
 }
 function chipBadge(c) {
