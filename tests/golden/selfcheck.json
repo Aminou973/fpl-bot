@@ -1,36 +1,26 @@
 {
  "plan": {
   "Minoux_41": {
-   "captain": "Thiago",
+   "captain": "Haaland",
    "free_transfers": 1,
-   "hits": 2,
+   "hits": 1,
    "in": [
-    "Gibbs-White",
-    "Pickford",
-    "Thiago"
+    "Anderson",
+    "Gu\u00e9hi"
    ],
    "out": [
-    "B.Fernandes",
-    "Davis",
-    "Raya"
+    "Hume",
+    "Mbeumo"
    ],
-   "xp": 26.78
+   "xp": 31.65
   },
   "Minoux_69": {
    "captain": "Haaland",
    "free_transfers": 1,
-   "hits": 2,
-   "in": [
-    "Anderson",
-    "Raya",
-    "Rogers"
-   ],
-   "out": [
-    "B.Fernandes",
-    "Hume",
-    "Kinsky"
-   ],
-   "xp": 28.87
+   "hits": 0,
+   "in": [],
+   "out": [],
+   "xp": 32.62
   }
  },
  "projections_sha": "5645deecd04e90835d59615cc2c1cce3b2616de1ce903fcc5d68522757196508"

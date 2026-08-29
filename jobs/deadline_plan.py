@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd  # noqa: E402
 
-from fplbot import api, chips, dashboard, history, notify, optimize, pipeline  # noqa: E402
+from fplbot import api, chips, dashboard, elite as elite_mod, history, notify, optimize, pipeline  # noqa: E402
 from fplbot.notify import esc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -225,6 +225,21 @@ def main():
                 quiet = True
                 print(f"[plan] deadline {hrs:.1f}h away — publishing results only")
 
+    # engine 1b: sample the world's top managers before planning, so
+    # rank.elite_weight squads chase the elite template as it stands right now
+    elite = None
+    if not a.offline:
+        try:
+            elite = elite_mod.build(boot=ctx["bootstrap"], plan_gw=gws[0])
+            print(f"[plan] elite template sampled: "
+                  f"{(elite or {}).get('sampled', 0)} of the top "
+                  f"{(elite or {}).get('league', '')}") if elite else \
+                print("[plan] elite sample too thin - planner uses field ownership")
+            if elite:
+                pipeline.write_state("elite", elite)
+        except Exception as e:                              # noqa: BLE001
+            print(f"[plan] elite template unavailable: {e}")
+
     results = {}
     for name, t in cfg["teams"].items():
         state = {"picks": [], "picks_source": None,
@@ -264,6 +279,7 @@ def main():
 
     bundle = build_bundle(ctx, results, cfg)
     bundle["changes"] = diff_since(prev, bundle, results)
+    bundle["elite"] = elite
 
     # the submitter's audit log, so the dashboard can show its own state
     automation = {"apply_window": 36, "ft_pin": any(

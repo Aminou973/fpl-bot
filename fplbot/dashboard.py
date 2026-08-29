@@ -508,6 +508,23 @@ svg{display:block;max-width:100%}
   </div>
 </section>
 
+<section id="elite">
+  <div class="card">
+    <header><div><h2>Elite template</h2>
+      <p class="sub" id="eliteSub"></p></div>
+      <span class="hint" id="eliteMeta"></span></header>
+    <div class="split">
+      <div><h3>Top-50 template squad</h3><div id="eliteBody"></div></div>
+      <div>
+        <h3>Elite captains</h3><div id="eliteCaps"></div>
+        <h3>Moves into elite squads</h3><div id="eliteIns"></div>
+        <h3>Moves out</h3><div id="eliteOuts"></div>
+      </div>
+    </div>
+    <p class="note" id="eliteNote"></p>
+  </div>
+</section>
+
 <section id="accuracy">
   <div class="card">
     <header><div><h2>Model accuracy</h2>
@@ -625,7 +642,7 @@ const GROUPS = [
   ["team", "Team", [["squads", "Squads"], ["plan", "Transfers"], ["captain", "Captain"]]],
   ["live", "Live", [["livescore", "Live scores"]]],
   ["game", "Game", [["fixtures", "Fixtures"], ["chips", "Chips"]]],
-  ["market", "Market", [["value", "Value"], ["price", "Price radar"], ["players", "Players"]]],
+  ["market", "Market", [["value", "Value"], ["elite", "Elite"], ["price", "Price radar"], ["players", "Players"]]],
   ["model", "Model", [["accuracy", "Accuracy"], ["changes", "Changes"]]],
 ];
 const TAB = new Map();
@@ -1264,6 +1281,60 @@ function renderTemplate() {
     Minoux_41 is deliberately taking and Minoux_69 is deliberately avoiding.</p>`;
 }
 
+/* ================================================================= ELITE */
+/** What the world's top-ranked managers hold for the upcoming deadline.
+    D.elite is built by fplbot.elite each plan run; absent sample = quiet card. */
+function renderElite() {
+  const E = D.elite;
+  const body = $("#eliteBody");
+  if (!E || !(E.template || []).length) {
+    $("#eliteSub").textContent = "No elite sample is available yet.";
+    body.innerHTML = `<div class="empty">The plan job samples the top of the
+      world ranking each run. The first usable sample has not landed, so this
+      card stays empty rather than guessing.</div>`;
+    for (const id of ["eliteCaps", "eliteIns", "eliteOuts"]) $(`#${id}`).innerHTML = "";
+    return;
+  }
+  $("#eliteSub").textContent =
+    `Ownership among the world's ${E.sampled} top-ranked managers, side by side ` +
+    `with the whole game's. The elite move earlier — a gap between the two ` +
+    `columns is usually where the template is going, not where it has been.`;
+  $("#eliteMeta").textContent = `${E.league} · ${E.note || `squads for GW${E.gw}`}`;
+
+  const owned = {};
+  NAMES.forEach(n => (D.builds[n].current || []).forEach(i =>
+    { owned[i] = (owned[i] || []).concat(n); }));
+  const tag = i => { const w = owned[i] || [];
+    return w.length === 2 ? `<span class="st ok"><span class="dot"></span>both</span>`
+      : w.length === 1 ? `<span class="st warn"><span class="dot"></span>${w[0].replace("Minoux_", "")}</span>`
+      : `<span class="down">neither</span>`; };
+
+  body.innerHTML = `<table><thead><tr>
+      <th class="l">Player</th><th>£</th><th>Elite</th><th>Game</th><th class="l">Held</th></tr></thead><tbody>${
+    E.template.map(r => `
+      <tr><td class="l"><b>${r.name}</b> <span class="hint">${r.pos} ${r.team}</span></td>
+      <td>${fmt(r.price)}</td>
+      <td class="${r.elite > r.field ? "up" : "down"}"><b>${fmt(r.elite, 0)}%</b></td>
+      <td>${fmt(r.field, 0)}%</td>
+      <td class="l">${tag(r.id)}</td></tr>`).join("")}</tbody></table>`;
+
+  const capRow = c => `<tr><td class="l">${c.name} <span class="hint">${c.team}</span></td>
+    <td><b>${fmt(c.elite, 0)}%</b></td></tr>`;
+  $("#eliteCaps").innerHTML = `<table><tbody>${(E.captains || []).map(capRow).join("")}</tbody></table>`;
+  const move = m => `<tr><td class="l">${m.name} <span class="hint">${m.team}</span></td>
+    <td>${Math.round(m.elite / 100 * E.sampled)} managers</td></tr>`;
+  $("#eliteIns").innerHTML = (E.moves_in || []).length
+    ? `<table><tbody>${E.moves_in.map(move).join("")}</tbody></table>`
+    : `<div class="empty">No moves recorded yet this week.</div>`;
+  $("#eliteOuts").innerHTML = (E.moves_out || []).length
+    ? `<table><tbody>${E.moves_out.map(move).join("")}</tbody></table>`
+    : `<div class="empty">No moves recorded yet this week.</div>`;
+  $("#eliteNote").textContent =
+    "Squads are what the elite intend for the upcoming deadline, read mid-move " +
+    "(some managers transfer at the last hour). The planner's elite-weighted " +
+    "tilt for both teams is scored against this same sample.";
+}
+
 /* ================================================================= VALUE */
 function renderScatter() {
   const pos = $("#scPos").value;
@@ -1883,7 +1954,7 @@ let rt;
 addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(redrawCharts, 180); });
 
 tiles(); syncSquad(); renderPlan(); renderCap(); renderTemplate(); renderChipTabs();
-renderTicker(); renderChips(); renderPrice(); renderEngines(); renderTable(); renderChanges(); redrawCharts();
+renderTicker(); renderChips(); renderPrice(); renderElite(); renderEngines(); renderTable(); renderChanges(); redrawCharts();
 </script>
 </body>
 </html>

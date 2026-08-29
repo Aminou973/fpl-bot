@@ -41,7 +41,7 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
          locked=(), banned=(), own_bonus=0.0, min_differentials=None,
          max_captain_ownership=None, xp_prefix="xp", decay=DECAY, time_limit=300,
          scenarios=None, scenario_weights=None, risk_lambda=0.0, cvar_beta=0.75,
-         rank_alpha=0.0, template_tilt=0.0, cap_tilt=0.0,
+         rank_alpha=0.0, template_tilt=0.0, cap_tilt=0.0, elite_weight=0.0,
          chips_tc_bb=False, chip_windows=None, chips_used=(),
          price_matrix=None, sell_price=None, price_gamma=0.0):
     """Return the optimal transfer plan over `gws` starting from `current`.
@@ -55,7 +55,7 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
         Uryasev epigraph), so correlated bad weeks are priced in. With
         risk_lambda = 0 the scenario set is ignored entirely and the model is
         bit-identical to the deterministic one - asserted in the test suite.
-    rank_alpha / template_tilt / cap_tilt: engine 1. rank_alpha > 0 rescales
+    rank_alpha / elite_weight / template_tilt / cap_tilt: engine 1. rank_alpha > 0 rescales
         each gameweek's weight by the field's score density at your squad's
         projection (points are worth more when the field is bunched around
         you); template_tilt adds a signed per-ownership term to squad picks
@@ -72,6 +72,12 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
     club = pool.team.values
     ids = pool.id.values
     own = pool.selected_by.values if "selected_by" in pool else np.zeros(n)
+    ew = float(np.clip(elite_weight, 0.0, 1.0))
+    if ew and "elite_by" in pool:
+        # engine 1b: blend the field's ownership with the elite template's
+        # (fplbot.elite). A column that is missing silently degrades to the
+        # field's share, so offline/selfcheck runs stay bit-identical.
+        own = (1.0 - ew) * own + ew * pool.elite_by.values.astype(float)
     idx = {int(v): i for i, v in enumerate(ids)}
 
     cur = [idx[p] for p in current if p in idx]

@@ -120,6 +120,8 @@ def team_kwargs(df, cfg_team):
             kw["template_tilt"] = float(tilt)
         if rank.get("cap_tilt"):
             kw["cap_tilt"] = float(rank["cap_tilt"])
+        if rank.get("elite_weight"):
+            kw["elite_weight"] = float(rank["elite_weight"])
     elif cfg_team.get("ownership_bonus"):
         kw["own_bonus"] = float(cfg_team["ownership_bonus"])   # deprecated path
     if cfg_team.get("min_differentials"):
@@ -198,6 +200,16 @@ def plan_team(ctx, cfg_team, state, pool=None):
               f"config fallback squad, not the live API squad")
     if pool is None:
         pool = optimize.prune(df, gws, always=squad + list(kw.get("locked", [])))
+    # engine 1b: the elite template's ownership share, blended into the tilt
+    # by the planner when the team config sets rank.elite_weight. The column
+    # only appears when a fresh elite sample exists - without one the plan
+    # is bit-identical to the plain-ownership run.
+    if kw.get("elite_weight"):
+        elite = read_state("elite") or {}
+        emap = {int(r["id"]): float(r["elite"]) for r in elite.get("template", [])}
+        if emap:
+            pool = pool.assign(elite_by=pool["id"].map(
+                lambda i: emap.get(int(i), 0.0)))
     ft = int(state.get("free_transfers", 1))
     if cfg_team.get("unlimited_transfers") or gws[0] == 1:
         ft = 15          # transfers are unlimited and free before the GW1 deadline
@@ -291,8 +303,9 @@ def plan_team(ctx, cfg_team, state, pool=None):
                if k not in ("max_captain_ownership", "scenarios",
                             "scenario_weights", "risk_lambda", "cvar_beta",
                             "rank_alpha", "template_tilt", "cap_tilt",
-                            "chips_tc_bb", "chip_windows", "chips_used",
-                            "price_matrix", "sell_price", "price_gamma")}
+                            "elite_weight", "chips_tc_bb", "chip_windows",
+                            "chips_used", "price_matrix", "sell_price",
+                            "price_gamma")}
     target = optimize.solve(pool, gws, allow_infeasible=True, **plan_kw)
     return {
         "squad": squad, "squad_source": squad_source,

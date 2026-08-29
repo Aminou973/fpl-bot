@@ -59,6 +59,7 @@ teams:
     rank:                  # replaces ownership_bonus (xp-weighted, every week)
       alpha: 0.5
       tilt: 0.4            # template-safe: buys the field's players
+      elite_weight: 0.3    # 30% of the tilt reads the top-50 template (fplbot.elite)
     lock:
       - ["Haaland", "MCI"]
     # squad is only a fallback for when the API cannot be read
@@ -92,6 +93,7 @@ teams:
     rank:
       alpha: 0.5
       tilt: 0.4            # template-safe: buys the field's players
+      elite_weight: 0.5    # the chaser leans on the top-50 template hardest
     squad:
       - ["Raya", "ARS"]
       - ["Palmer", "IPS"]

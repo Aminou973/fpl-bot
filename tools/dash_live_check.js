@@ -18,7 +18,7 @@ global.fetch = async () => {
 };
 
 const SECTIONS = ["overview", "squads", "plan", "captain", "livescore", "value",
-  "fixtures", "chips", "price", "accuracy", "players", "changes"];
+  "elite", "fixtures", "chips", "price", "accuracy", "players", "changes"];
 function mkEl() {
   return {innerHTML: "", textContent: "", dataset: {}, value: "", hidden: false,
           style: {setProperty() {}, color: "", getPropertyValue: () => ""},
