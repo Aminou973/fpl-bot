@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Go Live: The Marketing Year</title>
+<style>
+  #mk{
+    --paper:#F5F4EE; --chalk:#FCFBF6; --ink:#17251F; --muted:#5C685F;
+    --line:#D8D6C6; --pitch:#256E3A; --pitchy:#1E5C31; --amber:#B4690E;
+    --card:#B3261E; --ink-15:rgba(23,37,31,.15);
+    background:var(--paper); color:var(--ink);
+    font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+    font-size:17px; line-height:1.6; margin:0; padding:0;
+  }
+  #mk *{box-sizing:border-box}
+  #mk .wrap{max-width:1060px;margin:0 auto;padding:56px 28px 96px}
+  #mk .mono{font-family:"Spline Sans Mono",ui-monospace,Consolas,monospace;
+    font-variant-numeric:tabular-nums}
+  #mk h1,#mk h2,#mk h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;
+    text-wrap:balance;line-height:1.04;margin:0}
+  #mk .eyebrow{font-family:"Spline Sans Mono",monospace;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--pitch);
+    border:1.5px solid var(--pitch);display:inline-block;padding:4px 10px}
+  #mk .mast{display:flex;flex-wrap:wrap;gap:24px;align-items:end;
+    justify-content:space-between;border-bottom:3px double var(--ink);
+    padding-bottom:26px;margin-top:22px}
+  #mk h1{font-size:clamp(46px,7.5vw,84px);text-transform:uppercase;font-weight:700}
+  #mk h1 em{font-style:normal;color:var(--pitch)}
+  #mk .kick{max-width:300px}
+  #mk .kick .big{font-size:13px;color:var(--card);text-transform:uppercase;
+    letter-spacing:.1em;font-weight:700}
+  #mk .kick .big b{display:block;font-family:"Barlow Condensed";font-size:30px;
+    letter-spacing:.02em}
+  #mk .strap{display:flex;flex-wrap:wrap;border:1.5px solid var(--ink);
+    border-top:none;background:var(--chalk)}
+  #mk .strap div{flex:1 1 150px;padding:14px 18px;border-right:1px solid var(--line)}
+  #mk .strap div:last-child{border-right:none}
+  #mk .strap .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);font-family:"Spline Sans Mono",monospace}
+  #mk .strap .v{font-family:"Barlow Condensed";font-size:24px;font-weight:600}
+  #mk section{margin-top:64px}
+  #mk h2{font-size:34px;text-transform:uppercase;letter-spacing:.02em;
+    display:flex;align-items:baseline;gap:14px}
+  #mk h2::after{content:"";flex:1;border-bottom:1.5px solid var(--ink);
+    transform:translateY(-7px)}
+  #mk h2 .no{font-family:"Spline Sans Mono",monospace;font-size:13px;
+    color:var(--pitch);letter-spacing:.12em}
+  #mk p{max-width:66ch}
+  #mk .lead{font-size:20px;line-height:1.55;max-width:70ch}
+  #mk .note{background:var(--chalk);border:1.5px solid var(--ink);
+    padding:18px 20px;margin-top:24px}
+  #mk .note b:first-child{font-family:"Barlow Condensed";font-size:20px;
+    text-transform:uppercase;letter-spacing:.03em;display:block;margin-bottom:4px}
+  #mk table{width:100%;border-collapse:collapse;background:var(--chalk);
+    border:1.5px solid var(--ink);margin-top:20px}
+  #mk caption{text-align:left;font-family:"Barlow Condensed";font-size:19px;
+    text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:0 0 8px 2px}
+  #mk th{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;text-align:left;padding:10px 12px;background:var(--ink);
+    color:var(--paper);font-weight:600;white-space:nowrap}
+  #mk td{padding:11px 12px;border-top:1px dashed var(--ink-15);vertical-align:top;
+    font-size:15px}
+  #mk .scroll{overflow-x:auto;margin-top:20px}
+  #mk .scroll table{min-width:940px;margin-top:0}
+  #mk td.mo{font-family:"Barlow Condensed";font-size:19px;white-space:nowrap;
+    text-transform:uppercase}
+  #mk td.mo .sub{display:block;font-family:"Spline Sans Mono",monospace;font-size:11.5px;
+    color:var(--muted);letter-spacing:.04em}
+  #mk .gate{display:inline-block;border:1.5px solid var(--pitch);color:var(--pitchy);
+    font-family:"Spline Sans Mono",monospace;font-size:11.5px;padding:2px 8px;
+    letter-spacing:.03em;white-space:nowrap}
+  #mk .hot{display:inline-block;border:1.5px solid var(--amber);color:var(--amber);
+    font-family:"Spline Sans Mono",monospace;font-size:11px;padding:1px 7px;
+    letter-spacing:.06em;white-space:nowrap;text-transform:uppercase}
+  #mk .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
+  #mk ul{padding-left:20px;max-width:66ch}
+  #mk li{margin:6px 0}
+  #mk .foot{margin-top:70px;border-top:3px double var(--ink);padding-top:16px;
+    display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    font-family:"Spline Sans Mono",monospace;font-size:12px;color:var(--muted)}
+  @media(max-width:760px){#mk .cols{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+
+  <div class="eyebrow">Marketing year · drawn up 30 August 2026 · supersedes the phased plan</div>
+  <div class="mast">
+    <div><h1>Go Live<br><em>The Marketing Year</em></h1></div>
+    <div class="kick">
+      <div class="big">Launch date<b>End of Sept 2026 · GW6–7</b></div>
+      <div class="big" style="color:var(--pitch);margin-top:8px">Season-two peak<b style="letter-spacing:.02em">GW1 · Aug 2027</b></div>
+    </div>
+  </div>
+
+  <div class="strap">
+    <div><div class="k">Build sprint</div><div class="v">4 weeks</div></div>
+    <div><div class="k">In-season launch</div><div class="v">Sept 2026</div></div>
+    <div><div class="k">Founding price</div><div class="v">£19/season</div></div>
+    <div><div class="k">Languages</div><div class="v">EN · FR · AR</div></div>
+    <div><div class="k">Season-two peak</div><div class="v">Aug 2027</div></div>
+  </div>
+
+  <section>
+    <h2><span class="no">01</span>The idea in one line</h2>
+    <p class="lead">Launch inside the current season, small and soon — then spend eleven months turning the
+    bot's public results into a marketing compound that pays off everything at GW1 of the next season. The
+    product does the talking: every gameweek the AI team agent publishes what it did, why, and what it scored.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span>Four weeks to go live</h2>
+    <p>Scope ruthlessly: launch with three screens and one engine. Everything else ships in-season.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Week</th><th>Ships by Monday</th><th>Marketing running in parallel</th></tr></thead>
+      <tbody>
+        <tr><td class="mo">Wk 1<span class="sub">31 Aug – 6 Sep</span></td>
+          <td>Landing page with waitlist email capture · engine extracted as a package · name, domain, handles secured</td>
+          <td>First build-in-public thread: "the bot that played its own wildcard" — with the GW1–3 record</td></tr>
+        <tr><td class="mo">Wk 2<span class="sub">7 – 13 Sep</span></td>
+          <td>Squad-by-name entry (autocomplete, saved to account) · projections + fixtures pages live (free tier)</td>
+          <td>Weekly GW recap post #1 · r/FantasyPL engagement, no links yet · Discord server opens</td></tr>
+        <tr><td class="mo">Wk 3<span class="sub">14 – 20 Sep</span></td>
+          <td>Daily AI agent brief (transfers · captain · bench · hit policy) for a saved squad · email delivery</td>
+          <td>GW recap + agent-decision post · waitlist gets "first 48h of beta" teaser</td></tr>
+        <tr><td class="mo">Wk 4<span class="sub">21 – 27 Sep</span></td>
+          <td>Stripe checkout, founding price £19/season (first 200 closed at that price forever) · public accuracy page</td>
+          <td>Launch week: bot's wildcard story to X + Reddit + Discord · waitlist converts 48h early</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note"><b>Open beta, not closed</b> Beta is anyone from the waitlist during launch week — free
+    until the international break ends. Founding members lock £19 forever and get named on a founding page. That
+    cohort is your first testimonial machine.</div>
+    <div class="note"><b>Built three-language from day one</b> English ships at launch — but the app is built
+    with locale routing and every string in a table from sprint week 1 (Next.js i18n, right-to-left ready).
+    French UI and content go live in October, Arabic with full RTL in November. Retrofitting languages in
+    February costs three times what building for them costs in September.</div>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>The month-by-month calendar</h2>
+    <p>Every month has one campaign idea, one channel bet, and a number. FPL's own calendar is the
+    marketing calendar — we never fight it, we ride it.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Month</th><th>Season beat</th><th>Campaign</th><th>Channel bet</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td class="mo">Sep 2026<span class="sub">launch</span></td><td>Int'l break, GW6–7</td>
+          <td>Launch week: founding price, bot's wildcard story, waitlist conversion</td>
+          <td>X build-in-public + Reddit presence + Discord</td><td><span class="gate">25 founding members</span></td></tr>
+        <tr><td class="mo">Oct 2026</td><td>Season settles, price rises start</td>
+          <td>Free tool #1 goes live: the <b>price-rise ticker</b> (SEO bait, shared daily)</td>
+          <td>SEO + daily ticker posts; referral: 1 free month per convert</td><td><span class="gate">60 paying</span></td></tr>
+        <tr><td class="mo">Nov 2026</td><td>Fixture congestion, rotation begins</td>
+          <td>Free tool #2: the <b>captain matrix</b>; first deadline-eve email flow running weekly</td>
+          <td>Email list + TikTok/Shorts of the agent "thinking out loud"</td><td><span class="gate">100 paying</span></td></tr>
+        <tr><td class="mo">Dec 2026<span class="hot">big window</span></td><td>AFCON + holiday fixtures = rotation chaos</td>
+          <td>"The AI saw the rotation first" — live calls before the field catches up; New Year founding-price close</td>
+          <td>Every channel at once; first small paid promo budget (~£150)</td><td><span class="gate">160 paying</span></td></tr>
+        <tr><td class="mo">Jan 2027<span class="hot">big window</span></td><td>Price rise to £24 · cup blanks appear</td>
+          <td>Free-hit content week against the blank gameweek; founding price ends with a public countdown</td>
+          <td>Affiliate outreach starts: 10 FPL YouTubers/creators for Feb–Mar slots</td><td><span class="gate">220 paying</span></td></tr>
+        <tr><td class="mo">Feb 2027</td><td>Doubles/blanks land with cups</td>
+          <td>Creator campaign #1: their squad run through the agent, on camera</td>
+          <td>2–3 creator placements + referral surge</td><td><span class="gate">280 paying</span></td></tr>
+        <tr><td class="mo">Mar 2027</td><td>Run-in, mini-league grudge matches</td>
+          <td>"Beat your mini-league rival" content; the bot vs the template head-to-head page</td>
+          <td>Email + Discord challenges, community tournaments</td><td><span class="gate">330 paying</span></td></tr>
+        <tr><td class="mo">Apr 2027</td><td>Season climax</td>
+          <td>Churn-save + testimonial harvest; end-of-season review teased</td>
+          <td>Email; ask every active member for one sentence</td><td><span class="gate">360 paying</span></td></tr>
+        <tr><td class="mo">May 2027<span class="hot">proof</span></td><td>Season ends</td>
+          <td><b>The Season Report:</b> full P&amp;L of the public teams, accuracy tables, best and worst calls. The credibility asset.</td>
+          <td>Email + all channels; pre-registration for 2027/28 opens at £14 early-bird</td><td><span class="gate">500 pre-reg emails</span></td></tr>
+        <tr><td class="mo">Jun 2027</td><td>Fixtures released</td>
+          <td>Fixture-release day spike: free tool #3, the <b>squad builder</b> with new fixtures, open to all</td>
+          <td>SEO push + creator collabs on new-fixture content</td><td><span class="gate">1,500 emails</span></td></tr>
+        <tr><td class="mo">Jul 2027</td><td>Pre-season</td>
+          <td>New-season prices revealed; pre-season projections go live; early-bird closes 15 Aug</td>
+          <td>Creators campaign #2 (bigger, paid); countdown content</td><td><span class="gate">400 paying by GW−2</span></td></tr>
+        <tr><td class="mo">Aug 2027<span class="hot">peak</span></td><td>GW1</td>
+          <td>Main launch: team-reveal video, deadline-eve blitz, referral double-month, founding-page story one year old</td>
+          <td>All channels; small ad budget concentrated on GW−2 → GW+2 only</td><td><span class="gate">500–700 paying</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>Three languages, three communities</h2>
+    <p>The bot is English-only today; its audience shouldn't be. FPL's Arabic-speaking community is one of the
+    largest in the game, and French bridges Europe, West Africa and the Maghreb — often the same managers who
+    speak both. One product, three editions, three community desks.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Edition</th><th>When live</th><th>Where the community is</th><th>The cultural note</th></tr></thead>
+      <tbody>
+        <tr><td class="mo">English<span class="sub">launch week</span></td>
+          <td class="mono">Sept 2026</td>
+          <td>X FPL, r/FantasyPL, Discord</td>
+          <td>The default voice — dry, results-first, receipts every Sunday.</td></tr>
+        <tr><td class="mo">Français<span class="sub">octobre</span></td>
+          <td class="mono">Oct 2026</td>
+          <td>French FPL community on X (#FPLFR), Discord FPL France, Belgique &amp; Afrique francophone managers</td>
+          <td>Same engine, native copy — never machine-translated posts. The French desk runs its own weekly
+          deadline-eve, and feeds the one community mini-league (see 05).</td></tr>
+        <tr><td class="mo">العربية<span class="sub">novembre</span></td>
+          <td class="mono">Nov 2026</td>
+          <td>WhatsApp groups and Telegram channels — not Discord — plus X accounts across Saudi, UAE, Egypt and Morocco</td>
+          <td>Full right-to-left layout, Arabic-first design tokens, and the deadline-eve receipt timed to Gulf
+          and Maghreb evening habits. Telegram/WhatsApp beats email here.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note"><b>December is the flagship multicultural moment</b> AFCON lands Dec 2026–Jan 2027:
+    African squads rotate, and the two biggest affected audiences read French and Arabic. One campaign run in
+    three languages — "l'IA avant la CAN / الذكاء الاصطناعي يرى الدوران أولاً / The AI saw the rotation first" —
+    with the agent's live AFCON calls published in all three editions simultaneously. One story, three
+    communities, one moment none of the English-only competitors will serve properly.</div>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span>The contest machine</h2>
+    <p>Prizes make the community play with us, not just read us. Everything runs off one mechanic: a
+    single mini-league for the whole community — one table, every language on it, the same prizes —
+    with only the announcements translated. Real prizes every month, and the grand prize timed to the
+    season-two launch.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Competition</th><th>Who enters</th><th>Prizes</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td class="mo">Launch league<span class="sub">free entry</span></td>
+          <td>Anyone with an account — the waitlist's first reason to sign up</td>
+          <td class="mono">Top 3: £40 / £20 / £10 gift cards — one table, three winners, all languages together</td>
+          <td>Launch week → end of 2026</td></tr>
+        <tr><td class="mo">Monthly pots</td>
+          <td>Runs continuously; monthly reset on the 1st</td>
+          <td class="mono">£40 / £20 / £10 per month on the one league table — three winners a month, language-agnostic</td>
+          <td>Nov 2026 → Apr 2027</td></tr>
+        <tr><td class="mo">Beat the bot</td><td>Any paid member who outscores the bot's public team in a GW</td>
+          <td class="mono">Weekly draw for a £10 prize; winners' names on the founding page</td>
+          <td>Every GW from launch</td></tr>
+        <tr><td class="mo">Season grand prize</td><td>The same league table, running all season</td>
+          <td class="mono">£150 + a club shirt of their choice + founding price locked for life</td>
+          <td>Decided May 2027, presented in the Season Report</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul>
+      <li><b>One table on purpose.</b> English, French and Arabic managers compete for the same prizes on the
+      same standings — the multilingual community is the product, and the league proves it every GW. Winners are
+      announced in all three languages; nothing is ever split by language.</li>
+      <li><b>Prizes are marketing spend, not a cost.</b> Every winner posts their result — three language
+      communities each month producing proof and screenshots on our behalf.</li>
+      <li><b>Contest content is the receipt's sibling:</b> "our league's GW12 champion did X with the agent's
+      calls" is a testimonial with a scoreboard.</li>
+      <li><b>Run it clean:</b> published rules on site, independent verification (the official FPL league table
+      is the scoreboard), winners announced in all three languages, no purchase necessary for the launch and
+      monthly leagues — only the members-only extras require an active subscription.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">06</span>The weekly engine</h2>
+    <p>Campaigns sit on top of a rhythm that never stops — this is what compounds.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Day</th><th>What goes out</th></tr></thead>
+      <tbody>
+        <tr><td class="mo">Monday</td><td>Fixture + rotation notes for the coming weeks ("what changed since Saturday")</td></tr>
+        <tr><td class="mo">Wednesday</td><td>Buy/sell watchlist + 2–3 price-rise picks from the ticker</td></tr>
+        <tr><td class="mo">Friday</td><td><b>Deadline-eve:</b> the agent's calls for the week, free preview of one team, paid full detail — to both channels every week</td></tr>
+        <tr><td class="mo">Sat–Sun</td><td>Live points thread; quick post-mortem Saturday night (provisional bonus takes)</td></tr>
+        <tr><td class="mo">Sunday eve</td><td><b>The receipt:</b> what the agent actually did vs what it said. Wins and misses both. This post is the product.</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;color:var(--muted);font-size:14.5px">From December the two highest-value posts —
+    the deadline-eve brief and the Sunday receipt — go out in all three languages; each edition keeps its own
+    voice instead of a translated echo. Contest winners and the monthly pots are announced in the same posts,
+    so the contest machine rides the same engine for free.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">07</span>Channels, honestly ranked</h2>
+    <ul>
+      <li><b>X / Twitter FPL community</b> — fastest to reach, most price-sensitive to results. Primary channel for the weekly engine.</li>
+      <li><b>Reddit (r/FantasyPL)</b> — biggest audience, strictest on self-promotion. Engage first, link only when the weekly receipt is genuinely useful; play the long game.</li>
+      <li><b>WhatsApp &amp; Telegram groups</b> — where the Arabic-speaking FPL community actually lives. One good MENA Telegram share beats a week of Facebook-style posting; get into groups by being useful, and give the group admins a free season.</li>
+      <li><b>Free tools as SEO</b> — price ticker, captain matrix, squad builder. Tools get searched in July like clockwork; content pages don't have to. This is the compounding channel.</li>
+      <li><b>TikTok / Shorts</b> — screen-record the agent reasoning ("it's selling Palmer, here's why — he's one knock from rotation"). Cheap to make, big reach, low intent — awareness only.</li>
+      <li><b>Email</b> — the only channel you own. Deadline-eve every gameweek from October.</li>
+      <li><b>Creators (affiliates)</b> — buy attention only in the two pre-paid peaks (Feb, Jul–Aug). Pay per verified conversion, not flat, until one creator proves flat-fee is worth it.</li>
+      <li><b>Discord</b> — retention and testimonials, not acquisition. Founding members' private channel from day one.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">08</span>Budget for the year</h2>
+    <ul class="mono" style="font-size:14.5px;line-height:2">
+      <li>£0–300&nbsp;&nbsp;— launch window: nothing paid, all earned, maybe £150 Reddit/X promo in December only</li>
+      <li>£300–600&nbsp;— Jan–Feb creator placements, pay-per-conversion where possible</li>
+      <li>£400–800&nbsp;— Jul–Aug 2027 paid push, concentrated GW−2 to GW+2</li>
+      <li>~£900&nbsp;&nbsp;&nbsp;&nbsp;— the contest machine's prize pool across the year (one league table:
+        ~£70/mo × 9 monthly pots + launch league + the £150 grand prize) — paid back in community proof</li>
+      <li>£700–1,000 — infra + email + LLM across the year (grows with, not ahead of, paying users)</li>
+    </ul>
+    <p style="color:var(--muted);font-size:14.5px">Rule: every pound of promo is spent pointed at a deadline
+    (founding-price close, price rise, GW1). Deadlines convert; ambient ads don't.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">09</span>What could kill it</h2>
+    <ul>
+      <li><b>Launching late.</b> In-season launch is the whole point — projections during a live season make subscribers; a launch at GW20 is a hard sell. The 4-week sprint is a deadline, not a wish.</li>
+      <li><b>Missing the receipt.</b> One week of "we forgot to post the results" and the trust engine stalls. Automate it before you automate anything else.</li>
+      <li><b>Spamming Reddit.</b> One self-promotion ban and the main organic channel is gone. Community karma first, links later.</li>
+      <li><b>A bad month, hidden.</b> Post the misses. A visible bot that recovers is more convincing than a perfect one.</li>
+    </ul>
+  </section>
+
+  <div class="foot">
+    <span>Go Live: The Marketing Year · FPL AI subscription</span>
+    <span class="mono">Launch GW6 Sept 2026 → Season-two peak GW1 Aug 2027</span>
+  </div>
+
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=Spline+Sans+Mono:wght@400;600&display=swap">
