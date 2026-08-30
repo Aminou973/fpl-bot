@@ -1,18 +1,18 @@
 {
  "deadline": "2026-09-04T17:30:00Z",
- "generated": "2026-08-30T21:54:52.540528+00:00",
+ "generated": "2026-08-30T23:54:18.178703+00:00",
  "gw": 3,
  "teams": {
   "Minoux_41": {
    "bench": [
     109,
     237,
-    346,
-    272
+    165,
+    346
    ],
    "captain": 480,
    "chip": "wildcard",
-   "chip_gain": 5.72,
+   "chip_gain": 6.38,
    "entry": 4896428,
    "hits": 0,
    "in": [
@@ -23,9 +23,9 @@
     165,
     229,
     237,
-    272,
     346,
     387,
+    427,
     480,
     498
    ],
@@ -34,11 +34,11 @@
     61,
     82,
     84,
-    106,
     155,
     248,
     260,
     397,
+    426,
     441,
     445,
     529
@@ -81,7 +81,7 @@
      "position": 6
     },
     {
-     "element": 426,
+     "element": 427,
      "is_captain": false,
      "is_vice": false,
      "position": 7
@@ -105,7 +105,7 @@
      "position": 10
     },
     {
-     "element": 165,
+     "element": 106,
      "is_captain": false,
      "is_vice": false,
      "position": 11
@@ -123,13 +123,13 @@
      "position": 13
     },
     {
-     "element": 346,
+     "element": 165,
      "is_captain": false,
      "is_vice": false,
      "position": 14
     },
     {
-     "element": 272,
+     "element": 346,
      "is_captain": false,
      "is_vice": false,
      "position": 15
@@ -155,17 +155,17 @@
    "squad_after": [
     1,
     8,
+    106,
     109,
     40,
     165,
     229,
     237,
-    272,
     346,
     368,
     387,
     388,
-    426,
+    427,
     480,
     498
    ],
@@ -178,11 +178,11 @@
     388,
     498,
     8,
-    426,
+    427,
     480,
     40,
     368,
-    165
+    106
    ]
   },
   "Minoux_69": {
