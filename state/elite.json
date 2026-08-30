@@ -2,7 +2,7 @@
  "captains": [
   {
    "elite": 94.0,
-   "field": 68.7,
+   "field": 68.8,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -11,7 +11,7 @@
   },
   {
    "elite": 4.0,
-   "field": 15.3,
+   "field": 15.5,
    "id": 399,
    "name": "Cherki",
    "pos": "MID",
@@ -28,7 +28,7 @@
    "team": "LIV"
   }
  ],
- "generated": "2026-08-30T00:43:46+00:00",
+ "generated": "2026-08-30T07:24:58+00:00",
  "gw": 3,
  "gw_read": 2,
  "league": "Overall (top 50)",
@@ -39,7 +39,7 @@
  "template": [
   {
    "elite": 96.0,
-   "field": 68.7,
+   "field": 68.8,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -57,7 +57,7 @@
   },
   {
    "elite": 64.0,
-   "field": 15.3,
+   "field": 15.5,
    "id": 399,
    "name": "Cherki",
    "pos": "MID",
@@ -75,7 +75,7 @@
   },
   {
    "elite": 44.0,
-   "field": 9.9,
+   "field": 10.0,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -102,7 +102,7 @@
   },
   {
    "elite": 38.0,
-   "field": 8.8,
+   "field": 8.9,
    "id": 229,
    "name": "Tarkowski",
    "pos": "DEF",
@@ -147,7 +147,7 @@
   },
   {
    "elite": 32.0,
-   "field": 15.3,
+   "field": 15.4,
    "id": 391,
    "name": "Gvardiol",
    "pos": "DEF",
@@ -210,7 +210,7 @@
   },
   {
    "elite": 20.0,
-   "field": 3.6,
+   "field": 3.7,
    "id": 572,
    "name": "Tzolakis",
    "pos": "GKP",
@@ -219,7 +219,7 @@
   },
   {
    "elite": 20.0,
-   "field": 22.2,
+   "field": 22.1,
    "id": 496,
    "name": "Kinsky",
    "pos": "GKP",
@@ -246,7 +246,7 @@
   },
   {
    "elite": 18.0,
-   "field": 8.9,
+   "field": 9.0,
    "id": 226,
    "name": "Pickford",
    "pos": "GKP",
@@ -255,7 +255,7 @@
   },
   {
    "elite": 16.0,
-   "field": 34.1,
+   "field": 34.0,
    "id": 427,
    "name": "Mbeumo",
    "pos": "MID",
