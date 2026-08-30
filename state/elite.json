@@ -2,7 +2,7 @@
  "captains": [
   {
    "elite": 100.0,
-   "field": 46.3,
+   "field": 46.6,
    "id": 426,
    "name": "B.Fernandes",
    "pos": "MID",
@@ -10,7 +10,7 @@
    "team": "MUN"
   }
  ],
- "generated": "2026-08-30T17:20:08+00:00",
+ "generated": "2026-08-30T17:46:41+00:00",
  "gw": 3,
  "gw_read": 2,
  "league": "Overall (top 50)",
@@ -21,7 +21,7 @@
  "template": [
   {
    "elite": 100.0,
-   "field": 46.3,
+   "field": 46.6,
    "id": 426,
    "name": "B.Fernandes",
    "pos": "MID",
@@ -30,7 +30,7 @@
   },
   {
    "elite": 100.0,
-   "field": 68.9,
+   "field": 69.0,
    "id": 165,
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
@@ -38,7 +38,7 @@
    "team": "CHE"
   },
   {
-   "elite": 70.0,
+   "elite": 76.0,
    "field": 41.7,
    "id": 8,
    "name": "Calafiori",
@@ -47,13 +47,13 @@
    "team": "ARS"
   },
   {
-   "elite": 60.0,
-   "field": 21.5,
-   "id": 109,
-   "name": "Verbruggen",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "BHA"
+   "elite": 62.0,
+   "field": 33.2,
+   "id": 427,
+   "name": "Mbeumo",
+   "pos": "MID",
+   "price": 8.0,
+   "team": "MUN"
   },
   {
    "elite": 58.0,
@@ -65,7 +65,16 @@
    "team": "LEE"
   },
   {
-   "elite": 46.0,
+   "elite": 56.0,
+   "field": 21.5,
+   "id": 109,
+   "name": "Verbruggen",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "BHA"
+  },
+  {
+   "elite": 50.0,
    "field": 17.5,
    "id": 154,
    "name": "Palmer",
@@ -74,17 +83,8 @@
    "team": "CHE"
   },
   {
-   "elite": 46.0,
-   "field": 10.6,
-   "id": 115,
-   "name": "De Cuyper",
-   "pos": "DEF",
-   "price": 4.6,
-   "team": "BHA"
-  },
-  {
-   "elite": 42.0,
-   "field": 15.7,
+   "elite": 48.0,
+   "field": 15.6,
    "id": 237,
    "name": "Ndiaye",
    "pos": "MID",
@@ -92,16 +92,16 @@
    "team": "EVE"
   },
   {
-   "elite": 40.0,
-   "field": 42.9,
-   "id": 368,
-   "name": "Szoboszlai",
-   "pos": "MID",
-   "price": 7.0,
-   "team": "LIV"
+   "elite": 44.0,
+   "field": 10.8,
+   "id": 115,
+   "name": "De Cuyper",
+   "pos": "DEF",
+   "price": 4.6,
+   "team": "BHA"
   },
   {
-   "elite": 38.0,
+   "elite": 40.0,
    "field": 9.3,
    "id": 229,
    "name": "Tarkowski",
@@ -110,16 +110,7 @@
    "team": "EVE"
   },
   {
-   "elite": 38.0,
-   "field": 69.1,
-   "id": 411,
-   "name": "Haaland",
-   "pos": "FWD",
-   "price": 15.5,
-   "team": "MCI"
-  },
-  {
-   "elite": 34.0,
+   "elite": 40.0,
    "field": 16.2,
    "id": 379,
    "name": "Isak",
@@ -128,8 +119,26 @@
    "team": "LIV"
   },
   {
-   "elite": 34.0,
-   "field": 21.9,
+   "elite": 40.0,
+   "field": 42.8,
+   "id": 368,
+   "name": "Szoboszlai",
+   "pos": "MID",
+   "price": 7.0,
+   "team": "LIV"
+  },
+  {
+   "elite": 36.0,
+   "field": 38.2,
+   "id": 1,
+   "name": "Raya",
+   "pos": "GKP",
+   "price": 6.0,
+   "team": "ARS"
+  },
+  {
+   "elite": 32.0,
+   "field": 21.8,
    "id": 496,
    "name": "Kinsky",
    "pos": "GKP",
@@ -137,34 +146,7 @@
    "team": "TOT"
   },
   {
-   "elite": 34.0,
-   "field": 33.4,
-   "id": 427,
-   "name": "Mbeumo",
-   "pos": "MID",
-   "price": 8.0,
-   "team": "MUN"
-  },
-  {
-   "elite": 30.0,
-   "field": 10.0,
-   "id": 565,
-   "name": "M.Sangar\u00e9",
-   "pos": "MID",
-   "price": 5.6,
-   "team": "BRE"
-  },
-  {
-   "elite": 30.0,
-   "field": 3.3,
-   "id": 334,
-   "name": "Muharemovi\u0107",
-   "pos": "DEF",
-   "price": 5.0,
-   "team": "LEE"
-  },
-  {
-   "elite": 30.0,
+   "elite": 32.0,
    "field": 7.0,
    "id": 10,
    "name": "White",
@@ -173,8 +155,8 @@
    "team": "ARS"
   },
   {
-   "elite": 28.0,
-   "field": 15.7,
+   "elite": 32.0,
+   "field": 15.8,
    "id": 391,
    "name": "Gvardiol",
    "pos": "DEF",
@@ -182,7 +164,7 @@
    "team": "MCI"
   },
   {
-   "elite": 26.0,
+   "elite": 30.0,
    "field": 16.3,
    "id": 418,
    "name": "Maguire",
@@ -191,17 +173,35 @@
    "team": "MUN"
   },
   {
-   "elite": 26.0,
-   "field": 38.3,
-   "id": 1,
-   "name": "Raya",
-   "pos": "GKP",
-   "price": 6.0,
-   "team": "ARS"
+   "elite": 28.0,
+   "field": 10.0,
+   "id": 565,
+   "name": "M.Sangar\u00e9",
+   "pos": "MID",
+   "price": 5.6,
+   "team": "BRE"
   },
   {
-   "elite": 24.0,
-   "field": 15.2,
+   "elite": 26.0,
+   "field": 69.1,
+   "id": 411,
+   "name": "Haaland",
+   "pos": "FWD",
+   "price": 15.5,
+   "team": "MCI"
+  },
+  {
+   "elite": 26.0,
+   "field": 3.3,
+   "id": 334,
+   "name": "Muharemovi\u0107",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "LEE"
+  },
+  {
+   "elite": 22.0,
+   "field": 15.1,
    "id": 412,
    "name": "Lammens",
    "pos": "GKP",
@@ -209,40 +209,40 @@
    "team": "MUN"
   },
   {
-   "elite": 22.0,
-   "field": 8.4,
-   "id": 88,
-   "name": "Kayode",
-   "pos": "DEF",
-   "price": 4.6,
-   "team": "BRE"
-  },
-  {
-   "elite": 18.0,
-   "field": 2.0,
-   "id": 123,
-   "name": "Hinshelwood",
-   "pos": "MID",
-   "price": 6.0,
-   "team": "BHA"
-  },
-  {
-   "elite": 18.0,
-   "field": 8.0,
-   "id": 542,
-   "name": "E.Le F\u00e9e",
-   "pos": "MID",
+   "elite": 16.0,
+   "field": 11.9,
+   "id": 552,
+   "name": "Brobbey",
+   "pos": "FWD",
    "price": 6.0,
    "team": "SUN"
   },
   {
-   "elite": 18.0,
-   "field": 28.4,
-   "id": 4,
-   "name": "Gabriel",
-   "pos": "DEF",
-   "price": 8.0,
+   "elite": 16.0,
+   "field": 25.9,
+   "id": 557,
+   "name": "Tzolis",
+   "pos": "MID",
+   "price": 6.5,
    "team": "ARS"
+  },
+  {
+   "elite": 16.0,
+   "field": 17.2,
+   "id": 399,
+   "name": "Cherki",
+   "pos": "MID",
+   "price": 7.6,
+   "team": "MCI"
+  },
+  {
+   "elite": 14.0,
+   "field": 1.7,
+   "id": 233,
+   "name": "Mykolenko",
+   "pos": "DEF",
+   "price": 4.5,
+   "team": "EVE"
   }
  ]
 }
