@@ -83,8 +83,11 @@ def predict(log_df, horizon_hours=72, now=None):
         price = float(last.cost) / 10.0
         proj = rate * horizon_hours
         thresh = max(MIN_THRESHOLD, OWN_K * own * 10_000_000 / 15)
-        z_rise = (proj - thresh) / (FILL_SD * max(thresh, 1.0))
-        z_fall = (-proj - thresh) / (FILL_SD * max(thresh, 1.0))
+        # clip before exp: an uncalibrated threshold drives |z| into the
+        # hundreds and np.exp overflows, which is noise in the logs rather
+        # than information. +-30 is already p = 1e-13 / 1 - 1e-13.
+        z_rise = np.clip((proj - thresh) / (FILL_SD * max(thresh, 1.0)), -30, 30)
+        z_fall = np.clip((-proj - thresh) / (FILL_SD * max(thresh, 1.0)), -30, 30)
         p_rise = float(1.0 / (1.0 + np.exp(-z_rise)))
         p_fall = float(1.0 / (1.0 + np.exp(-z_fall)))
         conf = float(np.clip((hours - MIN_OBS_H) / 168.0, 0.0, 1.0))
@@ -150,5 +153,5 @@ def calibrate(log_df=None):
         # stage-2 logistic fit lands here once the history justifies it
         fit["fit_date"] = pd.Timestamp.now(tz="UTC").isoformat()
     STATE.mkdir(exist_ok=True)
-    MODEL_FILE.write_text(json.dumps(fit, indent=1))
+    MODEL_FILE.write_text(json.dumps(fit, indent=1), encoding="utf-8")
     return fit

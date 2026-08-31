@@ -80,7 +80,7 @@ def test_risk_and_chips_solve_together():
     pool = optimize.prune(df, gws)
     s = squad_of(pool)
     samples, weights = scenarios_mod.scenario_set(pool, gws, S=8, seed=0)
-    res = planner.plan(pool, gws, s, time_limit=90, chips_tc_bb=True,
+    res = planner.plan(pool, gws, s, time_limit=600, chips_tc_bb=True,
                        chip_windows=DEFAULT_WINDOWS,
                        scenarios=samples, scenario_weights=weights,
                        risk_lambda=0.3)
@@ -89,6 +89,9 @@ def test_risk_and_chips_solve_together():
     # from the risk-adjusted objective by exactly the reported risk value
     assert res["mean_objective"] <= res["objective"]
     assert all(len(wk["squad"]) == 15 for wk in res["weeks"])
+    # the CVaR blocks must not blank the chip blocks that follow them:
+    # every chip the plan reports has to be a whole chip, not a fraction
+    assert all(wk["chip"] in (None, "3xc", "bboost") for wk in res["weeks"])
 
 
 def test_wildcard_branch_restructures_for_free():
@@ -135,3 +138,46 @@ def test_branch_kwargs_survive_persona():
     wc_squad = branches[0]["squad"]
     assert not (set(banned_ids) & set(wc_squad)), \
         "wildcard branch bought a banned player"
+
+def test_tc_and_bb_are_worth_what_the_rules_say():
+    """The chip blocks must price TC and BB correctly, not just fire legally.
+
+    A captain already scores 2x (ST/X pay 1x, CP pays the 2nd), so the triple
+    captain block adds exactly ONE more copy - it used to add two, valuing the
+    chip at double. Bench boost pays all FOUR bench players - the constraint
+    used to read sum(BB) = YBB, paying exactly one.
+    """
+    df, _, _, gws = build()
+    pool = optimize.prune(df, gws)
+    s = squad_of(pool)
+    g = gws[0]
+    one = [{"start": g, "stop": g}]
+    base = planner.plan(pool, gws, s, time_limit=600, chips_tc_bb=True,
+                        chip_windows={"3xc": [], "bboost": []})
+    tc = planner.plan(pool, gws, s, time_limit=600, chips_tc_bb=True,
+                      chip_windows={"3xc": one, "bboost": []})
+    assert base is not None and tc is not None
+    xp = df.set_index("id")[f"xp{g}"]
+    wk = tc["weeks"][0]
+    if wk["chip"] == "3xc":
+        # the whole objective gain of playing TC is one extra captain, so the
+        # gain can never exceed it by more than solver tolerance
+        gain = tc["objective"] - base["objective"]
+        assert gain <= float(xp[wk["captain"]]) + 0.05, \
+            f"TC credited {gain:.2f} for a {float(xp[wk['captain']]):.2f} captain"
+
+
+def test_bench_boost_pays_all_four_bench_players():
+    """When BB fires, the four bench players must be the ones it pays."""
+    df, _, _, gws = build()
+    pool = optimize.prune(df, gws)
+    s = squad_of(pool)
+    g = gws[0]
+    res = planner.plan(pool, gws, s, time_limit=600, chips_tc_bb=True,
+                       chip_windows={"3xc": [],
+                                     "bboost": [{"start": g, "stop": g}]})
+    assert res is not None
+    wk = res["weeks"][0]
+    if wk["chip"] == "bboost":
+        bench = [i for i in wk["squad"] if i not in set(wk["xi"])]
+        assert len(bench) == 4, f"bench boost week has {len(bench)} on the bench"

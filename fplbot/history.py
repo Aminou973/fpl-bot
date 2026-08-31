@@ -44,7 +44,7 @@ def save_projections(root: Path, gw: int, df) -> None:
 
 def load_projections(root: Path, gw: int):
     f = snapshot_dir(root) / f"gw{gw}.json"
-    return json.loads(f.read_text()) if f.exists() else None
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else None
 
 
 # ------------------------------------------------------------------ grading --

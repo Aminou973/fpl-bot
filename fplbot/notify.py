@@ -44,7 +44,14 @@ def _post(method, payload):
                 return json.load(r)
         except Exception as e:                       # noqa: BLE001
             if attempt == 2:
-                print(f"[notify] failed: {e}")
+                # Telegram names the real reason (a bad HTML entity, and its
+                # byte offset) in the response body, not in the status line
+                body = ""
+                try:
+                    body = e.read().decode("utf-8", "replace")[:300]
+                except Exception:                    # noqa: BLE001
+                    pass
+                print(f"[notify] failed: {e}" + (f" | {body}" if body else ""))
                 return None
             time.sleep(2 * (attempt + 1))
 
@@ -76,17 +83,30 @@ def send(text, chat_id=None, silent=None, kind="alert"):
 
 
 def _split(text):
+    """Chunks Telegram will actually accept: never empty, never over LIMIT.
+
+    Splitting on paragraphs alone is not enough - a single paragraph longer
+    than LIMIT used to be flushed while the buffer was still empty (Telegram
+    rejects an empty message) and then sent whole (Telegram rejects anything
+    over 4096). Both cases now fall through to a hard character split.
+    """
     if len(text) <= LIMIT:
         return [text]
     out, buf = [], ""
     for para in text.split("\n\n"):
-        if len(buf) + len(para) + 2 > LIMIT:
+        while len(para) > LIMIT:                 # a single huge paragraph
+            if buf.strip():
+                out.append(buf.rstrip())
+                buf = ""
+            out.append(para[:LIMIT])
+            para = para[LIMIT:]
+        if buf and len(buf) + len(para) + 2 > LIMIT:
             out.append(buf.rstrip())
             buf = ""
         buf += para + "\n\n"
     if buf.strip():
         out.append(buf.rstrip())
-    return out
+    return [c for c in out if c.strip()]
 
 
 def esc(s):

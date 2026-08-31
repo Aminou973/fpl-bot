@@ -100,10 +100,10 @@ def main():
     gold_path = GOLDEN / "selfcheck.json"
     if a.rebaseline:
         GOLDEN.mkdir(parents=True, exist_ok=True)
-        gold_path.write_text(json.dumps(cur, indent=1, sort_keys=True))
+        gold_path.write_text(json.dumps(cur, indent=1, sort_keys=True), encoding="utf-8")
         print(f"rebaselined {gold_path}")
         return
-    gold = json.loads(gold_path.read_text())
+    gold = json.loads(gold_path.read_text(encoding="utf-8"))
     ok = True
     if cur["projections_sha"] != gold["projections_sha"]:
         ok = False

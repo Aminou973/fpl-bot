@@ -31,7 +31,15 @@ def get(path: str, retries: int = 4, pause: float = 2.0):
                 "User-Agent": UA, "Accept": "application/json"})
             with urllib.request.urlopen(req, timeout=45) as r:
                 return json.load(r)
-        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+        except urllib.error.HTTPError as e:
+            last = e
+            # a 4xx is an answer, not a hiccup: a 404 (entry_cup before the cup
+            # exists, picks not yet published) used to burn 20s of back-off
+            # before raising. Only 429 is worth waiting out.
+            if 400 <= e.code < 500 and e.code != 429:
+                break
+            time.sleep(pause * (attempt + 1))
+        except (urllib.error.URLError, TimeoutError) as e:
             last = e
             time.sleep(pause * (attempt + 1))
     raise RuntimeError(f"FPL API failed for {url}: {last}")

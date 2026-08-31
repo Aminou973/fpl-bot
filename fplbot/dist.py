@@ -91,6 +91,5 @@ def attach_quantiles(df, gws, n_sims=256, seed=0, team_shock=0.18):
         # deprecated alias: cxp used to be the deterministic upside tilt; it is
         # the 85th-percentile draw now. xp_prefix="cxp" keeps working.
         df[f"cxp{g}"] = df[f"q85{g}"]
-    df["ceiling_total"] = [round(sum(df[f"q85{g}"].iloc[i] for g in gws), 3)
-                           for i in range(len(df))]
+    df["ceiling_total"] = df[[f"q85{g}" for g in gws]].sum(axis=1).round(3)
     return df

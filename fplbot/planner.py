@@ -187,7 +187,7 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
         if tc_ok:
             # the captain already earns double via CP; the chip adds the third
             for i in range(n):
-                c[OFF_TC + g * n + i] -= 2 * w[g] * xp[i, g]
+                c[OFF_TC + g * n + i] -= w[g] * xp[i, g]
         if bb_ok:
             # bench players already earn bench_weight via X; the chip pays the rest
             for i in range(n):
@@ -275,7 +275,7 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
                 add({OFF_BB + g * n + i: 1, X(i, g): -1, ST(i, g): 1}, -np.inf, 0)
             add({**{OFF_TC + g * n + i: 1 for i in range(n)}, OFF_YTC + g: -1}, 0, 0)
             add({**{OFF_BB + g * n + i: 1 for i in range(n)},
-                 OFF_YBB + g: -1}, 0, 0)                     # exactly the 4 bench spots
+                 OFF_YBB + g: -4}, 0, 0)                     # exactly the 4 bench spots
             add({OFF_YTC + g: 1, OFF_YBB + g: 1}, -np.inf, 1)  # one chip per week
 
     add({OFF_FT: 1}, free_transfers, free_transfers)
@@ -315,10 +315,13 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
         lo_b[OFF_HT + g], hi_b[OFF_HT + g] = 0, (15 if allow_hits else 0)
     if use_risk:
         # zeta is free, the epigraph slacks are nonnegative and continuous
-        integrality[OFF_ZETA:] = 0
+        # end both slices explicitly: with Tier A chips active the U block is
+        # not the tail of the variable vector - the TC/BB blocks follow it, and
+        # they must stay binary and bounded at 1
+        integrality[OFF_ZETA:OFF_U + S * G] = 0
         lo_b[OFF_ZETA:OFF_ZETA + G] = -np.inf
         hi_b[OFF_ZETA:OFF_ZETA + G] = np.inf
-        hi_b[OFF_U:] = np.inf
+        hi_b[OFF_U:OFF_U + S * G] = np.inf
     if use_chips:
         for g in range(G):
             gw = gws[g]
@@ -462,7 +465,7 @@ def wildcard_gain(pool, df, gws, current, base_objective, **kw):
     differentials constraint is worse than no suggestion at all.
     """
     from .optimize import solve
-    kw = {k: v for k, v in kw.items() if k in BRANCH_KW}
+    kw = {k: v for k, v in kw.items() if k in SOLVE_KW}
     wc = solve(pool, gws, allow_infeasible=True, **kw)
     if wc is None:
         return None
@@ -478,6 +481,18 @@ BRANCH_KW = ("budget", "locked", "banned", "own_bonus", "min_differentials",
              "bench_weight", "decay", "rank_alpha", "template_tilt",
              "cap_tilt", "elite_weight", "price_matrix", "sell_price",
              "price_gamma", "time_limit")
+
+# BRANCH_KW is shaped for plan(). optimize.solve() is a different, smaller
+# signature - handing it plan()-only knobs (rank_alpha, template_tilt,
+# elite_weight, price_*) raises TypeError. That crashed every free-hit branch
+# for any team with engine 1 enabled; it stayed hidden only because no team
+# had delegated the free hit, so the path never ran. The hard constraints
+# (locked/banned/min_differentials/budget) survive the narrower sieve; the
+# soft rank tilt has no equivalent in solve() and is simply not applied to a
+# single-week free-hit squad.
+SOLVE_KW = ("budget", "weights", "locked", "banned", "max_changes", "current",
+            "bench_weight", "max_per_club", "time_limit", "xp_prefix",
+            "own_bonus", "min_differentials", "differ_from", "min_differences")
 
 
 def wildcard_plan(pool, gws, current, bank=0.0, **kw):
@@ -508,7 +523,7 @@ def freehit_plan(pool, gws, current, bank=0.0, **kw):
         raise ValueError("freehit_plan takes exactly one gameweek")
     cur_idx = [i for i in range(len(pool)) if int(pool.id.values[i]) in set(current)]
     budget = float(pool.price.values[cur_idx].sum()) + float(bank)
-    kw = {k: v for k, v in kw.items() if k in BRANCH_KW}
+    kw = {k: v for k, v in kw.items() if k in SOLVE_KW}
     res = solve(pool, gws, allow_infeasible=True, budget=budget, **kw)
     return res
 
@@ -531,14 +546,20 @@ def chip_branches(pool, gws, current, base, candidates, bank=0.0, **kw):
         at = gws.index(gw)
         base_rest = sum(wk["xp"] for wk in base["weeks"][at:])
         entry = {"chip": chip, "gw": gw, "gain": None}
+        # The squad a chip is played FROM is the one the base plan holds going
+        # into that week, not the one you own today - they differ as soon as the
+        # plan makes a transfer before `gw`. Using today's squad silently priced
+        # every future-week branch against the wrong starting point.
+        from_squad = current if at == 0 else base["weeks"][at - 1]["squad"]
+        from_bank = bank if at == 0 else base["weeks"][at - 1].get("bank", bank)
         if chip == "wildcard":
-            wc = wildcard_plan(pool, gws[at:], current, bank=bank, **kw)
+            wc = wildcard_plan(pool, gws[at:], from_squad, bank=from_bank, **kw)
             if wc is not None:
                 entry.update(squad=wc["weeks"][0]["squad"],
                              xp=wc["total_xp"],
                              gain=round(wc["total_xp"] - base_rest, 2))
         elif chip == "free_hit":
-            fh = freehit_plan(pool, [gw], current, bank=bank, **kw)
+            fh = freehit_plan(pool, [gw], from_squad, bank=from_bank, **kw)
             if fh is not None:
                 xi, _ = best_xi(pool, fh["squad"], gw)
                 pos = pool.set_index("id").pos.to_dict()

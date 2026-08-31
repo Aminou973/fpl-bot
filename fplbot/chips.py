@@ -44,7 +44,7 @@ def load_patterns():
     read as "this is when they usually land", not "this is when they will".
     """
     try:
-        return json.loads(PATTERNS.read_text())
+        return json.loads(PATTERNS.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return {"basis": [], "gameweeks": {}}
 

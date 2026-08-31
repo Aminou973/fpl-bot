@@ -67,7 +67,7 @@ def main():
            "pass": agree / len(rows) >= 0.9,
            "rows": rows}
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
-    Path(a.out).write_text(json.dumps(out, indent=1))
+    Path(a.out).write_text(json.dumps(out, indent=1), encoding="utf-8")
     print(f"scraped pessimistic signals: {len(rows)}, agree with FPL: {agree} "
           f"-> precision {out['precision']} "
           f"({'PASS - override unlocked at 90%' if out['pass'] else 'below 0.90 - scrape stays advisory'})")

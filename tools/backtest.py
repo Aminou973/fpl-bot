@@ -68,7 +68,7 @@ def main():
     print(f"\n{res.summary()}")
     print(f"ran in {time.time() - t0:.0f}s")
     out = a.out or str(ROOT / "data" / "backtest" / f"{a.season}.json")
-    Path(out).write_text(json.dumps(res.to_json(), indent=1))
+    Path(out).write_text(json.dumps(res.to_json(), indent=1), encoding="utf-8")
     print(f"wrote {out}")
 
 

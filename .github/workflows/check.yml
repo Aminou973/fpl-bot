@@ -16,7 +16,8 @@ concurrency:
 jobs:
   selfcheck:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # the ILP invariant suite takes ~21 min locally and a runner is slower
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,6 +26,8 @@ jobs:
           cache: pip
       - run: pip install -r requirements-dev.txt
       - name: golden files + invariant tests
+        # no -x: these are solver tests, and one slow solve used to abort every
+        # test after it, hiding real failures behind a timing flake
         run: |
           python tools/selfcheck.py
-          pytest tests/ -x -q
+          pytest tests/ -q

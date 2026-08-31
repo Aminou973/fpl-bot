@@ -26,11 +26,21 @@ engines:
     enabled: true
     alpha: 0.5
   chips:
-    tier_a: true      # TC/BB decided in the ILP for the imminent week only
+    tier_a: true      # TC/BB decided in the ILP for the imminent week only.
+                      # ENABLES the machinery only - a chip is played solely
+                      # for a team whose chips_auto names it (triple_captain /
+                      # bench_boost) with the xp it must clear. No entry means
+                      # the window never opens for that team.
     branching: true   # WC/FH branch evaluation at calendar-flagged weeks
     branch_time_limit: 60
   price:
-    enabled: true     # inert until state/price_log.jsonl has enough history
+    enabled: false    # OFF 2026-08-31: the stage-1 physics is miscalibrated -
+                      # 612 of 623 predictions came back saturated (>=0.99)
+                      # because the net rate is measured over the whole log,
+                      # transfers_in_event resets each deadline, and the
+                      # ownership threshold is orders of magnitude too small.
+                      # Re-enable only after tools/price_eval.py shows a real
+                      # hit rate on a trailing intra-gameweek window.
     gamma: 0.05       # objective points per £0.1m of avoided rise
     horizon_hours: 72
   scenarios:
@@ -60,6 +70,28 @@ teams:
       alpha: 0.5
       tilt: 0.4            # template-safe: buys the field's players
       elite_weight: 0.3    # 30% of the tilt reads the top-50 template (fplbot.elite)
+    # ------------------------------------------------------------------
+    # ALL FOUR CHIPS DELEGATED TO THE BOT — owner instruction 2026-08-31
+    # ("i delegate all both team & chips to you").
+    #
+    # Each number is the expected-points gain the chip must clear before the
+    # bot plays it. Three gates must all hold: the chip is unspent, the API's
+    # own window is open for the imminent gameweek, and the modelled gain
+    # clears the number. Tier A chips (TC/BB) additionally hold if a better
+    # week is visible inside the 5-gameweek horizon.
+    #
+    # Gates set from the bot's own season chip calendar (2026-08-31 run):
+    #   triple_captain  1st-half peak +4.0..4.5, 2nd-half +5.3..5.4
+    #   bench_boost     1st-half peak +5.0..7.6, 2nd-half +8.8..14.0
+    #   free_hit        currently +0.6 max — no blank gameweeks are scheduled
+    #                   yet, so this gate simply will not fire until they are,
+    #                   which is the correct behaviour for a blank-week chip.
+    # Delete any line to take that chip back into your own hands.
+    chips_auto:
+      wildcard: 5.0
+      free_hit: 4.0
+      triple_captain: 4.5
+      bench_boost: 5.0
     lock:
       - ["Haaland", "MCI"]
     # squad is only a fallback for when the API cannot be read
@@ -94,12 +126,28 @@ teams:
       alpha: 0.5
       tilt: 0.4            # template-safe: buys the field's players
       elite_weight: 0.5    # the chaser leans on the top-50 template hardest
-    # engine 7 — the bot PLAYS these chips itself for this team when all three
-    # gates hold: chip unspent, API window open for the deadline week, and the
-    # modelled gain over the horizon clears the number below. Approved by the
-    # owner 2026-08-29 ("use the chips auto by you, you take control").
+    # ------------------------------------------------------------------
+    # ALL FOUR CHIPS DELEGATED TO THE BOT — owner instruction 2026-08-31
+    # ("i delegate all both team & chips to you").
+    #
+    # Each number is the expected-points gain the chip must clear before the
+    # bot plays it. Three gates must all hold: the chip is unspent, the API's
+    # own window is open for the imminent gameweek, and the modelled gain
+    # clears the number. Tier A chips (TC/BB) additionally hold if a better
+    # week is visible inside the 5-gameweek horizon.
+    #
+    # Gates set from the bot's own season chip calendar (2026-08-31 run):
+    #   triple_captain  1st-half peak +4.0..4.5, 2nd-half +5.3..5.4
+    #   bench_boost     1st-half peak +5.0..7.6, 2nd-half +8.8..14.0
+    #   free_hit        currently +0.6 max — no blank gameweeks are scheduled
+    #                   yet, so this gate simply will not fire until they are,
+    #                   which is the correct behaviour for a blank-week chip.
+    # Delete any line to take that chip back into your own hands.
     chips_auto:
-      wildcard: 5.0        # xp gain over the horizon the wildcard must beat
+      wildcard: 5.0
+      free_hit: 4.0
+      triple_captain: 4.5
+      bench_boost: 5.0
     squad:
       - ["Raya", "ARS"]
       - ["Palmer", "IPS"]

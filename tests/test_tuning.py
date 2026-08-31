@@ -23,7 +23,7 @@ def engines():
 def write_best(params):
     """tuning.results as an absolute path: ROOT / <abs> resolves to <abs>."""
     f = Path(tempfile.mkstemp(suffix=".json")[1])
-    f.write_text(json.dumps({"best": {"params": params}}))
+    f.write_text(json.dumps({"best": {"params": params}}), encoding="utf-8")
     return str(f)
 
 

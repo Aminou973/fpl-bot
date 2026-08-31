@@ -237,7 +237,7 @@ def write_live_state(cfg, boot):
         bundle = None
         f = ROOT / "site" / "bundle.json"
         if f.exists():
-            bundle = json.loads(f.read_text())
+            bundle = json.loads(f.read_text(encoding="utf-8"))
         snap = live_mod.build(boot=boot, entry_ids=mine,
                               compare=cfg.get("compare") or (), bundle=bundle)
         (ROOT / "site").mkdir(exist_ok=True)

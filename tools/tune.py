@@ -143,7 +143,7 @@ def collect(gw_from, gw_to):
     shards = sorted(ROOT.glob("data/backtest/tuning_shard*.json"))
     rows = []
     for f in shards:
-        rows.extend(json.loads(f.read_text()))
+        rows.extend(json.loads(f.read_text(encoding="utf-8")))
     if not rows:
         print("no shard results found - run the sweep first")
         return
@@ -161,7 +161,7 @@ def collect(gw_from, gw_to):
            "n_coarse": len(coarse), "n_refined": len(refined),
            "pareto": par, "best": best, "walk_forward": wf,
            "all": sorted(pool, key=lambda r: -r["field_pct"])}
-    OUT.write_text(json.dumps(out, indent=1))
+    OUT.write_text(json.dumps(out, indent=1), encoding="utf-8")
     for f in shards:
         f.unlink()
     print(f"\nwrote {OUT} - {len(pool)} configs, best field_pct "
@@ -172,7 +172,7 @@ def report():
     if not OUT.exists():
         print("no tuning.json yet")
         return
-    d = json.loads(OUT.read_text())
+    d = json.loads(OUT.read_text(encoding="utf-8"))
     print(f"tuning run {d.get('generated')} over GW"
           f"{d['gw_window'][0]}-{d['gw_window'][1]} "
           f"({d.get('n_coarse')} coarse, {d.get('n_refined')} refined)\n")
@@ -213,7 +213,7 @@ def main():
     rows = coarse_stage(replay, a.n_iter, a.from_gw, a.until,
                         a.shard, a.nshards, a.seed)
     if rows:
-        shard_file(a.shard).write_text(json.dumps(rows, indent=1))
+        shard_file(a.shard).write_text(json.dumps(rows, indent=1), encoding="utf-8")
         print(f"\nwrote {shard_file(a.shard)} ({len(rows)} configs); "
               f"finish with --collect")
 

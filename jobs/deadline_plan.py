@@ -153,8 +153,9 @@ def chip_alerts(ctx, results, cfg):
         alerts.append("🎯 <b>Chip window"
                       + ("s" if len(lines) > 1 else "") + "</b>\n\n"
                       + "\n".join(lines)
-                      + "\n\n<i>Play the chip yourself in the app before the "
-                        "deadline — chips are never auto-played.</i>")
+                      + "\n\n<i>Only chips listed under a team's "
+                        "chips_auto are played by the bot; the rest are "
+                        "yours to play before the deadline.</i>")
     pipeline.write_state("chip_alerts", {"sent": sorted(sent)})
     return alerts
 
@@ -208,7 +209,12 @@ def last_plan_entry(df, res):
         "captain": captain, "vice": vice,
         "hits": wk.get("hits", 0),
         "chip": (cp or {}).get("chip") if cp and cp.get("week") else wk_chip,
-        "chip_gain": (cp or {}).get("gain") if cp else None,
+        # a Tier A chip (TC/BB) is decided inside the ILP, so its value lives
+        # in res["tier_a_gain"] rather than on a chip_play branch - report
+        # whichever applies, so the bot never plays a chip without saying what
+        # it thought the chip was worth
+        "chip_gain": ((cp or {}).get("gain") if cp and cp.get("week")
+                      else res.get("tier_a_gain")),
         "squad_source": res.get("squad_source"),
         "picks_payload": payload,
     }
@@ -256,7 +262,12 @@ def main():
         except Exception as e:                              # noqa: BLE001
             print(f"[plan] elite template unavailable: {e}")
 
-    results = {}
+    # Live squad state for every team FIRST. The season chip calendar is built
+    # from these squads before any planning happens, so the chip gates inside
+    # plan_team can see all 36 remaining gameweeks instead of just the
+    # 5-gameweek planning horizon. (It used to be computed after the loop,
+    # which is why the gates could only ever compare the next five weeks.)
+    states = {}
     for name, t in cfg["teams"].items():
         state = {"picks": [], "picks_source": None,
                  "free_transfers": t.get("free_transfers", 1),
@@ -282,14 +293,39 @@ def main():
                           f"{state['free_transfers']} by config")
             except Exception as e:                   # noqa: BLE001
                 print(f"[plan] live squad for {name} unavailable ({e}); using config")
-        results[name] = pipeline.plan_team(ctx, t, state)
+        states[name] = state
+
+    # the full-season chip pass, now BEFORE planning so the gates can use it
+    try:
+        long_h = 39 - gws[0]
+        ldf, _, _, lgws = pipeline.long_projection(ctx, long_h)
+        live_squads = {}
+        for name, t in cfg["teams"].items():
+            sq = pipeline.resolve_squad(
+                df, states[name].get("picks"),
+                [tuple(x) for x in t.get("squad", [])])
+            if len(sq) == 15:
+                live_squads[name] = sq
+        caps = {n: cfg["teams"][n].get("max_captain_ownership") for n in live_squads}
+        win = api.chip_windows(ctx["bootstrap"]) if not a.offline else None
+        ctx["chip_calendar"] = chips.calendar(ldf, lgws, live_squads, caps,
+                                              windows=win)
+        print(f"[plan] chip calendar built over {len(lgws)} gameweeks "
+              f"(GW{lgws[0]}-{lgws[-1]}) - chip gates can see the whole season")
+    except Exception as e:                              # noqa: BLE001
+        print(f"[plan] chip calendar unavailable: {e}")
+        ctx["chip_calendar"] = None
+
+    results = {}
+    for name, t in cfg["teams"].items():
+        results[name] = pipeline.plan_team(ctx, t, states[name], name=name)
         results[name].setdefault("entry_id", t.get("entry_id"))
 
     prev = {}
     prev_path = ROOT / "site" / "bundle.json"
     if prev_path.exists():
         try:
-            prev = json.loads(prev_path.read_text())
+            prev = json.loads(prev_path.read_text(encoding="utf-8"))
         except (ValueError, OSError):
             prev = {}
 
@@ -310,20 +346,12 @@ def main():
     for key, fname in (("price_eval", "price_eval.json"),
                        ("news_eval", "news_eval.json")):
         f = ROOT / "data" / "backtest" / fname
-        bundle[key] = json.loads(f.read_text()) if f.exists() else None
+        bundle[key] = json.loads(f.read_text(encoding="utf-8")) if f.exists() else None
 
-    # chips are once-a-season decisions, so they get their own full-season pass
-    try:
-        long_h = 39 - gws[0]
-        ldf, _, _, lgws = pipeline.long_projection(ctx, long_h)
-        squads = {n: r["squad"] for n, r in results.items() if "error" not in r}
-        caps = {n: cfg["teams"][n].get("max_captain_ownership") for n in squads}
-        win = api.chip_windows(ctx["bootstrap"]) if not a.offline else None
-        bundle["chip_calendar"] = chips.calendar(ldf, lgws, squads, caps, windows=win)
-        ctx["chip_calendar"] = bundle["chip_calendar"]
-    except Exception as e:                              # noqa: BLE001
-        print(f"[plan] chip calendar unavailable: {e}")
-        bundle["chip_calendar"] = None
+    # the calendar was already built above (on the live squads) so the chip
+    # gates could consult it; the dashboard shows that same one rather than
+    # paying for a second full-season pass
+    bundle["chip_calendar"] = ctx.get("chip_calendar")
     if not a.offline:
         entries = {n: t.get("entry_id") for n, t in cfg["teams"].items()}
         bundle["history"] = history.build(ROOT, ctx["bootstrap"], entries,
@@ -411,6 +439,7 @@ def diff_since(prev, cur, results):
     if not prev.get("players"):
         return {"first_run": True, "prices": [], "news": [], "plan": []}
     old = {p["id"]: p for p in prev["players"]}
+    owned = _owned(results)          # hoisted: was rebuilt once per player
     prices, news = [], []
     for p in cur["players"]:
         o = old.get(p["id"])
@@ -419,11 +448,11 @@ def diff_since(prev, cur, results):
         if abs(p["price"] - o["price"]) > 1e-6:
             prices.append({"name": p["name"], "team": p["team"], "pos": p["pos"],
                            "from": o["price"], "to": p["price"],
-                           "owned": p["id"] in _owned(results)})
+                           "owned": p["id"] in owned})
         if (p.get("status") != o.get("status")) or ((p.get("news") or "") != (o.get("news") or "")):
             news.append({"name": p["name"], "team": p["team"], "pos": p["pos"],
                          "status": p.get("status"), "note": p.get("news") or "",
-                         "owned": p["id"] in _owned(results)})
+                         "owned": p["id"] in owned})
     plan = []
     for name, res in results.items():
         if "error" in res:
@@ -446,8 +475,16 @@ def _owned(results):
 
 
 def price_predictions(ctx, limit=10):
-    """Top price-move predictions for the dashboard; empty when the engine is dark."""
+    """Top price-move predictions for the dashboard; empty when the engine is dark.
+
+    "Dark" includes engines.price.enabled: false - the panel used to predict
+    regardless of the switch, so a disabled engine still published its numbers
+    to the dashboard.
+    """
     from fplbot import price as price_mod
+    if not ((pipeline.load_config().get("engines") or {})
+            .get("price") or {}).get("enabled"):
+        return []
     try:
         preds = price_mod.predict(price_mod.read_log())
     except Exception:

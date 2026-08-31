@@ -88,7 +88,7 @@ def main():
         "weeks": scored,
     }
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
-    Path(a.out).write_text(json.dumps(out, indent=1))
+    Path(a.out).write_text(json.dumps(out, indent=1), encoding="utf-8")
     print(f"scored {len(s)} predictions: brier {out['brier_mean']} "
           f"(naive {out['brier_naive']}), base rate {out['base_rate']}")
     print(f"wrote {a.out}")

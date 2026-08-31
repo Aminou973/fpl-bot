@@ -144,8 +144,12 @@ def best_xi(df, squad_ids, gw):
     s = df[df.id.isin(squad_ids)].copy().sort_values(f"xp{gw}", ascending=False)
     xi_, bench = [], []
     gks = s[s.pos == "GKP"]
+    if not len(gks):
+        raise ValueError(f"squad has no goalkeeper: {sorted(squad_ids)}")
     xi_.append(gks.iloc[0])
-    bench_gk = gks.iloc[1]
+    # a free-hit or partially resolved 15 can carry a single keeper: the XI is
+    # still legal, there is simply no keeper to put on the bench
+    bench_gk = gks.iloc[1] if len(gks) > 1 else None
     out = s[s.pos != "GKP"]
     need = {"DEF": 3, "MID": 2, "FWD": 1}
     for p, k in need.items():
@@ -155,7 +159,7 @@ def best_xi(df, squad_ids, gw):
     xi_ += [r for _, r in out.head(4).iterrows()]
     used = {r.id for r in xi_}
     bench = [r for _, r in s.iterrows() if r.id not in used and r.pos != "GKP"]
-    return xi_, [bench_gk] + bench
+    return xi_, ([bench_gk] if bench_gk is not None else []) + bench
 
 
 def pick_vice(df, xi_ids, captain_id, gw, max_ownership=None):

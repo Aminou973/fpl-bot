@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -16,8 +17,15 @@ STATE = ROOT / "state"
 SITE = ROOT / "site"
 
 
+@lru_cache(maxsize=1)
 def load_config():
-    return yaml.safe_load((ROOT / "config.yml").read_text())
+    """config.yml, parsed once - plan_team alone used to re-read it six times.
+
+    Explicit UTF-8 matters here: the file carries £ and names like
+    "João Pedro" / "E.Le Fée", and a bare read_text() on a cp1252 machine
+    mojibakes them into something no API web_name will ever match.
+    """
+    return yaml.safe_load((ROOT / "config.yml").read_text(encoding="utf-8"))
 
 
 def resolve_squad(df, element_ids=None, by_name=None):
@@ -154,7 +162,7 @@ def apply_tuning(kw, cfg_team, hit_threshold):
         return kw, hit_threshold, {}
     f = ROOT / tun.get("results", "data/backtest/tuning.json")
     try:
-        params = (json.loads(f.read_text()).get("best") or {}).get("params") or {}
+        params = (json.loads(f.read_text(encoding="utf-8")).get("best") or {}).get("params") or {}
     except (OSError, ValueError):
         return kw, hit_threshold, {}
     eng = cfg.get("engines") or {}
@@ -185,7 +193,88 @@ def apply_tuning(kw, cfg_team, hit_threshold):
     return kw, hit_threshold, applied
 
 
-def plan_team(ctx, cfg_team, state, pool=None):
+# Tier A chips the bot can play itself, mapped to their config.chips_auto key.
+TIER_A = {"3xc": "triple_captain", "bboost": "bench_boost"}
+
+
+def tier_a_value(pool, week, chip):
+    """What a Tier A chip actually adds to the week the ILP just planned.
+
+    Triple captain adds one more copy of the captain's projection (he already
+    scores twice). Bench boost pays the four bench players the fraction of
+    their projection the plan did not already credit them via bench_weight.
+
+    Honest edge: this prices a chip against a week inside the planning horizon
+    (5 gameweeks). It cannot see a GW25 double from GW3 - the season-level view
+    is fplbot.chips.calendar, published on the dashboard. So the automatic gate
+    avoids the obvious local mistake, not every mistiming.
+    """
+    xp = pool.set_index("id")[f"xp{week['gw']}"]
+    if chip == "3xc":
+        return float(xp.get(week["captain"], 0.0))
+    if chip == "bboost":
+        bench = [i for i in week["squad"] if i not in set(week["xi"])]
+        return float(sum(xp.get(i, 0.0) for i in bench)) * (1 - optimize.BENCH_W)
+    return 0.0
+
+
+# how each chip is named in the season calendar's per-week series
+CAL_SERIES = {"3xc": "tc_expected", "bboost": "bench_boost_expected",
+              "wildcard": "wildcard_expected", "free_hit": "free_hit"}
+CAL_WINDOW = {"3xc": "3xc", "bboost": "bboost",
+              "wildcard": "wildcard", "free_hit": "freehit"}
+
+
+def season_best(calendar, team, chip, now_gw):
+    """Best remaining week for `chip`, over the WHOLE season rather than the
+    5-gameweek planning horizon.
+
+    Reads the calendar's own per-week series, so every week is scored by one
+    measure and the comparison is like for like - mixing the calendar's numbers
+    with the planner's is exactly the error that inflated a wildcard from
+    -0.09 to +8.84. Restricted to the chip window `now_gw` falls inside,
+    because a chip that expires at the split cannot be saved for GW25.
+
+    Returns (best_gw, value_at_best, value_now); any may be None.
+    """
+    if not calendar:
+        return None, None, None
+    weeks = (calendar.get("teams") or {}).get(team) or []
+    key = CAL_SERIES.get(chip)
+    if not weeks or not key:
+        return None, None, None
+    wins = (calendar.get("windows") or {}).get(CAL_WINDOW.get(chip, chip)) or []
+    lo, hi = now_gw, 38
+    for w in wins:
+        if (w.get("start") or 0) <= now_gw <= (w.get("stop") or 38):
+            lo, hi = now_gw, int(w.get("stop") or 38)
+            break
+    live = [(int(w["gw"]), float(w[key])) for w in weeks
+            if w.get(key) is not None and lo <= int(w["gw"]) <= hi]
+    if not live:
+        return None, None, None
+    now_v = next((v for g, v in live if g == now_gw), None)
+    best_gw, best_v = max(live, key=lambda t: t[1])
+    return best_gw, best_v, now_v
+
+
+def _hold_for_better(calendar, team, chip, now_gw, label):
+    """True when the season calendar says a clearly better week is still to come.
+
+    The margin is 10% of the better week's own magnitude, so it scales with the
+    chip and works on the wildcard's median-centred series too.
+    """
+    best_gw, best_v, now_v = season_best(calendar, team, chip, now_gw)
+    if best_gw is None or now_v is None or best_gw == now_gw:
+        return False
+    if best_v - now_v <= 0.10 * max(abs(best_v), 1.0):
+        return False
+    print(f"[plan] {label} held: the season calendar rates GW{best_gw} "
+          f"({best_v:+.2f}) above GW{now_gw} ({now_v:+.2f})")
+    return True
+
+
+def plan_team(ctx, cfg_team, state, pool=None, name=None):
     """Transfer plan for one team, honouring its free transfers and hit policy."""
     df, gws = ctx["df"], ctx["gws"]
     kw = team_kwargs(df, cfg_team)
@@ -233,8 +322,14 @@ def plan_team(ctx, cfg_team, state, pool=None):
     # ILP only answers "is the chip worth it this week, given the plan?".
     # Window legality from the API's own chips array (offline: defaults);
     # already-spent chips are pinned shut.
+    # CONSENT GATE: engines.chips.tier_a only enables the machinery. Which
+    # chips the bot may play ITSELF is per team, exactly like engine 7 below -
+    # a team with no chips_auto entry for a chip never has its window opened,
+    # so the ILP cannot reach for it. Each entry is also the xp the chip must
+    # clear before it is kept (checked after the solve).
     chips_cfg = (load_config().get("engines") or {}).get("chips") or {}
-    if chips_cfg.get("tier_a"):
+    auto = cfg_team.get("chips_auto") or {}
+    if chips_cfg.get("tier_a") and any(auto.get(v) for v in TIER_A.values()):
         try:
             wins = ctx.get("chip_windows") or api.chip_windows(ctx.get("bootstrap"))
         except Exception:
@@ -244,8 +339,9 @@ def plan_team(ctx, cfg_team, state, pool=None):
         this_gw = gws[0]
 
         def legal(key):
-            return any(w["start"] <= this_gw <= w["stop"]
-                       for w in (wins.get(key) or []))
+            return bool(auto.get(TIER_A[key])) and any(
+                w["start"] <= this_gw <= w["stop"]
+                for w in (wins.get(key) or []))
 
         kw.update(
             chips_tc_bb=True,
@@ -287,6 +383,52 @@ def plan_team(ctx, cfg_team, state, pool=None):
     if p is None:
         return {"error": info.get("advice", "planner infeasible") if info
                 else "planner infeasible"}
+    # A Tier A chip the ILP reached for still has to clear the team's own bar.
+    # The value is plain arithmetic on the finished week (the ILP coefficients
+    # are the same numbers), so this costs no solve unless the chip fails -
+    # and then the week is re-planned with that chip's window shut.
+    # Every Tier A chip the ILP reaches for must clear this team's own bar.
+    # This LOOPS rather than testing once: rejecting 3xc and re-planning can
+    # hand back a plan that plays bboost instead, and a single `if` let that
+    # second chip through ungated - the exact hole the consent gate exists to
+    # close. Bounded by the number of Tier A chips, so it always terminates.
+    tier_a_gain = None
+    for _ in range(len(TIER_A) + 1):
+        fired = p["weeks"][0].get("chip")
+        if fired not in TIER_A or not kw.get("chip_windows"):
+            break
+        gain = tier_a_value(pool, p["weeks"][0], fired)
+        bar = float(auto.get(TIER_A[fired]) or 0)
+        # The ILP only ever opens the imminent week, so left alone this gate is
+        # myopic: it fires on the first week that clears the bar even when a
+        # visibly better one is days away. Price the same chip against every
+        # week of the horizon and hold if one of them clearly wins. The 10%
+        # margin stops projection noise deferring the chip forever.
+        ahead = [(wk["gw"], tier_a_value(pool, wk, fired))
+                 for wk in p["weeks"][1:]]
+        best_gw, best = max(ahead, key=lambda t: t[1]) if ahead else (None, 0.0)
+        reason = None
+        if gain < bar:
+            reason = f"+{gain:.2f} xp against a {bar:.2f} bar"
+        elif best > gain * 1.10:
+            reason = (f"+{gain:.2f} xp now, but GW{best_gw} projects "
+                      f"+{best:.2f} - holding")
+        elif _hold_for_better(ctx.get("chip_calendar"), name, fired,
+                              gws[0], fired):
+            reason = "a better week remains inside this chip's window"
+        if not reason:
+            tier_a_gain = round(float(gain), 2)
+            print(f"[plan] CHIP ARMED: {fired} for GW{gws[0]} "
+                  f"(+{gain:.2f} xp, bar {bar:.2f}, best ahead +{best:.2f})")
+            break
+        print(f"[plan] {fired} rejected: {reason} - re-planning without it")
+        kw["chip_windows"] = {**kw["chip_windows"], fired: []}
+        p, info = planner.plan_with_hit_policy(
+            pool, gws, squad, hit_threshold=tuned_hit,
+            free_transfers=ft, bank=float(state.get("bank", 0.0)), **kw)
+        if p is None:
+            return {"error": "planner infeasible after rejecting "
+                             f"the {fired} chip"}
     # engine 5 diagnostics: predictions for the players this week's plan buys
     price_pred = []
     if "pred_rise" in pool.columns:
@@ -307,8 +449,24 @@ def plan_team(ctx, cfg_team, state, pool=None):
     # submit payload — the submit job activates the chip, never pays for the
     # moves. TC/BB stay tier-A (inside the plan) and free hit stays advisory.
     chip_play = None
-    auto = cfg_team.get("chips_auto") or {}
     used = set(state.get("chips_used") or ())
+    # Engine 7 scores its branches against the base plan's reported xp - but
+    # planner reports wk["xp"] as starters + captain - hits, which EXCLUDES a
+    # Tier A chip's own contribution. So a base plan contorted to exploit a
+    # bench boost (value pushed onto the bench, out of the XI) reports a
+    # depressed xp, and every wildcard measured against it looks better than it
+    # is. Measured on Minoux_69 for GW3: +8.84 against the chip-shaped base,
+    # -0.09 against the honest one. Both chips cannot be played in the same week
+    # anyway, so the correct counterfactual for "what if I do not wildcard" is a
+    # plan with no Tier A chip in it.
+    base_for_branches = p
+    if p["weeks"][0].get("chip"):
+        kw_nochip = {**kw, "chip_windows": {"3xc": [], "bboost": []}}
+        p0, _i0 = planner.plan_with_hit_policy(
+            pool, gws, squad, hit_threshold=tuned_hit,
+            free_transfers=ft, bank=float(state.get("bank", 0.0)), **kw_nochip)
+        if p0 is not None:
+            base_for_branches = p0
     try:
         wins = ctx.get("chip_windows") or api.chip_windows(ctx.get("bootstrap"))
     except Exception:
@@ -318,10 +476,26 @@ def plan_team(ctx, cfg_team, state, pool=None):
     wc_gate = float(auto.get("wildcard") or 0)
     if wc_gate and "wildcard" not in used and \
             any(w["start"] <= gws[0] <= w["stop"] for w in (wins.get("wildcard") or [])):
-        [wc] = planner.chip_branches(
-            pool, gws, squad, p, [{"chip": "wildcard", "gw": gws[0]}],
+        # Price the wildcard at EVERY week of the horizon, not just this one.
+        # Without this the gate is myopic and fires on the first week clearing
+        # the bar - measured on Minoux_41, GW3 scored +6.16 while GW4 scored
+        # +7.06, and the bot took GW3 only because it came first.
+        branches = planner.chip_branches(
+            pool, gws, squad, base_for_branches,
+            [{"chip": "wildcard", "gw": g} for g in gws],
             bank=float(state.get("bank", 0.0)), **kw)
-        gain = wc.get("gain")
+        scored = [b for b in branches if b.get("gain") is not None]
+        wc = next((b for b in scored if b["gw"] == gws[0]), None)
+        best_b = max(scored, key=lambda b: b["gain"]) if scored else None
+        gain = (wc or {}).get("gain")
+        if (gain is not None and best_b is not None
+                and best_b["gw"] != gws[0] and best_b["gain"] > gain * 1.10):
+            print(f"[plan] wildcard held: +{gain:.2f} xp now, but GW"
+                  f"{best_b['gw']} projects +{best_b['gain']:.2f}")
+            gain = None
+        if gain is not None and _hold_for_better(
+                ctx.get("chip_calendar"), name, "wildcard", gws[0], "wildcard"):
+            gain = None
         if gain is not None and gain >= wc_gate:
             chip_play = {"chip": "wildcard", "gw": gws[0], "gain": float(gain),
                          "week": None}
@@ -333,15 +507,51 @@ def plan_team(ctx, cfg_team, state, pool=None):
     if fh_gate and chip_play is None and "freehit" not in used and \
             any(w["start"] <= gws[0] <= w["stop"] for w in (wins.get("freehit") or [])):
         [fh] = planner.chip_branches(
-            pool, gws, squad, p, [{"chip": "free_hit", "gw": gws[0]}],
+            pool, gws, squad, base_for_branches,
+            [{"chip": "free_hit", "gw": gws[0]}],
             bank=float(state.get("bank", 0.0)), **kw)
         gain = fh.get("gain")
+        if gain is not None and _hold_for_better(
+                ctx.get("chip_calendar"), name, "free_hit", gws[0], "free hit"):
+            gain = None
         if gain is not None and gain >= fh_gate:
             chip_play = {"chip": "free_hit", "gw": gws[0], "gain": float(gain),
                          "squad": fh.get("squad"), "week": None}
     if chip_play:
         print(f"[plan] CHIP ARMED: {chip_play['chip']} for GW{chip_play['gw']} "
               f"(+{chip_play['gain']} xp over the horizon)")
+    # FPL allows exactly ONE chip per gameweek. A wildcard or free hit rewrites
+    # the whole squad, so a bench boost or triple captain planned alongside it is
+    # both illegal and strategically backwards - you boost a settled bench, not
+    # one you have just rebuilt. The squad-rewriting chip therefore wins, and the
+    # Tier A chip is re-planned away so the published plan is not built around a
+    # chip that will never be played. (last_plan_entry already preferred the
+    # wildcard, but only by if/else ordering, leaving the plan's XI and bench
+    # arranged for the discarded chip.)
+    if chip_play and p["weeks"][0].get("chip"):
+        dropped = p["weeks"][0]["chip"]
+        # Both are extra points over the same horizon, so compare them rather
+        # than assuming the squad-rewriting chip wins: on Minoux_41 that rule
+        # discarded a +11.45 bench boost for a +7.59 wildcard. Whichever is
+        # worth more keeps the week; the loser is re-planned away so the
+        # published plan is never built around a chip that will not be played.
+        wc_gain = float(chip_play.get("gain") or 0.0)
+        ta_gain = float(tier_a_gain or 0.0)
+        if ta_gain > wc_gain:
+            print(f"[plan] {chip_play['chip']} dropped: {dropped} is worth more "
+                  f"this week (+{ta_gain:.2f} vs +{wc_gain:.2f})")
+            chip_play = None
+        else:
+            print(f"[plan] {dropped} dropped: {chip_play['chip']} takes GW{gws[0]} "
+                  f"(+{wc_gain:.2f} vs +{ta_gain:.2f}) - one chip per gameweek")
+            kw["chip_windows"] = {**(kw.get("chip_windows") or {}), dropped: []}
+            tier_a_gain = None
+            p2, info2 = planner.plan_with_hit_policy(
+                pool, gws, squad, hit_threshold=tuned_hit,
+                free_transfers=ft, bank=float(state.get("bank", 0.0)), **kw)
+            if p2 is not None:
+                p, info = p2, info2
+                planner.attach_vice(df, p["weeks"], cap_own)
     plan_kw = {k: v for k, v in kw.items()
                if k not in ("max_captain_ownership", "scenarios",
                             "scenario_weights", "risk_lambda", "cvar_beta",
@@ -362,6 +572,7 @@ def plan_team(ctx, cfg_team, state, pool=None):
                          if target else None,
         "chips": planner.evaluate_chips(df, p["weeks"], gws),
         "chip_play": chip_play,
+        "tier_a_gain": tier_a_gain,
         "price_pred": price_pred,
         "tuned": tuned_applied,
         "free_transfers": ft, "bank": float(state.get("bank", 0.0)),
@@ -388,7 +599,7 @@ def kw_summary(cfg_team):
 
 def read_state(name, default=None):
     f = STATE / f"{name}.json"
-    return json.loads(f.read_text()) if f.exists() else (default or {})
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else (default or {})
 
 
 def write_state(name, obj):

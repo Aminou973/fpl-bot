@@ -13,7 +13,11 @@ guess:
   5. a chip in the plan (engine 7's wildcard) must be unspent in the live
      entry history and must activate together with its transfer batch — if
      the activation is refused, the moves are NOT sent as paid transfers
-Credentials come from FPL_EMAIL / FPL_PASSWORD environment variables.
+  6. every transfer leg must swap like for like — the in/out lists are paired
+     by position, and a mismatch refuses the batch rather than posting it
+Credentials are refresh tokens from the environment (FPL_REFRESH_TOKEN,
+FPL_REFRESH_TOKEN_2, …), minted by the one-time browser login in
+jobs/fpl_login.py. FPL retired email/password login.
 """
 from __future__ import annotations
 
@@ -225,6 +229,7 @@ def main():
 
     names = name_lookup(boot)
     boot_el_cost = {p["id"]: p["now_cost"] for p in boot["elements"]}
+    boot_el_pos = {p["id"]: p["element_type"] for p in boot["elements"]}
 
     # a real submission must be preceded by a successful dry run for this
     # gameweek: the first scheduled tick verifies login and prints the diff,
@@ -284,7 +289,21 @@ def main():
         # in-player's current cost and the out-player's selling price
         owned = {p["element"]: p for p in mt["picks"]}
         legs = []
-        for el_in, el_out in zip(entry["in"], entry["out"]):
+        # The planner emits `in` and `out` in pool-row order, which says nothing
+        # about position - zipping them raw can offer FPL a keeper for a
+        # midfielder and get the whole batch rejected. The squad's position
+        # counts are fixed every week, so the two lists always share a position
+        # multiset: sorting both by position makes the pairing legal.
+        pos_key = lambda e: (boot_el_pos.get(e, 0), e)          # noqa: E731
+        ins = sorted(entry["in"], key=pos_key)
+        outs = sorted(entry["out"], key=pos_key)
+        if [boot_el_pos.get(e) for e in ins] != [boot_el_pos.get(e) for e in outs]:
+            results[name] = {"status": "refused", "gw": gw,
+                             "note": "transfer in/out positions do not match - "
+                                     "refusing to send a batch FPL would reject"}
+            print("  ✘ refusing: in/out positions do not match")
+            continue
+        for el_in, el_out in zip(ins, outs):
             if el_in in owned:
                 print(f"  transfer {names.get(el_in, el_in)} already owned — skipped")
                 continue
