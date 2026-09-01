@@ -10,7 +10,7 @@
    "team": "MUN"
   }
  ],
- "generated": "2026-08-31T23:10:48+00:00",
+ "generated": "2026-09-01T00:05:23+00:00",
  "gw": 3,
  "gw_read": 2,
  "league": "Overall (top 50)",
@@ -39,7 +39,7 @@
   },
   {
    "elite": 92.0,
-   "field": 42.0,
+   "field": 42.1,
    "id": 8,
    "name": "Calafiori",
    "pos": "DEF",
@@ -47,8 +47,8 @@
    "team": "ARS"
   },
   {
-   "elite": 68.0,
-   "field": 31.7,
+   "elite": 70.0,
+   "field": 31.6,
    "id": 427,
    "name": "Mbeumo",
    "pos": "MID",
@@ -74,17 +74,8 @@
    "team": "CHE"
   },
   {
-   "elite": 64.0,
-   "field": 21.5,
-   "id": 109,
-   "name": "Verbruggen",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "BHA"
-  },
-  {
    "elite": 62.0,
-   "field": 12.8,
+   "field": 12.9,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -93,6 +84,15 @@
   },
   {
    "elite": 60.0,
+   "field": 21.5,
+   "id": 109,
+   "name": "Verbruggen",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "BHA"
+  },
+  {
+   "elite": 58.0,
    "field": 38.0,
    "id": 1,
    "name": "Raya",
@@ -101,7 +101,7 @@
    "team": "ARS"
   },
   {
-   "elite": 56.0,
+   "elite": 54.0,
    "field": 14.9,
    "id": 237,
    "name": "Ndiaye",
@@ -110,7 +110,7 @@
    "team": "EVE"
   },
   {
-   "elite": 46.0,
+   "elite": 48.0,
    "field": 42.1,
    "id": 368,
    "name": "Szoboszlai",
@@ -119,7 +119,7 @@
    "team": "LIV"
   },
   {
-   "elite": 42.0,
+   "elite": 44.0,
    "field": 7.0,
    "id": 10,
    "name": "White",
@@ -128,7 +128,7 @@
    "team": "ARS"
   },
   {
-   "elite": 32.0,
+   "elite": 34.0,
    "field": 27.5,
    "id": 4,
    "name": "Gabriel",
@@ -137,7 +137,7 @@
    "team": "ARS"
   },
   {
-   "elite": 32.0,
+   "elite": 34.0,
    "field": 15.8,
    "id": 418,
    "name": "Maguire",
@@ -146,13 +146,22 @@
    "team": "MUN"
   },
   {
-   "elite": 32.0,
+   "elite": 30.0,
    "field": 8.6,
    "id": 469,
    "name": "N.Williams",
    "pos": "DEF",
    "price": 5.0,
    "team": "NFO"
+  },
+  {
+   "elite": 28.0,
+   "field": 21.0,
+   "id": 496,
+   "name": "Kinsky",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "TOT"
   },
   {
    "elite": 26.0,
@@ -164,13 +173,13 @@
    "team": "LIV"
   },
   {
-   "elite": 26.0,
-   "field": 21.0,
-   "id": 496,
-   "name": "Kinsky",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "TOT"
+   "elite": 24.0,
+   "field": 9.9,
+   "id": 229,
+   "name": "Tarkowski",
+   "pos": "DEF",
+   "price": 6.0,
+   "team": "EVE"
   },
   {
    "elite": 22.0,
@@ -182,17 +191,8 @@
    "team": "MUN"
   },
   {
-   "elite": 22.0,
-   "field": 9.9,
-   "id": 229,
-   "name": "Tarkowski",
-   "pos": "DEF",
-   "price": 6.0,
-   "team": "EVE"
-  },
-  {
-   "elite": 22.0,
-   "field": 17.9,
+   "elite": 20.0,
+   "field": 17.8,
    "id": 423,
    "name": "Shaw",
    "pos": "DEF",
@@ -201,33 +201,6 @@
   },
   {
    "elite": 20.0,
-   "field": 11.2,
-   "id": 565,
-   "name": "M.Sangar\u00e9",
-   "pos": "MID",
-   "price": 5.6,
-   "team": "BRE"
-  },
-  {
-   "elite": 20.0,
-   "field": 16.7,
-   "id": 391,
-   "name": "Gvardiol",
-   "pos": "DEF",
-   "price": 5.6,
-   "team": "MCI"
-  },
-  {
-   "elite": 18.0,
-   "field": 3.3,
-   "id": 334,
-   "name": "Muharemovi\u0107",
-   "pos": "DEF",
-   "price": 5.0,
-   "team": "LEE"
-  },
-  {
-   "elite": 18.0,
    "field": 2.3,
    "id": 527,
    "name": "Richarlison",
@@ -236,13 +209,40 @@
    "team": "TOT"
   },
   {
-   "elite": 16.0,
-   "field": 69.8,
-   "id": 411,
-   "name": "Haaland",
-   "pos": "FWD",
-   "price": 15.5,
+   "elite": 18.0,
+   "field": 11.3,
+   "id": 565,
+   "name": "M.Sangar\u00e9",
+   "pos": "MID",
+   "price": 5.6,
+   "team": "BRE"
+  },
+  {
+   "elite": 18.0,
+   "field": 16.8,
+   "id": 391,
+   "name": "Gvardiol",
+   "pos": "DEF",
+   "price": 5.6,
    "team": "MCI"
+  },
+  {
+   "elite": 16.0,
+   "field": 3.3,
+   "id": 334,
+   "name": "Muharemovi\u0107",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "LEE"
+  },
+  {
+   "elite": 14.0,
+   "field": 25.6,
+   "id": 40,
+   "name": "Rogers",
+   "pos": "MID",
+   "price": 7.5,
+   "team": "CHE"
   }
  ]
 }
