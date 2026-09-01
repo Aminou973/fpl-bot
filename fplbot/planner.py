@@ -524,6 +524,17 @@ def freehit_plan(pool, gws, current, bank=0.0, **kw):
     cur_idx = [i for i in range(len(pool)) if int(pool.id.values[i]) in set(current)]
     budget = float(pool.price.values[cur_idx].sum()) + float(bank)
     kw = {k: v for k, v in kw.items() if k in SOLVE_KW}
+    # A free-hit squad exists for ONE week and then reverts, so a squad-shape
+    # brief does not apply to it - the brief describes where your real squad
+    # should end up. Leaving it in also scored the chip unfairly: plan() holds
+    # min_differentials at the END of the horizon (giving the base plan five
+    # weeks to comply) while solve() enforces it immediately, so the free-hit
+    # squad looked instantly compliant and the base looked broken. On a team
+    # that had just been given a differential quota that gap alone was worth a
+    # spurious +10 xp, enough to fire a once-a-season chip.
+    kw.pop("min_differentials", None)
+    kw.pop("differ_from", None)
+    kw.pop("min_differences", None)
     res = solve(pool, gws, allow_infeasible=True, budget=budget, **kw)
     return res
 

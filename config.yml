@@ -69,7 +69,10 @@ teams:
     rank:                  # replaces ownership_bonus (xp-weighted, every week)
       alpha: 0.5
       tilt: 0.4            # template-safe: buys the field's players
-      elite_weight: 0.3    # 30% of the tilt reads the top-50 template (fplbot.elite)
+      elite_weight: 0.0    # THE FIELD'S team: mass ownership only, no elite blend.
+                           # Measured 2026-09-01: elite_weight alone moved the
+                           # target squad 0/15 places, so it was never what
+                           # separated the two teams - it just blurred this one.
     # ------------------------------------------------------------------
     # ALL FOUR CHIPS DELEGATED TO THE BOT — owner instruction 2026-08-31
     # ("i delegate all both team & chips to you").
@@ -89,11 +92,17 @@ teams:
     # Delete any line to take that chip back into your own hands.
     chips_auto:
       wildcard: 5.0
-      free_hit: 4.0
+      # free_hit NOT delegated: engine 7 builds a free-hit branch with
+      # week=None, and last_plan_entry only carries a chip when the branch
+      # has a week - so the submitter can never actually play it. The gate
+      # would arm it and log CHIP ARMED while nothing reached FPL. Wire the
+      # payload first, then delegate it.
       triple_captain: 4.5
       bench_boost: 5.0
-    lock:
-      - ["Haaland", "MCI"]
+    # lock removed 2026-09-01 (owner: "for 69 it's not obligated to have
+    # haaland all time"). The optimiser now buys or sells him on the numbers
+    # like any other player; the template tilt still pulls toward him whenever
+    # the field owns him heavily, which is the honest version of "safe".
     # squad is only a fallback for when the API cannot be read
     squad:
       - ["Kinsky", "TOT"]
@@ -117,15 +126,27 @@ teams:
     role: template
     free_transfers: 1      # pinned 2026-08-27: same as the other team
     blurb: >-
-      Elite-chase team - mirrors the template the game's top managers play:
-      template-safe squad, Haaland allowed, captains picked on expected points
-      rather than rarity. Differentiated 2026-08-29 after the differential
-      strategy fell behind the field.
+      Ceiling team - optimised for the 85th-percentile outcome rather than the
+      average one, with a negative template tilt and at least six players under
+      10% owned. Deliberately holds a different squad from the main team: the
+      two exist to be compared, and two convergent teams compare nothing.
     hit_threshold: 6       # same trade discipline as the main team
+    # Re-differentiated 2026-09-01 (owner: "i dont need them convergent need
+    # them different"). Both teams had drifted to the same brief and the
+    # optimiser was returning an IDENTICAL 15 for each - two teams, no
+    # diversification. Measured overlap with the template-safe target:
+    #   elite_weight alone ......... 15/15  (no effect at all)
+    #   6 players under 10% owned .. 14/15
+    #   objective: ceiling (q85) ....  8/15  at HIGHER xp than the baseline
+    # So the separation comes from the objective, not from rarity quotas.
+    objective: ceiling     # optimise the simulated q85 upside, not the mean
     rank:
       alpha: 0.5
-      tilt: 0.4            # template-safe: buys the field's players
-      elite_weight: 0.5    # the chaser leans on the top-50 template hardest
+      tilt: -0.3           # fades the field instead of buying it (signed tilt)
+      elite_weight: 0.5    # still reads the top-50 template, at half weight
+    min_differentials:     # a floor on rarity so it cannot drift back to the
+      count: 6             # field template even if the ceiling squad happens
+      max_ownership: 10    # to be popular that week
     # ------------------------------------------------------------------
     # ALL FOUR CHIPS DELEGATED TO THE BOT — owner instruction 2026-08-31
     # ("i delegate all both team & chips to you").
@@ -145,7 +166,11 @@ teams:
     # Delete any line to take that chip back into your own hands.
     chips_auto:
       wildcard: 5.0
-      free_hit: 4.0
+      # free_hit NOT delegated: engine 7 builds a free-hit branch with
+      # week=None, and last_plan_entry only carries a chip when the branch
+      # has a week - so the submitter can never actually play it. The gate
+      # would arm it and log CHIP ARMED while nothing reached FPL. Wire the
+      # payload first, then delegate it.
       triple_captain: 4.5
       bench_boost: 5.0
     squad:
