@@ -1,12 +1,12 @@
 {
  "deadline": "2026-09-04T17:30:00Z",
- "generated": "2026-09-01T22:05:01.922914+00:00",
+ "generated": "2026-09-02T00:35:23.939861+00:00",
  "gw": 3,
  "teams": {
   "Minoux_41": {
    "bench": [
     529,
-    61,
+    155,
     248,
     441
    ],
@@ -17,13 +17,13 @@
    "hits": 2,
    "in": [
     226,
-    480,
-    533
+    229,
+    480
    ],
    "out": [
+    61,
     82,
-    397,
-    445
+    426
    ],
    "picks_payload": [
     {
@@ -39,43 +39,43 @@
      "position": 2
     },
     {
-     "element": 388,
+     "element": 229,
      "is_captain": false,
      "is_vice": false,
      "position": 3
     },
     {
-     "element": 84,
+     "element": 388,
      "is_captain": false,
      "is_vice": false,
      "position": 4
     },
     {
-     "element": 533,
+     "element": 84,
      "is_captain": false,
      "is_vice": false,
      "position": 5
     },
     {
-     "element": 426,
+     "element": 445,
+     "is_captain": false,
+     "is_vice": false,
+     "position": 6
+    },
+    {
+     "element": 397,
      "is_captain": false,
      "is_vice": true,
-     "position": 6
+     "position": 7
     },
     {
      "element": 480,
      "is_captain": true,
      "is_vice": false,
-     "position": 7
-    },
-    {
-     "element": 368,
-     "is_captain": false,
-     "is_vice": false,
      "position": 8
     },
     {
-     "element": 155,
+     "element": 368,
      "is_captain": false,
      "is_vice": false,
      "position": 9
@@ -99,7 +99,7 @@
      "position": 12
     },
     {
-     "element": 61,
+     "element": 155,
      "is_captain": false,
      "is_vice": false,
      "position": 13
@@ -136,33 +136,33 @@
    ],
    "squad_after": [
     4,
-    61,
     84,
     106,
     155,
     226,
+    229,
     248,
     260,
     368,
     388,
-    426,
+    397,
     441,
+    445,
     480,
-    529,
-    533
+    529
    ],
    "squad_source": "api",
-   "vice": 426,
+   "vice": 397,
    "xi": [
     226,
     4,
+    229,
     388,
     84,
-    533,
-    426,
+    445,
+    397,
     480,
     368,
-    155,
     260,
     106
    ]
