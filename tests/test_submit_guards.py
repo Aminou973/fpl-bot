@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "jobs"))
 
-from fplbot import pipeline                       # noqa: E402
+from fplbot import api, pipeline                  # noqa: E402
 import submit_transfers                            # noqa: E402
 
 
@@ -50,3 +50,42 @@ def test_snapshot_freshness():
     assert not pipeline.snapshot_fresh({**full, "fetched_at": now.isoformat(),
                                         "picks": []})
     assert not pipeline.snapshot_fresh({**full, "fetched_at": "nonsense"})
+
+
+def test_lineup_write_accepts_202():
+    """A re-write of an unchanged lineup gets HTTP 202 from FPL.
+
+    GW3 2026-09-03: the chip-rearm run posted the identical lineup again and
+    FPL answered 202 (accepted, no change) — which the strict !=200 check
+    reported to Telegram as a lineup failure although the write had landed.
+    """
+    class Resp:
+        status_code = 202
+        text = '{"picks": []}'
+
+        def json(self):
+            return {"picks": []}
+
+    class Session:
+        def post(self, *a, **k):
+            return Resp()
+
+    picks = [{"element": 1, "position": 1, "is_captain": False,
+              "is_vice_captain": False}] * 15
+    # 202 must not raise; 400 must
+    assert api.submit_picks(Session(), 1, picks) == {"picks": []}
+    api.submit_picks(Session(), 1, picks, chip="3xc")     # chip rides fine
+
+    class Bad(Resp):
+        status_code = 400
+        text = '{"error": "squad_element_invalid"}'
+
+    class BadSession:
+        def post(self, *a, **k):
+            return Bad()
+
+    try:
+        api.submit_picks(BadSession(), 1, picks)
+        raise AssertionError("400 must raise")
+    except RuntimeError as e:
+        assert "400" in str(e)

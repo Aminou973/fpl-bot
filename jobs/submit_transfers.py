@@ -305,16 +305,26 @@ def main():
             chip = entry.get("chip")
             pending_chip = None
             if chip and chip in PICK_CHIPS:
-                try:
-                    used = {c.get("name")
-                            for c in (api.entry_history(entry_id).get("chips")
-                                      or [])}
-                    if chip not in used:
+                # the my-team read knows the chip is active even mid-gameweek,
+                # while entry history only lists it after the week is scored:
+                # trusting history alone made the next hourly run re-arm the
+                # chip every hour (FPL answered 202 each time)
+                if any(c.get("name") == chip and c.get("status") == "played"
+                       for c in (mt.get("chips") or [])):
+                    print(f"  chip {chip.upper()} is already active for this "
+                          f"gameweek — armed, nothing to do")
+                else:
+                    try:
+                        used = {c.get("name")
+                                for c in (api.entry_history(entry_id)
+                                          .get("chips") or [])}
+                        if chip not in used:
+                            pending_chip = chip
+                    except RuntimeError as e:             # noqa: PERF203
+                        print(f"  chip history unreadable ({e}) — treating "
+                              f"the chip as pending and re-writing the picks "
+                              f"with it")
                         pending_chip = chip
-                except RuntimeError as e:                 # noqa: PERF203
-                    print(f"  chip history unreadable ({e}) — treating the "
-                          f"chip as pending and re-writing the picks with it")
-                    pending_chip = chip
             if pending_chip:
                 print(f"[{name}] live lineup matches the plan, but chip "
                       f"{pending_chip.upper()} is not played yet — writing "

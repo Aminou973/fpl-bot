@@ -370,7 +370,10 @@ def make_transfers(session, entry_id: int, gw: int, transfers: list, chip=None):
     r = session.post(f"{BASE}/transfers/",
                      json={"chip": chip, "entry": entry_id, "event": gw,
                            "transfers": transfers}, timeout=45)
-    if r.status_code != 200:
+    # 200 is a fresh batch; FPL answers 202 for an accepted no-change replay
+    # (an identical transfer batch or a chip re-armed by a retried run) —
+    # both mean the game took it, so only real errors raise
+    if not 200 <= r.status_code < 300:
         raise RuntimeError(f"transfers/{entry_id} failed: "
                            f"HTTP {r.status_code} {r.text[:300]}")
     # a 200 can come back with an empty body; that still means accepted
@@ -392,7 +395,10 @@ def submit_picks(session, team_id: int, picks: list, chip=None):
             for p in picks]
     r = session.post(f"{BASE}/my-team/{team_id}/",
                      json={"chip": chip, "picks": body}, timeout=45)
-    if r.status_code != 200:
+    # 200 is a fresh write; 202 means the game accepted a re-write of an
+    # already-current lineup (e.g. a chip armed again by a retried run) —
+    # both are success, only 4xx/5xx is a failure
+    if not 200 <= r.status_code < 300:
         raise RuntimeError(f"my-team/{team_id} submit failed: "
                            f"HTTP {r.status_code} {r.text[:300]}")
     # success can be an empty body; only parse when there is one
