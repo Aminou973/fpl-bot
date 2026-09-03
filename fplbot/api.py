@@ -250,10 +250,22 @@ REDIRECT_URI = "https://fantasy.premierleague.com/"
 
 
 def _auth_post(path, data):
+    import time
     import requests
-    r = requests.post(f"{AUTH}/{path}", data=data,
-                      headers={"User-Agent": UA, "Accept": "application/json"},
-                      timeout=45)
+    # one DNS blip used to kill an otherwise-fine login mid-exchange (and a
+    # refresh would then cost the whole run); retry the transient failures
+    for attempt in range(4):
+        try:
+            r = requests.post(f"{AUTH}/{path}", data=data,
+                              headers={"User-Agent": UA, "Accept": "application/json"},
+                              timeout=45)
+            break
+        except requests.exceptions.RequestException as e:
+            if attempt == 3:
+                raise RuntimeError(f"{AUTH}/{path} unreachable after 4 tries: {e}")
+            print(f"[auth] transient network error, retrying "
+                  f"({attempt + 1}/3): {type(e).__name__}")
+            time.sleep(3 * (attempt + 1))
     body = {}
     try:
         body = r.json()
