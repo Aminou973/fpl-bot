@@ -1,12 +1,12 @@
 {
  "deadline": "2026-09-04T17:30:00Z",
- "generated": "2026-09-03T17:03:15.958928+00:00",
+ "generated": "2026-09-03T17:25:40.468663+00:00",
  "gw": 3,
  "teams": {
   "Minoux_41": {
    "bench": [
-    529,
-    260,
+    82,
+    498,
     248,
     441
    ],
@@ -14,16 +14,12 @@
    "chip": null,
    "chip_gain": null,
    "entry": 4896428,
-   "hits": 2,
+   "hits": 0,
    "in": [
-    8,
-    226,
-    480
+    40
    ],
    "out": [
-    61,
-    82,
-    426
+    260
    ],
    "picks_payload": [
     {
@@ -39,13 +35,13 @@
      "position": 2
     },
     {
-     "element": 388,
+     "element": 229,
      "is_captain": false,
      "is_vice": false,
      "position": 3
     },
     {
-     "element": 8,
+     "element": 388,
      "is_captain": false,
      "is_vice": false,
      "position": 4
@@ -57,20 +53,20 @@
      "position": 5
     },
     {
-     "element": 445,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 6
-    },
-    {
      "element": 397,
      "is_captain": false,
      "is_vice": true,
-     "position": 7
+     "position": 6
     },
     {
      "element": 480,
      "is_captain": true,
+     "is_vice": false,
+     "position": 7
+    },
+    {
+     "element": 40,
+     "is_captain": false,
      "is_vice": false,
      "position": 8
     },
@@ -93,13 +89,13 @@
      "position": 11
     },
     {
-     "element": 529,
+     "element": 82,
      "is_captain": false,
      "is_vice": false,
      "position": 12
     },
     {
-     "element": 260,
+     "element": 498,
      "is_captain": false,
      "is_vice": false,
      "position": 13
@@ -118,50 +114,50 @@
     }
    ],
    "squad": [
-    82,
-    84,
+    226,
     4,
-    61,
+    229,
     388,
-    445,
-    260,
-    426,
-    368,
+    84,
+    498,
     397,
-    106,
-    529,
+    480,
+    368,
     155,
+    106,
+    82,
+    260,
     248,
     441
    ],
    "squad_after": [
     4,
-    8,
+    82,
     84,
     106,
+    40,
     226,
+    229,
     248,
-    260,
     368,
     155,
     388,
     397,
     441,
-    445,
     480,
-    529
+    498
    ],
    "squad_source": "api",
    "vice": 397,
    "xi": [
     226,
     4,
+    229,
     388,
-    8,
     84,
-    445,
     397,
     480,
+    40,
     368,
     155,
     106
