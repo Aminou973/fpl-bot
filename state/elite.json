@@ -10,7 +10,7 @@
    "team": "MUN"
   }
  ],
- "generated": "2026-09-03T19:28:31+00:00",
+ "generated": "2026-09-03T19:39:08+00:00",
  "gw": 3,
  "gw_read": 2,
  "league": "Overall (top 50)",
@@ -48,15 +48,6 @@
   },
   {
    "elite": 68.0,
-   "field": 26.2,
-   "id": 346,
-   "name": "Calvert-Lewin",
-   "pos": "FWD",
-   "price": 6.0,
-   "team": "LEE"
-  },
-  {
-   "elite": 66.0,
    "field": 29.0,
    "id": 427,
    "name": "Mbeumo",
@@ -65,22 +56,22 @@
    "team": "MUN"
   },
   {
-   "elite": 60.0,
+   "elite": 68.0,
+   "field": 26.2,
+   "id": 346,
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "price": 6.0,
+   "team": "LEE"
+  },
+  {
+   "elite": 62.0,
    "field": 18.4,
    "id": 154,
    "name": "Palmer",
    "pos": "MID",
    "price": 9.6,
    "team": "CHE"
-  },
-  {
-   "elite": 60.0,
-   "field": 21.7,
-   "id": 109,
-   "name": "Verbruggen",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "BHA"
   },
   {
    "elite": 60.0,
@@ -101,7 +92,16 @@
    "team": "ARS"
   },
   {
-   "elite": 54.0,
+   "elite": 58.0,
+   "field": 21.7,
+   "id": 109,
+   "name": "Verbruggen",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "BHA"
+  },
+  {
+   "elite": 52.0,
    "field": 13.0,
    "id": 237,
    "name": "Ndiaye",
@@ -129,21 +129,21 @@
   },
   {
    "elite": 34.0,
-   "field": 14.7,
-   "id": 418,
-   "name": "Maguire",
-   "pos": "DEF",
-   "price": 5.0,
-   "team": "MUN"
-  },
-  {
-   "elite": 32.0,
    "field": 26.0,
    "id": 4,
    "name": "Gabriel",
    "pos": "DEF",
    "price": 8.0,
    "team": "ARS"
+  },
+  {
+   "elite": 34.0,
+   "field": 14.7,
+   "id": 418,
+   "name": "Maguire",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "MUN"
   },
   {
    "elite": 28.0,
@@ -182,15 +182,6 @@
    "team": "LIV"
   },
   {
-   "elite": 22.0,
-   "field": 16.4,
-   "id": 423,
-   "name": "Shaw",
-   "pos": "DEF",
-   "price": 4.5,
-   "team": "MUN"
-  },
-  {
    "elite": 20.0,
    "field": 13.8,
    "id": 412,
@@ -207,6 +198,15 @@
    "pos": "DEF",
    "price": 5.6,
    "team": "MCI"
+  },
+  {
+   "elite": 20.0,
+   "field": 16.4,
+   "id": 423,
+   "name": "Shaw",
+   "pos": "DEF",
+   "price": 4.5,
+   "team": "MUN"
   },
   {
    "elite": 20.0,
@@ -237,12 +237,12 @@
   },
   {
    "elite": 16.0,
-   "field": 71.3,
-   "id": 411,
-   "name": "Haaland",
-   "pos": "FWD",
-   "price": 15.5,
-   "team": "MCI"
+   "field": 3.2,
+   "id": 334,
+   "name": "Muharemovi\u0107",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "LEE"
   }
  ]
 }
