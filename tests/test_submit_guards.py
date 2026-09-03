@@ -89,3 +89,23 @@ def test_lineup_write_accepts_202():
         raise AssertionError("400 must raise")
     except RuntimeError as e:
         assert "400" in str(e)
+
+
+def test_snapshot_records_free_transfers():
+    """limit−made from the my-team read is the FTs left for THIS deadline.
+
+    GW3 2026-09-03: Minoux_41 spent its FT on Rogers mid-week, but the plan
+    still said "1 FT · rolls (2 next week)" — entry history's loop adds the
+    next week's allocation as soon as the current week's transfers land.
+    """
+    snap = submit_transfers.snapshot_of(1, "t", 1, 3, {
+        "picks": [], "transfers": {"bank": 21, "limit": 1, "made": 1}})
+    assert snap["free_transfers"] == 0
+    assert pipeline.snapshot_bank(snap) == 2.1
+    # a rolled allowance reads back as two
+    snap = submit_transfers.snapshot_of(1, "t", 1, 3, {
+        "picks": [], "transfers": {"limit": 2, "made": 0}})
+    assert snap["free_transfers"] == 2
+    # no limit in the read -> no FT claim (planner falls back as before)
+    assert submit_transfers.snapshot_of(1, "t", 1, 3, {
+        "picks": [], "transfers": {"bank": 5}})["free_transfers"] is None

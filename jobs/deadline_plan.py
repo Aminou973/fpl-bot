@@ -291,6 +291,16 @@ def main():
                         live["bank"] = sb
                     live["picks_source"] = ("live-snapshot "
                                             + str(snap.get("fetched_at", ""))[:16])
+                    # FTs only from a snapshot taken for the gameweek whose
+                    # deadline this plan targets: limit−made is the count for
+                    # that deadline, and reusing it after the deadline rolls
+                    # would undercount the fresh allocation. It outranks the
+                    # config pin (which reflects a one-time rule, not today's
+                    # screen) because the live read is the game's own answer.
+                    if (snap.get("gw") == gw
+                            and snap.get("free_transfers") is not None):
+                        live["free_transfers"] = int(snap["free_transfers"])
+                        live["ft_source"] = "live-snapshot"
                 if live.get("picks"):
                     state = live
                     print(f"[plan] live squad for {name}: "
@@ -300,10 +310,12 @@ def main():
                     print(f"[plan] live squad for {name} returned no picks "
                           f"({live.get('picks_error')}); using config fallback")
                 state.setdefault("bank", 0.0)
-                if t.get("free_transfers") is not None:
+                if t.get("free_transfers") is not None and \
+                        state.get("ft_source") != "live-snapshot":
                     # config pin wins over the recomputed count: the game's own
                     # screen is the authority on how many FTs are available
-                    # (e.g. a season where unused FTs do not bank)
+                    # (e.g. a season where unused FTs do not bank) — but the
+                    # live snapshot IS that screen, so it outranks the pin
                     state["free_transfers"] = int(t["free_transfers"])
                     print(f"[plan] free transfers pinned to "
                           f"{state['free_transfers']} by config")

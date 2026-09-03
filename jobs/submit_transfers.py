@@ -134,13 +134,24 @@ def stale_plan_note(entry, mt):
 def snapshot_of(entry_id, name, team_id, gw, mt):
     """Authenticated squad state for the planner (state/live_squad.json)."""
     picks = mt.get("picks") or []
+    tr = mt.get("transfers") or {}
+    # limit is the free-transfer allowance for THIS deadline (rolled FTs
+    # included), made is what has already been spent on it — so limit−made
+    # is exactly the FTs the planner may still use before that deadline.
+    # entry_history cannot tell this apart mid-gameweek: its loop adds the
+    # NEXT week's +1 as soon as the current week's transfers land, which is
+    # how a spent FT still showed as "1 FT · rolls (2 next week)".
+    ft = tr.get("limit")
+    if ft is not None:
+        ft = max(0, int(ft) - int(tr.get("made") or 0))
     return {"entry": entry_id, "team_id": team_id, "name": name, "gw": gw,
             "picks": [p["element"] for p in picks],
             "picks_detail": [{"element": p["element"],
                               "selling_price": p.get("selling_price"),
                               "purchase_price": p.get("purchase_price")}
                              for p in picks],
-            "bank_raw": (mt.get("transfers") or {}).get("bank"),
+            "bank_raw": tr.get("bank"),
+            "free_transfers": ft,
             "fetched_at": dt.datetime.now(dt.timezone.utc).isoformat()}
 
 
