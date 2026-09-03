@@ -30,6 +30,20 @@
      "team_id": 4894622
     }
    }
+  },
+  "3": {
+   "at": "2026-09-03T06:29:48.369443+00:00",
+   "deadline": "2026-09-04T17:30:00Z",
+   "mode": "dry-run",
+   "teams": {
+    "Minoux_41": {
+     "status": "dry-run"
+    },
+    "Minoux_69": {
+     "note": "entry 4894622 is on none of the logged-in accounts",
+     "status": "skipped"
+    }
+   }
   }
  }
 }
