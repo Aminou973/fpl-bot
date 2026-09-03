@@ -32,15 +32,30 @@
    }
   },
   "3": {
-   "at": "2026-09-03T19:10:11.629331+00:00",
+   "at": "2026-09-03T19:12:55.960601+00:00",
    "deadline": "2026-09-04T17:30:00Z",
-   "mode": "dry-run",
+   "mode": "apply",
    "teams": {
     "Minoux_41": {
-     "status": "dry-run"
+     "captain": 480,
+     "gw": 3,
+     "in": [
+      40
+     ],
+     "out": [
+      260
+     ],
+     "status": "applied",
+     "team_id": 4896428
     },
     "Minoux_69": {
-     "status": "dry-run"
+     "captain": 411,
+     "chip": "3xc",
+     "gw": 3,
+     "in": [],
+     "out": [],
+     "status": "applied",
+     "team_id": 4894622
     }
    }
   }
