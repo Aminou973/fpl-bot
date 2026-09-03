@@ -1,6 +1,7 @@
 """Glue: live data in, projections + per-team transfer plans + dashboard out."""
 from __future__ import annotations
 
+import datetime as dt
 import json
 import os
 from functools import lru_cache
@@ -606,3 +607,39 @@ def write_state(name, obj):
     STATE.mkdir(exist_ok=True)
     (STATE / f"{name}.json").write_text(json.dumps(obj, indent=1, sort_keys=True),
                                         encoding="utf-8")
+
+
+# ---------------------------------------------- authenticated squad snapshot
+# Public picks publish only at a deadline, so mid-gameweek transfers - the
+# submit job's own included - are invisible to api.squad_state, which falls
+# back to last week's published squad. That is how the GW3 planner rebuilt a
+# squad the submitter had already transformed hours earlier. The submit job
+# therefore writes an authenticated my-team snapshot (state/live_squad.json)
+# on every run and the planner prefers a fresh snapshot over published picks.
+
+SNAPSHOT_MAX_AGE_H = 26     # covers a full gameweek window of hourly snapshots
+
+
+def snapshot_bank(snap):
+    """Bank in £m from a live snapshot, or None when the read had none.
+
+    FPL money fields are tenths of a million; if the raw value is absurdly
+    large the endpoint served pennies instead - divide by 100 rather than
+    plan against a bank of £100,000m.
+    """
+    raw = snap.get("bank_raw")
+    if raw is None:
+        return None
+    return float(raw) / 100.0 if raw >= 100_000 else float(raw) / 10.0
+
+
+def snapshot_fresh(snap, max_age_h=SNAPSHOT_MAX_AGE_H):
+    """True when a snapshot holds a full squad and is recent enough to trust."""
+    if len(snap.get("picks") or []) != 15:
+        return False
+    try:
+        t = dt.datetime.fromisoformat(str(snap.get("fetched_at") or ""))
+    except ValueError:
+        return False
+    age_h = (dt.datetime.now(dt.timezone.utc) - t).total_seconds() / 3600
+    return 0 <= age_h <= max_age_h

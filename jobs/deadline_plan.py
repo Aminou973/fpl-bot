@@ -275,6 +275,22 @@ def main():
         if not a.offline and t.get("entry_id"):
             try:
                 live = api.squad_state(t["entry_id"], ctx["bootstrap"])
+                # the submit job writes an authenticated my-team snapshot each
+                # hourly run (state/live_squad.json). Published picks only
+                # exist at a deadline, so mid-gameweek transfers - the bot's
+                # own included - never reach squad_state; the fresh snapshot
+                # is the only source that has them (GW3 lesson).
+                snap = (pipeline.read_state("live_squad") or {}).get(
+                    str(t["entry_id"]))
+                if snap and pipeline.snapshot_fresh(snap):
+                    live["picks"] = list(snap["picks"])
+                    if snap.get("picks_detail"):
+                        live["picks_detail"] = snap["picks_detail"]
+                    sb = pipeline.snapshot_bank(snap)
+                    if sb is not None:
+                        live["bank"] = sb
+                    live["picks_source"] = ("live-snapshot "
+                                            + str(snap.get("fetched_at", ""))[:16])
                 if live.get("picks"):
                     state = live
                     print(f"[plan] live squad for {name}: "

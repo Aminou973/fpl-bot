@@ -110,6 +110,40 @@ def store_secret(name: str, value: str) -> bool:
         return False
 
 
+def stale_plan_note(entry, mt):
+    """Why the plan must not be acted on, or None when it may.
+
+    A plan generated before mid-gameweek transfers (the bot's own or the
+    owner's) names players that are already gone and offers to buy players
+    the squad already holds - acting on it sells ghosts and pays hits for
+    moves that were never the plan. GW3: the planner rebuilt the squad the
+    submitter had transformed hours earlier because public picks only
+    publish at a deadline, and the submitter dutifully made one of the
+    ghost's transfers before the lineup write was rejected.
+    """
+    base = {int(e) for e in (entry.get("squad") or [])}
+    live = {int(p["element"]) for p in mt.get("picks") or []}
+    if base and live and base != live:
+        return (f"plan was built on a different squad than the live one "
+                f"({len(base & live)}/{len(base)} players shared) - "
+                f"transfers happened after the plan was generated; "
+                f"regenerate the plan before submitting")
+    return None
+
+
+def snapshot_of(entry_id, name, team_id, gw, mt):
+    """Authenticated squad state for the planner (state/live_squad.json)."""
+    picks = mt.get("picks") or []
+    return {"entry": entry_id, "team_id": team_id, "name": name, "gw": gw,
+            "picks": [p["element"] for p in picks],
+            "picks_detail": [{"element": p["element"],
+                              "selling_price": p.get("selling_price"),
+                              "purchase_price": p.get("purchase_price")}
+                             for p in picks],
+            "bank_raw": (mt.get("transfers") or {}).get("bank"),
+            "fetched_at": dt.datetime.now(dt.timezone.utc).isoformat()}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true",
@@ -244,6 +278,10 @@ def main():
         a.apply = False
 
     results = {}
+    # authenticated squad snapshots for the planner; written even on dry runs
+    # and even when the plan is refused, since the squad itself is what the
+    # planner is missing (public picks only publish at a deadline)
+    snapshots = pipeline.read_state("live_squad", {}) or {}
     for name, entry in wanted.items():
         entry_id = entries[name]
         if entry_id not in sessions:
@@ -255,9 +293,16 @@ def main():
             continue
         session, team_id = sessions[entry_id]
         mt = api.my_team(session, team_id)
+        snapshots[str(entry_id)] = snapshot_of(entry_id, name, team_id, gw, mt)
+        pipeline.write_state("live_squad", snapshots)
         if live_picks_sig(mt) == plan_sig(entry["picks_payload"]):
             results[name] = {"status": "already-applied", "gw": gw}
             print(f"[{name}] live squad already matches the plan — nothing to do")
+            continue
+        note = stale_plan_note(entry, mt)
+        if note:
+            results[name] = {"status": "refused", "gw": gw, "note": note}
+            print(f"  ✘ refusing: {note}")
             continue
         print(f"[{name}] entry {entry_id} (my-team id {team_id})")
         for line in diff_names(names, live_picks_sig(mt),
@@ -337,7 +382,20 @@ def main():
                     continue
                 print(f"  ✔ {chip} activated with {len(legs)} moves")
             elif legs:
-                api.make_transfers(session, entry_id, gw, legs)
+                try:
+                    api.make_transfers(session, entry_id, gw, legs)
+                except Exception as e:                       # noqa: BLE001
+                    # the moves may or may not have landed - FPL can apply a
+                    # batch and still return an error. Record it, alert, and
+                    # let the rest of the teams (and the hourly re-run) sort
+                    # out the truth instead of crashing the whole run.
+                    msg = f"transfers failed (check the squad before retrying): {e}"
+                    results[name] = {"status": "transfers-failed", "gw": gw,
+                                     "note": str(e)[:300]}
+                    print(f"  ✘ {msg}")
+                    notify.send(f"🚨 <b>{esc(name)} — transfers failed</b>\n\n"
+                                f"{esc(str(e)[:300])}", kind="alert")
+                    continue
                 print(f"  ✔ transfers made: "
                       + ", ".join(f"{names.get(l['element_in'])} in for "
                                   f"{names.get(l['element_out'])}" for l in legs))
@@ -345,14 +403,37 @@ def main():
             print("  no transfers to make — lineup only")
         # a triple captain or bench boost rides ON the lineup write (it does
         # not touch transfers); a wildcard was already activated above
-        api.submit_picks(session, team_id, entry["picks_payload"],
-                         chip=chip if chip in PICK_CHIPS else None)
+        try:
+            api.submit_picks(session, team_id, entry["picks_payload"],
+                             chip=chip if chip in PICK_CHIPS else None)
+        except Exception as e:                              # noqa: BLE001
+            # the transfers above DID land - the lineup write is what failed
+            # (GW3: a plan built on a pre-transfer squad). Record what was
+            # actually spent so state and the planner do not lose the moves,
+            # then move on to the remaining teams.
+            msg = f"lineup write failed after {len(legs)} transfer(s): {e}"
+            results[name] = {"status": "lineup-failed", "gw": gw,
+                             "in": [l["element_in"] for l in legs],
+                             "out": [l["element_out"] for l in legs],
+                             "note": str(e)[:300]}
+            if chip:
+                results[name]["chip"] = chip
+            print(f"  ✘ {msg}")
+            notify.send(f"🚨 <b>{esc(name)} — lineup write failed</b>\n\n"
+                        f"{esc(str(e)[:300])}", kind="alert")
+            continue
         results[name] = {"status": "applied", "team_id": team_id,
                          "gw": gw, "in": entry["in"], "out": entry["out"],
                          "captain": entry["captain"]}
         if chip:
             results[name]["chip"] = chip
         print(f"  ✔ applied")
+        # the squad just changed: snapshot the post-transfer squad so the next
+        # plan run (23 minutes later on a bad schedule) does not plan on the
+        # pre-transfer squad this run read
+        if legs:
+            snapshots[str(entry_id)]["picks"] = sorted(entry["squad_after"])
+            pipeline.write_state("live_squad", snapshots)
 
     log["gws"][str(gw)] = {
         "at": dt.datetime.now(dt.timezone.utc).isoformat(),
@@ -365,7 +446,8 @@ def main():
     # audible alert when the bot actually acted (or could not)
     if results:
         marks = {"applied": "✅", "already-applied": "✔", "skipped": "⚠️",
-                 "dry-run": "•", "chip-failed": "🚨", "refused": "🚫"}
+                 "dry-run": "•", "chip-failed": "🚨", "refused": "🚫",
+                 "transfers-failed": "🚨", "lineup-failed": "🚨"}
         body = "\n".join(f"{marks.get(v['status'], '•')} <b>{esc(k)}</b> — "
                          f"{esc(v.get('note') or v['status'])}"
                          for k, v in results.items())
