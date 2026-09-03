@@ -296,9 +296,34 @@ def main():
         snapshots[str(entry_id)] = snapshot_of(entry_id, name, team_id, gw, mt)
         pipeline.write_state("live_squad", snapshots)
         if live_picks_sig(mt) == plan_sig(entry["picks_payload"]):
-            results[name] = {"status": "already-applied", "gw": gw}
-            print(f"[{name}] live squad already matches the plan — nothing to do")
-            continue
+            # the lineup matches, but a chip that rides ON the lineup write is
+            # part of the plan too: GW3, Minoux_69's triple captain sat behind
+            # this shortcut and never reached FPL because the carried-over
+            # lineup already equalled the plan. A transfers chip cannot be
+            # pending here (the squad matches exactly), so only pick chips
+            # matter — and only while they are unspent this season.
+            chip = entry.get("chip")
+            pending_chip = None
+            if chip and chip in PICK_CHIPS:
+                try:
+                    used = {c.get("name")
+                            for c in (api.entry_history(entry_id).get("chips")
+                                      or [])}
+                    if chip not in used:
+                        pending_chip = chip
+                except RuntimeError as e:                 # noqa: PERF203
+                    print(f"  chip history unreadable ({e}) — treating the "
+                          f"chip as pending and re-writing the picks with it")
+                    pending_chip = chip
+            if pending_chip:
+                print(f"[{name}] live lineup matches the plan, but chip "
+                      f"{pending_chip.upper()} is not played yet — writing "
+                      f"the picks again with the chip")
+            else:
+                results[name] = {"status": "already-applied", "gw": gw}
+                print(f"[{name}] live squad already matches the plan — "
+                      f"nothing to do")
+                continue
         note = stale_plan_note(entry, mt)
         if note:
             results[name] = {"status": "refused", "gw": gw, "note": note}
