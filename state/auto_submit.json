@@ -32,29 +32,18 @@
    }
   },
   "3": {
-   "at": "2026-09-03T11:43:02.589031+00:00",
+   "at": "2026-09-03T17:22:12.700811+00:00",
    "deadline": "2026-09-04T17:30:00Z",
-   "mode": "apply",
+   "mode": "dry-run",
    "teams": {
     "Minoux_41": {
-     "captain": 480,
      "gw": 3,
-     "in": [
-      226,
-      229,
-      480
-     ],
-     "out": [
-      61,
-      426,
-      529
-     ],
-     "status": "applied",
-     "team_id": 4896428
+     "note": "plan was built on a different squad than the live one (11/15 players shared) - transfers happened after the plan was generated; regenerate the plan before submitting",
+     "status": "refused"
     },
     "Minoux_69": {
-     "gw": 3,
-     "status": "already-applied"
+     "note": "entry 4894622 is on none of the logged-in accounts",
+     "status": "skipped"
     }
    }
   }

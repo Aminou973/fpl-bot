@@ -1,0 +1,104 @@
+{
+ "4896428": {
+  "bank_raw": 32,
+  "entry": 4896428,
+  "fetched_at": "2026-09-03T17:22:12.700398+00:00",
+  "gw": 3,
+  "name": "Minoux_41",
+  "picks": [
+   226,
+   4,
+   229,
+   388,
+   84,
+   498,
+   397,
+   480,
+   368,
+   155,
+   106,
+   82,
+   260,
+   248,
+   441
+  ],
+  "picks_detail": [
+   {
+    "element": 226,
+    "purchase_price": 55,
+    "selling_price": 55
+   },
+   {
+    "element": 4,
+    "purchase_price": 80,
+    "selling_price": 80
+   },
+   {
+    "element": 229,
+    "purchase_price": 60,
+    "selling_price": 60
+   },
+   {
+    "element": 388,
+    "purchase_price": 60,
+    "selling_price": 60
+   },
+   {
+    "element": 84,
+    "purchase_price": 55,
+    "selling_price": 55
+   },
+   {
+    "element": 498,
+    "purchase_price": 59,
+    "selling_price": 59
+   },
+   {
+    "element": 397,
+    "purchase_price": 85,
+    "selling_price": 85
+   },
+   {
+    "element": 480,
+    "purchase_price": 79,
+    "selling_price": 79
+   },
+   {
+    "element": 368,
+    "purchase_price": 70,
+    "selling_price": 70
+   },
+   {
+    "element": 155,
+    "purchase_price": 70,
+    "selling_price": 69
+   },
+   {
+    "element": 106,
+    "purchase_price": 80,
+    "selling_price": 80
+   },
+   {
+    "element": 82,
+    "purchase_price": 50,
+    "selling_price": 50
+   },
+   {
+    "element": 260,
+    "purchase_price": 65,
+    "selling_price": 64
+   },
+   {
+    "element": 248,
+    "purchase_price": 55,
+    "selling_price": 54
+   },
+   {
+    "element": 441,
+    "purchase_price": 45,
+    "selling_price": 45
+   }
+  ],
+  "team_id": 4896428
+ }
+}
