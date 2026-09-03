@@ -32,7 +32,7 @@
    }
   },
   "3": {
-   "at": "2026-09-03T18:59:24.862469+00:00",
+   "at": "2026-09-03T19:10:11.629331+00:00",
    "deadline": "2026-09-04T17:30:00Z",
    "mode": "dry-run",
    "teams": {
@@ -40,8 +40,7 @@
      "status": "dry-run"
     },
     "Minoux_69": {
-     "gw": 3,
-     "status": "already-applied"
+     "status": "dry-run"
     }
    }
   }
