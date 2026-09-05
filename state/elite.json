@@ -11,7 +11,7 @@
   },
   {
    "elite": 4.0,
-   "field": 17.2,
+   "field": 17.3,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -28,7 +28,7 @@
    "team": "MCI"
   }
  ],
- "generated": "2026-09-05T21:42:23+00:00",
+ "generated": "2026-09-05T23:22:37+00:00",
  "gw": 4,
  "gw_read": 3,
  "league": "Overall (top 50)",
@@ -48,7 +48,7 @@
   },
   {
    "elite": 94.0,
-   "field": 17.2,
+   "field": 17.3,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -75,7 +75,7 @@
   },
   {
    "elite": 54.0,
-   "field": 30.6,
+   "field": 30.7,
    "id": 399,
    "name": "Cherki",
    "pos": "MID",
@@ -97,12 +97,12 @@
    "id": 397,
    "name": "Semenyo",
    "pos": "MID",
-   "price": 8.5,
+   "price": 8.4,
    "team": "MCI"
   },
   {
    "elite": 44.0,
-   "field": 10.1,
+   "field": 10.2,
    "id": 367,
    "name": "Gakpo",
    "pos": "MID",
@@ -119,7 +119,7 @@
    "team": "BRE"
   },
   {
-   "elite": 40.0,
+   "elite": 38.0,
    "field": 5.6,
    "id": 398,
    "name": "Foden",
@@ -128,7 +128,7 @@
    "team": "MCI"
   },
   {
-   "elite": 40.0,
+   "elite": 38.0,
    "field": 17.3,
    "id": 356,
    "name": "Virgil",
@@ -137,7 +137,7 @@
    "team": "LIV"
   },
   {
-   "elite": 34.0,
+   "elite": 36.0,
    "field": 18.9,
    "id": 391,
    "name": "Gvardiol",
@@ -146,7 +146,7 @@
    "team": "MCI"
   },
   {
-   "elite": 34.0,
+   "elite": 36.0,
    "field": 40.5,
    "id": 368,
    "name": "Szoboszlai",
@@ -173,24 +173,6 @@
    "team": "LIV"
   },
   {
-   "elite": 28.0,
-   "field": 4.2,
-   "id": 94,
-   "name": "Schade",
-   "pos": "MID",
-   "price": 6.0,
-   "team": "BRE"
-  },
-  {
-   "elite": 26.0,
-   "field": 1.2,
-   "id": 597,
-   "name": "Suzuki",
-   "pos": "GKP",
-   "price": 5.0,
-   "team": "AVL"
-  },
-  {
    "elite": 26.0,
    "field": 48.5,
    "id": 426,
@@ -210,7 +192,7 @@
   },
   {
    "elite": 26.0,
-   "field": 10.2,
+   "field": 10.3,
    "id": 449,
    "name": "Hall",
    "pos": "DEF",
@@ -225,6 +207,24 @@
    "pos": "MID",
    "price": 7.9,
    "team": "NFO"
+  },
+  {
+   "elite": 26.0,
+   "field": 4.2,
+   "id": 94,
+   "name": "Schade",
+   "pos": "MID",
+   "price": 6.0,
+   "team": "BRE"
+  },
+  {
+   "elite": 24.0,
+   "field": 1.2,
+   "id": 597,
+   "name": "Suzuki",
+   "pos": "GKP",
+   "price": 5.0,
+   "team": "AVL"
   },
   {
    "elite": 22.0,
@@ -245,7 +245,7 @@
    "team": "BHA"
   },
   {
-   "elite": 20.0,
+   "elite": 18.0,
    "field": 7.0,
    "id": 32,
    "name": "Cash",
@@ -254,13 +254,13 @@
    "team": "AVL"
   },
   {
-   "elite": 20.0,
-   "field": 5.7,
-   "id": 586,
-   "name": "Mendy",
-   "pos": "DEF",
-   "price": 4.0,
-   "team": "HUL"
+   "elite": 18.0,
+   "field": 1.1,
+   "id": 41,
+   "name": "Buend\u00eda",
+   "pos": "MID",
+   "price": 6.0,
+   "team": "AVL"
   }
  ]
 }
