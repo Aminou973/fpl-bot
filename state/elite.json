@@ -2,7 +2,7 @@
  "captains": [
   {
    "elite": 94.0,
-   "field": 71.2,
+   "field": 71.1,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -11,7 +11,7 @@
   },
   {
    "elite": 4.0,
-   "field": 17.1,
+   "field": 17.2,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -28,7 +28,7 @@
    "team": "MCI"
   }
  ],
- "generated": "2026-09-05T19:30:49+00:00",
+ "generated": "2026-09-05T21:06:00+00:00",
  "gw": 4,
  "gw_read": 3,
  "league": "Overall (top 50)",
@@ -39,7 +39,7 @@
  "template": [
   {
    "elite": 98.0,
-   "field": 71.2,
+   "field": 71.1,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -47,8 +47,8 @@
    "team": "MCI"
   },
   {
-   "elite": 94.0,
-   "field": 17.1,
+   "elite": 96.0,
+   "field": 17.2,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -57,7 +57,7 @@
   },
   {
    "elite": 76.0,
-   "field": 17.7,
+   "field": 17.8,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -66,7 +66,7 @@
   },
   {
    "elite": 58.0,
-   "field": 13.3,
+   "field": 13.2,
    "id": 106,
    "name": "Thiago",
    "pos": "FWD",
@@ -83,7 +83,7 @@
    "team": "MCI"
   },
   {
-   "elite": 44.0,
+   "elite": 46.0,
    "field": 5.3,
    "id": 277,
    "name": "Egan",
@@ -93,7 +93,16 @@
   },
   {
    "elite": 44.0,
-   "field": 19.2,
+   "field": 10.1,
+   "id": 367,
+   "name": "Gakpo",
+   "pos": "MID",
+   "price": 7.1,
+   "team": "LIV"
+  },
+  {
+   "elite": 44.0,
+   "field": 19.1,
    "id": 397,
    "name": "Semenyo",
    "pos": "MID",
@@ -102,25 +111,7 @@
   },
   {
    "elite": 42.0,
-   "field": 10.0,
-   "id": 367,
-   "name": "Gakpo",
-   "pos": "MID",
-   "price": 7.1,
-   "team": "LIV"
-  },
-  {
-   "elite": 42.0,
-   "field": 5.6,
-   "id": 398,
-   "name": "Foden",
-   "pos": "MID",
-   "price": 7.0,
-   "team": "MCI"
-  },
-  {
-   "elite": 42.0,
-   "field": 7.0,
+   "field": 6.9,
    "id": 82,
    "name": "Kelleher",
    "pos": "GKP",
@@ -129,6 +120,15 @@
   },
   {
    "elite": 40.0,
+   "field": 5.6,
+   "id": 398,
+   "name": "Foden",
+   "pos": "MID",
+   "price": 7.0,
+   "team": "MCI"
+  },
+  {
+   "elite": 38.0,
    "field": 17.3,
    "id": 356,
    "name": "Virgil",
@@ -137,7 +137,7 @@
    "team": "LIV"
   },
   {
-   "elite": 34.0,
+   "elite": 36.0,
    "field": 18.8,
    "id": 391,
    "name": "Gvardiol",
@@ -146,8 +146,8 @@
    "team": "MCI"
   },
   {
-   "elite": 34.0,
-   "field": 40.6,
+   "elite": 36.0,
+   "field": 40.5,
    "id": 368,
    "name": "Szoboszlai",
    "pos": "MID",
@@ -155,16 +155,7 @@
    "team": "LIV"
   },
   {
-   "elite": 32.0,
-   "field": 9.3,
-   "id": 366,
-   "name": "Wirtz",
-   "pos": "MID",
-   "price": 7.4,
-   "team": "LIV"
-  },
-  {
-   "elite": 30.0,
+   "elite": 34.0,
    "field": 5.2,
    "id": 87,
    "name": "Ajer",
@@ -173,13 +164,13 @@
    "team": "BRE"
   },
   {
-   "elite": 28.0,
-   "field": 10.2,
-   "id": 449,
-   "name": "Hall",
-   "pos": "DEF",
-   "price": 5.1,
-   "team": "NEW"
+   "elite": 30.0,
+   "field": 9.3,
+   "id": 366,
+   "name": "Wirtz",
+   "pos": "MID",
+   "price": 7.4,
+   "team": "LIV"
   },
   {
    "elite": 26.0,
@@ -192,12 +183,30 @@
   },
   {
    "elite": 26.0,
-   "field": 9.6,
+   "field": 9.7,
    "id": 279,
    "name": "Ajayi",
    "pos": "DEF",
    "price": 4.1,
    "team": "HUL"
+  },
+  {
+   "elite": 26.0,
+   "field": 10.2,
+   "id": 449,
+   "name": "Hall",
+   "pos": "DEF",
+   "price": 5.1,
+   "team": "NEW"
+  },
+  {
+   "elite": 26.0,
+   "field": 9.4,
+   "id": 480,
+   "name": "Gibbs-White",
+   "pos": "MID",
+   "price": 7.9,
+   "team": "NFO"
   },
   {
    "elite": 26.0,
@@ -218,22 +227,13 @@
    "team": "AVL"
   },
   {
-   "elite": 24.0,
+   "elite": 22.0,
    "field": 2.2,
    "id": 605,
    "name": "Yalcouy\u00e9",
    "pos": "MID",
    "price": 4.5,
    "team": "BHA"
-  },
-  {
-   "elite": 24.0,
-   "field": 9.4,
-   "id": 480,
-   "name": "Gibbs-White",
-   "pos": "MID",
-   "price": 7.9,
-   "team": "NFO"
   },
   {
    "elite": 22.0,
