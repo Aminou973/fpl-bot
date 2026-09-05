@@ -73,7 +73,7 @@
    "team": "BHA"
   }
  ],
- "generated": "2026-09-05T10:55:59+00:00",
+ "generated": "2026-09-05T11:14:11+00:00",
  "gw": 4,
  "gw_read": 3,
  "league": "Overall (top 50)",
@@ -137,7 +137,7 @@
    "team": "BRE"
   },
   {
-   "elite": 46.0,
+   "elite": 48.0,
    "field": 5.2,
    "id": 277,
    "name": "Egan",
@@ -146,7 +146,7 @@
    "team": "HUL"
   },
   {
-   "elite": 44.0,
+   "elite": 42.0,
    "field": 48.6,
    "id": 426,
    "name": "B.Fernandes",
@@ -155,7 +155,7 @@
    "team": "MUN"
   },
   {
-   "elite": 44.0,
+   "elite": 42.0,
    "field": 30.6,
    "id": 399,
    "name": "Cherki",
@@ -173,7 +173,7 @@
    "team": "LIV"
   },
   {
-   "elite": 40.0,
+   "elite": 42.0,
    "field": 13.5,
    "id": 106,
    "name": "Thiago",
@@ -182,7 +182,7 @@
    "team": "BRE"
   },
   {
-   "elite": 38.0,
+   "elite": 40.0,
    "field": 45.8,
    "id": 8,
    "name": "Calafiori",
@@ -254,6 +254,15 @@
    "team": "ARS"
   },
   {
+   "elite": 24.0,
+   "field": 19.4,
+   "id": 397,
+   "name": "Semenyo",
+   "pos": "MID",
+   "price": 8.5,
+   "team": "MCI"
+  },
+  {
    "elite": 22.0,
    "field": 9.4,
    "id": 480,
@@ -281,15 +290,6 @@
    "team": "CHE"
   },
   {
-   "elite": 22.0,
-   "field": 19.4,
-   "id": 397,
-   "name": "Semenyo",
-   "pos": "MID",
-   "price": 8.5,
-   "team": "MCI"
-  },
-  {
    "elite": 20.0,
    "field": 9.6,
    "id": 88,
@@ -300,12 +300,12 @@
   },
   {
    "elite": 20.0,
-   "field": 15.5,
-   "id": 464,
-   "name": "Wissa",
-   "pos": "FWD",
-   "price": 6.1,
-   "team": "NEW"
+   "field": 9.4,
+   "id": 366,
+   "name": "Wirtz",
+   "pos": "MID",
+   "price": 7.4,
+   "team": "LIV"
   }
  ]
 }
