@@ -28,7 +28,7 @@
    "team": "MCI"
   }
  ],
- "generated": "2026-09-05T23:22:37+00:00",
+ "generated": "2026-09-06T01:20:54+00:00",
  "gw": 4,
  "gw_read": 3,
  "league": "Overall (top 50)",
@@ -57,7 +57,7 @@
   },
   {
    "elite": 76.0,
-   "field": 17.8,
+   "field": 17.9,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -74,7 +74,7 @@
    "team": "BRE"
   },
   {
-   "elite": 54.0,
+   "elite": 56.0,
    "field": 30.7,
    "id": 399,
    "name": "Cherki",
@@ -83,7 +83,7 @@
    "team": "MCI"
   },
   {
-   "elite": 46.0,
+   "elite": 44.0,
    "field": 5.4,
    "id": 277,
    "name": "Egan",
@@ -92,7 +92,7 @@
    "team": "HUL"
   },
   {
-   "elite": 46.0,
+   "elite": 44.0,
    "field": 19.1,
    "id": 397,
    "name": "Semenyo",
@@ -101,7 +101,7 @@
    "team": "MCI"
   },
   {
-   "elite": 44.0,
+   "elite": 42.0,
    "field": 10.2,
    "id": 367,
    "name": "Gakpo",
@@ -119,8 +119,8 @@
    "team": "BRE"
   },
   {
-   "elite": 38.0,
-   "field": 5.6,
+   "elite": 40.0,
+   "field": 5.5,
    "id": 398,
    "name": "Foden",
    "pos": "MID",
@@ -128,22 +128,13 @@
    "team": "MCI"
   },
   {
-   "elite": 38.0,
+   "elite": 40.0,
    "field": 17.3,
    "id": 356,
    "name": "Virgil",
    "pos": "DEF",
    "price": 6.5,
    "team": "LIV"
-  },
-  {
-   "elite": 36.0,
-   "field": 18.9,
-   "id": 391,
-   "name": "Gvardiol",
-   "pos": "DEF",
-   "price": 5.6,
-   "team": "MCI"
   },
   {
    "elite": 36.0,
@@ -156,6 +147,15 @@
   },
   {
    "elite": 34.0,
+   "field": 18.9,
+   "id": 391,
+   "name": "Gvardiol",
+   "pos": "DEF",
+   "price": 5.6,
+   "team": "MCI"
+  },
+  {
+   "elite": 32.0,
    "field": 5.2,
    "id": 87,
    "name": "Ajer",
@@ -164,7 +164,7 @@
    "team": "BRE"
   },
   {
-   "elite": 30.0,
+   "elite": 32.0,
    "field": 9.2,
    "id": 366,
    "name": "Wirtz",
@@ -183,7 +183,7 @@
   },
   {
    "elite": 26.0,
-   "field": 9.7,
+   "field": 9.8,
    "id": 279,
    "name": "Ajayi",
    "pos": "DEF",
@@ -245,7 +245,7 @@
    "team": "BHA"
   },
   {
-   "elite": 18.0,
+   "elite": 20.0,
    "field": 7.0,
    "id": 32,
    "name": "Cash",
@@ -254,13 +254,13 @@
    "team": "AVL"
   },
   {
-   "elite": 18.0,
-   "field": 1.1,
-   "id": 41,
-   "name": "Buend\u00eda",
-   "pos": "MID",
-   "price": 6.0,
-   "team": "AVL"
+   "elite": 20.0,
+   "field": 5.7,
+   "id": 586,
+   "name": "Mendy",
+   "pos": "DEF",
+   "price": 4.0,
+   "team": "HUL"
   }
  ]
 }
