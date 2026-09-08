@@ -220,6 +220,81 @@ def last_plan_entry(df, res):
     }
 
 
+# --------------------------------------------------- one decision per week --
+def next_cron_run(now, minute):
+    """The next time the hourly plan workflow will fire, in UTC."""
+    slot = now.replace(minute=minute, second=0, microsecond=0)
+    return slot if slot > now else slot + dt.timedelta(hours=1)
+
+
+def is_brief_run(deadline, cfg, now=None):
+    """Is this the run that should publish the week's transfer decision?
+
+    Late enough that the team news is real - press conferences, the last
+    fitness updates, the overnight price moves - and early enough to act on.
+    That is the last hourly slot still at least `min_lead_minutes` clear of the
+    deadline, which puts the brief between roughly one and two hours out.
+
+    Deliberately not the closest possible slot: Actions cron drifts by minutes
+    under load, and a decision that lands after the deadline is worth nothing.
+    """
+    b = cfg.get("brief", {}) or {}
+    lo = float(b.get("min_lead_minutes", 60))
+    hi = float(b.get("max_lead_minutes", 150))
+    minute = int(b.get("cron_minute_utc", 5))
+    now = now or dt.datetime.now(dt.timezone.utc)
+    lead = (deadline - now).total_seconds() / 60
+    if lead < lo or lead > hi:
+        return False
+    return (deadline - next_cron_run(now, minute)).total_seconds() / 60 < lo
+
+
+def move_value(df, gw, ins, outs):
+    """What a set of transfers is worth this gameweek, under today's numbers."""
+    col = f"xp{gw}"
+    if col not in df.columns:
+        return 0.0
+    r = df.set_index("id")
+    def total(ids):
+        return sum(float(r.loc[i, col]) for i in ids if i in r.index)
+    return total(ins) - total(outs)
+
+
+def apply_lock(df, gw, name, res, committed, cfg):
+    """Hold this week's transfers steady unless a change clearly earns it.
+
+    Re-running the same solver on data that moved by a rounding error produces a
+    different but equally good set of transfers. Every rewrite of the plan is a
+    fresh batch for the submit job to execute, which is how one free transfer
+    became five moves and -16 in gameweek 3. So the first plan of the week is
+    the plan, and it only changes when the alternative beats it by a real margin
+    or has become impossible to carry out.
+    """
+    wk = res["plan"]["weeks"][0]
+    new = {"in": list(wk["in"]), "out": list(wk["out"])}
+    old = committed.get(name)
+    if not old or old.get("gw") != gw:
+        return new, {"state": "new"}
+
+    r = df.set_index("id")
+    gone = [i for i in old["in"]
+            if i not in r.index
+            or (isinstance(r.loc[i, "status"], str) and r.loc[i, "status"] != "a")]
+    if gone:
+        who = ", ".join(str(r.loc[i, "name"]) if i in r.index else str(i) for i in gone)
+        return new, {"state": "forced", "why": f"{who} is no longer available"}
+    if set(old["out"]) - set(res.get("squad") or []):
+        return new, {"state": "forced", "why": "a player it wanted to sell is already gone"}
+
+    margin = float((cfg.get("brief", {}) or {}).get("lock_margin", 1.5))
+    gain = (move_value(df, gw, new["in"], new["out"])
+            - move_value(df, gw, old["in"], old["out"]))
+    if gain > margin:
+        return new, {"state": "improved", "gain": round(gain, 2), "margin": margin}
+    return {"in": list(old["in"]), "out": list(old["out"])}, \
+           {"state": "held", "gain": round(gain, 2), "margin": margin}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true")
@@ -228,24 +303,58 @@ def main():
     a = ap.parse_args()
 
     cfg = pipeline.load_config()
+    b = cfg.get("brief", {}) or {}
+
+    # The workflow fires hourly so one slot can always land in the short window
+    # where the team news is settled and there is still time to act. Most of
+    # those hours have nothing to do and finding that out has to be cheap: one
+    # request, a clock check, exit. The expensive projection build happens only
+    # on a refresh slot or on the run that publishes the week's decision.
+    boot, quiet, brief_run = None, False, True
+    if not a.offline:
+        boot = api.bootstrap()
+        nxt = api.next_event(boot)
+        now = dt.datetime.now(dt.timezone.utc)
+        hrs = None
+        if nxt.get("deadline_time"):
+            d = dt.datetime.fromisoformat(nxt["deadline_time"].replace("Z", "+00:00"))
+            hrs = (d - now).total_seconds() / 3600
+            brief_run = is_brief_run(d, cfg)
+        sent = pipeline.read_state("brief_sent", {})
+        refresh = now.hour in [int(h) for h in b.get("refresh_hours_utc", [7, 13, 19])]
+
+        if a.force:
+            # a manual run answers a question now; it does not consume the
+            # week's one scheduled decision
+            brief_run = True
+            print("[plan] forced run"
+                  + (f", {hrs:.1f}h to deadline" if hrs is not None else ""))
+        elif brief_run and sent.get("gw") == nxt.get("id"):
+            brief_run, quiet = False, True
+            print(f"[plan] brief for GW{nxt.get('id')} already sent "
+                  f"{sent.get('at', '')} — staying quiet")
+        elif brief_run:
+            print(f"[plan] {hrs * 60:.0f} min to deadline — this is the brief")
+        elif refresh:
+            quiet = True
+            print(f"[plan] refresh slot"
+                  + (f", {hrs:.1f}h to deadline" if hrs is not None else "")
+                  + " — dashboard only")
+        else:
+            print("[plan] nothing due this hour"
+                  + (f" ({hrs:.1f}h to deadline)" if hrs is not None else "")
+                  + " — exiting")
+            return
+
+        if not brief_run and hrs is not None and (
+                hrs > float(cfg.get("plan_window_hours", 40)) or hrs < 0):
+            print(f"[plan] deadline {hrs:.1f}h away — publishing results only")
+
     ctx = pipeline.build_projections(offline=a.offline,
                                      horizon=int(cfg.get("horizon", 5)))
     df, gws = ctx["df"], ctx["gws"]
-
-    # Far from a deadline there is no transfer advice worth pushing to a phone,
-    # but the results of the gameweek that just ended very much are worth
-    # publishing. So the run continues either way and only the Telegram brief is
-    # held back: the dashboard refreshes three times a day all week.
-    quiet = False
     if not a.offline:
-        nxt = api.next_event(ctx["bootstrap"])
         ctx["next_event"] = nxt
-        if not a.force and nxt.get("deadline_time"):
-            d = dt.datetime.fromisoformat(nxt["deadline_time"].replace("Z", "+00:00"))
-            hrs = (d - dt.datetime.now(dt.timezone.utc)).total_seconds() / 3600
-            if hrs > float(cfg.get("plan_window_hours", 40)) or hrs < 0:
-                quiet = True
-                print(f"[plan] deadline {hrs:.1f}h away — publishing results only")
 
     # engine 1b: sample the world's top managers before planning, so
     # rank.elite_weight squads chase the elite template as it stands right now
@@ -349,6 +458,26 @@ def main():
         results[name] = pipeline.plan_team(ctx, t, states[name], name=name)
         results[name].setdefault("entry_id", t.get("entry_id"))
 
+    # Hold each team to one set of transfers per gameweek. This runs BEFORE the
+    # bundle and before state/last_plan.json is written, because last_plan is
+    # what the submit job executes - a plan that changes between runs is a
+    # second batch of real transfers, not a second opinion.
+    committed = pipeline.read_state("committed", {})
+    locks = {}
+    for name, res in results.items():
+        if "error" in res or not (res.get("plan") or {}).get("weeks"):
+            continue
+        keep, why = apply_lock(df, gws[0], name, res, committed, cfg)
+        locks[name] = why
+        wk = res["plan"]["weeks"][0]
+        if list(keep["in"]) != list(wk["in"]) or list(keep["out"]) != list(wk["out"]):
+            print(f"[plan] {name}: holding the committed move ({why.get('state')})")
+            wk["in"], wk["out"] = list(keep["in"]), list(keep["out"])
+        committed[name] = {"gw": gws[0], "in": list(keep["in"]),
+                           "out": list(keep["out"])}
+    if not a.offline:
+        pipeline.write_state("committed", committed)
+
     prev = {}
     prev_path = ROOT / "site" / "bundle.json"
     if prev_path.exists():
@@ -420,12 +549,17 @@ def main():
     told = pipeline.read_state("plan_brief", {"gw": None, "sig": None})
     unchanged = told.get("gw") == gws[0] and told.get("sig") == sig
     if quiet:
-        print("[plan] outside the deadline window — brief printed, not sent")
+        print("[plan] not the brief slot — printed here, not sent")
     elif not a.no_notify:
         if unchanged:
             print("[plan] plan unchanged since the last send — not sent")
         else:
             notify.send(text, kind="alert")
+            if not a.offline and brief_run and not a.force:
+                pipeline.write_state("brief_sent", {
+                    "gw": gws[0],
+                    "at": dt.datetime.now(dt.timezone.utc)
+                            .isoformat(timespec="minutes")})
     if not unchanged:
         pipeline.write_state("plan_brief", {"gw": gws[0], "sig": sig})
 

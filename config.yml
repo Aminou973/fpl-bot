@@ -66,6 +66,7 @@ teams:
       Main team - template safe. Haaland locked in and a tilt toward well-owned
       players, so a big popular haul never costs you rank.
     hit_threshold: 6       # only take a -4 if the plan gains more than this
+    max_transfers_per_gw: 2   # hard ceiling on moves in one gameweek
     rank:                  # replaces ownership_bonus (xp-weighted, every week)
       alpha: 0.5
       tilt: 0.4            # template-safe: buys the field's players
@@ -131,6 +132,7 @@ teams:
       10% owned. Deliberately holds a different squad from the main team: the
       two exist to be compared, and two convergent teams compare nothing.
     hit_threshold: 6       # same trade discipline as the main team
+    max_transfers_per_gw: 3   # hard ceiling on moves in one gameweek
     # Re-differentiated 2026-09-01 (owner: "i dont need them convergent need
     # them different"). Both teams had drifted to the same brief and the
     # optimiser was returning an IDENTICAL 15 for each - two teams, no
@@ -189,3 +191,21 @@ teams:
       - ["Georginio", "BHA"]
       - ["João Pedro", "CHE"]
       - ["Haaland", "MCI"]
+
+# ---------------------------------------------------------------- the brief --
+# One transfer decision per gameweek, published once, late enough that the team
+# news is real. The plan workflow fires hourly; the job picks the last slot that
+# is still min_lead_minutes clear of the deadline, so the message lands between
+# roughly one and two hours out. Every other hour exits in seconds.
+brief:
+  min_lead_minutes: 60      # never closer than this to the deadline
+  max_lead_minutes: 150     # never earlier than this
+  refresh_hours_utc: [7, 13, 19]   # hours that rebuild the dashboard quietly
+  cron_minute_utc: 5        # must match the cron in .github/workflows/plan.yml
+  lock_margin: 1.5          # xP a new move must beat the committed one by
+
+# --------------------------------------------------------------- submission --
+submit:
+  # The bot may spend free transfers on its own. It may not spend POINTS on its
+  # own: a plan that costs a hit is sent to Telegram for a human to approve.
+  auto_hits: false

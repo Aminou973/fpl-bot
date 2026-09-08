@@ -49,6 +49,11 @@ def live_picks_sig(mt):
             for p in sorted(mt["picks"], key=lambda p: p.get("position", 0))]
 
 
+def owned_now(mt):
+    """Element ids the game currently has in the squad."""
+    return {int(p["element"]) for p in (mt.get("picks") or [])}
+
+
 def plan_sig(payload):
     return [(p["element"], p["is_captain"], p["is_vice"])
             for p in sorted(payload, key=lambda p: p["position"])]
@@ -349,6 +354,32 @@ def main():
         if note:
             results[name] = {"status": "refused", "gw": gw, "note": note}
             print(f"  ✘ refusing: {note}")
+            continue
+
+        # Spending guard. Everything above checks that the plan is COHERENT;
+        # this checks that carrying it out is AFFORDABLE. Gameweek 3 cost -16
+        # because a fresh plan every few hours meant a fresh batch every few
+        # hours, each one individually reasonable. So: never pay points
+        # unattended, and never exceed the week's ceiling counting what has
+        # already been spent. A refusal rings the phone rather than acting.
+        tr = mt.get("transfers") or {}
+        made = int(tr.get("made") or 0)
+        free_left = max(0, int(tr.get("limit") or 0) - made)
+        wants = len([e for e in entry.get("in") or [] if e not in owned_now(mt)])
+        team_cfg = cfg["teams"].get(name, {})
+        cap = team_cfg.get("max_transfers_per_gw")
+        auto_hits = bool((cfg.get("submit") or {}).get("auto_hits", False))
+        stop = None
+        if not entry.get("chip") and wants > free_left and not auto_hits:
+            stop = (f"{wants} transfer(s) with {free_left} free left would cost "
+                    f"−{4 * (wants - free_left)} pts — the bot does not spend "
+                    f"points on its own. Make these by hand if you want them.")
+        elif cap is not None and made + wants > int(cap):
+            stop = (f"{made} transfer(s) already made this gameweek and the plan "
+                    f"wants {wants} more, over the {cap}-a-week ceiling.")
+        if stop:
+            results[name] = {"status": "refused", "gw": gw, "note": stop}
+            print(f"  ✘ refusing: {stop}")
             continue
         print(f"[{name}] entry {entry_id} (my-team id {team_id})")
         for line in diff_names(names, live_picks_sig(mt),

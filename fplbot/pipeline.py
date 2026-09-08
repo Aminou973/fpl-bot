@@ -303,6 +303,11 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
     ft = int(state.get("free_transfers", 1))
     if cfg_team.get("unlimited_transfers") or gws[0] == 1:
         ft = 15          # transfers are unlimited and free before the GW1 deadline
+    # a hard ceiling on this week's moves, counting whatever has already been
+    # spent inside the window that is currently open
+    if cfg_team.get("max_transfers_per_gw") is not None:
+        kw["max_moves"] = max(0, int(cfg_team["max_transfers_per_gw"])
+                              - int(state.get("transfers_made", 0)))
     # engine 2: scenario CVaR, from the global engines block with per-team override
     eng = (load_config().get("engines") or {}).get("scenarios") or {}
     risk = cfg_team.get("risk") or {}
@@ -554,7 +559,7 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
                 p, info = p2, info2
                 planner.attach_vice(df, p["weeks"], cap_own)
     plan_kw = {k: v for k, v in kw.items()
-               if k not in ("max_captain_ownership", "scenarios",
+               if k not in ("max_captain_ownership", "max_moves", "scenarios",
                             "scenario_weights", "risk_lambda", "cvar_beta",
                             "rank_alpha", "template_tilt", "cap_tilt",
                             "elite_weight", "chips_tc_bb", "chip_windows",

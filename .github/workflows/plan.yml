@@ -1,10 +1,14 @@
 name: plan
 
-# The deadline plan for both teams. Runs a few times a day; the job itself
-# decides whether the deadline is close enough to be worth a full solve.
+# The deadline plan for both teams.
+#
+# Fires hourly so one slot can always land 1-2 hours before the deadline, once
+# the press conferences and late fitness news are in. Almost every run exits in
+# seconds after a single API call; the full solve happens on the three refresh
+# slots and on the one run that publishes the week's decision.
 on:
   schedule:
-    - cron: "5 7,13,19 * * *"
+    - cron: "5 * * * *"
   workflow_dispatch:
     inputs:
       force:

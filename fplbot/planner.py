@@ -43,7 +43,8 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
          scenarios=None, scenario_weights=None, risk_lambda=0.0, cvar_beta=0.75,
          rank_alpha=0.0, template_tilt=0.0, cap_tilt=0.0, elite_weight=0.0,
          chips_tc_bb=False, chip_windows=None, chips_used=(),
-         price_matrix=None, sell_price=None, price_gamma=0.0):
+         price_matrix=None, sell_price=None, price_gamma=0.0,
+         max_moves=None):
     """Return the optimal transfer plan over `gws` starting from `current`.
 
     free_transfers: how many you have available for the first gameweek.
@@ -235,6 +236,13 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
                 add({X(i, g): 1, X(i, g - 1): -1, IN(i, g): -1, OUT(i, g): 1}, 0, 0)
             add({IN(i, g): 1, X(i, g): -1}, -np.inf, 0)      # can't buy and not own
             add({OUT(i, g): 1, X(i, g): 1}, -np.inf, 1)      # can't sell and still own
+
+        # A ceiling on moves per gameweek. The hit maths alone will happily
+        # price a five-move week, and with auto-submission on that is five moves
+        # actually executed. A week that big should be a deliberate human
+        # decision, so the solver simply cannot reach for it.
+        if max_moves is not None and free_transfers <= MAX_FT:
+            add({IN(i, g): 1 for i in range(n)}, 0, int(max_moves))
 
         # transfers in must equal transfers out
         add({**{IN(i, g): 1 for i in range(n)},
