@@ -1,6 +1,6 @@
 {
  "deadline": "2026-09-12T12:30:00Z",
- "generated": "2026-09-08T12:08:08.532286+00:00",
+ "generated": "2026-09-08T16:53:47.445237+00:00",
  "gw": 4,
  "teams": {
   "Minoux_41": {
@@ -16,7 +16,7 @@
    "entry": 4896428,
    "hits": 0,
    "in": [
-    8
+    499
    ],
    "out": [
     84
@@ -53,7 +53,7 @@
      "position": 5
     },
     {
-     "element": 8,
+     "element": 499,
      "is_captain": false,
      "is_vice": false,
      "position": 6
@@ -132,7 +132,6 @@
    ],
    "squad_after": [
     4,
-    8,
     82,
     106,
     40,
@@ -145,7 +144,8 @@
     397,
     441,
     480,
-    498
+    498,
+    499
    ],
    "squad_source": "api",
    "vice": 40,
@@ -155,7 +155,7 @@
     229,
     388,
     498,
-    8,
+    499,
     397,
     480,
     40,
@@ -166,13 +166,13 @@
   "Minoux_69": {
    "bench": [
     1,
-    229,
+    4,
     368,
-    481
+    346
    ],
    "captain": 411,
    "chip": "bboost",
-   "chip_gain": 11.11,
+   "chip_gain": 11.22,
    "entry": 4894622,
    "hits": 0,
    "in": [
@@ -189,7 +189,7 @@
      "position": 1
     },
     {
-     "element": 4,
+     "element": 229,
      "is_captain": false,
      "is_vice": false,
      "position": 2
@@ -219,31 +219,31 @@
      "position": 6
     },
     {
-     "element": 212,
+     "element": 481,
      "is_captain": false,
      "is_vice": false,
      "position": 7
     },
     {
-     "element": 489,
+     "element": 212,
      "is_captain": false,
      "is_vice": false,
      "position": 8
     },
     {
-     "element": 411,
-     "is_captain": true,
+     "element": 489,
+     "is_captain": false,
      "is_vice": false,
      "position": 9
     },
     {
-     "element": 165,
-     "is_captain": false,
+     "element": 411,
+     "is_captain": true,
      "is_vice": false,
      "position": 10
     },
     {
-     "element": 346,
+     "element": 165,
      "is_captain": false,
      "is_vice": false,
      "position": 11
@@ -255,7 +255,7 @@
      "position": 12
     },
     {
-     "element": 229,
+     "element": 4,
      "is_captain": false,
      "is_vice": false,
      "position": 13
@@ -267,7 +267,7 @@
      "position": 14
     },
     {
-     "element": 481,
+     "element": 346,
      "is_captain": false,
      "is_vice": false,
      "position": 15
@@ -311,16 +311,16 @@
    "vice": 40,
    "xi": [
     109,
-    4,
+    229,
     388,
     498,
     259,
     40,
+    481,
     212,
     489,
     411,
-    165,
-    346
+    165
    ]
   }
  }
