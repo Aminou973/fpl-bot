@@ -1,6 +1,6 @@
 {
  "deadline": "2026-09-12T12:30:00Z",
- "generated": "2026-09-11T00:37:05.190024+00:00",
+ "generated": "2026-09-11T05:19:17.849525+00:00",
  "gw": 4,
  "teams": {
   "Minoux_41": {
@@ -166,13 +166,13 @@
   "Minoux_69": {
    "bench": [
     1,
-    229,
+    4,
     498,
     165
    ],
    "captain": 411,
    "chip": "bboost",
-   "chip_gain": 11.44,
+   "chip_gain": 11.65,
    "entry": 4894622,
    "hits": 0,
    "in": [
@@ -189,7 +189,7 @@
      "position": 1
     },
     {
-     "element": 4,
+     "element": 229,
      "is_captain": false,
      "is_vice": false,
      "position": 2
@@ -255,7 +255,7 @@
      "position": 12
     },
     {
-     "element": 229,
+     "element": 4,
      "is_captain": false,
      "is_vice": false,
      "position": 13
@@ -311,7 +311,7 @@
    "vice": 40,
    "xi": [
     109,
-    4,
+    229,
     388,
     259,
     40,
