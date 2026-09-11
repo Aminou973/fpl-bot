@@ -105,9 +105,9 @@
  "4896428": {
   "bank_raw": 21,
   "entry": 4896428,
-  "fetched_at": "2026-09-03T19:38:22.077507+00:00",
-  "free_transfers": 0,
-  "gw": 3,
+  "fetched_at": "2026-09-11T17:54:39.777794+00:00",
+  "free_transfers": 1,
+  "gw": 4,
   "name": "Minoux_41",
   "picks": [
    226,
@@ -155,7 +155,7 @@
    {
     "element": 397,
     "purchase_price": 85,
-    "selling_price": 85
+    "selling_price": 84
    },
    {
     "element": 480,
@@ -180,7 +180,7 @@
    {
     "element": 106,
     "purchase_price": 80,
-    "selling_price": 80
+    "selling_price": 79
    },
    {
     "element": 82,

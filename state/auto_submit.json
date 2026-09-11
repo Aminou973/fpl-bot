@@ -46,16 +46,20 @@
    }
   },
   "4": {
-   "at": "2026-09-11T14:37:32.751639+00:00",
+   "at": "2026-09-11T17:54:40.754069+00:00",
    "deadline": "2026-09-12T12:30:00Z",
-   "mode": "dry-run",
+   "mode": "apply",
    "teams": {
     "Minoux_41": {
-     "note": "entry 4896428 is on none of the logged-in accounts",
-     "status": "skipped"
-    },
-    "Minoux_69": {
-     "status": "dry-run"
+     "gw": 4,
+     "in": [
+      499
+     ],
+     "note": "my-team/4896428 submit failed: HTTP 400 {\"picks\":[{},{},{\"element\":[{\"message\":\"Element 200 is not in the player's picks.\",\"code\":\"squad_element_invalid\"}]},{},{},{},{},{},{},{},{},{},{},{},{}]}",
+     "out": [
+      84
+     ],
+     "status": "lineup-failed"
     }
    }
   }
