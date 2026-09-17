@@ -438,7 +438,7 @@ def main():
                 # would undercount the fresh allocation. It outranks the
                 # config pin (which reflects a one-time rule, not today's
                 # screen) because the live read is the game's own answer.
-                if (snap.get("gw") == gw
+                if (snap.get("gw") == gws[0]
                         and snap.get("free_transfers") is not None):
                     live["free_transfers"] = int(snap["free_transfers"])
                     live["ft_source"] = "live-snapshot"
