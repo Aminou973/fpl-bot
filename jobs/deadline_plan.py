@@ -10,6 +10,7 @@ import argparse
 import datetime as dt
 import json
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -47,7 +48,10 @@ def brief(ctx, results, cfg):
 
     for name, res in results.items():
         if "error" in res:
-            out.append(f"\n<b>{esc(name)}</b> — ⚠️ {esc(res['error'])}")
+            out.append(f"\n<b>{esc(name)}</b> — ⚠️ {esc(res['error'])}. "
+                       f"No transfer advice for {esc(name)} this run — the "
+                       f"dashboard is showing the last verified plan instead. "
+                       f"Retrying next hour.")
             continue
         wk = res["plan"]["weeks"][0]
         lines = [f"\n<b>{esc(name)}</b> · {res['free_transfers']} FT · "
@@ -384,6 +388,16 @@ def main():
         if not a.offline and t.get("entry_id"):
             try:
                 live = api.squad_state(t["entry_id"], ctx["bootstrap"])
+                # One retry, short backoff. The public picks endpoint and the
+                # live snapshot both occasionally miss for reasons that clear
+                # up in seconds - a rate-limited request, or landing in the
+                # narrow window where the concurrent submit job is mid-write
+                # to state/live_squad.json. A team that fails BOTH the retry
+                # and the snapshot goes to the config-squad guard below, which
+                # now refuses to act on it rather than planning against it.
+                if not live.get("picks"):
+                    time.sleep(5)
+                    live = api.squad_state(t["entry_id"], ctx["bootstrap"])
                 # the submit job writes an authenticated my-team snapshot each
                 # hourly run (state/live_squad.json). Published picks only
                 # exist at a deadline, so mid-gameweek transfers - the bot's
@@ -487,6 +501,29 @@ def main():
             prev = {}
 
     bundle = build_bundle(ctx, results, cfg)
+
+    # A team whose live squad could not be verified this run has no entry in
+    # bundle["builds"] - build_bundle skips anything with "error" in res, on
+    # purpose, so a bad squad can never reach the transfer-plan UI. But a
+    # missing team is its own problem: several dashboard panels index
+    # D.builds[name] without a fallback, and would rather show yesterday's
+    # verified plan than break. So carry the previous run's build forward,
+    # marked stale, instead of leaving a hole.
+    for name in cfg["teams"]:
+        if name in bundle.get("builds", {}):
+            continue
+        prior = (prev.get("builds") or {}).get(name)
+        if not prior:
+            continue
+        carried = dict(prior)
+        carried["stale"] = True
+        carried["stale_reason"] = results.get(name, {}).get(
+            "error", "could not verify your live squad this run")
+        carried["stale_since"] = prev.get("generated")
+        bundle.setdefault("builds", {})[name] = carried
+        print(f"[plan] {name}: carrying forward the last verified build "
+              f"({carried['stale_reason']})")
+
     bundle["changes"] = diff_since(prev, bundle, results)
     bundle["elite"] = elite
 

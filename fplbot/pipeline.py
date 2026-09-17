@@ -90,7 +90,7 @@ def build_projections(offline=False, horizon=5):
                                        frames=frames, gw26=gw26, news=news)
     return {"df": df, "teams": teams, "fixtures": fxdf, "gws": gws,
             "bootstrap": boot, "start": start, "frames": frames, "gw26": gw26,
-            "fx": fx, "news": news}
+            "fx": fx, "news": news, "offline": offline}
 
 
 def long_projection(ctx, horizon):
@@ -284,10 +284,20 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
         df, state.get("picks"), [tuple(x) for x in cfg_team.get("squad", [])])
     if len(squad) != 15:
         return {"error": f"squad resolved to {len(squad)} players "
-                         f"(source {squad_source})"}
-    if squad_source != "api":
-        print(f"[plan] WARNING: {squad_source} — the plan is built on the "
-              f"config fallback squad, not the live API squad")
+                         f"(source {squad_source})", "squad_source": squad_source}
+    if squad_source != "api" and not ctx.get("offline"):
+        # GW5 lesson: this used to be a warning and the run carried on to plan
+        # a full transfer batch against the config.yml fallback squad — a
+        # squad that is only ever right by accident, since it is whatever was
+        # typed into config.yml at setup and never updated after. The result
+        # was a "sell B.Fernandes" recommendation for an account that had not
+        # owned him in weeks. A plan built on a squad nobody actually holds is
+        # not a cautious plan, it is a wrong one, so refuse to build it at all
+        # - the caller falls back to last week's verified plan instead.
+        print(f"[plan] WARNING: {squad_source} — refusing to plan a squad "
+              f"that is not the live one")
+        return {"error": "could not verify your live squad this run",
+               "squad_source": squad_source}
     if pool is None:
         pool = optimize.prune(df, gws, always=squad + list(kw.get("locked", [])))
     # engine 1b: the elite template's ownership share, blended into the tilt

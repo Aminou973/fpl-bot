@@ -798,12 +798,19 @@ function renderAutomation() {
       : sub.status === "already-applied" ? "already in place"
       : sub.status === "dry-run" ? "verified, will apply"
       : sub.status ? sub.status : "—") : "waiting for window";
+    const staleNote = b.stale
+      ? `<div class="n" style="color:var(--warn,#c77b00)">⚠️ not refreshed this run`
+        + (b.stale_since ? ` — showing the plan from ${new Date(b.stale_since)
+            .toLocaleString(undefined, {weekday: "short", hour: "2-digit", minute: "2-digit"})}` : "")
+        + `</div>`
+      : "";
     cells.push(`<div class="autocell">
       <div class="k">${n} <span class="hint">${b.role === "risk" ? "risk" : "main"}</span></div>
       <div class="v">${b.free_transfers ?? "–"} FT <span class="hint">· ${hits} hit${hits === 1 ? "" : "s"} planned</span></div>
       <div class="n">squad ${srcBadge(src)}<br>submit ${stBadge(
         pd || (sub && (sub.status === "applied" || sub.status === "already-applied")) ? "ok"
         : sub && sub.status === "dry-run" ? "warn" : "", subTxt)}</div>
+      ${staleNote}
     </div>`);
   });
   const bank = NAMES.map(n => `${n}: £${fmt((D.builds[n] || {}).bank, 1)}m`).join(" · ");
@@ -1259,7 +1266,7 @@ function renderCap() {
 /* ==================================================== TEMPLATE EXPOSURE */
 function renderTemplate() {
   const owned = {};
-  NAMES.forEach(n => (D.builds[n].current || []).forEach(i => {
+  NAMES.forEach(n => ((D.builds[n] || {}).current || []).forEach(i => {
     owned[i] = (owned[i] || []).concat(n);
   }));
   const top = (D.players || []).slice().sort((a, b) => b.selected_by - a.selected_by).slice(0, 12);
@@ -1303,7 +1310,7 @@ function renderElite() {
   $("#eliteMeta").textContent = `${E.league} · ${E.note || `squads for GW${E.gw}`}`;
 
   const owned = {};
-  NAMES.forEach(n => (D.builds[n].current || []).forEach(i =>
+  NAMES.forEach(n => ((D.builds[n] || {}).current || []).forEach(i =>
     { owned[i] = (owned[i] || []).concat(n); }));
   const tag = i => { const w = owned[i] || [];
     return w.length === 2 ? `<span class="st ok"><span class="dot"></span>both</span>`
