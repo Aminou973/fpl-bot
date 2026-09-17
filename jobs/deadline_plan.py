@@ -386,64 +386,80 @@ def main():
                  "free_transfers": t.get("free_transfers", 1),
                  "bank": t.get("bank", 0.0)}
         if not a.offline and t.get("entry_id"):
-            try:
-                live = api.squad_state(t["entry_id"], ctx["bootstrap"])
-                # One retry, short backoff. The public picks endpoint and the
-                # live snapshot both occasionally miss for reasons that clear
-                # up in seconds - a rate-limited request, or landing in the
-                # narrow window where the concurrent submit job is mid-write
-                # to state/live_squad.json. A team that fails BOTH the retry
-                # and the snapshot goes to the config-squad guard below, which
-                # now refuses to act on it rather than planning against it.
-                if not live.get("picks"):
-                    time.sleep(5)
+            # squad_state() calls several unauthenticated FPL endpoints
+            # (entry/, entry/picks/, entry/history/), any one of which can
+            # itself raise rather than degrade - entry() in particular has no
+            # fallback inside squad_state at all. GW5 lesson #2: a retry
+            # placed INSIDE the same try block never runs when the first
+            # call raises, and neither does the snapshot fallback below it -
+            # one flaky endpoint took out both teams' live reads on two
+            # consecutive runs even though the submit job's authenticated
+            # snapshot, a completely different code path, was sitting there
+            # fresh the whole time. So: the public read gets its own retry
+            # with its own exception handling, and the snapshot is then
+            # always attempted regardless of whether the public read raised,
+            # returned empty, or succeeded outright.
+            live = {"picks": [], "free_transfers": 1, "chips_used": [],
+                   "picks_source": None, "picks_error": None}
+            for attempt in (1, 2):
+                try:
                     live = api.squad_state(t["entry_id"], ctx["bootstrap"])
-                # the submit job writes an authenticated my-team snapshot each
-                # hourly run (state/live_squad.json). Published picks only
-                # exist at a deadline, so mid-gameweek transfers - the bot's
-                # own included - never reach squad_state; the fresh snapshot
-                # is the only source that has them (GW3 lesson).
+                    if live.get("picks"):
+                        break
+                except Exception as e:                   # noqa: BLE001
+                    print(f"[plan] live squad read for {name} failed on "
+                          f"attempt {attempt} ({e})")
+                if attempt == 1:
+                    time.sleep(5)
+            # the submit job writes an authenticated my-team snapshot each
+            # hourly run (state/live_squad.json). Published picks only
+            # exist at a deadline, so mid-gameweek transfers - the bot's
+            # own included - never reach squad_state; the fresh snapshot
+            # is the only source that has them (GW3 lesson), and now the
+            # only source that survives the public API having a bad day too.
+            try:
                 snap = (pipeline.read_state("live_squad") or {}).get(
                     str(t["entry_id"]))
-                if snap and pipeline.snapshot_fresh(snap):
-                    live["picks"] = list(snap["picks"])
-                    if snap.get("picks_detail"):
-                        live["picks_detail"] = snap["picks_detail"]
-                    sb = pipeline.snapshot_bank(snap)
-                    if sb is not None:
-                        live["bank"] = sb
-                    live["picks_source"] = ("live-snapshot "
-                                            + str(snap.get("fetched_at", ""))[:16])
-                    # FTs only from a snapshot taken for the gameweek whose
-                    # deadline this plan targets: limit−made is the count for
-                    # that deadline, and reusing it after the deadline rolls
-                    # would undercount the fresh allocation. It outranks the
-                    # config pin (which reflects a one-time rule, not today's
-                    # screen) because the live read is the game's own answer.
-                    if (snap.get("gw") == gw
-                            and snap.get("free_transfers") is not None):
-                        live["free_transfers"] = int(snap["free_transfers"])
-                        live["ft_source"] = "live-snapshot"
-                if live.get("picks"):
-                    state = live
-                    print(f"[plan] live squad for {name}: "
-                          f"{len(live['picks'])} picks "
-                          f"(source {live.get('picks_source')})")
-                else:
-                    print(f"[plan] live squad for {name} returned no picks "
-                          f"({live.get('picks_error')}); using config fallback")
-                state.setdefault("bank", 0.0)
-                if t.get("free_transfers") is not None and \
-                        state.get("ft_source") != "live-snapshot":
-                    # config pin wins over the recomputed count: the game's own
-                    # screen is the authority on how many FTs are available
-                    # (e.g. a season where unused FTs do not bank) — but the
-                    # live snapshot IS that screen, so it outranks the pin
-                    state["free_transfers"] = int(t["free_transfers"])
-                    print(f"[plan] free transfers pinned to "
-                          f"{state['free_transfers']} by config")
-            except Exception as e:                   # noqa: BLE001
-                print(f"[plan] live squad for {name} unavailable ({e}); using config")
+            except Exception as e:                        # noqa: BLE001
+                print(f"[plan] live snapshot unreadable for {name} ({e})")
+                snap = None
+            if snap and pipeline.snapshot_fresh(snap):
+                live["picks"] = list(snap["picks"])
+                if snap.get("picks_detail"):
+                    live["picks_detail"] = snap["picks_detail"]
+                sb = pipeline.snapshot_bank(snap)
+                if sb is not None:
+                    live["bank"] = sb
+                live["picks_source"] = ("live-snapshot "
+                                        + str(snap.get("fetched_at", ""))[:16])
+                # FTs only from a snapshot taken for the gameweek whose
+                # deadline this plan targets: limit−made is the count for
+                # that deadline, and reusing it after the deadline rolls
+                # would undercount the fresh allocation. It outranks the
+                # config pin (which reflects a one-time rule, not today's
+                # screen) because the live read is the game's own answer.
+                if (snap.get("gw") == gw
+                        and snap.get("free_transfers") is not None):
+                    live["free_transfers"] = int(snap["free_transfers"])
+                    live["ft_source"] = "live-snapshot"
+            if live.get("picks"):
+                state = live
+                print(f"[plan] live squad for {name}: "
+                      f"{len(live['picks'])} picks "
+                      f"(source {live.get('picks_source')})")
+            else:
+                print(f"[plan] live squad for {name} returned no picks "
+                      f"({live.get('picks_error')}); using config fallback")
+            state.setdefault("bank", 0.0)
+            if t.get("free_transfers") is not None and \
+                    state.get("ft_source") != "live-snapshot":
+                # config pin wins over the recomputed count: the game's own
+                # screen is the authority on how many FTs are available
+                # (e.g. a season where unused FTs do not bank) — but the
+                # live snapshot IS that screen, so it outranks the pin
+                state["free_transfers"] = int(t["free_transfers"])
+                print(f"[plan] free transfers pinned to "
+                      f"{state['free_transfers']} by config")
         states[name] = state
 
     # the full-season chip pass, now BEFORE planning so the gates can use it
@@ -509,11 +525,30 @@ def main():
     # D.builds[name] without a fallback, and would rather show yesterday's
     # verified plan than break. So carry the previous run's build forward,
     # marked stale, instead of leaving a hole.
+    def trustworthy(build):
+        # Only ever carry forward a build that was itself genuinely built on
+        # the live squad - never a build that was ALREADY the config fallback
+        # (that is how the same wrong "sell B.Fernandes" plan kept reappearing
+        # under a new "stale" label run after run), and never one that is
+        # already a carry-forward itself (that would let one bad afternoon
+        # quietly re-serve the same squad for the rest of the season). Two
+        # consecutive failures means the team simply has no plan shown this
+        # run - which is honest - rather than three, four, five stale copies
+        # of the same guess.
+        src = str((build or {}).get("squad_source") or "")
+        return (not build.get("stale")
+               and (src.startswith("gw") or src.startswith("api")
+                    or src.startswith("live-snapshot")))
+
     for name in cfg["teams"]:
         if name in bundle.get("builds", {}):
             continue
         prior = (prev.get("builds") or {}).get(name)
-        if not prior:
+        if not trustworthy(prior):
+            if prior:
+                print(f"[plan] {name}: last build wasn't trustworthy enough "
+                     f"to carry forward (source {prior.get('squad_source')!r}, "
+                     f"stale {prior.get('stale')!r}) - showing nothing this run")
             continue
         carried = dict(prior)
         carried["stale"] = True
