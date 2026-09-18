@@ -64,16 +64,17 @@
    }
   },
   "5": {
-   "at": "2026-09-18T10:09:03.285945+00:00",
+   "at": "2026-09-18T14:39:13.886825+00:00",
    "deadline": "2026-09-18T17:30:00Z",
-   "mode": "dry-run",
+   "mode": "apply",
    "teams": {
     "Minoux_41": {
-     "status": "dry-run"
+     "note": "entry 4896428 is on none of the logged-in accounts",
+     "status": "skipped"
     },
     "Minoux_69": {
      "gw": 5,
-     "note": "2 transfer(s) with 1 free left would cost \u22124 pts \u2014 the bot does not spend points on its own. Make these by hand if you want them.",
+     "note": "2 transfer(s) already made this gameweek and the plan wants 1 more, over the 2-a-week ceiling.",
      "status": "refused"
     }
    }
