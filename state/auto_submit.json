@@ -64,37 +64,17 @@
    }
   },
   "5": {
-   "at": "2026-09-18T09:33:36.299478+00:00",
+   "at": "2026-09-18T10:09:03.285945+00:00",
    "deadline": "2026-09-18T17:30:00Z",
-   "mode": "apply",
+   "mode": "dry-run",
    "teams": {
     "Minoux_41": {
-     "captain": 480,
-     "chip": "3xc",
-     "gw": 5,
-     "in": [
-      356
-     ],
-     "out": [
-      499
-     ],
-     "status": "applied",
-     "team_id": 4896428
+     "status": "dry-run"
     },
     "Minoux_69": {
-     "captain": 480,
-     "chip": "bboost",
      "gw": 5,
-     "in": [
-      88,
-      480
-     ],
-     "out": [
-      4,
-      489
-     ],
-     "status": "applied",
-     "team_id": 4894622
+     "note": "2 transfer(s) with 1 free left would cost \u22124 pts \u2014 the bot does not spend points on its own. Make these by hand if you want them.",
+     "status": "refused"
     }
    }
   }
