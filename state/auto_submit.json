@@ -64,17 +64,15 @@
    }
   },
   "5": {
-   "at": "2026-09-18T08:39:15.672703+00:00",
+   "at": "2026-09-18T09:23:01.706816+00:00",
    "deadline": "2026-09-18T17:30:00Z",
    "mode": "dry-run",
    "teams": {
     "Minoux_41": {
-     "note": "entry 4896428 is on none of the logged-in accounts",
-     "status": "skipped"
+     "status": "dry-run"
     },
     "Minoux_69": {
-     "note": "entry 4894622 is on none of the logged-in accounts",
-     "status": "skipped"
+     "status": "dry-run"
     }
    }
   }
