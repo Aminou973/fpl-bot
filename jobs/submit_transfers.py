@@ -193,6 +193,22 @@ def submit_head(apply_mode, results):
     return "nothing applied"
 
 
+def second_batch_note(prev_status, legs):
+    """One batch of transfers per gameweek, owner's rule of 2026-09-18.
+
+    GW5: the 09:33 batch applied, the squad moved, and the next plan run
+    re-optimised the remaining free transfers into a SECOND batch for the same
+    week - individually free, but a weekly rhythm the owner never asked for.
+    A gameweek's transfer batch is decided once; after it has been applied
+    (`applied` recorded in auto_submit for this gw), the bot only rewrites
+    lineups and chips - never a second batch of moves.
+    """
+    if legs and prev_status == "applied":
+        return ("this week's transfer batch was already applied - one batch "
+                "per week; further moves only by hand")
+    return None
+
+
 def submission_plan(entry, mt, boot_el_cost, boot_el_pos, names):
     """The transfer legs a plan needs, the squad they produce, and everything
     that must refuse it — computed BEFORE anything is sent.
@@ -575,6 +591,15 @@ def main():
             note = "refusing before any transfer: " + "; ".join(issues)
             results[name] = {"status": "refused", "gw": gw, "note": note}
             print(f"  ✘ refusing: {note}")
+            continue
+        # One batch of transfers per gameweek: after `applied` is recorded for
+        # this week, only lineups and chips may be rewritten - never a second
+        # batch of moves, however free they look (owner's rule, GW5 2026-09-18)
+        stop = second_batch_note(
+            ((prior.get("teams") or {}).get(name) or {}).get("status"), legs)
+        if stop:
+            results[name] = {"status": "refused", "gw": gw, "note": stop}
+            print(f"  ✘ refusing: {stop}")
             continue
         if not a.apply:
             results[name] = {"status": "dry-run"}

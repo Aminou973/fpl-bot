@@ -191,3 +191,22 @@ def test_forced_legs_on_a_player_not_owned_are_infeasible():
         pool, gws, squad, hit_threshold=6.0, free_transfers=1,
         force_legs=([], [stranger]), **pipeline.team_kwargs(df, cfg))
     assert plan is None and info.get("infeasible"), (plan, info)
+
+
+def test_allow_hits_false_spends_free_transfers_only():
+    """Owner's rule 2026-09-18: the bot never pays points on a transfer. With
+    allow_hits disabled the hit arm is not solved at all - no plan that costs
+    a -4 can win, whatever it 'gains'."""
+    df, _, _, gws = build()
+    team = "Minoux_41"
+    cfg = pipeline.load_config()["teams"][team]
+    squad = resolve_cfg_squad(df, cfg)
+    pool = optimize.prune(df, gws, always=squad)
+    plan, info = planner.plan_with_hit_policy(
+        pool, gws, squad, hit_threshold=6.0, free_transfers=1,
+        **pipeline.team_kwargs(df, cfg))
+    assert plan is not None, info
+    assert info.get("hits_forbidden") and not info.get("took_hits")
+    assert plan["total_hits"] == 0
+    for wk in plan["weeks"]:
+        assert wk["hits"] == 0

@@ -66,6 +66,8 @@ teams:
       Main team - template safe. Haaland locked in and a tilt toward well-owned
       players, so a big popular haul never costs you rank.
     hit_threshold: 6       # only take a -4 if the plan gains more than this
+    allow_hits: false      # owner's rule 2026-09-18: never pay points on a
+                           # transfer - the plan spends free transfers only
     max_transfers_per_gw: 2   # hard ceiling on moves in one gameweek
     rank:                  # replaces ownership_bonus (xp-weighted, every week)
       alpha: 0.5
@@ -132,6 +134,8 @@ teams:
       10% owned. Deliberately holds a different squad from the main team: the
       two exist to be compared, and two convergent teams compare nothing.
     hit_threshold: 6       # same trade discipline as the main team
+    allow_hits: false      # owner's rule 2026-09-18: never pay points on a
+                           # transfer - the plan spends free transfers only
     max_transfers_per_gw: 3   # hard ceiling on moves in one gameweek
     # Re-differentiated 2026-09-01 (owner: "i dont need them convergent need
     # them different"). Both teams had drifted to the same brief and the

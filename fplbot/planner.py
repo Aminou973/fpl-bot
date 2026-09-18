@@ -423,7 +423,20 @@ def plan_with_hit_policy(pool, gws, current, hit_threshold=6.0, **kw):
     A -4 is worth taking only when the extra points clearly beat the cost, so the
     hit plan has to gain more than `hit_threshold` over the best plan that spends
     nothing but free transfers. Minoux_69 uses a high threshold, Minoux_41 a low one.
+    allow_hits=False (config) skips the hit arm entirely: the plan spends free
+    transfers only, and no solver arm that pays points can win.
     """
+    if kw.get("allow_hits") is False:
+        only = plan(pool, gws, current, allow_hits=False, **{
+            k: v for k, v in kw.items() if k != "allow_hits"})
+        if only is None:
+            return None, {"infeasible": True, "threshold": hit_threshold,
+                          "advice": "the brief cannot be met from this squad "
+                                    "inside the horizon without paying points "
+                                    "- this is what a wildcard is for"}
+        return only, {"took_hits": False, "gain_over_no_hit": None,
+                      "threshold": hit_threshold, "hits_forbidden": True}
+    kw = {k: v for k, v in kw.items() if k != "allow_hits"}
     with_hits = plan(pool, gws, current, allow_hits=True, **kw)
     no_hits = plan(pool, gws, current, allow_hits=False, **kw)
     if with_hits is None and no_hits is None:

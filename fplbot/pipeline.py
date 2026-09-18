@@ -142,6 +142,8 @@ def team_kwargs(df, cfg_team):
         kw["xp_prefix"] = "q85" if has_q else "cxp"
     if cfg_team.get("max_captain_ownership"):
         kw["max_captain_ownership"] = float(cfg_team["max_captain_ownership"])
+    if cfg_team.get("allow_hits") is False:
+        kw["allow_hits"] = False
     return kw
 
 
@@ -588,7 +590,7 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None, force_legs=None):
                             "rank_alpha", "template_tilt", "cap_tilt",
                             "elite_weight", "chips_tc_bb", "chip_windows",
                             "chips_used", "price_matrix", "sell_price",
-                            "price_gamma")}
+                            "price_gamma", "allow_hits")}
     target = optimize.solve(pool, gws, allow_infeasible=True, **plan_kw)
     return {
         "squad": squad, "squad_source": squad_source,

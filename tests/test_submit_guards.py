@@ -254,3 +254,16 @@ def test_refresh_retries_transient_failures(monkeypatch):
         raise AssertionError("persistent failure must raise")
     except RuntimeError as e:
         assert "no" in str(e)
+
+def test_second_batch_refused_after_apply():
+    """Owner's rule, GW5 2026-09-18: the 09:33 batch applied, then the next
+    plan run re-optimised the remaining free transfers into a SECOND batch for
+    the same week - free, but a weekly rhythm nobody asked for. After a
+    gameweek's batch is applied, only lineups and chips may be rewritten."""
+    assert submit_transfers.second_batch_note("applied", [{"element_in": 8}])
+    assert submit_transfers.second_batch_note("applied", []) is None
+    assert submit_transfers.second_batch_note("dry-run", [{"element_in": 8}]) \
+        is None
+    assert submit_transfers.second_batch_note(None, [{"element_in": 8}]) is None
+    assert submit_transfers.second_batch_note("transfers-failed",
+                                              [{"element_in": 8}]) is None
