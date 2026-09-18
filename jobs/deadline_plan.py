@@ -502,9 +502,29 @@ def main():
         wk = res["plan"]["weeks"][0]
         if list(keep["in"]) != list(wk["in"]) or list(keep["out"]) != list(wk["out"]):
             print(f"[plan] {name}: holding the committed move ({why.get('state')})")
-            wk["in"], wk["out"] = list(keep["in"]), list(keep["out"])
-        committed[name] = {"gw": gws[0], "in": list(keep["in"]),
-                           "out": list(keep["out"])}
+            # Hold the committed move WHOLESALE: re-solve with its legs forced,
+            # so the week's squad, lineup and captain are consistent with it.
+            # Overwriting only the in/out lists left a plan whose transfers were
+            # the committed move but whose squad_after/payload still came from
+            # the fresh solve - the GW5 ghost payload the submitter refuses.
+            replan = pipeline.plan_team(ctx, cfg["teams"][name], states[name],
+                                        name=name,
+                                        force_legs=(keep["in"], keep["out"]))
+            if (replan and "error" not in replan
+                    and (replan.get("plan") or {}).get("weeks")
+                    and list(replan["plan"]["weeks"][0]["in"]) == list(keep["in"])
+                    and list(replan["plan"]["weeks"][0]["out"]) == list(keep["out"])):
+                results[name] = replan
+            else:
+                # The committed move no longer fits (price moved, pool changed,
+                # budget) - the fresh solve is the only executable plan, so the
+                # lock moves with it rather than holding an impossible move.
+                print(f"[plan] {name}: committed move cannot be re-solved "
+                      f"({(replan or {}).get('error') or 'solve mismatch'}) - "
+                      "the fresh plan stands and the lock moves with it")
+        wk = results[name]["plan"]["weeks"][0]
+        committed[name] = {"gw": gws[0], "in": list(wk["in"]),
+                           "out": list(wk["out"])}
     if not a.offline:
         pipeline.write_state("committed", committed)
 

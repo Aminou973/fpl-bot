@@ -44,11 +44,14 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
          rank_alpha=0.0, template_tilt=0.0, cap_tilt=0.0, elite_weight=0.0,
          chips_tc_bb=False, chip_windows=None, chips_used=(),
          price_matrix=None, sell_price=None, price_gamma=0.0,
-         max_moves=None):
+         max_moves=None, force_legs=None):
     """Return the optimal transfer plan over `gws` starting from `current`.
 
     free_transfers: how many you have available for the first gameweek.
     bank: money in the bank, in millions.
+    force_legs: (in, out) element ids pinned as week-0 transfers. A re-plan
+        honouring a move the week is already committed to solves around these
+        legs instead of choosing fresh ones; infeasible if they no longer fit.
     allow_hits: when False, no gameweek may exceed its free-transfer allowance.
     scenarios: (S, n, G) point samples aligned with `pool`'s rows, from
         fplbot.scenarios.scenario_set. With risk_lambda > 0 the objective
@@ -236,6 +239,21 @@ def plan(pool, gws, current, free_transfers=1, bank=0.0, budget=None,
                 add({X(i, g): 1, X(i, g - 1): -1, IN(i, g): -1, OUT(i, g): 1}, 0, 0)
             add({IN(i, g): 1, X(i, g): -1}, -np.inf, 0)      # can't buy and not own
             add({OUT(i, g): 1, X(i, g): 1}, -np.inf, 1)      # can't sell and still own
+
+        # A re-plan that must honour a decision the week is already committed
+        # to (apply_lock "held"): pin those legs for week 0 so the squad, the
+        # lineup and the captain are re-solved AROUND them. Overwriting only
+        # the in/out lists on a solve that chose other moves is what wrote the
+        # GW5 ghost payload - players the legs never bought, a squad_after the
+        # legs never produce - into last_plan.json for the submitter to choke on.
+        if g == 0 and force_legs:
+            force_in, force_out = force_legs
+            for pid in force_in:
+                if pid in idx:
+                    add({IN(idx[pid], 0): 1}, 1, 1)
+            for pid in force_out:
+                if pid in idx:
+                    add({OUT(idx[pid], 0): 1}, 1, 1)
 
         # A ceiling on moves per gameweek. The hit maths alone will happily
         # price a five-move week, and with auto-submission on that is five moves

@@ -275,8 +275,14 @@ def _hold_for_better(calendar, team, chip, now_gw, label):
     return True
 
 
-def plan_team(ctx, cfg_team, state, pool=None, name=None):
-    """Transfer plan for one team, honouring its free transfers and hit policy."""
+def plan_team(ctx, cfg_team, state, pool=None, name=None, force_legs=None):
+    """Transfer plan for one team, honouring its free transfers and hit policy.
+
+    force_legs: (in, out) element ids the solver must spend this week's moves
+    on - the apply_lock re-plan that honours a move the week is already
+    committed to. The ids are kept through the pool prune, so a committed
+    arrival the prune would otherwise drop stays buyable.
+    """
     df, gws = ctx["df"], ctx["gws"]
     kw = team_kwargs(df, cfg_team)
     tuned_hit = float(cfg_team.get("hit_threshold", 6))
@@ -299,7 +305,9 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
         return {"error": "could not verify your live squad this run",
                "squad_source": squad_source}
     if pool is None:
-        pool = optimize.prune(df, gws, always=squad + list(kw.get("locked", [])))
+        f_in, f_out = force_legs or ((), ())
+        pool = optimize.prune(df, gws, always=squad + list(kw.get("locked", []))
+                              + [int(i) for i in f_in] + [int(i) for i in f_out])
     # engine 1b: the elite template's ownership share, blended into the tilt
     # by the planner when the team config sets rank.elite_weight. The column
     # only appears when a fresh elite sample exists - without one the plan
@@ -392,10 +400,13 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
     # built their kwargs, so a tuned risk_lambda is never clobbered by the
     # config-driven scenario block above
     kw, tuned_hit, tuned_applied = apply_tuning(kw, cfg_team, tuned_hit)
+    # every solve whose week 0 becomes the executed plan must carry the pin;
+    # a re-solve that drops it hands back exactly the mixed plan it was for
+    force = {} if force_legs is None else {"force_legs": force_legs}
     p, info = planner.plan_with_hit_policy(
         pool, gws, squad,
         hit_threshold=tuned_hit,
-        free_transfers=ft, bank=float(state.get("bank", 0.0)), **kw)
+        free_transfers=ft, bank=float(state.get("bank", 0.0)), **force, **kw)
     if p is None:
         return {"error": info.get("advice", "planner infeasible") if info
                 else "planner infeasible"}
@@ -441,7 +452,8 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
         kw["chip_windows"] = {**kw["chip_windows"], fired: []}
         p, info = planner.plan_with_hit_policy(
             pool, gws, squad, hit_threshold=tuned_hit,
-            free_transfers=ft, bank=float(state.get("bank", 0.0)), **kw)
+            free_transfers=ft, bank=float(state.get("bank", 0.0)),
+            **force, **kw)
         if p is None:
             return {"error": "planner infeasible after rejecting "
                              f"the {fired} chip"}
@@ -480,7 +492,8 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
         kw_nochip = {**kw, "chip_windows": {"3xc": [], "bboost": []}}
         p0, _i0 = planner.plan_with_hit_policy(
             pool, gws, squad, hit_threshold=tuned_hit,
-            free_transfers=ft, bank=float(state.get("bank", 0.0)), **kw_nochip)
+            free_transfers=ft, bank=float(state.get("bank", 0.0)),
+            **force, **kw_nochip)
         if p0 is not None:
             base_for_branches = p0
     try:
@@ -564,7 +577,8 @@ def plan_team(ctx, cfg_team, state, pool=None, name=None):
             tier_a_gain = None
             p2, info2 = planner.plan_with_hit_policy(
                 pool, gws, squad, hit_threshold=tuned_hit,
-                free_transfers=ft, bank=float(state.get("bank", 0.0)), **kw)
+                free_transfers=ft, bank=float(state.get("bank", 0.0)),
+                **force, **kw)
             if p2 is not None:
                 p, info = p2, info2
                 planner.attach_vice(df, p["weeks"], cap_own)

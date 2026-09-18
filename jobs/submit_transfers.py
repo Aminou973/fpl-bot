@@ -33,8 +33,12 @@ if hasattr(sys.stdout, "reconfigure"):
 
 from fplbot import api, notify, pipeline                      # noqa: E402
 from fplbot.notify import esc                                 # noqa: E402
+from fplbot.optimize import POS_MIN                           # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
+
+# bootstrap element_type codes -> the names POS_MIN speaks
+POSITION_OF = {1: "GKP", 2: "DEF", 3: "MID", 4: "FWD"}
 
 # chips that ride ON the lineup write rather than the transfers endpoint ——
 # triple captain and bench boost do not change the squad, so they activate
@@ -115,6 +119,30 @@ def store_secret(name: str, value: str) -> bool:
         return False
 
 
+def refresh_with_retry(rt, attempts=3, wait=8.0):
+    """refresh_tokens with a short retry.
+
+    The token endpoint intermittently answers HTTP 400 invalid_grant to a
+    token that a retry a few seconds later accepts (2026-09-17: the same
+    stored token was refused at 12:06 and 12:08 and accepted at 12:09 with
+    nothing re-armed in between — a dead token does not resurrect itself, a
+    transient one does). A failed refresh rotates nothing, so retrying is
+    free; a genuinely dead token just fails attempts times.
+    """
+    import time
+    last = None
+    for attempt in range(1, attempts + 1):
+        try:
+            return api.refresh_tokens(rt)
+        except RuntimeError as e:
+            last = e
+            if attempt < attempts:
+                print(f"[auth] refresh attempt {attempt} failed ({e}) — "
+                      f"retrying in {wait:.0f}s")
+                time.sleep(wait)
+    raise last
+
+
 def stale_plan_note(entry, mt):
     """Why the plan must not be acted on, or None when it may.
 
@@ -134,6 +162,138 @@ def stale_plan_note(entry, mt):
                 f"transfers happened after the plan was generated; "
                 f"regenerate the plan before submitting")
     return None
+
+
+def submit_head(apply_mode, results):
+    """Headline for the summary alert: what this run ACTUALLY did.
+
+    The old headline said "lineup applied" whenever --apply was on, even when
+    every team was skipped or refused — a dead login produced an "applied"
+    message with two warnings under it. Say what happened instead. A
+    lineup-failed team is NOT "nothing applied": its transfers landed on FPL
+    (GW4's half-applied squad), which is the state the owner most needs to
+    react to, so it gets its own headline rather than a soft one.
+    """
+    if not apply_mode:
+        return "dry run"
+    n = len(results)
+    ok = sum(v.get("status") in ("applied", "already-applied")
+             for v in results.values())
+    if ok == n:
+        if all(v.get("status") == "already-applied" for v in results.values()):
+            return "lineup already in place"
+        return "lineup applied"
+    if ok:
+        return f"lineup partially applied ({ok}/{n})"
+    if any(v.get("status") == "lineup-failed" for v in results.values()):
+        return "transfers landed but the lineup write FAILED"
+    if any(v.get("status") in ("transfers-failed", "chip-failed")
+           for v in results.values()):
+        return "submission failed"
+    return "nothing applied"
+
+
+def submission_plan(entry, mt, boot_el_cost, boot_el_pos, names):
+    """The transfer legs a plan needs, the squad they produce, and everything
+    that must refuse it — computed BEFORE anything is sent.
+
+    The order invariant that cost GW4 half a squad lives here: the payload is
+    validated against the squad the legs would actually produce, so a caller
+    that sends transfers only when ``issues`` is empty can never make a move
+    the lineup write would later reject. ``issues`` empty means the legs may
+    be sent and ``post`` is the only legal lineup payload.
+    Returns (legs, post, issues).
+    """
+    owned = {p["element"]: p for p in mt["picks"]}
+    legs = []
+    issues = []
+    # The planner emits `in` and `out` in pool-row order, which says nothing
+    # about position - zipping them raw can offer FPL a keeper for a
+    # midfielder and get the whole batch rejected. The squad's position
+    # counts are fixed every week, so the two lists always share a position
+    # multiset: sorting both by position makes the pairing legal.
+    pos_key = lambda e: (boot_el_pos.get(e, 0), e)          # noqa: E731
+    ins = sorted(entry["in"], key=pos_key)
+    outs = sorted(entry["out"], key=pos_key)
+    if [boot_el_pos.get(e) for e in ins] != [boot_el_pos.get(e) for e in outs]:
+        issues.append("transfer in/out positions do not match - refusing to "
+                      "send a batch FPL would reject")
+    else:
+        for el_in, el_out in zip(ins, outs):
+            if el_in in owned:
+                print(f"  transfer {names.get(el_in, el_in)} already owned — "
+                      f"skipped")
+                continue
+            if el_out not in owned:
+                print(f"  cannot sell {names.get(el_out, el_out)} — not owned "
+                      f"(already sold?) — skipped")
+                continue
+            legs.append({"element_in": el_in, "element_out": el_out,
+                         "purchase_price": boot_el_cost[el_in],
+                         "selling_price": owned[el_out].get("selling_price", 0)})
+    # the squad the legs above will actually produce; the lineup write is
+    # only legal for exactly these 15 players, so anything else in the
+    # payload is refused BEFORE a transfer can land (GW4's ghost)
+    post = ((owned_now(mt) - {l["element_out"] for l in legs})
+            | {l["element_in"] for l in legs})
+    issues += payload_issues(entry["picks_payload"], post, names, boot_el_pos)
+    return legs, post, issues
+
+
+def payload_issues(payload, expected, names=None, positions=None):
+    """Structural and squad-membership problems with the plan's picks payload.
+
+    The my-team endpoint accepts a lineup built only from players the squad
+    holds, so a payload naming a player the squad will not hold is rejected
+    AFTER any transfers have already landed - GW4 2026-09-11: the payload
+    named Lacroix, whom the squad never held, so Porro's transfer was made
+    and THEN the write was refused. ``expected`` is the squad the transfer
+    legs will actually produce; a payload that does not match it exactly is
+    refused before a single transfer is sent.
+    """
+    def nm(i):
+        return (names or {}).get(i, str(i))         # noqa: E731
+
+    issues = []
+    if len(payload) != 15:
+        issues.append(f"payload holds {len(payload)} players, need 15")
+    if sorted(int(p["position"]) for p in payload) != list(
+            range(1, len(payload) + 1)):
+        issues.append("positions are not 1..N")
+    els = [int(p["element"]) for p in payload]
+    if len(set(els)) != len(els):
+        issues.append("duplicate players in the payload")
+    caps = [p for p in payload if p.get("is_captain")]
+    if len(caps) != 1:
+        issues.append(f"{len(caps)} captains in the payload")
+    missing = sorted(set(els) - set(expected))
+    extra = sorted(set(expected) - set(els))
+    if missing:
+        issues.append("names players the squad will not hold: "
+                      + ", ".join(nm(i) for i in missing))
+    if extra:
+        issues.append("leaves squad players out: "
+                      + ", ".join(nm(i) for i in extra))
+    # XI legality: FPL's my-team write expects slots 1-11 to be a legal XI and
+    # slot 12 to be the substitute keeper, so a formation-broken payload is
+    # rejected only AFTER the transfers have landed - check it here, when it
+    # is still free to refuse. Needs the element->position map, with every
+    # element known: a partial map must skip, not refuse.
+    if positions and len(payload) == 15 and not issues:
+        raw = [positions.get(int(p["element"])) for p in
+               sorted(payload, key=lambda p: p["position"])]
+        if all(raw):
+            pos = [POSITION_OF.get(x, x) for x in raw]
+            xi, bench = pos[:11], pos[11:]
+            for p, (lo, hi) in POS_MIN.items():
+                have = sum(x == p for x in xi)
+                if not lo <= have <= hi:
+                    issues.append(f"XI has {have} {p}s, formation allows "
+                                  f"{lo}-{hi}")
+            if bench[0] != "GKP":
+                issues.append("the first bench slot (position 12) must be the "
+                              "substitute keeper")
+    return issues
 
 
 def snapshot_of(entry_id, name, team_id, gw, mt):
@@ -231,7 +391,7 @@ def main():
     unstored = set(auth_state.get("unstored", []))
     for i, (secret_name, rt) in enumerate(tokens, 1):
         try:
-            tok = api.refresh_tokens(rt)
+            tok = refresh_with_retry(rt)
         except RuntimeError as e:
             print(f"[auth] token {i} ({secret_name}) refresh FAILED: {e} — "
                   f"re-run jobs/fpl_login.py for that account")
@@ -403,39 +563,22 @@ def main():
                                          f"not arming it again"}
                 print(f"  ✘ refusing: {chip} already spent")
                 continue
+        # the my-team endpoint only writes a lineup from players already in
+        # the squad — transfers go through /transfers/ first, priced with the
+        # in-player's current cost and the out-player's selling price.
+        # submission_plan computes the legs AND validates the plan's payload
+        # against the squad they would produce, so every refusal below
+        # happens BEFORE a transfer can land (GW4's half-applied squad).
+        legs, post, issues = submission_plan(
+            entry, mt, boot_el_cost, boot_el_pos, names)
+        if issues:
+            note = "refusing before any transfer: " + "; ".join(issues)
+            results[name] = {"status": "refused", "gw": gw, "note": note}
+            print(f"  ✘ refusing: {note}")
+            continue
         if not a.apply:
             results[name] = {"status": "dry-run"}
             continue
-        # the my-team endpoint only writes a lineup from players already in
-        # the squad — transfers go through /transfers/ first, priced with the
-        # in-player's current cost and the out-player's selling price
-        owned = {p["element"]: p for p in mt["picks"]}
-        legs = []
-        # The planner emits `in` and `out` in pool-row order, which says nothing
-        # about position - zipping them raw can offer FPL a keeper for a
-        # midfielder and get the whole batch rejected. The squad's position
-        # counts are fixed every week, so the two lists always share a position
-        # multiset: sorting both by position makes the pairing legal.
-        pos_key = lambda e: (boot_el_pos.get(e, 0), e)          # noqa: E731
-        ins = sorted(entry["in"], key=pos_key)
-        outs = sorted(entry["out"], key=pos_key)
-        if [boot_el_pos.get(e) for e in ins] != [boot_el_pos.get(e) for e in outs]:
-            results[name] = {"status": "refused", "gw": gw,
-                             "note": "transfer in/out positions do not match - "
-                                     "refusing to send a batch FPL would reject"}
-            print("  ✘ refusing: in/out positions do not match")
-            continue
-        for el_in, el_out in zip(ins, outs):
-            if el_in in owned:
-                print(f"  transfer {names.get(el_in, el_in)} already owned — skipped")
-                continue
-            if el_out not in owned:
-                print(f"  cannot sell {names.get(el_out, el_out)} — not owned "
-                      f"(already sold?) — skipped")
-                continue
-            legs.append({"element_in": el_in, "element_out": el_out,
-                         "purchase_price": boot_el_cost[el_in],
-                         "selling_price": owned[el_out].get("selling_price", 0)})
         if legs or chip:
             if chip and chip not in PICK_CHIPS:
                 # wildcard (and a future free hit): the chip and its whole
@@ -528,7 +671,7 @@ def main():
         body = "\n".join(f"{marks.get(v['status'], '•')} <b>{esc(k)}</b> — "
                          f"{esc(v.get('note') or v['status'])}"
                          for k, v in results.items())
-        notify.send(f"🤖 <b>GW{gw} {'lineup applied' if a.apply else 'dry run'}</b>\n\n"
+        notify.send(f"🤖 <b>GW{gw} {esc(submit_head(a.apply, results))}</b>\n\n"
                     + body, kind="alert")
     played = {k: v["chip"] for k, v in results.items()
               if v.get("status") == "applied" and v.get("chip")}
