@@ -2,19 +2,19 @@
  "sources": {
   "ffscout": {
    "ok": true,
-   "ts": "2026-09-28T07:01:25.127102+00:00",
+   "ts": "2026-09-28T15:35:15.784158+00:00",
    "n": 0
   },
   "bbc": {
    "ok": true,
-   "ts": "2026-09-28T07:01:25.127102+00:00",
+   "ts": "2026-09-28T15:35:15.784158+00:00",
    "n": 6
   }
  },
  "etag": {
   "ffscout": {
-   "etag": "\"d548832edc4efe04394d0eb857521b1b\"",
-   "last_modified": "Mon, 28 Sep 2026 06:04:05 GMT"
+   "etag": "\"bc22f325abbd5eb619cbf7eca339d37f\"",
+   "last_modified": "Mon, 28 Sep 2026 13:50:59 GMT"
   },
   "bbc": {
    "etag": null,
@@ -22,11 +22,11 @@
   }
  },
  "failures": {
-  "physioroom": 2,
+  "physioroom": 0,
   "ffscout": 0,
   "bbc": 0
  },
  "skip_until": {
-  "physioroom": "2026-09-27T22:56:06.892644+00:00"
+  "physioroom": "2026-09-29T15:35:17.408947+00:00"
  }
 }
