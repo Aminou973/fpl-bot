@@ -38,7 +38,7 @@
   },
   {
    "elite": 4.0,
-   "field": 22.4,
+   "field": 22.3,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -73,7 +73,7 @@
    "team": "MCI"
   }
  ],
- "generated": "2026-10-01T15:41:17+00:00",
+ "generated": "2026-10-01T20:32:49+00:00",
  "gw": 6,
  "gw_read": 5,
  "league": "Overall (top 50)",
@@ -102,7 +102,7 @@
   },
   {
    "elite": 70.0,
-   "field": 28.9,
+   "field": 29.0,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -120,15 +120,6 @@
   },
   {
    "elite": 54.0,
-   "field": 16.6,
-   "id": 229,
-   "name": "Tarkowski",
-   "pos": "DEF",
-   "price": 6.2,
-   "team": "EVE"
-  },
-  {
-   "elite": 54.0,
    "field": 42.3,
    "id": 1,
    "name": "Raya",
@@ -138,6 +129,15 @@
   },
   {
    "elite": 52.0,
+   "field": 16.6,
+   "id": 229,
+   "name": "Tarkowski",
+   "pos": "DEF",
+   "price": 6.2,
+   "team": "EVE"
+  },
+  {
+   "elite": 50.0,
    "field": 17.3,
    "id": 449,
    "name": "Hall",
@@ -156,6 +156,15 @@
   },
   {
    "elite": 44.0,
+   "field": 40.5,
+   "id": 40,
+   "name": "Rogers",
+   "pos": "MID",
+   "price": 7.7,
+   "team": "CHE"
+  },
+  {
+   "elite": 44.0,
    "field": 26.8,
    "id": 391,
    "name": "Gvardiol",
@@ -171,15 +180,6 @@
    "pos": "DEF",
    "price": 5.0,
    "team": "BHA"
-  },
-  {
-   "elite": 42.0,
-   "field": 40.5,
-   "id": 40,
-   "name": "Rogers",
-   "pos": "MID",
-   "price": 7.7,
-   "team": "CHE"
   },
   {
    "elite": 40.0,
@@ -210,7 +210,7 @@
   },
   {
    "elite": 34.0,
-   "field": 22.4,
+   "field": 22.3,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -218,7 +218,7 @@
    "team": "LIV"
   },
   {
-   "elite": 30.0,
+   "elite": 32.0,
    "field": 21.6,
    "id": 109,
    "name": "Verbruggen",
@@ -254,15 +254,6 @@
    "team": "NEW"
   },
   {
-   "elite": 24.0,
-   "field": 11.5,
-   "id": 94,
-   "name": "Schade",
-   "pos": "MID",
-   "price": 6.2,
-   "team": "BRE"
-  },
-  {
    "elite": 22.0,
    "field": 8.7,
    "id": 469,
@@ -270,6 +261,15 @@
    "pos": "DEF",
    "price": 5.0,
    "team": "NFO"
+  },
+  {
+   "elite": 22.0,
+   "field": 11.6,
+   "id": 94,
+   "name": "Schade",
+   "pos": "MID",
+   "price": 6.2,
+   "team": "BRE"
   },
   {
    "elite": 20.0,
