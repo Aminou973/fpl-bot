@@ -2,20 +2,19 @@
  "sources": {
   "ffscout": {
    "ok": true,
-   "ts": "2026-10-04T21:34:55.910960+00:00",
-   "n": 0,
-   "not_modified": true
+   "ts": "2026-10-05T01:00:54.165358+00:00",
+   "n": 0
   },
   "bbc": {
    "ok": true,
-   "ts": "2026-10-04T21:34:55.910960+00:00",
+   "ts": "2026-10-05T01:00:54.165358+00:00",
    "n": 1
   }
  },
  "etag": {
   "ffscout": {
-   "etag": "\"b579052b2b653dea78ccb9fff4d5f2b5\"",
-   "last_modified": "Sun, 04 Oct 2026 12:40:34 GMT"
+   "etag": "\"00668c4bd5362012d8d8dfaa8589efc9\"",
+   "last_modified": "Mon, 05 Oct 2026 00:35:38 GMT"
   },
   "bbc": {
    "etag": null,
