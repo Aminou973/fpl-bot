@@ -80,9 +80,9 @@
    }
   },
   "6": {
-   "at": "2026-10-09T09:38:00.466480+00:00",
+   "at": "2026-10-09T16:35:40.422902+00:00",
    "deadline": "2026-10-10T10:00:00Z",
-   "mode": "apply",
+   "mode": "dry-run",
    "teams": {
     "Minoux_41": {
      "note": "entry 4896428 is on none of the logged-in accounts",
@@ -90,8 +90,7 @@
     },
     "Minoux_69": {
      "gw": 6,
-     "note": "2 transfer(s) with 0 free left would cost \u22128 pts \u2014 the bot does not spend points on its own. Make these by hand if you want them.",
-     "status": "refused"
+     "status": "already-applied"
     }
    }
   }
