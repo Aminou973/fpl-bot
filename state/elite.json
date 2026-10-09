@@ -2,7 +2,7 @@
  "captains": [
   {
    "elite": 74.0,
-   "field": 74.0,
+   "field": 74.1,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -20,7 +20,7 @@
   },
   {
    "elite": 4.0,
-   "field": 24.6,
+   "field": 24.3,
    "id": 154,
    "name": "Palmer",
    "pos": "MID",
@@ -29,7 +29,7 @@
   },
   {
    "elite": 4.0,
-   "field": 38.2,
+   "field": 38.1,
    "id": 426,
    "name": "B.Fernandes",
    "pos": "MID",
@@ -38,7 +38,7 @@
   },
   {
    "elite": 4.0,
-   "field": 21.4,
+   "field": 20.3,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -47,7 +47,7 @@
   },
   {
    "elite": 2.0,
-   "field": 5.8,
+   "field": 5.7,
    "id": 236,
    "name": "Dewsbury-Hall",
    "pos": "MID",
@@ -56,7 +56,7 @@
   },
   {
    "elite": 2.0,
-   "field": 17.4,
+   "field": 17.8,
    "id": 229,
    "name": "Tarkowski",
    "pos": "DEF",
@@ -65,7 +65,7 @@
   },
   {
    "elite": 2.0,
-   "field": 28.5,
+   "field": 28.6,
    "id": 399,
    "name": "Cherki",
    "pos": "MID",
@@ -73,7 +73,7 @@
    "team": "MCI"
   }
  ],
- "generated": "2026-10-09T09:38:33+00:00",
+ "generated": "2026-10-09T16:36:20+00:00",
  "gw": 6,
  "gw_read": 5,
  "league": "Overall (top 50)",
@@ -84,7 +84,7 @@
  "template": [
   {
    "elite": 84.0,
-   "field": 74.0,
+   "field": 74.1,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -93,7 +93,7 @@
   },
   {
    "elite": 74.0,
-   "field": 50.8,
+   "field": 50.9,
    "id": 8,
    "name": "Calafiori",
    "pos": "DEF",
@@ -102,7 +102,7 @@
   },
   {
    "elite": 70.0,
-   "field": 31.4,
+   "field": 32.6,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -120,7 +120,7 @@
   },
   {
    "elite": 54.0,
-   "field": 42.7,
+   "field": 43.0,
    "id": 1,
    "name": "Raya",
    "pos": "GKP",
@@ -129,7 +129,7 @@
   },
   {
    "elite": 52.0,
-   "field": 17.4,
+   "field": 17.8,
    "id": 229,
    "name": "Tarkowski",
    "pos": "DEF",
@@ -138,7 +138,7 @@
   },
   {
    "elite": 50.0,
-   "field": 18.5,
+   "field": 19.1,
    "id": 449,
    "name": "Hall",
    "pos": "DEF",
@@ -147,7 +147,7 @@
   },
   {
    "elite": 46.0,
-   "field": 24.3,
+   "field": 24.0,
    "id": 346,
    "name": "Calvert-Lewin",
    "pos": "FWD",
@@ -156,7 +156,7 @@
   },
   {
    "elite": 44.0,
-   "field": 41.4,
+   "field": 41.8,
    "id": 40,
    "name": "Rogers",
    "pos": "MID",
@@ -174,7 +174,7 @@
   },
   {
    "elite": 44.0,
-   "field": 28.9,
+   "field": 29.5,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -192,7 +192,7 @@
   },
   {
    "elite": 40.0,
-   "field": 24.6,
+   "field": 24.3,
    "id": 154,
    "name": "Palmer",
    "pos": "MID",
@@ -201,7 +201,7 @@
   },
   {
    "elite": 36.0,
-   "field": 14.6,
+   "field": 14.3,
    "id": 397,
    "name": "Semenyo",
    "pos": "MID",
@@ -210,7 +210,7 @@
   },
   {
    "elite": 34.0,
-   "field": 21.4,
+   "field": 20.3,
    "id": 379,
    "name": "Isak",
    "pos": "FWD",
@@ -228,7 +228,7 @@
   },
   {
    "elite": 28.0,
-   "field": 18.6,
+   "field": 18.3,
    "id": 31,
    "name": "Konsa",
    "pos": "DEF",
@@ -237,7 +237,7 @@
   },
   {
    "elite": 28.0,
-   "field": 31.9,
+   "field": 31.5,
    "id": 368,
    "name": "Szoboszlai",
    "pos": "MID",
@@ -246,7 +246,7 @@
   },
   {
    "elite": 26.0,
-   "field": 6.5,
+   "field": 6.9,
    "id": 453,
    "name": "Barnes",
    "pos": "MID",
@@ -255,7 +255,7 @@
   },
   {
    "elite": 22.0,
-   "field": 8.5,
+   "field": 8.4,
    "id": 469,
    "name": "N.Williams",
    "pos": "DEF",
@@ -264,7 +264,7 @@
   },
   {
    "elite": 22.0,
-   "field": 13.2,
+   "field": 13.9,
    "id": 94,
    "name": "Schade",
    "pos": "MID",
@@ -273,7 +273,7 @@
   },
   {
    "elite": 20.0,
-   "field": 18.9,
+   "field": 19.0,
    "id": 464,
    "name": "Wissa",
    "pos": "FWD",
@@ -282,7 +282,7 @@
   },
   {
    "elite": 20.0,
-   "field": 8.5,
+   "field": 8.6,
    "id": 249,
    "name": "Barry",
    "pos": "FWD",
@@ -291,7 +291,7 @@
   },
   {
    "elite": 18.0,
-   "field": 16.8,
+   "field": 16.6,
    "id": 496,
    "name": "Kinsky",
    "pos": "GKP",
@@ -300,7 +300,7 @@
   },
   {
    "elite": 16.0,
-   "field": 28.5,
+   "field": 28.6,
    "id": 399,
    "name": "Cherki",
    "pos": "MID",
