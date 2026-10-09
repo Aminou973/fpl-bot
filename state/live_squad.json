@@ -2,7 +2,7 @@
  "4894622": {
   "bank_raw": 3,
   "entry": 4894622,
-  "fetched_at": "2026-10-09T16:35:40.422233+00:00",
+  "fetched_at": "2026-10-09T16:39:08.027909+00:00",
   "free_transfers": 0,
   "gw": 6,
   "name": "Minoux_69",
@@ -105,9 +105,9 @@
  "4896428": {
   "bank_raw": 10,
   "entry": 4896428,
-  "fetched_at": "2026-09-18T10:09:02.849922+00:00",
-  "free_transfers": 0,
-  "gw": 5,
+  "fetched_at": "2026-10-09T16:39:08.243858+00:00",
+  "free_transfers": 1,
+  "gw": 6,
   "name": "Minoux_41",
   "picks": [
    226,
@@ -140,7 +140,7 @@
    {
     "element": 229,
     "purchase_price": 60,
-    "selling_price": 60
+    "selling_price": 61
    },
    {
     "element": 388,
@@ -170,7 +170,7 @@
    {
     "element": 368,
     "purchase_price": 70,
-    "selling_price": 70
+    "selling_price": 69
    },
    {
     "element": 155,
