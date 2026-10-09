@@ -2,32 +2,32 @@
  "4894622": {
   "bank_raw": 3,
   "entry": 4894622,
-  "fetched_at": "2026-10-09T02:34:14.725696+00:00",
-  "free_transfers": 2,
+  "fetched_at": "2026-10-09T09:38:00.465823+00:00",
+  "free_transfers": 0,
   "gw": 6,
   "name": "Minoux_69",
   "picks": [
    1,
-   40,
-   88,
-   109,
-   124,
-   165,
-   212,
    229,
-   259,
-   346,
-   368,
    388,
-   411,
+   498,
+   88,
    480,
-   498
+   40,
+   368,
+   124,
+   411,
+   165,
+   109,
+   259,
+   212,
+   346
   ],
   "picks_detail": [
    {
-    "element": 109,
-    "purchase_price": 45,
-    "selling_price": 45
+    "element": 1,
+    "purchase_price": 60,
+    "selling_price": 60
    },
    {
     "element": 229,
@@ -40,14 +40,14 @@
     "selling_price": 60
    },
    {
+    "element": 498,
+    "purchase_price": 60,
+    "selling_price": 58
+   },
+   {
     "element": 88,
     "purchase_price": 46,
     "selling_price": 46
-   },
-   {
-    "element": 259,
-    "purchase_price": 40,
-    "selling_price": 40
    },
    {
     "element": 480,
@@ -55,39 +55,9 @@
     "selling_price": 80
    },
    {
-    "element": 13,
-    "purchase_price": 75,
-    "selling_price": 74
-   },
-   {
-    "element": 481,
-    "purchase_price": 65,
-    "selling_price": 63
-   },
-   {
-    "element": 212,
-    "purchase_price": 45,
-    "selling_price": 44
-   },
-   {
-    "element": 165,
-    "purchase_price": 76,
-    "selling_price": 76
-   },
-   {
-    "element": 346,
-    "purchase_price": 60,
-    "selling_price": 60
-   },
-   {
-    "element": 1,
-    "purchase_price": 60,
-    "selling_price": 60
-   },
-   {
-    "element": 498,
-    "purchase_price": 60,
-    "selling_price": 58
+    "element": 40,
+    "purchase_price": 78,
+    "selling_price": 78
    },
    {
     "element": 368,
@@ -95,9 +65,39 @@
     "selling_price": 69
    },
    {
+    "element": 124,
+    "purchase_price": 59,
+    "selling_price": 59
+   },
+   {
     "element": 411,
     "purchase_price": 155,
     "selling_price": 155
+   },
+   {
+    "element": 165,
+    "purchase_price": 76,
+    "selling_price": 76
+   },
+   {
+    "element": 109,
+    "purchase_price": 45,
+    "selling_price": 45
+   },
+   {
+    "element": 259,
+    "purchase_price": 40,
+    "selling_price": 40
+   },
+   {
+    "element": 212,
+    "purchase_price": 45,
+    "selling_price": 44
+   },
+   {
+    "element": 346,
+    "purchase_price": 60,
+    "selling_price": 60
    }
   ],
   "team_id": 4894622
