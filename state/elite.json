@@ -2,7 +2,7 @@
  "captains": [
   {
    "elite": 34.0,
-   "field": 24.5,
+   "field": 24.6,
    "id": 154,
    "name": "Palmer",
    "pos": "MID",
@@ -10,8 +10,8 @@
    "team": "CHE"
   },
   {
-   "elite": 20.0,
-   "field": 67.3,
+   "elite": 18.0,
+   "field": 67.4,
    "id": 165,
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
@@ -29,7 +29,7 @@
   },
   {
    "elite": 10.0,
-   "field": 43.3,
+   "field": 43.4,
    "id": 40,
    "name": "Rogers",
    "pos": "MID",
@@ -38,7 +38,7 @@
   },
   {
    "elite": 6.0,
-   "field": 36.8,
+   "field": 36.7,
    "id": 426,
    "name": "B.Fernandes",
    "pos": "MID",
@@ -56,7 +56,7 @@
   },
   {
    "elite": 4.0,
-   "field": 36.7,
+   "field": 36.9,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -65,7 +65,7 @@
   },
   {
    "elite": 2.0,
-   "field": 32.3,
+   "field": 32.5,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -73,7 +73,7 @@
    "team": "BHA"
   }
  ],
- "generated": "2026-10-11T02:12:16+00:00",
+ "generated": "2026-10-11T09:19:14+00:00",
  "gw": 7,
  "gw_read": 6,
  "league": "Overall (top 50)",
@@ -84,7 +84,7 @@
  "template": [
   {
    "elite": 98.0,
-   "field": 67.3,
+   "field": 67.4,
    "id": 165,
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
@@ -101,17 +101,8 @@
    "team": "ARS"
   },
   {
-   "elite": 96.0,
-   "field": 74.6,
-   "id": 411,
-   "name": "Haaland",
-   "pos": "FWD",
-   "price": 15.6,
-   "team": "MCI"
-  },
-  {
    "elite": 94.0,
-   "field": 32.3,
+   "field": 32.5,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -120,7 +111,16 @@
   },
   {
    "elite": 94.0,
-   "field": 36.7,
+   "field": 74.6,
+   "id": 411,
+   "name": "Haaland",
+   "pos": "FWD",
+   "price": 15.6,
+   "team": "MCI"
+  },
+  {
+   "elite": 92.0,
+   "field": 36.9,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -129,7 +129,7 @@
   },
   {
    "elite": 86.0,
-   "field": 43.3,
+   "field": 43.4,
    "id": 40,
    "name": "Rogers",
    "pos": "MID",
@@ -138,7 +138,7 @@
   },
   {
    "elite": 68.0,
-   "field": 24.5,
+   "field": 24.6,
    "id": 154,
    "name": "Palmer",
    "pos": "MID",
@@ -155,7 +155,7 @@
    "team": "BHA"
   },
   {
-   "elite": 60.0,
+   "elite": 58.0,
    "field": 17.3,
    "id": 31,
    "name": "Konsa",
@@ -173,7 +173,7 @@
    "team": "ARS"
   },
   {
-   "elite": 46.0,
+   "elite": 44.0,
    "field": 20.8,
    "id": 449,
    "name": "Hall",
@@ -183,7 +183,7 @@
   },
   {
    "elite": 42.0,
-   "field": 16.0,
+   "field": 15.9,
    "id": 94,
    "name": "Schade",
    "pos": "MID",
@@ -200,7 +200,7 @@
    "team": "LEE"
   },
   {
-   "elite": 28.0,
+   "elite": 30.0,
    "field": 19.9,
    "id": 427,
    "name": "Mbeumo",
@@ -227,22 +227,13 @@
    "team": "TOT"
   },
   {
-   "elite": 26.0,
+   "elite": 24.0,
    "field": 27.6,
    "id": 391,
    "name": "Gvardiol",
    "pos": "DEF",
    "price": 5.8,
    "team": "MCI"
-  },
-  {
-   "elite": 22.0,
-   "field": 7.3,
-   "id": 569,
-   "name": "Gonzalo",
-   "pos": "FWD",
-   "price": 6.1,
-   "team": "FUL"
   },
   {
    "elite": 20.0,
@@ -254,22 +245,31 @@
    "team": "LIV"
   },
   {
-   "elite": 18.0,
-   "field": 20.3,
-   "id": 15,
-   "name": "\u00d8degaard",
-   "pos": "MID",
-   "price": 6.8,
-   "team": "ARS"
+   "elite": 20.0,
+   "field": 7.3,
+   "id": 569,
+   "name": "Gonzalo",
+   "pos": "FWD",
+   "price": 6.1,
+   "team": "FUL"
   },
   {
-   "elite": 18.0,
+   "elite": 20.0,
    "field": 8.6,
    "id": 249,
    "name": "Barry",
    "pos": "FWD",
    "price": 5.7,
    "team": "EVE"
+  },
+  {
+   "elite": 18.0,
+   "field": 20.2,
+   "id": 15,
+   "name": "\u00d8degaard",
+   "pos": "MID",
+   "price": 6.8,
+   "team": "ARS"
   },
   {
    "elite": 18.0,
@@ -290,6 +290,15 @@
    "team": "TOT"
   },
   {
+   "elite": 16.0,
+   "field": 13.5,
+   "id": 397,
+   "name": "Semenyo",
+   "pos": "MID",
+   "price": 8.4,
+   "team": "MCI"
+  },
+  {
    "elite": 14.0,
    "field": 2.5,
    "id": 304,
@@ -297,15 +306,6 @@
    "pos": "DEF",
    "price": 4.0,
    "team": "IPS"
-  },
-  {
-   "elite": 14.0,
-   "field": 13.5,
-   "id": 397,
-   "name": "Semenyo",
-   "pos": "MID",
-   "price": 8.4,
-   "team": "MCI"
   }
  ]
 }
