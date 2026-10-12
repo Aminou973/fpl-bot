@@ -1,13 +1,13 @@
 {
  "deadline": "2026-10-17T10:00:00Z",
- "generated": "2026-10-12T16:09:18.949947+00:00",
+ "generated": "2026-10-12T23:15:28.914623+00:00",
  "gw": 7,
  "teams": {
   "Minoux_41": {
    "bench": [
     82,
+    356,
     200,
-    79,
     441
    ],
    "captain": 397,
@@ -35,55 +35,55 @@
      "position": 2
     },
     {
-     "element": 356,
+     "element": 229,
      "is_captain": false,
      "is_vice": false,
      "position": 3
     },
     {
-     "element": 229,
+     "element": 388,
      "is_captain": false,
      "is_vice": false,
      "position": 4
     },
     {
-     "element": 388,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 5
-    },
-    {
      "element": 397,
      "is_captain": true,
      "is_vice": false,
-     "position": 6
+     "position": 5
     },
     {
      "element": 480,
      "is_captain": false,
      "is_vice": true,
-     "position": 7
+     "position": 6
     },
     {
      "element": 40,
      "is_captain": false,
      "is_vice": false,
-     "position": 8
+     "position": 7
     },
     {
      "element": 368,
      "is_captain": false,
      "is_vice": false,
-     "position": 9
+     "position": 8
     },
     {
      "element": 155,
      "is_captain": false,
      "is_vice": false,
-     "position": 10
+     "position": 9
     },
     {
      "element": 106,
+     "is_captain": false,
+     "is_vice": false,
+     "position": 10
+    },
+    {
+     "element": 79,
      "is_captain": false,
      "is_vice": false,
      "position": 11
@@ -95,13 +95,13 @@
      "position": 12
     },
     {
-     "element": 200,
+     "element": 356,
      "is_captain": false,
      "is_vice": false,
      "position": 13
     },
     {
-     "element": 79,
+     "element": 200,
      "is_captain": false,
      "is_vice": false,
      "position": 14
@@ -152,7 +152,6 @@
    "xi": [
     226,
     4,
-    356,
     229,
     388,
     397,
@@ -160,7 +159,8 @@
     40,
     368,
     155,
-    106
+    106,
+    79
    ]
   },
   "Minoux_69": {
