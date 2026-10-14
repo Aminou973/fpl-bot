@@ -1,13 +1,13 @@
 {
  "deadline": "2026-10-17T10:00:00Z",
- "generated": "2026-10-14T14:05:20.304643+00:00",
+ "generated": "2026-10-14T18:55:34.684985+00:00",
  "gw": 7,
  "teams": {
   "Minoux_41": {
    "bench": [
     82,
     356,
-    368,
+    200,
     441
    ],
    "captain": 397,
@@ -47,25 +47,25 @@
      "position": 4
     },
     {
-     "element": 200,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 5
-    },
-    {
      "element": 397,
      "is_captain": true,
      "is_vice": false,
-     "position": 6
+     "position": 5
     },
     {
      "element": 480,
      "is_captain": false,
      "is_vice": true,
-     "position": 7
+     "position": 6
     },
     {
      "element": 40,
+     "is_captain": false,
+     "is_vice": false,
+     "position": 7
+    },
+    {
+     "element": 368,
      "is_captain": false,
      "is_vice": false,
      "position": 8
@@ -101,7 +101,7 @@
      "position": 13
     },
     {
-     "element": 368,
+     "element": 200,
      "is_captain": false,
      "is_vice": false,
      "position": 14
@@ -154,10 +154,10 @@
     4,
     229,
     388,
-    200,
     397,
     480,
     40,
+    368,
     155,
     106,
     79
