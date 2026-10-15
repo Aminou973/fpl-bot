@@ -97,6 +97,20 @@
      "status": "already-applied"
     }
    }
+  },
+  "7": {
+   "at": "2026-10-15T23:17:55.695289+00:00",
+   "deadline": "2026-10-17T10:00:00Z",
+   "mode": "dry-run",
+   "teams": {
+    "Minoux_41": {
+     "note": "entry 4896428 is on none of the logged-in accounts",
+     "status": "skipped"
+    },
+    "Minoux_69": {
+     "status": "dry-run"
+    }
+   }
   }
  }
 }
