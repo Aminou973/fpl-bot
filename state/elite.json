@@ -38,7 +38,7 @@
   },
   {
    "elite": 6.0,
-   "field": 39.7,
+   "field": 39.8,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -47,7 +47,7 @@
   },
   {
    "elite": 4.0,
-   "field": 34.4,
+   "field": 34.3,
    "id": 426,
    "name": "B.Fernandes",
    "pos": "MID",
@@ -56,7 +56,7 @@
   },
   {
    "elite": 2.0,
-   "field": 35.6,
+   "field": 35.7,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -73,7 +73,7 @@
    "team": "MUN"
   }
  ],
- "generated": "2026-10-15T00:52:53+00:00",
+ "generated": "2026-10-15T06:27:33+00:00",
  "gw": 7,
  "gw_read": 6,
  "league": "Overall (top 50)",
@@ -111,7 +111,7 @@
   },
   {
    "elite": 92.0,
-   "field": 35.6,
+   "field": 35.7,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -120,7 +120,7 @@
   },
   {
    "elite": 88.0,
-   "field": 39.7,
+   "field": 39.8,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -147,7 +147,7 @@
   },
   {
    "elite": 58.0,
-   "field": 21.9,
+   "field": 22.0,
    "id": 109,
    "name": "Verbruggen",
    "pos": "GKP",
@@ -164,7 +164,7 @@
    "team": "ARS"
   },
   {
-   "elite": 46.0,
+   "elite": 48.0,
    "field": 43.7,
    "id": 1,
    "name": "Raya",
@@ -218,15 +218,6 @@
    "team": "LEE"
   },
   {
-   "elite": 26.0,
-   "field": 8.7,
-   "id": 249,
-   "name": "Barry",
-   "pos": "FWD",
-   "price": 5.7,
-   "team": "EVE"
-  },
-  {
    "elite": 24.0,
    "field": 27.6,
    "id": 368,
@@ -236,13 +227,13 @@
    "team": "LIV"
   },
   {
-   "elite": 22.0,
-   "field": 15.7,
-   "id": 496,
-   "name": "Kinsky",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "TOT"
+   "elite": 24.0,
+   "field": 8.7,
+   "id": 249,
+   "name": "Barry",
+   "pos": "FWD",
+   "price": 5.7,
+   "team": "EVE"
   },
   {
    "elite": 22.0,
@@ -252,6 +243,15 @@
    "pos": "MID",
    "price": 7.9,
    "team": "MUN"
+  },
+  {
+   "elite": 20.0,
+   "field": 15.7,
+   "id": 496,
+   "name": "Kinsky",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "TOT"
   },
   {
    "elite": 20.0,
@@ -272,7 +272,7 @@
    "team": "ARS"
   },
   {
-   "elite": 18.0,
+   "elite": 20.0,
    "field": 16.8,
    "id": 497,
    "name": "Dubravka",
@@ -300,12 +300,12 @@
   },
   {
    "elite": 16.0,
-   "field": 32.1,
-   "id": 399,
-   "name": "Cherki",
-   "pos": "MID",
-   "price": 7.9,
-   "team": "MCI"
+   "field": 7.2,
+   "id": 569,
+   "name": "Gonzalo",
+   "pos": "FWD",
+   "price": 6.1,
+   "team": "FUL"
   }
  ]
 }
