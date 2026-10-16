@@ -1,6 +1,6 @@
 {
  "deadline": "2026-10-17T10:00:00Z",
- "generated": "2026-10-16T20:07:32.032935+00:00",
+ "generated": "2026-10-16T23:04:25.074245+00:00",
  "gw": 7,
  "teams": {
   "Minoux_41": {
@@ -217,13 +217,13 @@
     {
      "element": 40,
      "is_captain": false,
-     "is_vice": true,
+     "is_vice": false,
      "position": 7
     },
     {
      "element": 124,
      "is_captain": false,
-     "is_vice": false,
+     "is_vice": true,
      "position": 8
     },
     {
@@ -304,7 +304,7 @@
     498
    ],
    "squad_source": "api",
-   "vice": 40,
+   "vice": 124,
    "xi": [
     1,
     229,
