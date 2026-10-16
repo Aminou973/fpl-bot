@@ -99,7 +99,7 @@
    }
   },
   "7": {
-   "at": "2026-10-16T01:39:29.295234+00:00",
+   "at": "2026-10-16T06:24:18.895885+00:00",
    "deadline": "2026-10-17T10:00:00Z",
    "mode": "apply",
    "teams": {
@@ -108,16 +108,9 @@
      "status": "skipped"
     },
     "Minoux_69": {
-     "captain": 411,
      "gw": 7,
-     "in": [
-      330
-     ],
-     "out": [
-      88
-     ],
-     "status": "applied",
-     "team_id": 4894622
+     "note": "1 transfer(s) with 0 free left would cost \u22124 pts \u2014 the bot does not spend points on its own. Make these by hand if you want them.",
+     "status": "refused"
     }
    }
   }

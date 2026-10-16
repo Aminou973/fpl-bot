@@ -1,27 +1,27 @@
 {
  "4894622": {
-  "bank_raw": 3,
+  "bank_raw": 2,
   "entry": 4894622,
-  "fetched_at": "2026-10-16T01:39:28.408039+00:00",
-  "free_transfers": 1,
+  "fetched_at": "2026-10-16T06:24:18.895245+00:00",
+  "free_transfers": 0,
   "gw": 7,
   "name": "Minoux_69",
   "picks": [
    1,
-   40,
-   109,
-   124,
-   165,
-   212,
    229,
-   259,
-   330,
-   346,
-   368,
    388,
-   411,
+   498,
+   330,
    480,
-   498
+   40,
+   124,
+   411,
+   165,
+   346,
+   109,
+   259,
+   368,
+   212
   ],
   "picks_detail": [
    {
@@ -45,9 +45,9 @@
     "selling_price": 57
    },
    {
-    "element": 88,
-    "purchase_price": 46,
-    "selling_price": 46
+    "element": 330,
+    "purchase_price": 47,
+    "selling_price": 47
    },
    {
     "element": 480,
@@ -58,11 +58,6 @@
     "element": 40,
     "purchase_price": 78,
     "selling_price": 78
-   },
-   {
-    "element": 368,
-    "purchase_price": 70,
-    "selling_price": 69
    },
    {
     "element": 124,
@@ -80,6 +75,11 @@
     "selling_price": 77
    },
    {
+    "element": 346,
+    "purchase_price": 60,
+    "selling_price": 60
+   },
+   {
     "element": 109,
     "purchase_price": 45,
     "selling_price": 45
@@ -90,14 +90,14 @@
     "selling_price": 40
    },
    {
+    "element": 368,
+    "purchase_price": 70,
+    "selling_price": 69
+   },
+   {
     "element": 212,
     "purchase_price": 45,
     "selling_price": 44
-   },
-   {
-    "element": 346,
-    "purchase_price": 60,
-    "selling_price": 60
    }
   ],
   "team_id": 4894622
