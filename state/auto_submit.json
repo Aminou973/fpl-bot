@@ -99,16 +99,25 @@
    }
   },
   "7": {
-   "at": "2026-10-15T23:17:55.695289+00:00",
+   "at": "2026-10-16T01:39:29.295234+00:00",
    "deadline": "2026-10-17T10:00:00Z",
-   "mode": "dry-run",
+   "mode": "apply",
    "teams": {
     "Minoux_41": {
      "note": "entry 4896428 is on none of the logged-in accounts",
      "status": "skipped"
     },
     "Minoux_69": {
-     "status": "dry-run"
+     "captain": 411,
+     "gw": 7,
+     "in": [
+      330
+     ],
+     "out": [
+      88
+     ],
+     "status": "applied",
+     "team_id": 4894622
     }
    }
   }
