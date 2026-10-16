@@ -2,7 +2,7 @@
  "captains": [
   {
    "elite": 28.0,
-   "field": 75.8,
+   "field": 75.9,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -20,7 +20,7 @@
   },
   {
    "elite": 16.0,
-   "field": 71.0,
+   "field": 71.3,
    "id": 165,
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
@@ -29,7 +29,7 @@
   },
   {
    "elite": 8.0,
-   "field": 46.0,
+   "field": 46.2,
    "id": 40,
    "name": "Rogers",
    "pos": "MID",
@@ -38,7 +38,7 @@
   },
   {
    "elite": 6.0,
-   "field": 41.5,
+   "field": 42.0,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -47,7 +47,7 @@
   },
   {
    "elite": 4.0,
-   "field": 32.9,
+   "field": 32.5,
    "id": 426,
    "name": "B.Fernandes",
    "pos": "MID",
@@ -56,7 +56,7 @@
   },
   {
    "elite": 2.0,
-   "field": 37.4,
+   "field": 37.9,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -73,7 +73,7 @@
    "team": "MUN"
   }
  ],
- "generated": "2026-10-16T16:58:15+00:00",
+ "generated": "2026-10-16T19:51:49+00:00",
  "gw": 7,
  "gw_read": 6,
  "league": "Overall (top 50)",
@@ -84,7 +84,7 @@
  "template": [
   {
    "elite": 98.0,
-   "field": 71.0,
+   "field": 71.3,
    "id": 165,
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
@@ -93,7 +93,7 @@
   },
   {
    "elite": 98.0,
-   "field": 75.8,
+   "field": 75.9,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -102,7 +102,7 @@
   },
   {
    "elite": 94.0,
-   "field": 52.8,
+   "field": 52.9,
    "id": 8,
    "name": "Calafiori",
    "pos": "DEF",
@@ -111,7 +111,7 @@
   },
   {
    "elite": 92.0,
-   "field": 37.4,
+   "field": 37.9,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -120,7 +120,7 @@
   },
   {
    "elite": 88.0,
-   "field": 41.5,
+   "field": 42.0,
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
@@ -129,7 +129,7 @@
   },
   {
    "elite": 78.0,
-   "field": 46.0,
+   "field": 46.2,
    "id": 40,
    "name": "Rogers",
    "pos": "MID",
@@ -164,7 +164,7 @@
    "team": "ARS"
   },
   {
-   "elite": 46.0,
+   "elite": 48.0,
    "field": 43.8,
    "id": 1,
    "name": "Raya",
@@ -192,7 +192,7 @@
   },
   {
    "elite": 32.0,
-   "field": 28.5,
+   "field": 28.6,
    "id": 391,
    "name": "Gvardiol",
    "pos": "DEF",
@@ -201,7 +201,7 @@
   },
   {
    "elite": 30.0,
-   "field": 14.3,
+   "field": 14.2,
    "id": 94,
    "name": "Schade",
    "pos": "MID",
@@ -218,17 +218,8 @@
    "team": "LEE"
   },
   {
-   "elite": 26.0,
-   "field": 8.7,
-   "id": 249,
-   "name": "Barry",
-   "pos": "FWD",
-   "price": 5.7,
-   "team": "EVE"
-  },
-  {
    "elite": 24.0,
-   "field": 25.4,
+   "field": 24.7,
    "id": 368,
    "name": "Szoboszlai",
    "pos": "MID",
@@ -236,13 +227,13 @@
    "team": "LIV"
   },
   {
-   "elite": 22.0,
-   "field": 15.6,
-   "id": 496,
-   "name": "Kinsky",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "TOT"
+   "elite": 24.0,
+   "field": 8.7,
+   "id": 249,
+   "name": "Barry",
+   "pos": "FWD",
+   "price": 5.7,
+   "team": "EVE"
   },
   {
    "elite": 22.0,
@@ -255,6 +246,15 @@
   },
   {
    "elite": 20.0,
+   "field": 15.6,
+   "id": 496,
+   "name": "Kinsky",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "TOT"
+  },
+  {
+   "elite": 20.0,
    "field": 6.0,
    "id": 236,
    "name": "Dewsbury-Hall",
@@ -264,7 +264,7 @@
   },
   {
    "elite": 20.0,
-   "field": 19.4,
+   "field": 19.3,
    "id": 15,
    "name": "\u00d8degaard",
    "pos": "MID",
@@ -272,8 +272,8 @@
    "team": "ARS"
   },
   {
-   "elite": 18.0,
-   "field": 16.8,
+   "elite": 20.0,
+   "field": 16.7,
    "id": 497,
    "name": "Dubravka",
    "pos": "GKP",
@@ -282,7 +282,7 @@
   },
   {
    "elite": 16.0,
-   "field": 14.1,
+   "field": 14.2,
    "id": 397,
    "name": "Semenyo",
    "pos": "MID",
@@ -300,12 +300,12 @@
   },
   {
    "elite": 16.0,
-   "field": 34.2,
-   "id": 399,
-   "name": "Cherki",
-   "pos": "MID",
-   "price": 7.9,
-   "team": "MCI"
+   "field": 7.2,
+   "id": 569,
+   "name": "Gonzalo",
+   "pos": "FWD",
+   "price": 6.1,
+   "team": "FUL"
   }
  ]
 }
