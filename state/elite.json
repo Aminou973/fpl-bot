@@ -19,7 +19,7 @@
    "team": "ARS"
   }
  ],
- "generated": "2026-10-19T17:47:08+00:00",
+ "generated": "2026-10-19T19:11:31+00:00",
  "gw": 8,
  "gw_read": 7,
  "league": "Overall (top 50)",
@@ -83,7 +83,7 @@
    "team": "CHE"
   },
   {
-   "elite": 72.0,
+   "elite": 74.0,
    "field": 44.1,
    "id": 1,
    "name": "Raya",
@@ -92,7 +92,7 @@
    "team": "ARS"
   },
   {
-   "elite": 68.0,
+   "elite": 70.0,
    "field": 26.3,
    "id": 154,
    "name": "Palmer",
@@ -101,8 +101,8 @@
    "team": "CHE"
   },
   {
-   "elite": 66.0,
-   "field": 17.6,
+   "elite": 68.0,
+   "field": 17.7,
    "id": 31,
    "name": "Konsa",
    "pos": "DEF",
@@ -110,22 +110,22 @@
    "team": "ARS"
   },
   {
-   "elite": 52.0,
-   "field": 22.5,
-   "id": 109,
-   "name": "Verbruggen",
-   "pos": "GKP",
-   "price": 4.6,
-   "team": "BHA"
-  },
-  {
-   "elite": 48.0,
+   "elite": 50.0,
    "field": 20.4,
    "id": 449,
    "name": "Hall",
    "pos": "DEF",
    "price": 5.3,
    "team": "NEW"
+  },
+  {
+   "elite": 50.0,
+   "field": 22.5,
+   "id": 109,
+   "name": "Verbruggen",
+   "pos": "GKP",
+   "price": 4.6,
+   "team": "BHA"
   },
   {
    "elite": 42.0,
@@ -165,42 +165,6 @@
   },
   {
    "elite": 20.0,
-   "field": 4.8,
-   "id": 334,
-   "name": "Muharemovi\u0107",
-   "pos": "DEF",
-   "price": 5.0,
-   "team": "LEE"
-  },
-  {
-   "elite": 18.0,
-   "field": 18.4,
-   "id": 229,
-   "name": "Tarkowski",
-   "pos": "DEF",
-   "price": 6.2,
-   "team": "EVE"
-  },
-  {
-   "elite": 18.0,
-   "field": 15.4,
-   "id": 496,
-   "name": "Kinsky",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "TOT"
-  },
-  {
-   "elite": 18.0,
-   "field": 13.4,
-   "id": 397,
-   "name": "Semenyo",
-   "pos": "MID",
-   "price": 8.3,
-   "team": "MCI"
-  },
-  {
-   "elite": 18.0,
    "field": 16.6,
    "id": 497,
    "name": "Dubravka",
@@ -210,12 +174,21 @@
   },
   {
    "elite": 18.0,
-   "field": 7.8,
-   "id": 453,
-   "name": "Barnes",
-   "pos": "MID",
-   "price": 6.1,
-   "team": "NEW"
+   "field": 4.8,
+   "id": 334,
+   "name": "Muharemovi\u0107",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "LEE"
+  },
+  {
+   "elite": 18.0,
+   "field": 15.4,
+   "id": 496,
+   "name": "Kinsky",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "TOT"
   },
   {
    "elite": 16.0,
@@ -228,7 +201,25 @@
   },
   {
    "elite": 16.0,
-   "field": 19.9,
+   "field": 18.4,
+   "id": 229,
+   "name": "Tarkowski",
+   "pos": "DEF",
+   "price": 6.2,
+   "team": "EVE"
+  },
+  {
+   "elite": 16.0,
+   "field": 13.3,
+   "id": 397,
+   "name": "Semenyo",
+   "pos": "MID",
+   "price": 8.3,
+   "team": "MCI"
+  },
+  {
+   "elite": 16.0,
+   "field": 19.8,
    "id": 368,
    "name": "Szoboszlai",
    "pos": "MID",
@@ -243,6 +234,15 @@
    "pos": "DEF",
    "price": 5.8,
    "team": "MCI"
+  },
+  {
+   "elite": 16.0,
+   "field": 7.8,
+   "id": 453,
+   "name": "Barnes",
+   "pos": "MID",
+   "price": 6.1,
+   "team": "NEW"
   },
   {
    "elite": 14.0,
