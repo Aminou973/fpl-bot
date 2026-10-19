@@ -19,7 +19,7 @@
    "team": "ARS"
   }
  ],
- "generated": "2026-10-19T00:30:18+00:00",
+ "generated": "2026-10-19T05:19:55+00:00",
  "gw": 8,
  "gw_read": 7,
  "league": "Overall (top 50)",
@@ -92,7 +92,7 @@
    "team": "ARS"
   },
   {
-   "elite": 72.0,
+   "elite": 70.0,
    "field": 26.2,
    "id": 154,
    "name": "Palmer",
@@ -111,15 +111,6 @@
   },
   {
    "elite": 52.0,
-   "field": 20.4,
-   "id": 449,
-   "name": "Hall",
-   "pos": "DEF",
-   "price": 5.3,
-   "team": "NEW"
-  },
-  {
-   "elite": 52.0,
    "field": 22.5,
    "id": 109,
    "name": "Verbruggen",
@@ -128,8 +119,17 @@
    "team": "BHA"
   },
   {
-   "elite": 44.0,
-   "field": 22.9,
+   "elite": 50.0,
+   "field": 20.4,
+   "id": 449,
+   "name": "Hall",
+   "pos": "DEF",
+   "price": 5.3,
+   "team": "NEW"
+  },
+  {
+   "elite": 42.0,
+   "field": 23.0,
    "id": 346,
    "name": "Calvert-Lewin",
    "pos": "FWD",
@@ -192,6 +192,15 @@
   },
   {
    "elite": 16.0,
+   "field": 4.9,
+   "id": 290,
+   "name": "Slater",
+   "pos": "MID",
+   "price": 4.5,
+   "team": "HUL"
+  },
+  {
+   "elite": 16.0,
    "field": 18.4,
    "id": 229,
    "name": "Tarkowski",
@@ -201,12 +210,30 @@
   },
   {
    "elite": 16.0,
-   "field": 20.3,
+   "field": 14.0,
+   "id": 397,
+   "name": "Semenyo",
+   "pos": "MID",
+   "price": 8.3,
+   "team": "MCI"
+  },
+  {
+   "elite": 16.0,
+   "field": 20.2,
    "id": 368,
    "name": "Szoboszlai",
    "pos": "MID",
    "price": 6.8,
    "team": "LIV"
+  },
+  {
+   "elite": 16.0,
+   "field": 28.6,
+   "id": 391,
+   "name": "Gvardiol",
+   "pos": "DEF",
+   "price": 5.8,
+   "team": "MCI"
   },
   {
    "elite": 16.0,
@@ -219,39 +246,12 @@
   },
   {
    "elite": 14.0,
-   "field": 4.9,
-   "id": 290,
-   "name": "Slater",
-   "pos": "MID",
-   "price": 4.5,
-   "team": "HUL"
-  },
-  {
-   "elite": 14.0,
-   "field": 14.0,
-   "id": 397,
-   "name": "Semenyo",
-   "pos": "MID",
-   "price": 8.3,
-   "team": "MCI"
-  },
-  {
-   "elite": 14.0,
    "field": 5.3,
    "id": 504,
    "name": "Vuskovic",
    "pos": "DEF",
    "price": 5.1,
    "team": "BHA"
-  },
-  {
-   "elite": 14.0,
-   "field": 9.2,
-   "id": 173,
-   "name": "Thomas",
-   "pos": "DEF",
-   "price": 4.0,
-   "team": "COV"
   }
  ]
 }
