@@ -19,7 +19,7 @@
    "team": "ARS"
   }
  ],
- "generated": "2026-10-19T22:39:07+00:00",
+ "generated": "2026-10-20T01:17:17+00:00",
  "gw": 8,
  "gw_read": 7,
  "league": "Overall (top 50)",
@@ -61,7 +61,7 @@
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
-   "price": 5.2,
+   "price": 5.3,
    "team": "BHA"
   },
   {
@@ -70,20 +70,20 @@
    "id": 124,
    "name": "Gro\u00df",
    "pos": "MID",
-   "price": 6.1,
+   "price": 6.2,
    "team": "BHA"
   },
   {
-   "elite": 90.0,
+   "elite": 88.0,
    "field": 47.9,
    "id": 40,
    "name": "Rogers",
    "pos": "MID",
-   "price": 7.9,
+   "price": 8.0,
    "team": "CHE"
   },
   {
-   "elite": 72.0,
+   "elite": 70.0,
    "field": 44.1,
    "id": 1,
    "name": "Raya",
@@ -137,8 +137,8 @@
    "team": "LEE"
   },
   {
-   "elite": 28.0,
-   "field": 20.1,
+   "elite": 30.0,
+   "field": 20.2,
    "id": 427,
    "name": "Mbeumo",
    "pos": "MID",
@@ -146,7 +146,7 @@
    "team": "MUN"
   },
   {
-   "elite": 24.0,
+   "elite": 26.0,
    "field": 13.9,
    "id": 94,
    "name": "Schade",
@@ -173,6 +173,15 @@
    "team": "LEE"
   },
   {
+   "elite": 20.0,
+   "field": 15.4,
+   "id": 496,
+   "name": "Kinsky",
+   "pos": "GKP",
+   "price": 4.5,
+   "team": "TOT"
+  },
+  {
    "elite": 18.0,
    "field": 18.4,
    "id": 229,
@@ -180,15 +189,6 @@
    "pos": "DEF",
    "price": 6.2,
    "team": "EVE"
-  },
-  {
-   "elite": 18.0,
-   "field": 15.4,
-   "id": 496,
-   "name": "Kinsky",
-   "pos": "GKP",
-   "price": 4.5,
-   "team": "TOT"
   },
   {
    "elite": 18.0,
