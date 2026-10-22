@@ -81,6 +81,20 @@ def diff_names(names, live, target):
             f"Captain {name(cap)}" if cap else ""]
 
 
+def clean_token(raw: str) -> str:
+    """The bare token from whatever was pasted into the secret.
+
+    Secrets are set by hand from the login script's output, and a copy that
+    carries the surrounding quotes, the `gh secret set NAME --body` prefix or
+    a trailing newline is refused by FPL as invalid_grant (GW8: token 2).
+    """
+    t = (raw or "").strip()
+    if "--body" in t:
+        t = t.split("--body", 1)[1]
+    t = t.strip().strip("'\"").strip()
+    return "".join(t.split())
+
+
 def credentials():
     """Collect refresh tokens from the environment, as (secret_name, token).
 
@@ -91,11 +105,12 @@ def credentials():
     """
     import os
     out = []
-    first = os.environ.get("FPL_REFRESH_TOKEN") or os.environ.get("FPL_REFRESH_TOKEN_1")
+    first = clean_token(os.environ.get("FPL_REFRESH_TOKEN")
+                        or os.environ.get("FPL_REFRESH_TOKEN_1"))
     if first:
         out.append(("FPL_REFRESH_TOKEN", first))
     for i in range(2, 6):
-        rt = os.environ.get(f"FPL_REFRESH_TOKEN_{i}")
+        rt = clean_token(os.environ.get(f"FPL_REFRESH_TOKEN_{i}"))
         if rt:
             out.append((f"FPL_REFRESH_TOKEN_{i}", rt))
     return out
@@ -117,6 +132,26 @@ def store_secret(name: str, value: str) -> bool:
         return True
     except Exception:                                        # noqa: BLE001
         return False
+
+
+def skip_reason(entry_id, tokens, dead, managed):
+    """Why an entry has no logged-in session, in words the owner can act on.
+
+    A dead token, a missing secret and a token stored from the wrong FPL
+    account all look the same from the sessions map; the alert must say
+    which, or the owner re-runs the wrong login.
+    """
+    gone = [n for n, _ in tokens if n in dead]
+    if gone:
+        return (f"login for {', '.join(gone)} expired — re-run "
+                f"jobs/fpl_login.py for entry {entry_id}'s account")
+    if len(tokens) < 2:
+        return (f"entry {entry_id} needs its own login — only "
+                f"{tokens[0][0] if tokens else 'no token'} is set; run "
+                f"jobs/fpl_login.py --account 2 --set-secret")
+    return (f"entry {entry_id} is on none of the logged-in accounts "
+            f"(they manage {', '.join(map(str, sorted(managed))) or 'nothing'})"
+            f" — a token was stored from the wrong FPL account")
 
 
 def refresh_with_retry(rt, attempts=3, wait=8.0):
@@ -477,11 +512,9 @@ def main():
     for name, entry in wanted.items():
         entry_id = entries[name]
         if entry_id not in sessions:
-            results[name] = {"status": "skipped",
-                             "note": f"entry {entry_id} is on none of the "
-                                     f"logged-in accounts"}
-            print(f"[{name}] skipped: entry {entry_id} not on any logged-in "
-                  f"account — re-arm that account with jobs/fpl_login.py")
+            note = skip_reason(entry_id, tokens, dead, sessions)
+            results[name] = {"status": "login-needed", "note": note}
+            print(f"[{name}] skipped: {note}")
             continue
         session, team_id = sessions[entry_id]
         mt = api.my_team(session, team_id)
@@ -691,6 +724,7 @@ def main():
     # audible alert when the bot actually acted (or could not)
     if results:
         marks = {"applied": "✅", "already-applied": "✔", "skipped": "⚠️",
+                 "login-needed": "🔐",
                  "dry-run": "•", "chip-failed": "🚨", "refused": "🚫",
                  "transfers-failed": "🚨", "lineup-failed": "🚨"}
         body = "\n".join(f"{marks.get(v['status'], '•')} <b>{esc(k)}</b> — "

@@ -60,6 +60,50 @@ def code_from_pasted(url_or_code: str, expected_state: str) -> str:
     return q["code"][0]
 
 
+def expected_entry(account: int):
+    """The entry this account's secret must reach: the account-th team in
+    config.yml (FPL_REFRESH_TOKEN -> first team, _2 -> second)."""
+    try:
+        import yaml
+        cfg = yaml.safe_load((Path(__file__).resolve().parent.parent
+                              / "config.yml").read_text(encoding="utf-8"))
+        ids = [t.get("entry_id") for t in cfg["teams"].values()]
+        return int(ids[account - 1]) if len(ids) >= account else None
+    except Exception:                                        # noqa: BLE001
+        return None
+
+
+def check_account(account: int, entries) -> None:
+    """Refuse to store a token from the wrong FPL account.
+
+    The submit job matches squads to tokens by entry id, so a token for
+    account 1 saved as FPL_REFRESH_TOKEN_2 leaves the second squad on
+    "none of the logged-in accounts" with no error at login time.
+    """
+    want = expected_entry(account)
+    if want is not None and want not in entries:
+        raise SystemExit(
+            f"this login manages entry {', '.join(map(str, sorted(entries)))}"
+            f" but account {account} must manage entry {want} — sign out of "
+            f"FPL in the browser, then log in with the other account")
+
+
+def manual_store(secret: str, rt: str) -> None:
+    """Hand the bare token over without a hand copy from the terminal.
+
+    Copying it out of a `gh secret set ... --body "..."` line is how the
+    quotes ended up inside FPL_REFRESH_TOKEN_2 (GW8). On Windows it goes
+    straight to the clipboard; elsewhere it is printed on a line of its own.
+    """
+    try:
+        subprocess.run(["clip"], input=rt.encode("utf-16-le"), check=True)
+        print(f"  The token is now in your CLIPBOARD (nothing to copy).")
+    except Exception:                                        # noqa: BLE001
+        print(f"  Copy the line below — the token alone, no quotes:\n\n{rt}\n")
+    print(f"  Open https://github.com/Aminou973/fpl-bot/settings/secrets/actions"
+          f" → {secret} → Update → paste (Ctrl+V) → Update secret.")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--account", type=int, choices=(1, 2), default=1,
@@ -101,6 +145,7 @@ def main():
     entries = api.me(session)
     print(f"Verified: this account manages entry "
           f"{', '.join(str(e) for e in sorted(entries))}")
+    check_account(a.account, entries)
 
     rt = tokens.get("refresh_token")
     if not rt:
@@ -114,8 +159,8 @@ def main():
                            check=True)
             print(f"OK — refresh token stored as repo secret {secret}.")
         except FileNotFoundError:
-            print("gh CLI not found — store it manually with:")
-            print(f"  gh secret set {secret} --body \"{rt}\"")
+            print("gh CLI not found — store it manually:")
+            manual_store(secret, rt)
         except subprocess.CalledProcessError as e:
             print(f"gh secret set failed (exit {e.returncode}) — run manually:")
             print(f"  gh secret set {secret} --body \"{rt}\"")

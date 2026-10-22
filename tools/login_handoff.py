@@ -27,7 +27,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "jobs"))
 
-from fpl_login import code_from_pasted, pkce                    # noqa: E402
+from fpl_login import check_account, code_from_pasted, pkce                    # noqa: E402
 from fplbot import api                                          # noqa: E402
 
 
@@ -60,6 +60,7 @@ def finish(account: int, redirect: str, set_secret: bool) -> None:
     entries = api.me(session)
     print(f"Verified: this account manages entry "
           f"{', '.join(str(e) for e in sorted(entries))}")
+    check_account(account, entries)
 
     rt = tokens.get("refresh_token")
     if not rt:
