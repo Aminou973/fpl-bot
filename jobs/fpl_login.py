@@ -88,6 +88,22 @@ def check_account(account: int, entries) -> None:
             f"FPL in the browser, then log in with the other account")
 
 
+def manual_store(secret: str, rt: str) -> None:
+    """Hand the bare token over without a hand copy from the terminal.
+
+    Copying it out of a `gh secret set ... --body "..."` line is how the
+    quotes ended up inside FPL_REFRESH_TOKEN_2 (GW8). On Windows it goes
+    straight to the clipboard; elsewhere it is printed on a line of its own.
+    """
+    try:
+        subprocess.run(["clip"], input=rt.encode("utf-16-le"), check=True)
+        print(f"  The token is now in your CLIPBOARD (nothing to copy).")
+    except Exception:                                        # noqa: BLE001
+        print(f"  Copy the line below — the token alone, no quotes:\n\n{rt}\n")
+    print(f"  Open https://github.com/Aminou973/fpl-bot/settings/secrets/actions"
+          f" → {secret} → Update → paste (Ctrl+V) → Update secret.")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--account", type=int, choices=(1, 2), default=1,
@@ -143,8 +159,8 @@ def main():
                            check=True)
             print(f"OK — refresh token stored as repo secret {secret}.")
         except FileNotFoundError:
-            print("gh CLI not found — store it manually with:")
-            print(f"  gh secret set {secret} --body \"{rt}\"")
+            print("gh CLI not found — store it manually:")
+            manual_store(secret, rt)
         except subprocess.CalledProcessError as e:
             print(f"gh secret set failed (exit {e.returncode}) — run manually:")
             print(f"  gh secret set {secret} --body \"{rt}\"")

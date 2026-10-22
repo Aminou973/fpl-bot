@@ -81,6 +81,20 @@ def diff_names(names, live, target):
             f"Captain {name(cap)}" if cap else ""]
 
 
+def clean_token(raw: str) -> str:
+    """The bare token from whatever was pasted into the secret.
+
+    Secrets are set by hand from the login script's output, and a copy that
+    carries the surrounding quotes, the `gh secret set NAME --body` prefix or
+    a trailing newline is refused by FPL as invalid_grant (GW8: token 2).
+    """
+    t = (raw or "").strip()
+    if "--body" in t:
+        t = t.split("--body", 1)[1]
+    t = t.strip().strip("'\"").strip()
+    return "".join(t.split())
+
+
 def credentials():
     """Collect refresh tokens from the environment, as (secret_name, token).
 
@@ -91,11 +105,12 @@ def credentials():
     """
     import os
     out = []
-    first = os.environ.get("FPL_REFRESH_TOKEN") or os.environ.get("FPL_REFRESH_TOKEN_1")
+    first = clean_token(os.environ.get("FPL_REFRESH_TOKEN")
+                        or os.environ.get("FPL_REFRESH_TOKEN_1"))
     if first:
         out.append(("FPL_REFRESH_TOKEN", first))
     for i in range(2, 6):
-        rt = os.environ.get(f"FPL_REFRESH_TOKEN_{i}")
+        rt = clean_token(os.environ.get(f"FPL_REFRESH_TOKEN_{i}"))
         if rt:
             out.append((f"FPL_REFRESH_TOKEN_{i}", rt))
     return out
