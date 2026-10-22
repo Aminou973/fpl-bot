@@ -153,6 +153,18 @@ def main():
               "(offline_access was not granted) — nothing to automate with")
         return
 
+    # prove the token works headless before anyone stores it: one refresh,
+    # exactly what the submit job does. FPL rotates on exchange, so the
+    # rotated token is the one to keep. A token that fails here would only
+    # have failed an hour later in Actions as invalid_grant.
+    try:
+        rt = api.refresh_tokens(rt).get("refresh_token") or rt
+        print("Checked: the token refreshes headless — safe to store.")
+    except RuntimeError as e:
+        raise SystemExit(f"FPL refused to refresh this new token ({e}); "
+                         f"granted scope: {tokens.get('scope')!r}. Nothing "
+                         f"stored — try again in a private window.")
+
     if a.set_secret:
         try:
             subprocess.run(["gh", "secret", "set", secret, "--body", rt],
