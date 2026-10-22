@@ -70,6 +70,46 @@ def name_lookup(boot):
             for p in boot["elements"]}
 
 
+MANUAL = ("login-needed", "skipped", "chip-failed", "transfers-failed",
+          "lineup-failed")
+
+
+def manual_lineup(name, entry, names, positions, gw, deadline, why):
+    """Telegram card with everything needed to set a team by hand.
+
+    Sent when the bot cannot submit a team itself (dead login, failed write),
+    so the owner can still make the plan's moves in the FPL app in time.
+    """
+    pos = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
+    nm = lambda i: esc(names.get(i, str(i)))           # noqa: E731
+    cap, vice = entry.get("captain"), entry.get("vice")
+
+    def tag(i):
+        return " (C)" if i == cap else " (VC)" if i == vice else ""
+    xi = sorted(entry.get("xi") or [], key=lambda i: positions.get(i, 9))
+    lines = [f"✋ <b>GW{gw} — set {esc(name)} by hand</b>",
+             f"<i>{esc(why)}</i>",
+             f"Deadline {esc(deadline.replace('T', ' ')[:16])} UTC", ""]
+    outs, ins = entry.get("out") or [], entry.get("in") or []
+    if outs or ins:
+        lines.append("<b>Transfers</b>")
+        lines += [f"▼ OUT {nm(o)}" for o in outs]
+        lines += [f"▲ IN {nm(i)}" for i in ins]
+        if entry.get("hits"):
+            lines.append(f"−{4 * entry['hits']} pts hit")
+    else:
+        lines.append("<b>Transfers</b>: none — roll the free transfer")
+    if entry.get("chip"):
+        lines.append(f"🎯 Play chip: <b>{esc(entry['chip'])}</b>")
+    lines += ["", "<b>Starting XI</b>"]
+    lines += [f"{pos.get(positions.get(i), '?')} {nm(i)}{tag(i)}" for i in xi]
+    lines += ["", "<b>Bench (in order)</b>"]
+    lines += [f"{'GK' if n == 0 else f'{n}.'} {nm(i)}"
+              for n, i in enumerate(entry.get("bench") or [])]
+    lines += ["", f"Captain <b>{nm(cap)}</b> · Vice <b>{nm(vice)}</b>"]
+    return "\n".join(lines)
+
+
 def diff_names(names, live, target):
     cur = {e for e, _, _ in live}
     new = {e for e, _, _ in target}
@@ -732,6 +772,24 @@ def main():
                          for k, v in results.items())
         notify.send(f"🤖 <b>GW{gw} {esc(submit_head(a.apply, results))}</b>\n\n"
                     + body, kind="alert")
+    # a team the bot cannot submit still has to be set before the deadline:
+    # send its full lineup to do by hand - once when the problem is first
+    # seen this gameweek, and once more in the final 6 hours
+    sent = pipeline.read_state("manual_alerts", {}) or {}
+    stage = "final" if deadline and hrs <= 6 else "first"
+    for name, v in results.items():
+        if v.get("status") not in MANUAL:
+            continue
+        key = f"{gw}:{name}"
+        if stage in sent.get(key, []):
+            continue
+        notify.send(manual_lineup(name, wanted[name], names, boot_el_pos, gw,
+                                  deadline, v.get("note") or v["status"]),
+                    kind="alert")
+        sent.setdefault(key, []).append(stage)
+    if sent:
+        pipeline.write_state("manual_alerts", {k: v for k, v in sent.items()
+                                               if int(k.split(":")[0]) >= gw - 2})
     played = {k: v["chip"] for k, v in results.items()
               if v.get("status") == "applied" and v.get("chip")}
     if played and a.apply:
