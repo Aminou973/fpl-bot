@@ -119,6 +119,26 @@ def store_secret(name: str, value: str) -> bool:
         return False
 
 
+def skip_reason(entry_id, tokens, dead, managed):
+    """Why an entry has no logged-in session, in words the owner can act on.
+
+    A dead token, a missing secret and a token stored from the wrong FPL
+    account all look the same from the sessions map; the alert must say
+    which, or the owner re-runs the wrong login.
+    """
+    gone = [n for n, _ in tokens if n in dead]
+    if gone:
+        return (f"login for {', '.join(gone)} expired — re-run "
+                f"jobs/fpl_login.py for entry {entry_id}'s account")
+    if len(tokens) < 2:
+        return (f"entry {entry_id} needs its own login — only "
+                f"{tokens[0][0] if tokens else 'no token'} is set; run "
+                f"jobs/fpl_login.py --account 2 --set-secret")
+    return (f"entry {entry_id} is on none of the logged-in accounts "
+            f"(they manage {', '.join(map(str, sorted(managed))) or 'nothing'})"
+            f" — a token was stored from the wrong FPL account")
+
+
 def refresh_with_retry(rt, attempts=3, wait=8.0):
     """refresh_tokens with a short retry.
 
@@ -477,11 +497,9 @@ def main():
     for name, entry in wanted.items():
         entry_id = entries[name]
         if entry_id not in sessions:
-            results[name] = {"status": "skipped",
-                             "note": f"entry {entry_id} is on none of the "
-                                     f"logged-in accounts"}
-            print(f"[{name}] skipped: entry {entry_id} not on any logged-in "
-                  f"account — re-arm that account with jobs/fpl_login.py")
+            note = skip_reason(entry_id, tokens, dead, sessions)
+            results[name] = {"status": "login-needed", "note": note}
+            print(f"[{name}] skipped: {note}")
             continue
         session, team_id = sessions[entry_id]
         mt = api.my_team(session, team_id)
@@ -691,6 +709,7 @@ def main():
     # audible alert when the bot actually acted (or could not)
     if results:
         marks = {"applied": "✅", "already-applied": "✔", "skipped": "⚠️",
+                 "login-needed": "🔐",
                  "dry-run": "•", "chip-failed": "🚨", "refused": "🚫",
                  "transfers-failed": "🚨", "lineup-failed": "🚨"}
         body = "\n".join(f"{marks.get(v['status'], '•')} <b>{esc(k)}</b> — "

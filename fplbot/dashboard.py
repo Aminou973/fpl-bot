@@ -797,7 +797,10 @@ function renderAutomation() {
       : sub ? (sub.status === "applied" ? "lineup written"
       : sub.status === "already-applied" ? "already in place"
       : sub.status === "dry-run" ? "verified, will apply"
+      : sub.status === "login-needed" || sub.status === "skipped" ? "login needed"
       : sub.status ? sub.status : "—") : "waiting for window";
+    const loginNote = sub && sub.note && (sub.status === "login-needed" || sub.status === "skipped")
+      ? `<div class="n" style="color:var(--critical,#c0392b)">🔐 ${sub.note}</div>` : "";
     const staleNote = b.stale
       ? `<div class="n" style="color:var(--warn,#c77b00)">⚠️ not refreshed this run`
         + (b.stale_since ? ` — showing the plan from ${new Date(b.stale_since)
@@ -809,8 +812,9 @@ function renderAutomation() {
       <div class="v">${b.free_transfers ?? "–"} FT <span class="hint">· ${hits} hit${hits === 1 ? "" : "s"} planned</span></div>
       <div class="n">squad ${srcBadge(src)}<br>submit ${stBadge(
         pd || (sub && (sub.status === "applied" || sub.status === "already-applied")) ? "ok"
-        : sub && sub.status === "dry-run" ? "warn" : "", subTxt)}</div>
-      ${staleNote}
+        : sub && sub.status === "dry-run" ? "warn"
+        : sub && (sub.status === "login-needed" || sub.status === "skipped") ? "bad" : "", subTxt)}</div>
+      ${loginNote}${staleNote}
     </div>`);
   });
   const bank = NAMES.map(n => `${n}: £${fmt((D.builds[n] || {}).bank, 1)}m`).join(" · ");
