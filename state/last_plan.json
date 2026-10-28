@@ -1,18 +1,18 @@
 {
  "deadline": "2026-10-31T11:00:00Z",
- "generated": "2026-10-28T02:38:14.684998+00:00",
+ "generated": "2026-10-28T09:01:34.479963+00:00",
  "gw": 9,
  "teams": {
   "Minoux_41": {
    "bench": [
     82,
-    68,
-    79,
-    441
+    4,
+    200,
+    427
    ],
    "captain": 480,
    "chip": "bboost",
-   "chip_gain": 7.56,
+   "chip_gain": 11.1,
    "entry": 4896428,
    "hits": 0,
    "in": [
@@ -29,61 +29,61 @@
      "position": 1
     },
     {
-     "element": 4,
+     "element": 356,
      "is_captain": false,
      "is_vice": false,
      "position": 2
     },
     {
-     "element": 356,
+     "element": 229,
      "is_captain": false,
      "is_vice": false,
      "position": 3
     },
     {
-     "element": 229,
+     "element": 388,
      "is_captain": false,
      "is_vice": false,
      "position": 4
     },
     {
-     "element": 388,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 5
-    },
-    {
-     "element": 200,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 6
-    },
-    {
      "element": 40,
      "is_captain": false,
      "is_vice": true,
-     "position": 7
-    },
-    {
-     "element": 427,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 8
+     "position": 5
     },
     {
      "element": 480,
      "is_captain": true,
      "is_vice": false,
-     "position": 9
+     "position": 6
     },
     {
      "element": 155,
      "is_captain": false,
      "is_vice": false,
-     "position": 10
+     "position": 7
+    },
+    {
+     "element": 68,
+     "is_captain": false,
+     "is_vice": false,
+     "position": 8
     },
     {
      "element": 106,
+     "is_captain": false,
+     "is_vice": false,
+     "position": 9
+    },
+    {
+     "element": 79,
+     "is_captain": false,
+     "is_vice": false,
+     "position": 10
+    },
+    {
+     "element": 441,
      "is_captain": false,
      "is_vice": false,
      "position": 11
@@ -95,19 +95,19 @@
      "position": 12
     },
     {
-     "element": 68,
+     "element": 4,
      "is_captain": false,
      "is_vice": false,
      "position": 13
     },
     {
-     "element": 79,
+     "element": 200,
      "is_captain": false,
      "is_vice": false,
      "position": 14
     },
     {
-     "element": 441,
+     "element": 427,
      "is_captain": false,
      "is_vice": false,
      "position": 15
@@ -151,16 +151,16 @@
    "vice": 40,
    "xi": [
     226,
-    4,
     356,
     229,
     388,
-    200,
     40,
-    427,
     480,
     155,
-    106
+    68,
+    106,
+    79,
+    441
    ]
   },
   "Minoux_69": {
