@@ -2,9 +2,9 @@
  "4894622": {
   "bank_raw": 8,
   "entry": 4894622,
-  "fetched_at": "2026-10-23T13:49:15.404236+00:00",
-  "free_transfers": 0,
-  "gw": 8,
+  "fetched_at": "2026-10-30T00:22:40.028831+00:00",
+  "free_transfers": 1,
+  "gw": 9,
   "name": "Minoux_69",
   "picks": [
    1,
@@ -27,7 +27,7 @@
    {
     "element": 1,
     "purchase_price": 60,
-    "selling_price": 60
+    "selling_price": 61
    },
    {
     "element": 229,
