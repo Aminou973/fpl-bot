@@ -1,27 +1,27 @@
 {
  "4894622": {
-  "bank_raw": 8,
+  "bank_raw": 41,
   "entry": 4894622,
-  "fetched_at": "2026-10-30T06:26:58.149053+00:00",
-  "free_transfers": 1,
+  "fetched_at": "2026-10-30T13:34:38.775814+00:00",
+  "free_transfers": 0,
   "gw": 9,
   "name": "Minoux_69",
   "picks": [
    1,
-   40,
-   94,
-   109,
-   124,
-   212,
    229,
-   259,
-   272,
-   330,
-   346,
    388,
-   411,
+   498,
+   330,
+   40,
    480,
-   498
+   94,
+   124,
+   411,
+   346,
+   109,
+   259,
+   212,
+   272
   ],
   "picks_detail": [
    {
@@ -75,9 +75,9 @@
     "selling_price": 156
    },
    {
-    "element": 165,
-    "purchase_price": 76,
-    "selling_price": 77
+    "element": 346,
+    "purchase_price": 60,
+    "selling_price": 60
    },
    {
     "element": 109,
@@ -95,9 +95,9 @@
     "selling_price": 43
    },
    {
-    "element": 346,
-    "purchase_price": 60,
-    "selling_price": 60
+    "element": 272,
+    "purchase_price": 44,
+    "selling_price": 44
    }
   ],
   "team_id": 4894622

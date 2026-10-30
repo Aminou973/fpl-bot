@@ -129,7 +129,7 @@
    }
   },
   "9": {
-   "at": "2026-10-30T06:26:58.594239+00:00",
+   "at": "2026-10-30T13:34:38.776315+00:00",
    "deadline": "2026-10-31T11:00:00Z",
    "mode": "apply",
    "teams": {
@@ -138,16 +138,8 @@
      "status": "login-needed"
     },
     "Minoux_69": {
-     "captain": 411,
      "gw": 9,
-     "in": [
-      272
-     ],
-     "out": [
-      165
-     ],
-     "status": "applied",
-     "team_id": 4894622
+     "status": "already-applied"
     }
    }
   }
