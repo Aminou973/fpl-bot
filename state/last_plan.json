@@ -1,6 +1,6 @@
 {
  "deadline": "2026-11-06T18:30:00Z",
- "generated": "2026-10-31T20:19:54.755086+00:00",
+ "generated": "2026-10-31T20:26:24.177047+00:00",
  "gw": 10,
  "teams": {
   "Minoux_41": {
@@ -10,7 +10,7 @@
     106,
     441
    ],
-   "captain": 480,
+   "captain": 427,
    "chip": null,
    "chip_gain": null,
    "entry": 4896428,
@@ -66,20 +66,20 @@
     },
     {
      "element": 427,
-     "is_captain": false,
-     "is_vice": true,
+     "is_captain": true,
+     "is_vice": false,
      "position": 8
     },
     {
      "element": 480,
-     "is_captain": true,
+     "is_captain": false,
      "is_vice": false,
      "position": 9
     },
     {
      "element": 68,
      "is_captain": false,
-     "is_vice": false,
+     "is_vice": true,
      "position": 10
     },
     {
@@ -148,7 +148,7 @@
     480
    ],
    "squad_source": "api",
-   "vice": 427,
+   "vice": 68,
    "xi": [
     226,
     4,
@@ -166,7 +166,7 @@
   "Minoux_69": {
    "bench": [
     109,
-    94,
+    498,
     212,
     272
    ],
@@ -207,33 +207,33 @@
      "position": 4
     },
     {
-     "element": 498,
+     "element": 330,
      "is_captain": false,
      "is_vice": false,
      "position": 5
     },
     {
-     "element": 330,
+     "element": 40,
      "is_captain": false,
      "is_vice": false,
      "position": 6
     },
     {
-     "element": 40,
+     "element": 480,
      "is_captain": false,
      "is_vice": false,
      "position": 7
     },
     {
-     "element": 480,
+     "element": 94,
      "is_captain": false,
-     "is_vice": true,
+     "is_vice": false,
      "position": 8
     },
     {
      "element": 124,
      "is_captain": false,
-     "is_vice": false,
+     "is_vice": true,
      "position": 9
     },
     {
@@ -255,7 +255,7 @@
      "position": 12
     },
     {
-     "element": 94,
+     "element": 498,
      "is_captain": false,
      "is_vice": false,
      "position": 13
@@ -308,16 +308,16 @@
     498
    ],
    "squad_source": "api",
-   "vice": 480,
+   "vice": 124,
    "xi": [
     1,
     4,
     229,
     388,
-    498,
     330,
     40,
     480,
+    94,
     124,
     411,
     346
