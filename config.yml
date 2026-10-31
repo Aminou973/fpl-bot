@@ -129,12 +129,18 @@ teams:
     role: template
     free_transfers: 1      # pinned 2026-08-27: same as the other team
     blurb: >-
-      Ceiling team - optimised for the 85th-percentile outcome rather than the
-      average one, with at least three players under 10% owned. Deliberately holds a different squad from the main team: the
+      All-in rank chaser - optimised for the 85th-percentile outcome, fades the
+      field, captains low-owned players and pays -4 hits for big upside. Built
+      to climb from 8M toward the top or crash trying; the main team is the
+      safe one. Deliberately holds a different squad from the main team: the
       two exist to be compared, and two convergent teams compare nothing.
-    hit_threshold: 6       # same trade discipline as the main team
-    allow_hits: false      # owner's rule 2026-09-18: never pay points on a
-                           # transfer - the plan spends free transfers only
+    # MAXIMUM RISK - owner 2026-10-31: "use _41 as your account and boost it
+    # with unimaginable risk ... maybe we get the top places". Overrides the
+    # 2026-09-18 no-hits rule and the same-day loosening below, for THIS team
+    # only. Expect wild weeks both ways: the -65 vs average after GW8 came
+    # from a milder version of this brief.
+    hit_threshold: 4       # take a -4 whenever the plan gains more than 4
+    allow_hits: true
     max_transfers_per_gw: 3   # hard ceiling on moves in one gameweek
     # Re-differentiated 2026-09-01 (owner: "i dont need them convergent need
     # them different"). Both teams had drifted to the same brief and the
@@ -153,10 +159,12 @@ teams:
     objective: ceiling     # optimise the simulated q85 upside, not the mean
     rank:
       alpha: 0.5
-      tilt: 0.0            # was -0.3: stop fading players because they are owned
-      elite_weight: 0.5    # still reads the top-50 template, at half weight
-    min_differentials:     # a floor on rarity so it cannot drift back to the
-      count: 3             # field template (was 6)
+      tilt: -0.6           # hard fade of the field (was 0.0, then -0.3)
+      cap_tilt: 0.4        # captaincy worth up to 40% more on low-owned picks
+      elite_weight: 0.0    # rank chasing: ignore what the top 50 hold
+    max_captain_ownership: 25   # never captain the crowd's pick
+    min_differentials:     # at least five players under 10% owned
+      count: 5
       max_ownership: 10
     # ------------------------------------------------------------------
     # ALL FOUR CHIPS DELEGATED TO THE BOT — owner instruction 2026-08-31
