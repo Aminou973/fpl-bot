@@ -130,8 +130,7 @@ teams:
     free_transfers: 1      # pinned 2026-08-27: same as the other team
     blurb: >-
       Ceiling team - optimised for the 85th-percentile outcome rather than the
-      average one, with a negative template tilt and at least six players under
-      10% owned. Deliberately holds a different squad from the main team: the
+      average one, with at least three players under 10% owned. Deliberately holds a different squad from the main team: the
       two exist to be compared, and two convergent teams compare nothing.
     hit_threshold: 6       # same trade discipline as the main team
     allow_hits: false      # owner's rule 2026-09-18: never pay points on a
@@ -145,14 +144,20 @@ teams:
     #   6 players under 10% owned .. 14/15
     #   objective: ceiling (q85) ....  8/15  at HIGHER xp than the baseline
     # So the separation comes from the objective, not from rarity quotas.
+    # Loosened 2026-10-31 (season review, owner: "update the logic"): after
+    # GW8 this team was 396 pts vs a 461 average (-65; beat the average in 2
+    # of 8 weeks) while the template-safe team was +30. The -0.3 tilt and the
+    # 6-differential floor kept it OFF the season's real performers (De Cuyper,
+    # Groß, Rogers, Palmer - 84-100% of the top 50 own them). The ceiling
+    # objective stays: it alone keeps the squads different (8/15 above).
     objective: ceiling     # optimise the simulated q85 upside, not the mean
     rank:
       alpha: 0.5
-      tilt: -0.3           # fades the field instead of buying it (signed tilt)
+      tilt: 0.0            # was -0.3: stop fading players because they are owned
       elite_weight: 0.5    # still reads the top-50 template, at half weight
     min_differentials:     # a floor on rarity so it cannot drift back to the
-      count: 6             # field template even if the ceiling squad happens
-      max_ownership: 10    # to be popular that week
+      count: 3             # field template (was 6)
+      max_ownership: 10
     # ------------------------------------------------------------------
     # ALL FOUR CHIPS DELEGATED TO THE BOT — owner instruction 2026-08-31
     # ("i delegate all both team & chips to you").

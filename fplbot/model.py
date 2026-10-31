@@ -85,6 +85,31 @@ def minutes_prior(apps, starts):
     return float(min(max(pred / 38.0, 0.02), 0.85))
 
 
+RECENT_GWS = 6          # this season's last N gameweeks read for start share
+RECENT_K = 4.0          # gameweeks of evidence at which recent form gets half
+RECENT_W_MAX = 0.65     # never let a short run overrule the long view entirely
+
+
+def recent_starts(gw26, n=RECENT_GWS):
+    """{element: (start rate, gameweeks seen)} over this season's last n weeks.
+
+    The start-share model above predicts a whole season from last season's
+    starts and the price - right in August, wrong by October: it rated
+    De Cuyper, Cherki and N.Jackson at 30-50% while they started every week
+    and the top 50 managers owned them at 64-90% (GW9 2026-27 review). What a
+    player has started lately is the best guide to whether he starts next.
+    Only gameweeks with a fixture count, so a blank does not read as benched.
+    """
+    if gw26 is None or not len(gw26) or "starts" not in gw26:
+        return {}
+    g = gw26[gw26["fixture"].notna()] if "fixture" in gw26 else gw26
+    last = sorted(g.GW.unique())[-n:]
+    g = g[g.GW.isin(last)]
+    per = g.groupby(["element", "GW"]).starts.max().clip(0, 1)
+    agg = per.groupby(level=0).agg(["mean", "size"])
+    return {int(e): (float(r["mean"]), int(r["size"])) for e, r in agg.iterrows()}
+
+
 # Premier League clubs win roughly 5.5 penalties a season and convert about 79%,
 # so being the designated taker is worth about 0.115 goals a game. Only the CHANGE
 # in that role is applied: a player who took them last season already has those
@@ -423,9 +448,15 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None,
 
     # --- goalkeeper depth chart: exactly one keeper plays for each club.
     # Rank each club's keepers by price, then by 2025/26 starts.
+    recent = recent_starts(gw26)
     gk = j[j.element_type == 1].copy()
     gk["_starts"] = gk.n_starts.fillna(0)
-    gk = gk.sort_values(["team", "now_cost", "_starts"], ascending=[True, False, False])
+    # this season's keeper first: whoever has been in goal lately keeps the
+    # gloves, whatever he cost (Tzolakis, the season's top-scoring keeper,
+    # was ranked behind a dearer back-up and projected at 1.3 a week)
+    gk["_recent"] = [recent.get(int(i), (0.0, 0))[0] for i in gk.id]
+    gk = gk.sort_values(["team", "_recent", "now_cost", "_starts"],
+                        ascending=[True, False, False, False])
     gk_rank = {}
     for tid, grp in gk.groupby("team"):
         for i, code in enumerate(grp.code.values):
@@ -449,6 +480,10 @@ def build(horizon=5, start_gw=1, frames=None, gw26=None, prev_frames=None,
             share = 0.5 * hist + 0.5 * prior_share if hist is not None else prior_share
         else:
             share = prior_share
+        rr = recent.get(int(r.id))
+        if rr is not None:
+            w = min(rr[1] / (rr[1] + RECENT_K), RECENT_W_MAX)
+            share = (1 - w) * share + w * rr[0]
         avail = availability(r)
         nr = news_map.get(int(r.id))
         if nr is not None and nr < 1.0 and r.status == "d":
