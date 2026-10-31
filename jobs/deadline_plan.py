@@ -583,7 +583,7 @@ def main():
     bundle["elite"] = elite
 
     # the submitter's audit log, so the dashboard can show its own state
-    automation = {"apply_window": 36, "ft_pin": any(
+    automation = {"apply_window": 12, "ft_pin": any(
         t.get("free_transfers") is not None for t in cfg["teams"].values())}
     sub = pipeline.read_state("auto_submit", {"gws": {}})
     last_gw = max(sub.get("gws", {}), key=int, default=None)

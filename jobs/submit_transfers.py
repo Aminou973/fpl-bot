@@ -7,7 +7,8 @@ pure dry run: login, read the live squad, print exactly what would change, exit.
 Guards, in order — a submit job acting unattended must refuse rather than
 guess:
   1. the plan must be for the gameweek whose deadline is actually next
-  2. the plan must be fresh (deadline within the act window, default 36h)
+  2. the plan must be fresh (deadline within the act window, default 36h);
+     writes happen only in the last 12h (--apply-window), earlier runs are dry
   3. the plan's squads must have come from the API (never the config fallback)
   4. if the live squad already equals the plan, do nothing
   5. a chip in the plan (engine 7's wildcard) must be unspent in the live
@@ -421,6 +422,10 @@ def main():
     ap.add_argument("--untested", action="store_true",
                     help="allow --apply without a prior successful dry run "
                          "for this gameweek (local debugging only)")
+    ap.add_argument("--apply-window", type=float, default=12.0,
+                    help="hours before deadline inside which --apply may write; "
+                         "earlier runs are dry runs (owner 2026-10-31: apply "
+                         "only on deadline day, after the late team news)")
     ap.add_argument("--window", type=float, default=36.0,
                     help="hours before deadline inside which submission is allowed")
     a = ap.parse_args()
@@ -452,6 +457,10 @@ def main():
                   f"{a.window:.0f}h window, nothing to do")
             return
         print(f"GW{gw} deadline in {hrs:.1f}h")
+        if a.apply and not a.force and hrs > a.apply_window:
+            print(f"apply held: lineups are written only in the last "
+                  f"{a.apply_window:.0f}h before the deadline — dry run now")
+            a.apply = False
 
     # only teams whose plan came from the live API squad are submittable
     teams = [a.team] if a.team else [n for n in cfg["teams"] if n in plan["teams"]]
