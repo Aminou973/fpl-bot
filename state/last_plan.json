@@ -1,25 +1,25 @@
 {
- "deadline": "2026-10-31T11:00:00Z",
- "generated": "2026-10-31T10:00:56.005158+00:00",
- "gw": 9,
+ "deadline": "2026-11-06T18:30:00Z",
+ "generated": "2026-10-31T13:31:55.807848+00:00",
+ "gw": 10,
  "teams": {
   "Minoux_41": {
    "bench": [
     82,
-    200,
+    155,
     79,
     441
    ],
-   "captain": 40,
+   "captain": 480,
    "chip": null,
    "chip_gain": null,
    "entry": 4896428,
    "hits": 0,
    "in": [
-    68
+    389
    ],
    "out": [
-    368
+    200
    ],
    "picks_payload": [
     {
@@ -53,26 +53,26 @@
      "position": 5
     },
     {
-     "element": 40,
-     "is_captain": true,
+     "element": 389,
+     "is_captain": false,
      "is_vice": false,
      "position": 6
     },
     {
-     "element": 427,
+     "element": 40,
      "is_captain": false,
      "is_vice": false,
      "position": 7
     },
     {
-     "element": 480,
+     "element": 427,
      "is_captain": false,
      "is_vice": true,
      "position": 8
     },
     {
-     "element": 155,
-     "is_captain": false,
+     "element": 480,
+     "is_captain": true,
      "is_vice": false,
      "position": 9
     },
@@ -95,7 +95,7 @@
      "position": 12
     },
     {
-     "element": 200,
+     "element": 155,
      "is_captain": false,
      "is_vice": false,
      "position": 13
@@ -114,20 +114,20 @@
     }
    ],
    "squad": [
-    82,
+    226,
     4,
     356,
     388,
-    200,
+    229,
     480,
     40,
-    427,
     155,
+    68,
     79,
     106,
-    226,
-    229,
-    368,
+    82,
+    427,
+    200,
     441
    ],
    "squad_after": [
@@ -137,28 +137,28 @@
     82,
     106,
     40,
-    200,
     226,
     229,
     356,
     155,
     388,
+    389,
     427,
     441,
     480
    ],
    "squad_source": "api",
-   "vice": 480,
+   "vice": 427,
    "xi": [
     226,
     4,
     356,
     229,
     388,
+    389,
     40,
     427,
     480,
-    155,
     68,
     106
    ]
@@ -166,7 +166,7 @@
   "Minoux_69": {
    "bench": [
     109,
-    259,
+    94,
     212,
     272
    ],
@@ -175,8 +175,12 @@
    "chip_gain": null,
    "entry": 4894622,
    "hits": 0,
-   "in": [],
-   "out": [],
+   "in": [
+    4
+   ],
+   "out": [
+    259
+   ],
    "picks_payload": [
     {
      "element": 1,
@@ -185,45 +189,45 @@
      "position": 1
     },
     {
-     "element": 229,
+     "element": 4,
      "is_captain": false,
      "is_vice": false,
      "position": 2
     },
     {
-     "element": 388,
+     "element": 229,
      "is_captain": false,
      "is_vice": false,
      "position": 3
     },
     {
-     "element": 498,
+     "element": 388,
      "is_captain": false,
      "is_vice": false,
      "position": 4
     },
     {
-     "element": 330,
+     "element": 498,
      "is_captain": false,
      "is_vice": false,
      "position": 5
     },
     {
-     "element": 40,
+     "element": 330,
      "is_captain": false,
-     "is_vice": true,
+     "is_vice": false,
      "position": 6
     },
     {
-     "element": 480,
+     "element": 40,
      "is_captain": false,
      "is_vice": false,
      "position": 7
     },
     {
-     "element": 94,
+     "element": 480,
      "is_captain": false,
-     "is_vice": false,
+     "is_vice": true,
      "position": 8
     },
     {
@@ -251,7 +255,7 @@
      "position": 12
     },
     {
-     "element": 259,
+     "element": 94,
      "is_captain": false,
      "is_vice": false,
      "position": 13
@@ -288,6 +292,7 @@
    ],
    "squad_after": [
     1,
+    4,
     94,
     109,
     124,
@@ -295,7 +300,6 @@
     212,
     229,
     272,
-    259,
     330,
     346,
     388,
@@ -304,16 +308,16 @@
     498
    ],
    "squad_source": "api",
-   "vice": 40,
+   "vice": 480,
    "xi": [
     1,
+    4,
     229,
     388,
     498,
     330,
     40,
     480,
-    94,
     124,
     411,
     346
