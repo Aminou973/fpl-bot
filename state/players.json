@@ -5,8 +5,8 @@
   "news": "",
   "selected_by": 46.3,
   "status": "a",
-  "tin": 8351,
-  "tout": 1241
+  "tin": 11688,
+  "tout": 2054
  },
  "10": {
   "chance": 100,
@@ -14,8 +14,8 @@
   "news": "",
   "selected_by": 4.8,
   "status": "a",
-  "tin": 3771,
-  "tout": 494
+  "tin": 5123,
+  "tout": 768
  },
  "100": {
   "chance": 0,
@@ -24,7 +24,7 @@
   "selected_by": 0.0,
   "status": "i",
   "tin": 2,
-  "tout": 56
+  "tout": 71
  },
  "101": {
   "chance": 75,
@@ -32,8 +32,8 @@
   "news": "Illness - 75% chance of playing",
   "selected_by": 1.7,
   "status": "d",
-  "tin": 566,
-  "tout": 4110
+  "tin": 645,
+  "tout": 5650
  },
  "102": {
   "chance": 100,
@@ -41,8 +41,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 16,
-  "tout": 336
+  "tin": 35,
+  "tout": 422
  },
  "103": {
   "chance": 0,
@@ -59,8 +59,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 8,
-  "tout": 26
+  "tin": 9,
+  "tout": 43
  },
  "105": {
   "chance": null,
@@ -68,8 +68,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 48,
-  "tout": 203
+  "tin": 73,
+  "tout": 274
  },
  "106": {
   "chance": null,
@@ -77,8 +77,8 @@
   "news": "",
   "selected_by": 9.2,
   "status": "a",
-  "tin": 4524,
-  "tout": 2415
+  "tin": 6336,
+  "tout": 3485
  },
  "107": {
   "chance": 0,
@@ -86,8 +86,8 @@
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.6,
   "status": "i",
-  "tin": 13,
-  "tout": 379
+  "tin": 15,
+  "tout": 551
  },
  "108": {
   "chance": null,
@@ -95,17 +95,17 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 37,
-  "tout": 83
+  "tin": 53,
+  "tout": 121
  },
  "109": {
   "chance": null,
   "cost": 46,
   "news": "",
-  "selected_by": 22.5,
+  "selected_by": 22.6,
   "status": "a",
-  "tin": 9710,
-  "tout": 1720
+  "tin": 16671,
+  "tout": 2182
  },
  "11": {
   "chance": 100,
@@ -113,8 +113,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 54,
-  "tout": 266
+  "tin": 74,
+  "tout": 397
  },
  "110": {
   "chance": null,
@@ -122,8 +122,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 44,
-  "tout": 212
+  "tin": 68,
+  "tout": 340
  },
  "111": {
   "chance": null,
@@ -131,17 +131,17 @@
   "news": "",
   "selected_by": 3.6,
   "status": "a",
-  "tin": 155,
-  "tout": 927
+  "tin": 245,
+  "tout": 1523
  },
  "112": {
   "chance": 100,
   "cost": 49,
   "news": "",
-  "selected_by": 9.4,
+  "selected_by": 9.7,
   "status": "a",
-  "tin": 3668,
-  "tout": 823
+  "tin": 33357,
+  "tout": 1009
  },
  "113": {
   "chance": 75,
@@ -149,8 +149,8 @@
   "news": "Hip injury - 75% chance of playing",
   "selected_by": 1.5,
   "status": "d",
-  "tin": 73,
-  "tout": 1374
+  "tin": 85,
+  "tout": 2088
  },
  "114": {
   "chance": null,
@@ -158,17 +158,17 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 415,
-  "tout": 169
+  "tin": 684,
+  "tout": 241
  },
  "115": {
   "chance": null,
   "cost": 53,
   "news": "",
-  "selected_by": 43.8,
+  "selected_by": 44.0,
   "status": "a",
-  "tin": 30075,
-  "tout": 778
+  "tin": 45791,
+  "tout": 1030
  },
  "116": {
   "chance": 100,
@@ -176,8 +176,8 @@
   "news": "",
   "selected_by": 1.4,
   "status": "a",
-  "tin": 640,
-  "tout": 265
+  "tin": 939,
+  "tout": 384
  },
  "117": {
   "chance": null,
@@ -185,7 +185,7 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 7,
+  "tin": 8,
   "tout": 6
  },
  "118": {
@@ -195,7 +195,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 7
+  "tout": 11
  },
  "119": {
   "chance": null,
@@ -203,17 +203,17 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 27,
-  "tout": 8
+  "tin": 45,
+  "tout": 11
  },
  "12": {
   "chance": 0,
   "cost": 95,
   "news": "Thigh injury - Unknown return date",
-  "selected_by": 6.7,
+  "selected_by": 6.6,
   "status": "i",
-  "tin": 33,
-  "tout": 10892
+  "tin": 62,
+  "tout": 15072
  },
  "120": {
   "chance": null,
@@ -221,8 +221,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 22,
-  "tout": 31
+  "tin": 31,
+  "tout": 44
  },
  "121": {
   "chance": 0,
@@ -230,8 +230,8 @@
   "news": "Hamstring injury - Expected back 22 Nov",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 3,
-  "tout": 17
+  "tin": 5,
+  "tout": 20
  },
  "122": {
   "chance": 100,
@@ -239,8 +239,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 68,
-  "tout": 9
+  "tin": 90,
+  "tout": 14
  },
  "123": {
   "chance": 100,
@@ -248,8 +248,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 160,
-  "tout": 269
+  "tin": 252,
+  "tout": 421
  },
  "124": {
   "chance": null,
@@ -257,8 +257,8 @@
   "news": "",
   "selected_by": 46.7,
   "status": "a",
-  "tin": 11900,
-  "tout": 4780
+  "tin": 17527,
+  "tout": 8766
  },
  "125": {
   "chance": 100,
@@ -266,8 +266,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 163,
-  "tout": 242
+  "tin": 218,
+  "tout": 360
  },
  "126": {
   "chance": null,
@@ -275,8 +275,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 19,
-  "tout": 35
+  "tin": 27,
+  "tout": 52
  },
  "127": {
   "chance": null,
@@ -284,8 +284,8 @@
   "news": "",
   "selected_by": 4.0,
   "status": "a",
-  "tin": 1656,
-  "tout": 1181
+  "tin": 2351,
+  "tout": 1841
  },
  "128": {
   "chance": 0,
@@ -302,8 +302,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 7977,
-  "tout": 179
+  "tin": 13905,
+  "tout": 265
  },
  "13": {
   "chance": 75,
@@ -311,8 +311,8 @@
   "news": "Unspecified injury - 75% chance of playing",
   "selected_by": 11.8,
   "status": "d",
-  "tin": 1015,
-  "tout": 6779
+  "tin": 1430,
+  "tout": 9198
  },
  "130": {
   "chance": 100,
@@ -320,8 +320,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 33,
-  "tout": 12
+  "tin": 44,
+  "tout": 24
  },
  "131": {
   "chance": 100,
@@ -329,8 +329,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 148,
-  "tout": 298
+  "tin": 183,
+  "tout": 426
  },
  "132": {
   "chance": 0,
@@ -339,7 +339,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 8
+  "tout": 11
  },
  "133": {
   "chance": 0,
@@ -356,8 +356,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 23,
-  "tout": 93
+  "tin": 30,
+  "tout": 122
  },
  "135": {
   "chance": 0,
@@ -366,7 +366,7 @@
   "selected_by": 0.0,
   "status": "i",
   "tin": 2,
-  "tout": 13
+  "tout": 19
  },
  "136": {
   "chance": 100,
@@ -374,8 +374,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 247,
-  "tout": 534
+  "tin": 309,
+  "tout": 821
  },
  "137": {
   "chance": 0,
@@ -383,7 +383,7 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 4,
+  "tin": 5,
   "tout": 0
  },
  "138": {
@@ -392,8 +392,8 @@
   "news": "",
   "selected_by": 10.3,
   "status": "a",
-  "tin": 8910,
-  "tout": 5356
+  "tin": 11957,
+  "tout": 10058
  },
  "139": {
   "chance": 0,
@@ -401,8 +401,8 @@
   "news": "Ankle injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 2,
-  "tout": 12
+  "tin": 3,
+  "tout": 21
  },
  "14": {
   "chance": null,
@@ -410,8 +410,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 518,
-  "tout": 257
+  "tin": 706,
+  "tout": 356
  },
  "140": {
   "chance": 0,
@@ -420,7 +420,7 @@
   "selected_by": 0.6,
   "status": "u",
   "tin": 0,
-  "tout": 105
+  "tout": 152
  },
  "141": {
   "chance": 0,
@@ -429,7 +429,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 1
+  "tout": 3
  },
  "142": {
   "chance": 0,
@@ -437,8 +437,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 3.4,
   "status": "i",
-  "tin": 5,
-  "tout": 1765
+  "tin": 9,
+  "tout": 2391
  },
  "143": {
   "chance": 0,
@@ -447,7 +447,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 1
+  "tout": 2
  },
  "144": {
   "chance": 100,
@@ -455,8 +455,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 54,
-  "tout": 243
+  "tin": 78,
+  "tout": 324
  },
  "145": {
   "chance": 100,
@@ -464,8 +464,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 616,
-  "tout": 43
+  "tin": 814,
+  "tout": 65
  },
  "146": {
   "chance": 0,
@@ -474,7 +474,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 1
+  "tout": 2
  },
  "147": {
   "chance": 0,
@@ -482,8 +482,8 @@
   "news": "Calf injury - Unknown return date",
   "selected_by": 0.1,
   "status": "i",
-  "tin": 1,
-  "tout": 77
+  "tin": 2,
+  "tout": 102
  },
  "148": {
   "chance": 0,
@@ -491,8 +491,8 @@
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 0.7,
   "status": "i",
-  "tin": 7,
-  "tout": 1986
+  "tin": 8,
+  "tout": 2766
  },
  "149": {
   "chance": null,
@@ -500,8 +500,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 636,
-  "tout": 122
+  "tin": 854,
+  "tout": 193
  },
  "15": {
   "chance": null,
@@ -509,8 +509,8 @@
   "news": "",
   "selected_by": 16.8,
   "status": "a",
-  "tin": 3987,
-  "tout": 5082
+  "tin": 5749,
+  "tout": 7529
  },
  "150": {
   "chance": 0,
@@ -519,7 +519,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 0
+  "tout": 1
  },
  "151": {
   "chance": null,
@@ -527,8 +527,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 1583,
-  "tout": 72
+  "tin": 2183,
+  "tout": 115
  },
  "152": {
   "chance": 100,
@@ -536,8 +536,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 316,
-  "tout": 86
+  "tin": 394,
+  "tout": 130
  },
  "153": {
   "chance": 100,
@@ -545,8 +545,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 22,
-  "tout": 14
+  "tin": 34,
+  "tout": 18
  },
  "154": {
   "chance": 100,
@@ -554,8 +554,8 @@
   "news": "",
   "selected_by": 27.5,
   "status": "a",
-  "tin": 23850,
-  "tout": 3522
+  "tin": 34418,
+  "tout": 4669
  },
  "155": {
   "chance": null,
@@ -563,8 +563,8 @@
   "news": "",
   "selected_by": 3.8,
   "status": "a",
-  "tin": 866,
-  "tout": 1681
+  "tin": 1112,
+  "tout": 2671
  },
  "156": {
   "chance": null,
@@ -572,8 +572,8 @@
   "news": "",
   "selected_by": 4.8,
   "status": "a",
-  "tin": 6328,
-  "tout": 2726
+  "tin": 9050,
+  "tout": 3970
  },
  "157": {
   "chance": null,
@@ -581,8 +581,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 1811,
-  "tout": 142
+  "tin": 2353,
+  "tout": 206
  },
  "158": {
   "chance": 0,
@@ -591,7 +591,7 @@
   "selected_by": 0.0,
   "status": "i",
   "tin": 4,
-  "tout": 4
+  "tout": 6
  },
  "159": {
   "chance": 100,
@@ -599,8 +599,8 @@
   "news": "",
   "selected_by": 1.1,
   "status": "a",
-  "tin": 429,
-  "tout": 252
+  "tin": 556,
+  "tout": 360
  },
  "16": {
   "chance": 50,
@@ -608,8 +608,8 @@
   "news": "Ankle injury - 50% chance of playing",
   "selected_by": 0.4,
   "status": "d",
-  "tin": 25,
-  "tout": 450
+  "tin": 38,
+  "tout": 647
  },
  "160": {
   "chance": null,
@@ -617,8 +617,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 29,
-  "tout": 84
+  "tin": 49,
+  "tout": 114
  },
  "161": {
   "chance": null,
@@ -626,8 +626,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 338,
-  "tout": 41
+  "tin": 467,
+  "tout": 65
  },
  "162": {
   "chance": null,
@@ -635,8 +635,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 168,
-  "tout": 220
+  "tin": 221,
+  "tout": 304
  },
  "163": {
   "chance": 0,
@@ -645,7 +645,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 24
+  "tout": 37
  },
  "164": {
   "chance": 100,
@@ -653,26 +653,26 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 8,
-  "tout": 19
+  "tin": 10,
+  "tout": 25
  },
  "165": {
   "chance": 0,
   "cost": 78,
   "news": "Thigh injury - Unknown return date",
-  "selected_by": 45.0,
+  "selected_by": 44.3,
   "status": "i",
-  "tin": 328,
-  "tout": 165697
+  "tin": 441,
+  "tout": 241747
  },
  "166": {
   "chance": null,
   "cost": 69,
   "news": "",
-  "selected_by": 23.4,
+  "selected_by": 23.8,
   "status": "a",
-  "tin": 44079,
-  "tout": 1941
+  "tin": 84051,
+  "tout": 2813
  },
  "167": {
   "chance": null,
@@ -680,8 +680,8 @@
   "news": "",
   "selected_by": 1.6,
   "status": "a",
-  "tin": 319,
-  "tout": 1633
+  "tin": 401,
+  "tout": 2898
  },
  "168": {
   "chance": 0,
@@ -690,7 +690,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 51
+  "tout": 62
  },
  "169": {
   "chance": null,
@@ -698,8 +698,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 131,
-  "tout": 184
+  "tin": 158,
+  "tout": 262
  },
  "17": {
   "chance": null,
@@ -707,8 +707,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 72,
-  "tout": 126
+  "tin": 110,
+  "tout": 163
  },
  "170": {
   "chance": 100,
@@ -716,8 +716,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 82,
-  "tout": 57
+  "tin": 114,
+  "tout": 80
  },
  "171": {
   "chance": 0,
@@ -726,7 +726,7 @@
   "selected_by": 0.8,
   "status": "u",
   "tin": 0,
-  "tout": 195
+  "tout": 297
  },
  "172": {
   "chance": null,
@@ -735,7 +735,7 @@
   "selected_by": 0.3,
   "status": "a",
   "tin": 7,
-  "tout": 29
+  "tout": 45
  },
  "173": {
   "chance": 50,
@@ -743,8 +743,8 @@
   "news": "Calf injury - 50% chance of playing",
   "selected_by": 8.5,
   "status": "d",
-  "tin": 186,
-  "tout": 6111
+  "tin": 262,
+  "tout": 10247
  },
  "174": {
   "chance": 0,
@@ -753,7 +753,7 @@
   "selected_by": 0.3,
   "status": "u",
   "tin": 0,
-  "tout": 61
+  "tout": 89
  },
  "175": {
   "chance": 100,
@@ -761,8 +761,8 @@
   "news": "",
   "selected_by": 7.1,
   "status": "a",
-  "tin": 1059,
-  "tout": 1430
+  "tin": 1567,
+  "tout": 2458
  },
  "176": {
   "chance": null,
@@ -770,8 +770,8 @@
   "news": "",
   "selected_by": 1.5,
   "status": "a",
-  "tin": 255,
-  "tout": 417
+  "tin": 383,
+  "tout": 705
  },
  "177": {
   "chance": 100,
@@ -779,8 +779,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 48,
-  "tout": 17
+  "tin": 72,
+  "tout": 35
  },
  "178": {
   "chance": null,
@@ -788,8 +788,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 18,
-  "tout": 18
+  "tin": 26,
+  "tout": 26
  },
  "179": {
   "chance": null,
@@ -797,8 +797,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 18,
-  "tout": 15
+  "tin": 23,
+  "tout": 22
  },
  "18": {
   "chance": 0,
@@ -807,7 +807,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 12
+  "tout": 15
  },
  "180": {
   "chance": 0,
@@ -815,8 +815,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.1,
   "status": "i",
-  "tin": 14,
-  "tout": 46
+  "tin": 25,
+  "tout": 65
  },
  "181": {
   "chance": 0,
@@ -825,7 +825,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 7
+  "tout": 8
  },
  "182": {
   "chance": 0,
@@ -833,8 +833,8 @@
   "news": "Calf injury - Unknown return date",
   "selected_by": 0.4,
   "status": "i",
-  "tin": 9,
-  "tout": 147
+  "tin": 14,
+  "tout": 221
  },
  "183": {
   "chance": 100,
@@ -842,8 +842,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 1854,
-  "tout": 230
+  "tin": 3564,
+  "tout": 343
  },
  "184": {
   "chance": null,
@@ -851,8 +851,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 31,
-  "tout": 55
+  "tin": 43,
+  "tout": 72
  },
  "185": {
   "chance": null,
@@ -860,8 +860,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 75,
-  "tout": 11
+  "tin": 115,
+  "tout": 26
  },
  "186": {
   "chance": 100,
@@ -869,8 +869,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 6,
-  "tout": 20
+  "tin": 9,
+  "tout": 28
  },
  "187": {
   "chance": 0,
@@ -878,8 +878,8 @@
   "news": "Ankle injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 1,
-  "tout": 3
+  "tin": 3,
+  "tout": 5
  },
  "188": {
   "chance": null,
@@ -887,8 +887,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 3,
-  "tout": 11
+  "tin": 8,
+  "tout": 13
  },
  "189": {
   "chance": null,
@@ -896,8 +896,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 12,
-  "tout": 76
+  "tin": 20,
+  "tout": 101
  },
  "19": {
   "chance": 100,
@@ -905,8 +905,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 44,
-  "tout": 76
+  "tin": 59,
+  "tout": 106
  },
  "190": {
   "chance": null,
@@ -914,8 +914,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 3,
-  "tout": 11
+  "tin": 4,
+  "tout": 16
  },
  "191": {
   "chance": 0,
@@ -924,7 +924,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 18
+  "tout": 26
  },
  "192": {
   "chance": 0,
@@ -933,7 +933,7 @@
   "selected_by": 0.2,
   "status": "u",
   "tin": 0,
-  "tout": 72
+  "tout": 94
  },
  "193": {
   "chance": 0,
@@ -941,8 +941,8 @@
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.1,
   "status": "i",
-  "tin": 2,
-  "tout": 21
+  "tin": 4,
+  "tout": 26
  },
  "194": {
   "chance": null,
@@ -950,8 +950,8 @@
   "news": "",
   "selected_by": 1.1,
   "status": "a",
-  "tin": 636,
-  "tout": 845
+  "tin": 848,
+  "tout": 1347
  },
  "195": {
   "chance": null,
@@ -959,8 +959,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 214,
-  "tout": 393
+  "tin": 290,
+  "tout": 644
  },
  "196": {
   "chance": 0,
@@ -969,7 +969,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 1
+  "tout": 3
  },
  "197": {
   "chance": 0,
@@ -978,7 +978,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 6
+  "tout": 8
  },
  "198": {
   "chance": 100,
@@ -986,8 +986,8 @@
   "news": "",
   "selected_by": 1.0,
   "status": "a",
-  "tin": 98,
-  "tout": 90
+  "tin": 146,
+  "tout": 147
  },
  "199": {
   "chance": null,
@@ -995,8 +995,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 22,
-  "tout": 44
+  "tin": 27,
+  "tout": 79
  },
  "2": {
   "chance": null,
@@ -1004,8 +1004,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 5,
-  "tout": 11
+  "tin": 9,
+  "tout": 13
  },
  "20": {
   "chance": 0,
@@ -1013,8 +1013,8 @@
   "news": "Suspended until 29 Nov",
   "selected_by": 0.1,
   "status": "s",
-  "tin": 4,
-  "tout": 71
+  "tin": 7,
+  "tout": 99
  },
  "200": {
   "chance": 0,
@@ -1022,8 +1022,8 @@
   "news": "Hamstring injury - Unknown return date",
   "selected_by": 5.5,
   "status": "i",
-  "tin": 15,
-  "tout": 11822
+  "tin": 23,
+  "tout": 15735
  },
  "201": {
   "chance": null,
@@ -1031,8 +1031,8 @@
   "news": "",
   "selected_by": 4.6,
   "status": "a",
-  "tin": 158,
-  "tout": 2421
+  "tin": 200,
+  "tout": 4403
  },
  "202": {
   "chance": null,
@@ -1040,8 +1040,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 51,
-  "tout": 136
+  "tin": 65,
+  "tout": 225
  },
  "203": {
   "chance": null,
@@ -1049,8 +1049,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 9,
-  "tout": 39
+  "tin": 11,
+  "tout": 56
  },
  "204": {
   "chance": null,
@@ -1058,8 +1058,8 @@
   "news": "",
   "selected_by": 5.1,
   "status": "a",
-  "tin": 112,
-  "tout": 1995
+  "tin": 174,
+  "tout": 3504
  },
  "205": {
   "chance": 0,
@@ -1077,7 +1077,7 @@
   "selected_by": 0.0,
   "status": "i",
   "tin": 2,
-  "tout": 2
+  "tout": 3
  },
  "207": {
   "chance": null,
@@ -1085,8 +1085,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 3,
-  "tout": 10
+  "tin": 5,
+  "tout": 21
  },
  "208": {
   "chance": 0,
@@ -1094,8 +1094,8 @@
   "news": "Groin injury - Expected back 8 Nov",
   "selected_by": 0.6,
   "status": "i",
-  "tin": 7,
-  "tout": 415
+  "tin": 12,
+  "tout": 588
  },
  "209": {
   "chance": null,
@@ -1103,8 +1103,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 27,
-  "tout": 33
+  "tin": 40,
+  "tout": 49
  },
  "21": {
   "chance": 100,
@@ -1112,8 +1112,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 26,
-  "tout": 11
+  "tin": 30,
+  "tout": 13
  },
  "210": {
   "chance": 100,
@@ -1121,8 +1121,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 52,
-  "tout": 189
+  "tin": 68,
+  "tout": 288
  },
  "211": {
   "chance": null,
@@ -1130,8 +1130,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 68,
-  "tout": 175
+  "tin": 84,
+  "tout": 315
  },
  "212": {
   "chance": null,
@@ -1139,8 +1139,8 @@
   "news": "",
   "selected_by": 5.8,
   "status": "a",
-  "tin": 1135,
-  "tout": 2026
+  "tin": 1676,
+  "tout": 3059
  },
  "213": {
   "chance": null,
@@ -1148,8 +1148,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 41,
-  "tout": 46
+  "tin": 46,
+  "tout": 67
  },
  "214": {
   "chance": null,
@@ -1157,8 +1157,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 191,
-  "tout": 418
+  "tin": 231,
+  "tout": 732
  },
  "215": {
   "chance": 0,
@@ -1185,7 +1185,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 3
+  "tout": 5
  },
  "218": {
   "chance": null,
@@ -1193,8 +1193,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 5,
-  "tout": 17
+  "tin": 6,
+  "tout": 23
  },
  "219": {
   "chance": 0,
@@ -1229,8 +1229,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 5,
-  "tout": 38
+  "tin": 7,
+  "tout": 47
  },
  "222": {
   "chance": 75,
@@ -1238,8 +1238,8 @@
   "news": "Ankle injury - 75% chance of playing",
   "selected_by": 0.5,
   "status": "d",
-  "tin": 15,
-  "tout": 490
+  "tin": 17,
+  "tout": 731
  },
  "223": {
   "chance": 0,
@@ -1247,8 +1247,8 @@
   "news": "Suspended until 2 Dec",
   "selected_by": 1.2,
   "status": "s",
-  "tin": 409,
-  "tout": 393
+  "tin": 411,
+  "tout": 943
  },
  "224": {
   "chance": 100,
@@ -1256,8 +1256,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 68,
-  "tout": 138
+  "tin": 83,
+  "tout": 223
  },
  "225": {
   "chance": 0,
@@ -1274,8 +1274,8 @@
   "news": "",
   "selected_by": 8.5,
   "status": "a",
-  "tin": 1072,
-  "tout": 1177
+  "tin": 1514,
+  "tout": 1778
  },
  "227": {
   "chance": null,
@@ -1283,8 +1283,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 20,
-  "tout": 15
+  "tin": 25,
+  "tout": 22
  },
  "228": {
   "chance": null,
@@ -1292,8 +1292,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 7,
-  "tout": 8
+  "tin": 12,
+  "tout": 11
  },
  "229": {
   "chance": null,
@@ -1301,8 +1301,8 @@
   "news": "",
   "selected_by": 18.9,
   "status": "a",
-  "tin": 7166,
-  "tout": 2407
+  "tin": 9353,
+  "tout": 4050
  },
  "23": {
   "chance": 0,
@@ -1319,8 +1319,8 @@
   "news": "Concussion - 75% chance of playing",
   "selected_by": 2.2,
   "status": "d",
-  "tin": 52,
-  "tout": 1929
+  "tin": 71,
+  "tout": 2785
  },
  "231": {
   "chance": null,
@@ -1328,8 +1328,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 39,
-  "tout": 109
+  "tin": 59,
+  "tout": 154
  },
  "232": {
   "chance": null,
@@ -1337,8 +1337,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 54,
-  "tout": 23
+  "tin": 80,
+  "tout": 34
  },
  "233": {
   "chance": 100,
@@ -1346,8 +1346,8 @@
   "news": "",
   "selected_by": 2.4,
   "status": "a",
-  "tin": 407,
-  "tout": 494
+  "tin": 585,
+  "tout": 970
  },
  "234": {
   "chance": 0,
@@ -1356,7 +1356,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 1
+  "tout": 3
  },
  "235": {
   "chance": 0,
@@ -1365,7 +1365,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 19
+  "tout": 27
  },
  "236": {
   "chance": null,
@@ -1373,8 +1373,8 @@
   "news": "",
   "selected_by": 6.1,
   "status": "a",
-  "tin": 3384,
-  "tout": 1210
+  "tin": 5073,
+  "tout": 1878
  },
  "237": {
   "chance": null,
@@ -1382,8 +1382,8 @@
   "news": "",
   "selected_by": 5.5,
   "status": "a",
-  "tin": 1776,
-  "tout": 1645
+  "tin": 2449,
+  "tout": 2704
  },
  "238": {
   "chance": 100,
@@ -1391,8 +1391,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 133,
-  "tout": 138
+  "tin": 191,
+  "tout": 198
  },
  "239": {
   "chance": 100,
@@ -1400,8 +1400,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 150,
-  "tout": 77
+  "tin": 216,
+  "tout": 125
  },
  "24": {
   "chance": 0,
@@ -1418,8 +1418,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 60,
-  "tout": 14
+  "tin": 120,
+  "tout": 20
  },
  "241": {
   "chance": null,
@@ -1427,8 +1427,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 3,
-  "tout": 11
+  "tin": 5,
+  "tout": 16
  },
  "242": {
   "chance": null,
@@ -1436,8 +1436,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 76,
-  "tout": 244
+  "tin": 109,
+  "tout": 350
  },
  "243": {
   "chance": null,
@@ -1445,8 +1445,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 4,
-  "tout": 13
+  "tin": 6,
+  "tout": 21
  },
  "244": {
   "chance": 100,
@@ -1454,8 +1454,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 64,
-  "tout": 113
+  "tin": 80,
+  "tout": 157
  },
  "245": {
   "chance": null,
@@ -1463,8 +1463,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 6,
-  "tout": 6
+  "tin": 7,
+  "tout": 7
  },
  "246": {
   "chance": 100,
@@ -1472,8 +1472,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 16,
-  "tout": 8
+  "tin": 24,
+  "tout": 13
  },
  "247": {
   "chance": 100,
@@ -1481,8 +1481,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 23,
-  "tout": 25
+  "tin": 39,
+  "tout": 37
  },
  "248": {
   "chance": 0,
@@ -1491,7 +1491,7 @@
   "selected_by": 0.4,
   "status": "u",
   "tin": 0,
-  "tout": 126
+  "tout": 191
  },
  "249": {
   "chance": null,
@@ -1499,8 +1499,8 @@
   "news": "",
   "selected_by": 7.4,
   "status": "a",
-  "tin": 3438,
-  "tout": 2404
+  "tin": 4712,
+  "tout": 4365
  },
  "25": {
   "chance": null,
@@ -1508,8 +1508,8 @@
   "news": "",
   "selected_by": 3.1,
   "status": "a",
-  "tin": 860,
-  "tout": 514
+  "tin": 1120,
+  "tout": 739
  },
  "250": {
   "chance": null,
@@ -1517,8 +1517,8 @@
   "news": "",
   "selected_by": 4.5,
   "status": "a",
-  "tin": 707,
-  "tout": 742
+  "tin": 906,
+  "tout": 1261
  },
  "251": {
   "chance": null,
@@ -1526,8 +1526,8 @@
   "news": "",
   "selected_by": 1.1,
   "status": "a",
-  "tin": 50,
-  "tout": 102
+  "tin": 91,
+  "tout": 180
  },
  "252": {
   "chance": 0,
@@ -1536,7 +1536,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 16
+  "tout": 24
  },
  "253": {
   "chance": 100,
@@ -1544,8 +1544,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 31,
-  "tout": 62
+  "tin": 47,
+  "tout": 130
  },
  "254": {
   "chance": 100,
@@ -1553,8 +1553,8 @@
   "news": "",
   "selected_by": 1.3,
   "status": "a",
-  "tin": 225,
-  "tout": 252
+  "tin": 342,
+  "tout": 481
  },
  "255": {
   "chance": null,
@@ -1562,8 +1562,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 3,
-  "tout": 7
+  "tin": 4,
+  "tout": 10
  },
  "256": {
   "chance": 100,
@@ -1571,8 +1571,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 4,
-  "tout": 16
+  "tin": 6,
+  "tout": 28
  },
  "257": {
   "chance": null,
@@ -1580,8 +1580,8 @@
   "news": "",
   "selected_by": 1.3,
   "status": "a",
-  "tin": 489,
-  "tout": 285
+  "tin": 593,
+  "tout": 557
  },
  "258": {
   "chance": null,
@@ -1589,8 +1589,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 201,
-  "tout": 310
+  "tin": 257,
+  "tout": 607
  },
  "259": {
   "chance": null,
@@ -1598,8 +1598,8 @@
   "news": "",
   "selected_by": 10.3,
   "status": "a",
-  "tin": 712,
-  "tout": 2301
+  "tin": 997,
+  "tout": 4040
  },
  "26": {
   "chance": 100,
@@ -1607,8 +1607,8 @@
   "news": "",
   "selected_by": 5.5,
   "status": "a",
-  "tin": 2619,
-  "tout": 2285
+  "tin": 3413,
+  "tout": 3420
  },
  "260": {
   "chance": 100,
@@ -1616,8 +1616,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 59,
-  "tout": 207
+  "tin": 92,
+  "tout": 343
  },
  "261": {
   "chance": null,
@@ -1625,8 +1625,8 @@
   "news": "",
   "selected_by": 1.4,
   "status": "a",
-  "tin": 520,
-  "tout": 616
+  "tin": 702,
+  "tout": 1005
  },
  "262": {
   "chance": 100,
@@ -1634,8 +1634,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 17,
-  "tout": 43
+  "tin": 21,
+  "tout": 63
  },
  "263": {
   "chance": null,
@@ -1643,8 +1643,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 10,
-  "tout": 14
+  "tin": 14,
+  "tout": 16
  },
  "264": {
   "chance": null,
@@ -1652,8 +1652,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 512,
-  "tout": 210
+  "tin": 770,
+  "tout": 333
  },
  "265": {
   "chance": null,
@@ -1661,8 +1661,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 22,
-  "tout": 74
+  "tin": 30,
+  "tout": 104
  },
  "266": {
   "chance": 100,
@@ -1670,8 +1670,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 4,
-  "tout": 0
+  "tin": 5,
+  "tout": 1
  },
  "267": {
   "chance": 75,
@@ -1679,8 +1679,8 @@
   "news": "Groin injury - 75% chance of playing",
   "selected_by": 0.1,
   "status": "d",
-  "tin": 2,
-  "tout": 28
+  "tin": 3,
+  "tout": 37
  },
  "268": {
   "chance": null,
@@ -1688,17 +1688,17 @@
   "news": "",
   "selected_by": 3.8,
   "status": "a",
-  "tin": 521,
-  "tout": 2945
+  "tin": 700,
+  "tout": 6220
  },
  "269": {
-  "chance": 0,
+  "chance": 100,
   "cost": 43,
-  "news": "Suspended until 7 Nov",
+  "news": "",
   "selected_by": 0.2,
-  "status": "s",
+  "status": "a",
   "tin": 2,
-  "tout": 137
+  "tout": 220
  },
  "27": {
   "chance": 0,
@@ -1707,7 +1707,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 21
+  "tout": 28
  },
  "270": {
   "chance": null,
@@ -1715,17 +1715,17 @@
   "news": "",
   "selected_by": 1.0,
   "status": "a",
-  "tin": 950,
-  "tout": 398
+  "tin": 1369,
+  "tout": 604
  },
  "271": {
   "chance": null,
   "cost": 53,
   "news": "",
-  "selected_by": 0.4,
+  "selected_by": 0.3,
   "status": "a",
-  "tin": 46,
-  "tout": 97
+  "tin": 65,
+  "tout": 157
  },
  "272": {
   "chance": null,
@@ -1733,8 +1733,8 @@
   "news": "",
   "selected_by": 4.5,
   "status": "a",
-  "tin": 1552,
-  "tout": 2277
+  "tin": 2033,
+  "tout": 3732
  },
  "273": {
   "chance": null,
@@ -1742,8 +1742,8 @@
   "news": "",
   "selected_by": 1.3,
   "status": "a",
-  "tin": 65,
-  "tout": 170
+  "tin": 93,
+  "tout": 271
  },
  "274": {
   "chance": 50,
@@ -1751,8 +1751,8 @@
   "news": "Arm injury - 50% chance of playing",
   "selected_by": 0.1,
   "status": "d",
-  "tin": 4,
-  "tout": 11
+  "tin": 5,
+  "tout": 17
  },
  "275": {
   "chance": 0,
@@ -1761,7 +1761,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 2
+  "tout": 5
  },
  "276": {
   "chance": 0,
@@ -1770,16 +1770,16 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 4
+  "tout": 7
  },
  "277": {
   "chance": null,
   "cost": 41,
   "news": "",
-  "selected_by": 7.3,
+  "selected_by": 7.2,
   "status": "a",
-  "tin": 777,
-  "tout": 3726
+  "tin": 999,
+  "tout": 7224
  },
  "278": {
   "chance": 0,
@@ -1787,8 +1787,8 @@
   "news": "Groin injury - Unknown return date",
   "selected_by": 0.1,
   "status": "i",
-  "tin": 7,
-  "tout": 71
+  "tin": 12,
+  "tout": 113
  },
  "279": {
   "chance": 100,
@@ -1796,8 +1796,8 @@
   "news": "",
   "selected_by": 12.8,
   "status": "a",
-  "tin": 665,
-  "tout": 6170
+  "tin": 934,
+  "tout": 10534
  },
  "28": {
   "chance": 0,
@@ -1805,8 +1805,8 @@
   "news": "Head injury - Unknown return date",
   "selected_by": 3.3,
   "status": "i",
-  "tin": 25,
-  "tout": 2566
+  "tin": 32,
+  "tout": 3535
  },
  "280": {
   "chance": 100,
@@ -1814,8 +1814,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 69,
-  "tout": 172
+  "tin": 85,
+  "tout": 280
  },
  "281": {
   "chance": 0,
@@ -1824,7 +1824,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 6
+  "tout": 10
  },
  "282": {
   "chance": null,
@@ -1832,8 +1832,8 @@
   "news": "",
   "selected_by": 2.7,
   "status": "a",
-  "tin": 256,
-  "tout": 1529
+  "tin": 366,
+  "tout": 2792
  },
  "283": {
   "chance": 0,
@@ -1850,8 +1850,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 14,
-  "tout": 37
+  "tin": 19,
+  "tout": 55
  },
  "285": {
   "chance": 100,
@@ -1859,8 +1859,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 11,
-  "tout": 25
+  "tin": 18,
+  "tout": 35
  },
  "286": {
   "chance": null,
@@ -1868,8 +1868,8 @@
   "news": "",
   "selected_by": 10.2,
   "status": "a",
-  "tin": 4410,
-  "tout": 4501
+  "tin": 6967,
+  "tout": 6741
  },
  "287": {
   "chance": 0,
@@ -1878,7 +1878,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 6
+  "tout": 8
  },
  "288": {
   "chance": null,
@@ -1886,8 +1886,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 23,
-  "tout": 103
+  "tin": 31,
+  "tout": 145
  },
  "289": {
   "chance": 0,
@@ -1895,8 +1895,8 @@
   "news": "Suspended until 22 Nov",
   "selected_by": 0.6,
   "status": "s",
-  "tin": 128,
-  "tout": 364
+  "tin": 137,
+  "tout": 728
  },
  "29": {
   "chance": 100,
@@ -1904,8 +1904,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 14,
-  "tout": 17
+  "tin": 25,
+  "tout": 23
  },
  "290": {
   "chance": null,
@@ -1913,8 +1913,8 @@
   "news": "",
   "selected_by": 4.5,
   "status": "a",
-  "tin": 848,
-  "tout": 2138
+  "tin": 1211,
+  "tout": 3263
  },
  "291": {
   "chance": 0,
@@ -1931,8 +1931,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 4,
-  "tout": 5
+  "tin": 5,
+  "tout": 6
  },
  "293": {
   "chance": 0,
@@ -1949,8 +1949,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 8,
-  "tout": 28
+  "tin": 13,
+  "tout": 41
  },
  "295": {
   "chance": null,
@@ -1958,8 +1958,8 @@
   "news": "",
   "selected_by": 1.7,
   "status": "a",
-  "tin": 1167,
-  "tout": 782
+  "tin": 1931,
+  "tout": 1136
  },
  "296": {
   "chance": 0,
@@ -1968,7 +1968,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 7
+  "tout": 9
  },
  "297": {
   "chance": 0,
@@ -1976,8 +1976,8 @@
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 7,
-  "tout": 4
+  "tin": 12,
+  "tout": 8
  },
  "298": {
   "chance": 0,
@@ -1986,7 +1986,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 61
+  "tout": 89
  },
  "299": {
   "chance": 0,
@@ -1995,7 +1995,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 6
+  "tout": 13
  },
  "3": {
   "chance": null,
@@ -2003,8 +2003,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 4,
-  "tout": 3
+  "tin": 5,
+  "tout": 7
  },
  "30": {
   "chance": 0,
@@ -2013,7 +2013,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 7
+  "tout": 11
  },
  "300": {
   "chance": null,
@@ -2021,8 +2021,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 51,
-  "tout": 61
+  "tin": 71,
+  "tout": 109
  },
  "301": {
   "chance": null,
@@ -2030,8 +2030,8 @@
   "news": "",
   "selected_by": 3.5,
   "status": "a",
-  "tin": 145,
-  "tout": 544
+  "tin": 199,
+  "tout": 897
  },
  "302": {
   "chance": null,
@@ -2039,8 +2039,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 31,
-  "tout": 51
+  "tin": 55,
+  "tout": 94
  },
  "303": {
   "chance": null,
@@ -2048,8 +2048,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 35,
-  "tout": 182
+  "tin": 41,
+  "tout": 271
  },
  "304": {
   "chance": null,
@@ -2057,17 +2057,17 @@
   "news": "",
   "selected_by": 2.9,
   "status": "a",
-  "tin": 548,
-  "tout": 594
+  "tin": 678,
+  "tout": 1123
  },
  "305": {
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 7.1,
+  "selected_by": 7.0,
   "status": "a",
-  "tin": 441,
-  "tout": 2025
+  "tin": 602,
+  "tout": 4045
  },
  "306": {
   "chance": null,
@@ -2075,8 +2075,8 @@
   "news": "",
   "selected_by": 1.1,
   "status": "a",
-  "tin": 42,
-  "tout": 202
+  "tin": 67,
+  "tout": 360
  },
  "307": {
   "chance": 0,
@@ -2085,7 +2085,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 9
+  "tout": 18
  },
  "308": {
   "chance": null,
@@ -2093,8 +2093,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 28,
-  "tout": 112
+  "tin": 37,
+  "tout": 175
  },
  "309": {
   "chance": null,
@@ -2103,7 +2103,7 @@
   "selected_by": 0.1,
   "status": "a",
   "tin": 13,
-  "tout": 24
+  "tout": 37
  },
  "31": {
   "chance": 100,
@@ -2111,8 +2111,8 @@
   "news": "",
   "selected_by": 21.8,
   "status": "a",
-  "tin": 15112,
-  "tout": 659
+  "tin": 21076,
+  "tout": 1140
  },
  "310": {
   "chance": 100,
@@ -2120,8 +2120,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 2,
-  "tout": 0
+  "tin": 3,
+  "tout": 1
  },
  "311": {
   "chance": 0,
@@ -2138,17 +2138,17 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 20,
-  "tout": 32
+  "tin": 30,
+  "tout": 40
  },
  "313": {
   "chance": null,
   "cost": 53,
   "news": "",
-  "selected_by": 0.2,
+  "selected_by": 0.1,
   "status": "a",
   "tin": 3,
-  "tout": 45
+  "tout": 73
  },
  "314": {
   "chance": 0,
@@ -2157,7 +2157,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 0
+  "tout": 2
  },
  "315": {
   "chance": 100,
@@ -2165,17 +2165,17 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 9,
-  "tout": 26
+  "tin": 14,
+  "tout": 46
  },
  "316": {
   "chance": 100,
   "cost": 55,
   "news": "",
-  "selected_by": 3.3,
+  "selected_by": 3.2,
   "status": "a",
-  "tin": 382,
-  "tout": 2260
+  "tin": 481,
+  "tout": 3652
  },
  "317": {
   "chance": 0,
@@ -2184,7 +2184,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 18
+  "tout": 24
  },
  "318": {
   "chance": 100,
@@ -2193,7 +2193,7 @@
   "selected_by": 0.1,
   "status": "a",
   "tin": 2,
-  "tout": 4
+  "tout": 9
  },
  "319": {
   "chance": 0,
@@ -2205,13 +2205,13 @@
   "tout": 0
  },
  "32": {
-  "chance": 100,
+  "chance": 0,
   "cost": 43,
-  "news": "",
+  "news": "Suspended until 21 Nov",
   "selected_by": 4.3,
-  "status": "a",
-  "tin": 650,
-  "tout": 682
+  "status": "s",
+  "tin": 997,
+  "tout": 1493
  },
  "320": {
   "chance": null,
@@ -2219,17 +2219,17 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 74,
-  "tout": 514
+  "tin": 108,
+  "tout": 782
  },
  "321": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 2.9,
+  "selected_by": 2.8,
   "status": "a",
-  "tin": 472,
-  "tout": 2033
+  "tin": 614,
+  "tout": 3289
  },
  "322": {
   "chance": 0,
@@ -2238,7 +2238,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 13
+  "tout": 18
  },
  "323": {
   "chance": null,
@@ -2246,8 +2246,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 48,
-  "tout": 270
+  "tin": 63,
+  "tout": 427
  },
  "324": {
   "chance": null,
@@ -2255,8 +2255,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 2,
-  "tout": 3
+  "tin": 3,
+  "tout": 7
  },
  "325": {
   "chance": 100,
@@ -2265,7 +2265,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 4,
-  "tout": 12
+  "tout": 18
  },
  "326": {
   "chance": 0,
@@ -2274,7 +2274,7 @@
   "selected_by": 0.3,
   "status": "u",
   "tin": 0,
-  "tout": 34
+  "tout": 58
  },
  "327": {
   "chance": null,
@@ -2282,8 +2282,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 40,
-  "tout": 202
+  "tin": 50,
+  "tout": 310
  },
  "328": {
   "chance": 0,
@@ -2291,8 +2291,8 @@
   "news": "Hamstring injury - Expected back 8 Nov",
   "selected_by": 0.1,
   "status": "i",
-  "tin": 3,
-  "tout": 72
+  "tin": 5,
+  "tout": 105
  },
  "329": {
   "chance": 0,
@@ -2300,8 +2300,8 @@
   "news": "Hamstring injury - Expected back 21 Nov",
   "selected_by": 0.4,
   "status": "i",
-  "tin": 1,
-  "tout": 142
+  "tin": 2,
+  "tout": 217
  },
  "33": {
   "chance": null,
@@ -2309,8 +2309,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 83,
-  "tout": 80
+  "tin": 102,
+  "tout": 171
  },
  "330": {
   "chance": null,
@@ -2318,8 +2318,8 @@
   "news": "",
   "selected_by": 11.5,
   "status": "a",
-  "tin": 5619,
-  "tout": 2546
+  "tin": 7047,
+  "tout": 5596
  },
  "331": {
   "chance": 100,
@@ -2327,8 +2327,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 52,
-  "tout": 47
+  "tin": 71,
+  "tout": 77
  },
  "332": {
   "chance": null,
@@ -2336,8 +2336,8 @@
   "news": "",
   "selected_by": 2.4,
   "status": "a",
-  "tin": 1142,
-  "tout": 477
+  "tin": 1508,
+  "tout": 968
  },
  "333": {
   "chance": 0,
@@ -2354,8 +2354,8 @@
   "news": "",
   "selected_by": 6.1,
   "status": "a",
-  "tin": 2178,
-  "tout": 590
+  "tin": 2997,
+  "tout": 1319
  },
  "335": {
   "chance": 100,
@@ -2363,17 +2363,17 @@
   "news": "",
   "selected_by": 1.9,
   "status": "a",
-  "tin": 125,
-  "tout": 1297
+  "tin": 193,
+  "tout": 1689
  },
  "336": {
-  "chance": 100,
+  "chance": 75,
   "cost": 58,
-  "news": "",
+  "news": "Thigh injury - 75% chance of playing",
   "selected_by": 0.3,
-  "status": "a",
-  "tin": 69,
-  "tout": 241
+  "status": "d",
+  "tin": 80,
+  "tout": 465
  },
  "337": {
   "chance": null,
@@ -2381,8 +2381,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 16,
-  "tout": 94
+  "tin": 23,
+  "tout": 136
  },
  "338": {
   "chance": null,
@@ -2390,8 +2390,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 68,
-  "tout": 229
+  "tin": 88,
+  "tout": 351
  },
  "339": {
   "chance": null,
@@ -2399,8 +2399,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 13,
-  "tout": 23
+  "tin": 19,
+  "tout": 37
  },
  "34": {
   "chance": 100,
@@ -2408,8 +2408,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 66,
-  "tout": 47
+  "tin": 115,
+  "tout": 66
  },
  "340": {
   "chance": 100,
@@ -2417,8 +2417,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 16,
-  "tout": 31
+  "tin": 17,
+  "tout": 42
  },
  "341": {
   "chance": 0,
@@ -2427,7 +2427,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 0
+  "tout": 1
  },
  "342": {
   "chance": 0,
@@ -2444,8 +2444,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 17,
-  "tout": 11
+  "tin": 22,
+  "tout": 17
  },
  "344": {
   "chance": 100,
@@ -2453,8 +2453,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 2,
-  "tout": 2
+  "tin": 3,
+  "tout": 3
  },
  "345": {
   "chance": null,
@@ -2462,8 +2462,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 90,
-  "tout": 136
+  "tin": 109,
+  "tout": 198
  },
  "346": {
   "chance": 100,
@@ -2471,8 +2471,8 @@
   "news": "",
   "selected_by": 21.3,
   "status": "a",
-  "tin": 6951,
-  "tout": 6848
+  "tin": 8681,
+  "tout": 14844
  },
  "347": {
   "chance": null,
@@ -2480,8 +2480,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 68,
-  "tout": 192
+  "tin": 86,
+  "tout": 284
  },
  "348": {
   "chance": 0,
@@ -2490,7 +2490,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 11
+  "tout": 14
  },
  "349": {
   "chance": 0,
@@ -2498,8 +2498,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 14,
-  "tout": 26
+  "tin": 20,
+  "tout": 42
  },
  "35": {
   "chance": null,
@@ -2507,8 +2507,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 15,
-  "tout": 20
+  "tin": 20,
+  "tout": 28
  },
  "350": {
   "chance": null,
@@ -2516,8 +2516,8 @@
   "news": "",
   "selected_by": 4.1,
   "status": "a",
-  "tin": 719,
-  "tout": 634
+  "tin": 1011,
+  "tout": 941
  },
  "351": {
   "chance": null,
@@ -2525,8 +2525,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 39,
-  "tout": 26
+  "tin": 50,
+  "tout": 42
  },
  "352": {
   "chance": null,
@@ -2534,8 +2534,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 28,
-  "tout": 152
+  "tin": 43,
+  "tout": 232
  },
  "353": {
   "chance": 0,
@@ -2544,7 +2544,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 1
+  "tout": 3
  },
  "354": {
   "chance": 0,
@@ -2552,8 +2552,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 17,
-  "tout": 14
+  "tin": 25,
+  "tout": 17
  },
  "355": {
   "chance": null,
@@ -2561,8 +2561,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 11,
-  "tout": 27
+  "tin": 15,
+  "tout": 36
  },
  "356": {
   "chance": null,
@@ -2570,8 +2570,8 @@
   "news": "",
   "selected_by": 15.1,
   "status": "a",
-  "tin": 3416,
-  "tout": 1477
+  "tin": 4791,
+  "tout": 2220
  },
  "357": {
   "chance": 0,
@@ -2579,8 +2579,8 @@
   "news": "Hamstring injury - Unknown return date",
   "selected_by": 1.3,
   "status": "i",
-  "tin": 8,
-  "tout": 708
+  "tin": 12,
+  "tout": 934
  },
  "358": {
   "chance": null,
@@ -2588,8 +2588,8 @@
   "news": "",
   "selected_by": 1.9,
   "status": "a",
-  "tin": 132,
-  "tout": 311
+  "tin": 195,
+  "tout": 472
  },
  "359": {
   "chance": 100,
@@ -2597,8 +2597,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 39,
-  "tout": 8
+  "tin": 54,
+  "tout": 13
  },
  "36": {
   "chance": 100,
@@ -2606,8 +2606,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 89,
-  "tout": 47
+  "tin": 164,
+  "tout": 68
  },
  "360": {
   "chance": 0,
@@ -2615,8 +2615,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 3,
-  "tout": 5
+  "tin": 4,
+  "tout": 7
  },
  "361": {
   "chance": null,
@@ -2624,8 +2624,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 21,
-  "tout": 32
+  "tin": 31,
+  "tout": 43
  },
  "362": {
   "chance": 100,
@@ -2633,8 +2633,8 @@
   "news": "",
   "selected_by": 4.4,
   "status": "a",
-  "tin": 2685,
-  "tout": 493
+  "tin": 3695,
+  "tout": 845
  },
  "363": {
   "chance": 0,
@@ -2642,8 +2642,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 13,
-  "tout": 12
+  "tin": 17,
+  "tout": 15
  },
  "364": {
   "chance": null,
@@ -2651,8 +2651,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 20,
-  "tout": 14
+  "tin": 21,
+  "tout": 19
  },
  "365": {
   "chance": 0,
@@ -2661,7 +2661,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 33
+  "tout": 42
  },
  "366": {
   "chance": 100,
@@ -2669,8 +2669,8 @@
   "news": "",
   "selected_by": 5.1,
   "status": "a",
-  "tin": 2672,
-  "tout": 721
+  "tin": 3791,
+  "tout": 1012
  },
  "367": {
   "chance": 100,
@@ -2678,17 +2678,17 @@
   "news": "",
   "selected_by": 6.9,
   "status": "a",
-  "tin": 4335,
-  "tout": 1445
+  "tin": 6560,
+  "tout": 2038
  },
  "368": {
   "chance": 50,
   "cost": 67,
   "news": "Hamstring injury - 50% chance of playing",
-  "selected_by": 13.6,
+  "selected_by": 13.5,
   "status": "d",
-  "tin": 174,
-  "tout": 8295
+  "tin": 272,
+  "tout": 11281
  },
  "369": {
   "chance": null,
@@ -2696,8 +2696,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 230,
-  "tout": 174
+  "tin": 327,
+  "tout": 258
  },
  "37": {
   "chance": null,
@@ -2705,8 +2705,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 325,
-  "tout": 148
+  "tin": 467,
+  "tout": 255
  },
  "370": {
   "chance": 100,
@@ -2714,8 +2714,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 14,
-  "tout": 9
+  "tin": 19,
+  "tout": 18
  },
  "371": {
   "chance": 100,
@@ -2723,8 +2723,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 183,
-  "tout": 182
+  "tin": 263,
+  "tout": 268
  },
  "372": {
   "chance": null,
@@ -2732,8 +2732,8 @@
   "news": "",
   "selected_by": 1.3,
   "status": "a",
-  "tin": 335,
-  "tout": 322
+  "tin": 484,
+  "tout": 472
  },
  "373": {
   "chance": 0,
@@ -2750,8 +2750,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 7,
-  "tout": 14
+  "tin": 9,
+  "tout": 26
  },
  "375": {
   "chance": null,
@@ -2759,8 +2759,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 28,
-  "tout": 22
+  "tin": 44,
+  "tout": 35
  },
  "376": {
   "chance": 0,
@@ -2777,8 +2777,8 @@
   "news": "Knee injury - 50% chance of playing",
   "selected_by": 0.7,
   "status": "d",
-  "tin": 19,
-  "tout": 853
+  "tin": 23,
+  "tout": 1205
  },
  "378": {
   "chance": null,
@@ -2786,17 +2786,17 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 12,
-  "tout": 72
+  "tin": 16,
+  "tout": 94
  },
  "379": {
   "chance": 100,
   "cost": 91,
   "news": "",
-  "selected_by": 20.5,
+  "selected_by": 20.7,
   "status": "a",
-  "tin": 57320,
-  "tout": 1150
+  "tin": 78469,
+  "tout": 1779
  },
  "38": {
   "chance": 0,
@@ -2805,7 +2805,7 @@
   "selected_by": 1.2,
   "status": "u",
   "tin": 0,
-  "tout": 821
+  "tout": 1161
  },
  "380": {
   "chance": 0,
@@ -2813,8 +2813,8 @@
   "news": "Achilles injury - Unknown return date",
   "selected_by": 0.1,
   "status": "i",
-  "tin": 42,
-  "tout": 46
+  "tin": 53,
+  "tout": 61
  },
  "381": {
   "chance": null,
@@ -2822,8 +2822,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 28,
-  "tout": 58
+  "tin": 33,
+  "tout": 84
  },
  "382": {
   "chance": 100,
@@ -2831,8 +2831,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 103,
-  "tout": 152
+  "tin": 154,
+  "tout": 221
  },
  "383": {
   "chance": 0,
@@ -2841,7 +2841,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 4
+  "tout": 6
  },
  "384": {
   "chance": null,
@@ -2849,8 +2849,8 @@
   "news": "",
   "selected_by": 7.4,
   "status": "a",
-  "tin": 577,
-  "tout": 2522
+  "tin": 800,
+  "tout": 3724
  },
  "385": {
   "chance": null,
@@ -2858,8 +2858,8 @@
   "news": "",
   "selected_by": 6.3,
   "status": "a",
-  "tin": 1863,
-  "tout": 1092
+  "tin": 2477,
+  "tout": 1872
  },
  "386": {
   "chance": null,
@@ -2867,8 +2867,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 1,
-  "tout": 2
+  "tin": 3,
+  "tout": 4
  },
  "387": {
   "chance": 100,
@@ -2876,17 +2876,17 @@
   "news": "",
   "selected_by": 8.4,
   "status": "a",
-  "tin": 599,
-  "tout": 2118
+  "tin": 804,
+  "tout": 3199
  },
  "388": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 16.6,
+  "selected_by": 16.5,
   "status": "a",
-  "tin": 942,
-  "tout": 10493
+  "tin": 1179,
+  "tout": 17217
  },
  "389": {
   "chance": 100,
@@ -2894,8 +2894,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 302,
-  "tout": 118
+  "tin": 389,
+  "tout": 206
  },
  "39": {
   "chance": 0,
@@ -2904,7 +2904,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 24
+  "tout": 33
  },
  "390": {
   "chance": null,
@@ -2912,17 +2912,17 @@
   "news": "",
   "selected_by": 2.0,
   "status": "a",
-  "tin": 467,
-  "tout": 498
+  "tin": 630,
+  "tout": 780
  },
  "391": {
   "chance": null,
   "cost": 57,
   "news": "",
-  "selected_by": 26.6,
+  "selected_by": 26.5,
   "status": "a",
-  "tin": 3682,
-  "tout": 9045
+  "tin": 4876,
+  "tout": 17953
  },
  "392": {
   "chance": null,
@@ -2930,8 +2930,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 26,
-  "tout": 72
+  "tin": 31,
+  "tout": 108
  },
  "393": {
   "chance": null,
@@ -2939,8 +2939,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 112,
-  "tout": 177
+  "tin": 180,
+  "tout": 268
  },
  "394": {
   "chance": 0,
@@ -2957,8 +2957,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 30,
-  "tout": 53
+  "tin": 42,
+  "tout": 80
  },
  "396": {
   "chance": null,
@@ -2967,16 +2967,16 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 3,
-  "tout": 5
+  "tout": 10
  },
  "397": {
   "chance": 0,
   "cost": 82,
   "news": "Knee injury - Unknown return date",
-  "selected_by": 6.5,
+  "selected_by": 6.4,
   "status": "i",
-  "tin": 31,
-  "tout": 8226
+  "tin": 43,
+  "tout": 11427
  },
  "398": {
   "chance": 100,
@@ -2984,44 +2984,44 @@
   "news": "",
   "selected_by": 2.6,
   "status": "a",
-  "tin": 734,
-  "tout": 2290
+  "tin": 974,
+  "tout": 3813
  },
  "399": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 37.0,
+  "selected_by": 36.8,
   "status": "a",
-  "tin": 5907,
-  "tout": 39694
+  "tin": 7513,
+  "tout": 66386
  },
  "4": {
   "chance": null,
   "cost": 80,
   "news": "",
-  "selected_by": 23.9,
+  "selected_by": 24.0,
   "status": "a",
-  "tin": 16136,
-  "tout": 952
+  "tin": 23083,
+  "tout": 1428
  },
  "40": {
   "chance": null,
   "cost": 81,
   "news": "",
-  "selected_by": 51.3,
+  "selected_by": 51.4,
   "status": "a",
-  "tin": 38502,
-  "tout": 1213
+  "tin": 54088,
+  "tout": 1530
  },
  "400": {
   "chance": 100,
   "cost": 75,
   "news": "",
-  "selected_by": 4.5,
+  "selected_by": 4.6,
   "status": "a",
-  "tin": 4848,
-  "tout": 1499
+  "tin": 6890,
+  "tout": 2536
  },
  "401": {
   "chance": 100,
@@ -3029,8 +3029,8 @@
   "news": "",
   "selected_by": 2.7,
   "status": "a",
-  "tin": 2585,
-  "tout": 746
+  "tin": 3349,
+  "tout": 2513
  },
  "402": {
   "chance": 0,
@@ -3039,7 +3039,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 0
+  "tout": 1
  },
  "403": {
   "chance": 0,
@@ -3047,8 +3047,8 @@
   "news": "Muscular injury - Expected back 21 Nov",
   "selected_by": 0.4,
   "status": "i",
-  "tin": 8,
-  "tout": 475
+  "tin": 12,
+  "tout": 766
  },
  "404": {
   "chance": 0,
@@ -3065,8 +3065,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 88,
-  "tout": 47
+  "tin": 114,
+  "tout": 77
  },
  "406": {
   "chance": 100,
@@ -3074,8 +3074,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 14,
-  "tout": 18
+  "tin": 27,
+  "tout": 24
  },
  "407": {
   "chance": 0,
@@ -3102,7 +3102,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 10
+  "tout": 13
  },
  "41": {
   "chance": null,
@@ -3110,8 +3110,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 235,
-  "tout": 469
+  "tin": 322,
+  "tout": 1106
  },
  "410": {
   "chance": 0,
@@ -3120,7 +3120,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 2
+  "tout": 3
  },
  "411": {
   "chance": 100,
@@ -3128,8 +3128,8 @@
   "news": "",
   "selected_by": 78.9,
   "status": "a",
-  "tin": 6327,
-  "tout": 1066
+  "tin": 8266,
+  "tout": 2061
  },
  "412": {
   "chance": null,
@@ -3137,8 +3137,8 @@
   "news": "",
   "selected_by": 7.7,
   "status": "a",
-  "tin": 150,
-  "tout": 3494
+  "tin": 185,
+  "tout": 5079
  },
  "413": {
   "chance": 0,
@@ -3155,8 +3155,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 32,
-  "tout": 5
+  "tin": 51,
+  "tout": 8
  },
  "415": {
   "chance": 0,
@@ -3165,7 +3165,7 @@
   "selected_by": 0.3,
   "status": "i",
   "tin": 2,
-  "tout": 137
+  "tout": 191
  },
  "416": {
   "chance": 100,
@@ -3173,8 +3173,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 35,
-  "tout": 52
+  "tin": 42,
+  "tout": 72
  },
  "417": {
   "chance": null,
@@ -3182,8 +3182,8 @@
   "news": "",
   "selected_by": 1.3,
   "status": "a",
-  "tin": 63,
-  "tout": 496
+  "tin": 73,
+  "tout": 736
  },
  "418": {
   "chance": null,
@@ -3191,8 +3191,8 @@
   "news": "",
   "selected_by": 5.7,
   "status": "a",
-  "tin": 108,
-  "tout": 3477
+  "tin": 134,
+  "tout": 5408
  },
  "419": {
   "chance": 0,
@@ -3200,8 +3200,8 @@
   "news": "Suspended until 22 Nov",
   "selected_by": 1.1,
   "status": "s",
-  "tin": 40,
-  "tout": 1150
+  "tin": 42,
+  "tout": 1621
  },
  "42": {
   "chance": null,
@@ -3209,8 +3209,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 7,
-  "tout": 5
+  "tin": 9,
+  "tout": 11
  },
  "420": {
   "chance": null,
@@ -3218,8 +3218,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 74,
-  "tout": 125
+  "tin": 92,
+  "tout": 170
  },
  "421": {
   "chance": 100,
@@ -3227,8 +3227,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 25,
-  "tout": 66
+  "tin": 36,
+  "tout": 92
  },
  "422": {
   "chance": 100,
@@ -3236,8 +3236,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 33,
-  "tout": 160
+  "tin": 47,
+  "tout": 226
  },
  "423": {
   "chance": 0,
@@ -3245,8 +3245,8 @@
   "news": "Unspecified injury - Unknown return date",
   "selected_by": 3.8,
   "status": "i",
-  "tin": 11,
-  "tout": 3546
+  "tin": 13,
+  "tout": 5417
  },
  "424": {
   "chance": null,
@@ -3254,8 +3254,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 39,
-  "tout": 65
+  "tin": 54,
+  "tout": 85
  },
  "425": {
   "chance": 0,
@@ -3270,19 +3270,19 @@
   "chance": null,
   "cost": 117,
   "news": "",
-  "selected_by": 22.4,
+  "selected_by": 22.3,
   "status": "a",
-  "tin": 388,
-  "tout": 26056
+  "tin": 523,
+  "tout": 35506
  },
  "427": {
   "chance": null,
   "cost": 79,
   "news": "",
-  "selected_by": 21.1,
+  "selected_by": 21.0,
   "status": "a",
-  "tin": 3007,
-  "tout": 18872
+  "tin": 3954,
+  "tout": 27371
  },
  "428": {
   "chance": null,
@@ -3290,8 +3290,8 @@
   "news": "",
   "selected_by": 5.7,
   "status": "a",
-  "tin": 575,
-  "tout": 4891
+  "tin": 746,
+  "tout": 6931
  },
  "429": {
   "chance": 75,
@@ -3299,8 +3299,8 @@
   "news": "Hip injury - 75% chance of playing",
   "selected_by": 1.0,
   "status": "d",
-  "tin": 17,
-  "tout": 809
+  "tin": 21,
+  "tout": 1065
  },
  "43": {
   "chance": 100,
@@ -3308,8 +3308,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 83,
-  "tout": 1023
+  "tin": 106,
+  "tout": 1412
  },
  "430": {
   "chance": 100,
@@ -3317,8 +3317,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 11,
-  "tout": 20
+  "tin": 16,
+  "tout": 29
  },
  "431": {
   "chance": 75,
@@ -3326,8 +3326,8 @@
   "news": "Calf injury - 75% chance of playing",
   "selected_by": 0.3,
   "status": "d",
-  "tin": 201,
-  "tout": 190
+  "tin": 210,
+  "tout": 315
  },
  "432": {
   "chance": 100,
@@ -3335,8 +3335,8 @@
   "news": "",
   "selected_by": 1.1,
   "status": "a",
-  "tin": 140,
-  "tout": 448
+  "tin": 187,
+  "tout": 601
  },
  "433": {
   "chance": 0,
@@ -3344,7 +3344,7 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 2,
+  "tin": 3,
   "tout": 2
  },
  "434": {
@@ -3353,8 +3353,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 4,
-  "tout": 3
+  "tin": 5,
+  "tout": 4
  },
  "435": {
   "chance": null,
@@ -3362,8 +3362,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 14,
-  "tout": 17
+  "tin": 18,
+  "tout": 24
  },
  "436": {
   "chance": 0,
@@ -3372,7 +3372,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 2
+  "tout": 5
  },
  "437": {
   "chance": null,
@@ -3380,8 +3380,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 18,
-  "tout": 58
+  "tin": 23,
+  "tout": 74
  },
  "438": {
   "chance": null,
@@ -3389,8 +3389,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 15,
-  "tout": 115
+  "tin": 21,
+  "tout": 145
  },
  "439": {
   "chance": 0,
@@ -3398,8 +3398,8 @@
   "news": "Shin injury - Unknown return date",
   "selected_by": 1.0,
   "status": "i",
-  "tin": 14,
-  "tout": 537
+  "tin": 20,
+  "tout": 738
  },
  "44": {
   "chance": 0,
@@ -3408,7 +3408,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 6
+  "tout": 8
  },
  "440": {
   "chance": null,
@@ -3416,8 +3416,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 106,
-  "tout": 216
+  "tin": 135,
+  "tout": 313
  },
  "441": {
   "chance": 0,
@@ -3426,7 +3426,7 @@
   "selected_by": 0.7,
   "status": "u",
   "tin": 0,
-  "tout": 351
+  "tout": 479
  },
  "442": {
   "chance": null,
@@ -3434,8 +3434,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 58,
-  "tout": 104
+  "tin": 76,
+  "tout": 151
  },
  "443": {
   "chance": null,
@@ -3443,8 +3443,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 5,
-  "tout": 3
+  "tin": 7,
+  "tout": 7
  },
  "444": {
   "chance": 0,
@@ -3452,8 +3452,8 @@
   "news": "Hamstring injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 19,
-  "tout": 13
+  "tin": 24,
+  "tout": 16
  },
  "445": {
   "chance": null,
@@ -3461,8 +3461,8 @@
   "news": "",
   "selected_by": 1.6,
   "status": "a",
-  "tin": 63,
-  "tout": 655
+  "tin": 78,
+  "tout": 1164
  },
  "446": {
   "chance": 100,
@@ -3470,8 +3470,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 46,
-  "tout": 35
+  "tin": 62,
+  "tout": 49
  },
  "447": {
   "chance": null,
@@ -3479,8 +3479,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 114,
-  "tout": 216
+  "tin": 149,
+  "tout": 339
  },
  "448": {
   "chance": 100,
@@ -3488,8 +3488,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 150,
-  "tout": 66
+  "tin": 203,
+  "tout": 99
  },
  "449": {
   "chance": null,
@@ -3497,8 +3497,8 @@
   "news": "",
   "selected_by": 20.4,
   "status": "a",
-  "tin": 2222,
-  "tout": 4171
+  "tin": 3011,
+  "tout": 8498
  },
  "45": {
   "chance": null,
@@ -3506,8 +3506,8 @@
   "news": "",
   "selected_by": 3.4,
   "status": "a",
-  "tin": 1773,
-  "tout": 836
+  "tin": 2441,
+  "tout": 1703
  },
  "450": {
   "chance": 0,
@@ -3515,8 +3515,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 3,
-  "tout": 35
+  "tin": 4,
+  "tout": 50
  },
  "451": {
   "chance": 0,
@@ -3525,7 +3525,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 13
+  "tout": 19
  },
  "452": {
   "chance": 100,
@@ -3533,8 +3533,8 @@
   "news": "",
   "selected_by": 2.4,
   "status": "a",
-  "tin": 862,
-  "tout": 801
+  "tin": 1229,
+  "tout": 1205
  },
  "453": {
   "chance": null,
@@ -3542,8 +3542,8 @@
   "news": "",
   "selected_by": 7.6,
   "status": "a",
-  "tin": 1890,
-  "tout": 1960
+  "tin": 2637,
+  "tout": 3198
  },
  "454": {
   "chance": 100,
@@ -3551,8 +3551,8 @@
   "news": "",
   "selected_by": 2.4,
   "status": "a",
-  "tin": 295,
-  "tout": 427
+  "tin": 412,
+  "tout": 610
  },
  "455": {
   "chance": 100,
@@ -3560,8 +3560,8 @@
   "news": "",
   "selected_by": 2.0,
   "status": "a",
-  "tin": 872,
-  "tout": 403
+  "tin": 1340,
+  "tout": 780
  },
  "456": {
   "chance": 100,
@@ -3569,8 +3569,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 34,
-  "tout": 41
+  "tin": 39,
+  "tout": 55
  },
  "457": {
   "chance": null,
@@ -3578,8 +3578,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 25,
-  "tout": 33
+  "tin": 44,
+  "tout": 51
  },
  "458": {
   "chance": 100,
@@ -3587,8 +3587,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 18,
-  "tout": 9
+  "tin": 28,
+  "tout": 10
  },
  "459": {
   "chance": 75,
@@ -3596,8 +3596,8 @@
   "news": "Muscular injury - 75% chance of playing",
   "selected_by": 0.1,
   "status": "d",
-  "tin": 1,
-  "tout": 42
+  "tin": 2,
+  "tout": 67
  },
  "46": {
   "chance": 100,
@@ -3605,8 +3605,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 71,
-  "tout": 78
+  "tin": 94,
+  "tout": 120
  },
  "460": {
   "chance": null,
@@ -3614,8 +3614,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 71,
-  "tout": 269
+  "tin": 100,
+  "tout": 400
  },
  "461": {
   "chance": 100,
@@ -3623,8 +3623,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 9,
-  "tout": 20
+  "tin": 13,
+  "tout": 32
  },
  "462": {
   "chance": null,
@@ -3632,8 +3632,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 4,
-  "tout": 14
+  "tin": 6,
+  "tout": 22
  },
  "463": {
   "chance": 0,
@@ -3642,7 +3642,7 @@
   "selected_by": 0.4,
   "status": "u",
   "tin": 0,
-  "tout": 59
+  "tout": 87
  },
  "464": {
   "chance": null,
@@ -3650,8 +3650,8 @@
   "news": "",
   "selected_by": 10.3,
   "status": "a",
-  "tin": 624,
-  "tout": 7616
+  "tin": 844,
+  "tout": 12207
  },
  "465": {
   "chance": 50,
@@ -3659,8 +3659,8 @@
   "news": "Ankle injury - 50% chance of playing",
   "selected_by": 0.3,
   "status": "d",
-  "tin": 78,
-  "tout": 322
+  "tin": 108,
+  "tout": 460
  },
  "466": {
   "chance": 0,
@@ -3669,7 +3669,7 @@
   "selected_by": 0.4,
   "status": "u",
   "tin": 0,
-  "tout": 161
+  "tout": 237
  },
  "467": {
   "chance": null,
@@ -3677,8 +3677,8 @@
   "news": "",
   "selected_by": 1.4,
   "status": "a",
-  "tin": 44,
-  "tout": 629
+  "tin": 62,
+  "tout": 994
  },
  "468": {
   "chance": null,
@@ -3686,17 +3686,17 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 8,
-  "tout": 4
+  "tin": 11,
+  "tout": 9
  },
  "469": {
   "chance": 100,
   "cost": 50,
   "news": "",
-  "selected_by": 5.9,
+  "selected_by": 5.8,
   "status": "a",
-  "tin": 360,
-  "tout": 2805
+  "tin": 457,
+  "tout": 5762
  },
  "47": {
   "chance": 100,
@@ -3704,8 +3704,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 264,
-  "tout": 151
+  "tin": 353,
+  "tout": 247
  },
  "470": {
   "chance": 0,
@@ -3722,8 +3722,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 55,
-  "tout": 161
+  "tin": 79,
+  "tout": 262
  },
  "472": {
   "chance": 100,
@@ -3731,8 +3731,8 @@
   "news": "",
   "selected_by": 2.1,
   "status": "a",
-  "tin": 365,
-  "tout": 848
+  "tin": 459,
+  "tout": 1368
  },
  "473": {
   "chance": null,
@@ -3740,8 +3740,8 @@
   "news": "",
   "selected_by": 1.5,
   "status": "a",
-  "tin": 30,
-  "tout": 774
+  "tin": 40,
+  "tout": 1264
  },
  "474": {
   "chance": 100,
@@ -3749,8 +3749,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 19,
-  "tout": 31
+  "tin": 25,
+  "tout": 73
  },
  "475": {
   "chance": 0,
@@ -3767,8 +3767,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 117,
-  "tout": 57
+  "tin": 162,
+  "tout": 95
  },
  "477": {
   "chance": 0,
@@ -3777,7 +3777,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 35
+  "tout": 45
  },
  "478": {
   "chance": null,
@@ -3785,7 +3785,7 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 4,
+  "tin": 7,
   "tout": 9
  },
  "479": {
@@ -3795,7 +3795,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 21
+  "tout": 32
  },
  "48": {
   "chance": 0,
@@ -3803,8 +3803,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 2,
-  "tout": 6
+  "tin": 4,
+  "tout": 8
  },
  "480": {
   "chance": 100,
@@ -3812,8 +3812,8 @@
   "news": "",
   "selected_by": 11.2,
   "status": "a",
-  "tin": 857,
-  "tout": 9847
+  "tin": 1124,
+  "tout": 17040
  },
  "481": {
   "chance": 100,
@@ -3821,8 +3821,8 @@
   "news": "",
   "selected_by": 3.7,
   "status": "a",
-  "tin": 594,
-  "tout": 914
+  "tin": 831,
+  "tout": 1337
  },
  "482": {
   "chance": 100,
@@ -3830,8 +3830,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 13,
-  "tout": 45
+  "tin": 20,
+  "tout": 60
  },
  "483": {
   "chance": 100,
@@ -3839,8 +3839,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 34,
-  "tout": 721
+  "tin": 53,
+  "tout": 963
  },
  "484": {
   "chance": 0,
@@ -3849,7 +3849,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 12
+  "tout": 15
  },
  "485": {
   "chance": 0,
@@ -3858,7 +3858,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 0
+  "tout": 1
  },
  "486": {
   "chance": null,
@@ -3866,8 +3866,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 40,
-  "tout": 37
+  "tin": 46,
+  "tout": 56
  },
  "487": {
   "chance": 75,
@@ -3876,7 +3876,7 @@
   "selected_by": 0.0,
   "status": "d",
   "tin": 0,
-  "tout": 24
+  "tout": 34
  },
  "488": {
   "chance": 100,
@@ -3884,8 +3884,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 53,
-  "tout": 101
+  "tin": 63,
+  "tout": 147
  },
  "489": {
   "chance": 100,
@@ -3893,8 +3893,8 @@
   "news": "",
   "selected_by": 1.0,
   "status": "a",
-  "tin": 65,
-  "tout": 381
+  "tin": 112,
+  "tout": 538
  },
  "49": {
   "chance": 0,
@@ -3911,17 +3911,17 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 101,
-  "tout": 258
+  "tin": 125,
+  "tout": 388
  },
  "491": {
   "chance": 0,
   "cost": 57,
   "news": "Calf injury - Unknown return date",
-  "selected_by": 1.2,
+  "selected_by": 1.1,
   "status": "i",
-  "tin": 10,
-  "tout": 643
+  "tin": 11,
+  "tout": 904
  },
  "492": {
   "chance": 100,
@@ -3929,8 +3929,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 219,
-  "tout": 62
+  "tin": 337,
+  "tout": 83
  },
  "493": {
   "chance": null,
@@ -3938,8 +3938,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 3,
-  "tout": 13
+  "tin": 6,
+  "tout": 18
  },
  "494": {
   "chance": 0,
@@ -3948,7 +3948,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 27
+  "tout": 39
  },
  "495": {
   "chance": null,
@@ -3956,8 +3956,8 @@
   "news": "",
   "selected_by": 1.0,
   "status": "a",
-  "tin": 100,
-  "tout": 121
+  "tin": 149,
+  "tout": 212
  },
  "496": {
   "chance": null,
@@ -3965,17 +3965,17 @@
   "news": "",
   "selected_by": 15.3,
   "status": "a",
-  "tin": 2219,
-  "tout": 1209
+  "tin": 4381,
+  "tout": 1785
  },
  "497": {
   "chance": null,
   "cost": 40,
   "news": "",
-  "selected_by": 15.8,
+  "selected_by": 15.7,
   "status": "a",
-  "tin": 584,
-  "tout": 2572
+  "tin": 832,
+  "tout": 4463
  },
  "498": {
   "chance": null,
@@ -3983,8 +3983,8 @@
   "news": "",
   "selected_by": 3.0,
   "status": "a",
-  "tin": 363,
-  "tout": 518
+  "tin": 490,
+  "tout": 1066
  },
  "499": {
   "chance": 100,
@@ -3992,8 +3992,8 @@
   "news": "",
   "selected_by": 4.9,
   "status": "a",
-  "tin": 631,
-  "tout": 596
+  "tin": 1066,
+  "tout": 1202
  },
  "5": {
   "chance": 100,
@@ -4001,8 +4001,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 1497,
-  "tout": 345
+  "tin": 2114,
+  "tout": 530
  },
  "50": {
   "chance": null,
@@ -4010,8 +4010,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 33,
-  "tout": 156
+  "tin": 50,
+  "tout": 244
  },
  "500": {
   "chance": 0,
@@ -4020,7 +4020,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 5
+  "tout": 9
  },
  "501": {
   "chance": 100,
@@ -4028,8 +4028,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 29,
-  "tout": 35
+  "tin": 36,
+  "tout": 62
  },
  "502": {
   "chance": 100,
@@ -4037,8 +4037,8 @@
   "news": "",
   "selected_by": 2.3,
   "status": "a",
-  "tin": 827,
-  "tout": 340
+  "tin": 2157,
+  "tout": 496
  },
  "503": {
   "chance": 100,
@@ -4046,8 +4046,8 @@
   "news": "",
   "selected_by": 3.9,
   "status": "a",
-  "tin": 887,
-  "tout": 488
+  "tin": 2015,
+  "tout": 880
  },
  "504": {
   "chance": null,
@@ -4055,8 +4055,8 @@
   "news": "",
   "selected_by": 7.0,
   "status": "a",
-  "tin": 9228,
-  "tout": 1115
+  "tin": 13872,
+  "tout": 1694
  },
  "505": {
   "chance": 0,
@@ -4065,7 +4065,7 @@
   "selected_by": 0.2,
   "status": "u",
   "tin": 0,
-  "tout": 44
+  "tout": 52
  },
  "506": {
   "chance": 100,
@@ -4073,8 +4073,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 39,
-  "tout": 37
+  "tin": 54,
+  "tout": 76
  },
  "507": {
   "chance": 0,
@@ -4091,8 +4091,8 @@
   "news": "",
   "selected_by": 1.0,
   "status": "a",
-  "tin": 238,
-  "tout": 216
+  "tin": 309,
+  "tout": 403
  },
  "509": {
   "chance": null,
@@ -4100,8 +4100,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 19,
-  "tout": 14
+  "tin": 26,
+  "tout": 18
  },
  "51": {
   "chance": 100,
@@ -4109,8 +4109,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 132,
-  "tout": 338
+  "tin": 195,
+  "tout": 562
  },
  "510": {
   "chance": null,
@@ -4118,8 +4118,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 10,
-  "tout": 13
+  "tin": 12,
+  "tout": 19
  },
  "511": {
   "chance": 0,
@@ -4128,7 +4128,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 38
+  "tout": 56
  },
  "512": {
   "chance": 100,
@@ -4136,8 +4136,8 @@
   "news": "",
   "selected_by": 1.5,
   "status": "a",
-  "tin": 2146,
-  "tout": 271
+  "tin": 7108,
+  "tout": 411
  },
  "513": {
   "chance": 0,
@@ -4145,7 +4145,7 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 5,
+  "tin": 6,
   "tout": 6
  },
  "514": {
@@ -4154,8 +4154,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 679,
-  "tout": 160
+  "tin": 1102,
+  "tout": 389
  },
  "515": {
   "chance": 100,
@@ -4163,17 +4163,17 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 593,
-  "tout": 116
+  "tin": 756,
+  "tout": 362
  },
  "516": {
-  "chance": 0,
+  "chance": 100,
   "cost": 54,
-  "news": "Suspended until 7 Nov",
+  "news": "",
   "selected_by": 0.1,
-  "status": "s",
-  "tin": 0,
-  "tout": 41
+  "status": "a",
+  "tin": 3,
+  "tout": 48
  },
  "517": {
   "chance": 0,
@@ -4191,7 +4191,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 15
+  "tout": 21
  },
  "519": {
   "chance": null,
@@ -4199,8 +4199,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 22,
-  "tout": 53
+  "tin": 35,
+  "tout": 91
  },
  "52": {
   "chance": 100,
@@ -4208,8 +4208,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 56,
-  "tout": 36
+  "tin": 103,
+  "tout": 55
  },
  "520": {
   "chance": 0,
@@ -4217,8 +4217,8 @@
   "news": "Knee injury - Expected back 31 Oct",
   "selected_by": 0.1,
   "status": "i",
-  "tin": 5,
-  "tout": 49
+  "tin": 7,
+  "tout": 70
  },
  "521": {
   "chance": 100,
@@ -4226,8 +4226,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 72,
-  "tout": 36
+  "tin": 129,
+  "tout": 81
  },
  "522": {
   "chance": null,
@@ -4235,8 +4235,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 99,
-  "tout": 43
+  "tin": 246,
+  "tout": 70
  },
  "523": {
   "chance": 0,
@@ -4245,7 +4245,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 7
+  "tout": 13
  },
  "524": {
   "chance": null,
@@ -4253,8 +4253,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 16,
-  "tout": 329
+  "tin": 23,
+  "tout": 443
  },
  "525": {
   "chance": null,
@@ -4262,8 +4262,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 204,
-  "tout": 92
+  "tin": 440,
+  "tout": 182
  },
  "526": {
   "chance": null,
@@ -4271,8 +4271,8 @@
   "news": "",
   "selected_by": 1.6,
   "status": "a",
-  "tin": 602,
-  "tout": 587
+  "tin": 847,
+  "tout": 2084
  },
  "527": {
   "chance": 0,
@@ -4281,7 +4281,7 @@
   "selected_by": 0.5,
   "status": "u",
   "tin": 0,
-  "tout": 78
+  "tout": 107
  },
  "528": {
   "chance": 0,
@@ -4290,7 +4290,7 @@
   "selected_by": 0.8,
   "status": "u",
   "tin": 0,
-  "tout": 403
+  "tout": 590
  },
  "529": {
   "chance": null,
@@ -4298,17 +4298,17 @@
   "news": "",
   "selected_by": 2.1,
   "status": "a",
-  "tin": 60,
-  "tout": 963
+  "tin": 81,
+  "tout": 1566
  },
  "53": {
   "chance": 100,
   "cost": 61,
   "news": "",
-  "selected_by": 6.2,
+  "selected_by": 6.3,
   "status": "a",
-  "tin": 6521,
-  "tout": 990
+  "tin": 16691,
+  "tout": 1475
  },
  "530": {
   "chance": 0,
@@ -4317,7 +4317,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 12
+  "tout": 18
  },
  "531": {
   "chance": null,
@@ -4325,8 +4325,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 14,
-  "tout": 14
+  "tin": 19,
+  "tout": 19
  },
  "532": {
   "chance": 0,
@@ -4335,7 +4335,7 @@
   "selected_by": 1.0,
   "status": "i",
   "tin": 3,
-  "tout": 725
+  "tout": 1050
  },
  "533": {
   "chance": 75,
@@ -4343,8 +4343,8 @@
   "news": "Knock - 75% chance of playing",
   "selected_by": 1.6,
   "status": "d",
-  "tin": 9,
-  "tout": 1945
+  "tin": 15,
+  "tout": 2971
  },
  "534": {
   "chance": null,
@@ -4352,8 +4352,8 @@
   "news": "",
   "selected_by": 1.9,
   "status": "a",
-  "tin": 100,
-  "tout": 826
+  "tin": 129,
+  "tout": 1483
  },
  "535": {
   "chance": 0,
@@ -4361,8 +4361,8 @@
   "news": "Suspended until 21 Nov",
   "selected_by": 0.2,
   "status": "s",
-  "tin": 16,
-  "tout": 80
+  "tin": 17,
+  "tout": 184
  },
  "536": {
   "chance": 100,
@@ -4370,8 +4370,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 19,
-  "tout": 82
+  "tin": 25,
+  "tout": 160
  },
  "537": {
   "chance": 0,
@@ -4389,7 +4389,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 7
+  "tout": 13
  },
  "539": {
   "chance": null,
@@ -4397,8 +4397,8 @@
   "news": "",
   "selected_by": 2.4,
   "status": "a",
-  "tin": 479,
-  "tout": 518
+  "tin": 700,
+  "tout": 795
  },
  "54": {
   "chance": 100,
@@ -4406,8 +4406,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 38,
-  "tout": 17
+  "tin": 47,
+  "tout": 31
  },
  "540": {
   "chance": 0,
@@ -4416,7 +4416,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 26
+  "tout": 35
  },
  "541": {
   "chance": 100,
@@ -4424,8 +4424,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 12,
-  "tout": 62
+  "tin": 14,
+  "tout": 102
  },
  "542": {
   "chance": null,
@@ -4433,8 +4433,8 @@
   "news": "",
   "selected_by": 2.7,
   "status": "a",
-  "tin": 269,
-  "tout": 1119
+  "tin": 498,
+  "tout": 1580
  },
  "543": {
   "chance": 100,
@@ -4442,8 +4442,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 3,
-  "tout": 5
+  "tin": 4,
+  "tout": 9
  },
  "544": {
   "chance": null,
@@ -4451,8 +4451,8 @@
   "news": "",
   "selected_by": 2.9,
   "status": "a",
-  "tin": 95,
-  "tout": 1291
+  "tin": 132,
+  "tout": 1897
  },
  "545": {
   "chance": null,
@@ -4460,8 +4460,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 64,
-  "tout": 112
+  "tin": 87,
+  "tout": 170
  },
  "546": {
   "chance": 0,
@@ -4470,7 +4470,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 5
+  "tout": 8
  },
  "547": {
   "chance": 0,
@@ -4478,8 +4478,8 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 0,
-  "tout": 1
+  "tin": 1,
+  "tout": 2
  },
  "548": {
   "chance": null,
@@ -4487,8 +4487,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 5,
-  "tout": 10
+  "tin": 7,
+  "tout": 16
  },
  "549": {
   "chance": null,
@@ -4496,8 +4496,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 12,
-  "tout": 20
+  "tin": 17,
+  "tout": 35
  },
  "55": {
   "chance": 0,
@@ -4506,7 +4506,7 @@
   "selected_by": 2.2,
   "status": "u",
   "tin": 0,
-  "tout": 219
+  "tout": 306
  },
  "550": {
   "chance": null,
@@ -4514,7 +4514,7 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 1,
+  "tin": 2,
   "tout": 3
  },
  "551": {
@@ -4523,17 +4523,17 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 6,
-  "tout": 53
+  "tin": 8,
+  "tout": 91
  },
  "552": {
   "chance": 100,
   "cost": 57,
   "news": "",
-  "selected_by": 5.3,
+  "selected_by": 5.2,
   "status": "a",
-  "tin": 1402,
-  "tout": 2992
+  "tin": 1722,
+  "tout": 5389
  },
  "553": {
   "chance": 100,
@@ -4541,8 +4541,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 30,
-  "tout": 551
+  "tin": 48,
+  "tout": 742
  },
  "554": {
   "chance": 0,
@@ -4551,7 +4551,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 5
+  "tout": 9
  },
  "555": {
   "chance": null,
@@ -4559,8 +4559,8 @@
   "news": "",
   "selected_by": 1.6,
   "status": "a",
-  "tin": 22,
-  "tout": 149
+  "tin": 41,
+  "tout": 232
  },
  "556": {
   "chance": 0,
@@ -4568,8 +4568,8 @@
   "news": "Ankle injury - Unknown return date",
   "selected_by": 1.2,
   "status": "i",
-  "tin": 22,
-  "tout": 451
+  "tin": 33,
+  "tout": 647
  },
  "557": {
   "chance": 75,
@@ -4577,8 +4577,8 @@
   "news": "Hamstring injury - 75% chance of playing",
   "selected_by": 3.8,
   "status": "d",
-  "tin": 164,
-  "tout": 1592
+  "tin": 270,
+  "tout": 2230
  },
  "558": {
   "chance": null,
@@ -4586,8 +4586,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 18,
-  "tout": 46
+  "tin": 22,
+  "tout": 67
  },
  "559": {
   "chance": null,
@@ -4595,8 +4595,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 11,
-  "tout": 23
+  "tin": 12,
+  "tout": 27
  },
  "56": {
   "chance": 100,
@@ -4604,8 +4604,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 87,
-  "tout": 86
+  "tin": 107,
+  "tout": 147
  },
  "560": {
   "chance": null,
@@ -4613,8 +4613,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 766,
-  "tout": 83
+  "tin": 1078,
+  "tout": 133
  },
  "561": {
   "chance": 0,
@@ -4623,7 +4623,7 @@
   "selected_by": 0.0,
   "status": "i",
   "tin": 4,
-  "tout": 18
+  "tout": 21
  },
  "562": {
   "chance": null,
@@ -4631,8 +4631,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 17,
-  "tout": 106
+  "tin": 21,
+  "tout": 153
  },
  "563": {
   "chance": 100,
@@ -4640,8 +4640,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 5,
-  "tout": 5
+  "tin": 6,
+  "tout": 8
  },
  "564": {
   "chance": null,
@@ -4649,8 +4649,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 11,
-  "tout": 81
+  "tin": 16,
+  "tout": 120
  },
  "565": {
   "chance": null,
@@ -4658,17 +4658,17 @@
   "news": "",
   "selected_by": 6.3,
   "status": "a",
-  "tin": 129,
-  "tout": 2304
+  "tin": 195,
+  "tout": 3467
  },
  "566": {
   "chance": null,
   "cost": 50,
   "news": "",
-  "selected_by": 2.0,
+  "selected_by": 2.1,
   "status": "a",
-  "tin": 4874,
-  "tout": 123
+  "tin": 8828,
+  "tout": 241
  },
  "567": {
   "chance": null,
@@ -4676,8 +4676,8 @@
   "news": "",
   "selected_by": 1.3,
   "status": "a",
-  "tin": 97,
-  "tout": 362
+  "tin": 141,
+  "tout": 556
  },
  "568": {
   "chance": null,
@@ -4685,17 +4685,17 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 14,
-  "tout": 21
+  "tin": 16,
+  "tout": 33
  },
  "569": {
   "chance": null,
   "cost": 60,
   "news": "",
-  "selected_by": 4.7,
+  "selected_by": 4.6,
   "status": "a",
-  "tin": 264,
-  "tout": 4004
+  "tin": 374,
+  "tout": 7853
  },
  "57": {
   "chance": null,
@@ -4703,8 +4703,8 @@
   "news": "",
   "selected_by": 3.0,
   "status": "a",
-  "tin": 1366,
-  "tout": 272
+  "tin": 2147,
+  "tout": 444
  },
  "570": {
   "chance": null,
@@ -4712,8 +4712,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 5,
-  "tout": 44
+  "tin": 6,
+  "tout": 66
  },
  "571": {
   "chance": 100,
@@ -4721,8 +4721,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 99,
-  "tout": 20
+  "tin": 157,
+  "tout": 23
  },
  "572": {
   "chance": null,
@@ -4730,8 +4730,8 @@
   "news": "",
   "selected_by": 14.2,
   "status": "a",
-  "tin": 781,
-  "tout": 6121
+  "tin": 962,
+  "tout": 9714
  },
  "573": {
   "chance": null,
@@ -4739,8 +4739,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 15,
-  "tout": 21
+  "tin": 20,
+  "tout": 29
  },
  "574": {
   "chance": null,
@@ -4748,8 +4748,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 7,
-  "tout": 16
+  "tin": 10,
+  "tout": 26
  },
  "575": {
   "chance": null,
@@ -4757,8 +4757,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 22,
-  "tout": 61
+  "tin": 25,
+  "tout": 90
  },
  "576": {
   "chance": null,
@@ -4766,8 +4766,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 19,
-  "tout": 29
+  "tin": 23,
+  "tout": 42
  },
  "577": {
   "chance": 0,
@@ -4776,7 +4776,7 @@
   "selected_by": 0.2,
   "status": "i",
   "tin": 1,
-  "tout": 48
+  "tout": 72
  },
  "578": {
   "chance": 0,
@@ -4784,8 +4784,8 @@
   "news": "Ankle injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 4,
-  "tout": 8
+  "tin": 5,
+  "tout": 12
  },
  "579": {
   "chance": null,
@@ -4793,8 +4793,8 @@
   "news": "",
   "selected_by": 3.9,
   "status": "a",
-  "tin": 5230,
-  "tout": 393
+  "tin": 7111,
+  "tout": 600
  },
  "58": {
   "chance": null,
@@ -4802,8 +4802,8 @@
   "news": "",
   "selected_by": 3.4,
   "status": "a",
-  "tin": 311,
-  "tout": 485
+  "tin": 457,
+  "tout": 797
  },
  "580": {
   "chance": null,
@@ -4811,8 +4811,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 9,
-  "tout": 43
+  "tin": 20,
+  "tout": 71
  },
  "581": {
   "chance": null,
@@ -4820,8 +4820,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 56,
-  "tout": 173
+  "tin": 71,
+  "tout": 279
  },
  "582": {
   "chance": 100,
@@ -4829,8 +4829,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 48,
-  "tout": 65
+  "tin": 70,
+  "tout": 126
  },
  "583": {
   "chance": 100,
@@ -4838,8 +4838,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 41,
-  "tout": 45
+  "tin": 64,
+  "tout": 64
  },
  "584": {
   "chance": null,
@@ -4848,7 +4848,7 @@
   "selected_by": 0.1,
   "status": "a",
   "tin": 1,
-  "tout": 14
+  "tout": 17
  },
  "585": {
   "chance": null,
@@ -4856,17 +4856,17 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 16,
-  "tout": 88
+  "tin": 26,
+  "tout": 140
  },
  "586": {
   "chance": 100,
   "cost": 41,
   "news": "",
-  "selected_by": 4.8,
+  "selected_by": 4.7,
   "status": "a",
-  "tin": 177,
-  "tout": 1238
+  "tin": 249,
+  "tout": 2077
  },
  "587": {
   "chance": null,
@@ -4874,8 +4874,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 10,
-  "tout": 6
+  "tin": 12,
+  "tout": 8
  },
  "588": {
   "chance": 100,
@@ -4883,8 +4883,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 28,
-  "tout": 138
+  "tin": 33,
+  "tout": 271
  },
  "589": {
   "chance": 75,
@@ -4893,7 +4893,7 @@
   "selected_by": 0.0,
   "status": "d",
   "tin": 2,
-  "tout": 6
+  "tout": 9
  },
  "59": {
   "chance": 0,
@@ -4902,7 +4902,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 24
+  "tout": 35
  },
  "590": {
   "chance": null,
@@ -4910,8 +4910,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 7,
-  "tout": 8
+  "tin": 10,
+  "tout": 17
  },
  "591": {
   "chance": 100,
@@ -4919,8 +4919,8 @@
   "news": "",
   "selected_by": 0.9,
   "status": "a",
-  "tin": 1744,
-  "tout": 306
+  "tin": 2973,
+  "tout": 432
  },
  "592": {
   "chance": null,
@@ -4928,8 +4928,8 @@
   "news": "",
   "selected_by": 1.0,
   "status": "a",
-  "tin": 537,
-  "tout": 135
+  "tin": 743,
+  "tout": 208
  },
  "593": {
   "chance": 100,
@@ -4937,8 +4937,8 @@
   "news": "",
   "selected_by": 1.2,
   "status": "a",
-  "tin": 114,
-  "tout": 232
+  "tin": 176,
+  "tout": 461
  },
  "594": {
   "chance": null,
@@ -4946,8 +4946,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 135,
-  "tout": 119
+  "tin": 184,
+  "tout": 174
  },
  "595": {
   "chance": null,
@@ -4956,7 +4956,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 1,
-  "tout": 3
+  "tout": 4
  },
  "596": {
   "chance": 0,
@@ -4965,7 +4965,7 @@
   "selected_by": 0.1,
   "status": "i",
   "tin": 2,
-  "tout": 34
+  "tout": 46
  },
  "597": {
   "chance": null,
@@ -4973,8 +4973,8 @@
   "news": "",
   "selected_by": 3.0,
   "status": "a",
-  "tin": 1919,
-  "tout": 625
+  "tin": 3339,
+  "tout": 1250
  },
  "598": {
   "chance": 100,
@@ -4982,8 +4982,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 7,
-  "tout": 10
+  "tin": 8,
+  "tout": 21
  },
  "599": {
   "chance": null,
@@ -4991,8 +4991,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 431,
-  "tout": 412
+  "tin": 562,
+  "tout": 672
  },
  "6": {
   "chance": 0,
@@ -5000,8 +5000,8 @@
   "news": "Back injury - Unknown return date",
   "selected_by": 0.2,
   "status": "i",
-  "tin": 50,
-  "tout": 64
+  "tin": 72,
+  "tout": 87
  },
  "60": {
   "chance": null,
@@ -5009,8 +5009,8 @@
   "news": "",
   "selected_by": 2.3,
   "status": "a",
-  "tin": 5931,
-  "tout": 396
+  "tin": 9140,
+  "tout": 639
  },
  "600": {
   "chance": null,
@@ -5018,8 +5018,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 13,
-  "tout": 8
+  "tin": 17,
+  "tout": 13
  },
  "601": {
   "chance": null,
@@ -5027,8 +5027,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 34,
-  "tout": 35
+  "tin": 94,
+  "tout": 62
  },
  "602": {
   "chance": 0,
@@ -5037,7 +5037,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 6
+  "tout": 9
  },
  "603": {
   "chance": null,
@@ -5045,8 +5045,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 11,
-  "tout": 21
+  "tin": 13,
+  "tout": 27
  },
  "604": {
   "chance": null,
@@ -5054,17 +5054,17 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 57,
-  "tout": 47
+  "tin": 74,
+  "tout": 63
  },
  "605": {
   "chance": null,
   "cost": 45,
   "news": "",
-  "selected_by": 3.0,
+  "selected_by": 2.9,
   "status": "a",
-  "tin": 597,
-  "tout": 2349
+  "tin": 810,
+  "tout": 3506
  },
  "606": {
   "chance": null,
@@ -5072,8 +5072,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 28,
-  "tout": 19
+  "tin": 37,
+  "tout": 40
  },
  "607": {
   "chance": 0,
@@ -5082,7 +5082,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 14
+  "tout": 20
  },
  "608": {
   "chance": null,
@@ -5090,8 +5090,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 35,
-  "tout": 80
+  "tin": 51,
+  "tout": 105
  },
  "609": {
   "chance": 0,
@@ -5100,7 +5100,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 61
+  "tout": 83
  },
  "61": {
   "chance": null,
@@ -5108,8 +5108,8 @@
   "news": "",
   "selected_by": 3.2,
   "status": "a",
-  "tin": 2176,
-  "tout": 323
+  "tin": 3412,
+  "tout": 489
  },
  "610": {
   "chance": 0,
@@ -5118,7 +5118,7 @@
   "selected_by": 0.1,
   "status": "u",
   "tin": 0,
-  "tout": 12
+  "tout": 22
  },
  "611": {
   "chance": 0,
@@ -5126,8 +5126,8 @@
   "news": "Hamstring injury - Expected back 21 Nov",
   "selected_by": 0.2,
   "status": "i",
-  "tin": 1,
-  "tout": 188
+  "tin": 2,
+  "tout": 258
  },
  "612": {
   "chance": 100,
@@ -5136,7 +5136,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 6,
-  "tout": 6
+  "tout": 8
  },
  "613": {
   "chance": null,
@@ -5144,8 +5144,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 51,
-  "tout": 91
+  "tin": 60,
+  "tout": 130
  },
  "614": {
   "chance": null,
@@ -5153,8 +5153,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 34,
-  "tout": 15
+  "tin": 50,
+  "tout": 21
  },
  "615": {
   "chance": null,
@@ -5162,8 +5162,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 21,
-  "tout": 17
+  "tin": 27,
+  "tout": 31
  },
  "616": {
   "chance": null,
@@ -5171,8 +5171,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 103,
-  "tout": 123
+  "tin": 134,
+  "tout": 184
  },
  "617": {
   "chance": 100,
@@ -5180,8 +5180,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 7,
-  "tout": 6
+  "tin": 10,
+  "tout": 8
  },
  "618": {
   "chance": 100,
@@ -5189,8 +5189,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 36,
-  "tout": 16
+  "tin": 61,
+  "tout": 24
  },
  "619": {
   "chance": null,
@@ -5198,8 +5198,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 28,
-  "tout": 33
+  "tin": 45,
+  "tout": 49
  },
  "62": {
   "chance": null,
@@ -5207,8 +5207,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 36,
-  "tout": 34
+  "tin": 44,
+  "tout": 53
  },
  "620": {
   "chance": null,
@@ -5216,8 +5216,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 29,
-  "tout": 51
+  "tin": 35,
+  "tout": 83
  },
  "621": {
   "chance": null,
@@ -5225,8 +5225,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 19,
-  "tout": 67
+  "tin": 34,
+  "tout": 93
  },
  "622": {
   "chance": null,
@@ -5234,8 +5234,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 148,
-  "tout": 92
+  "tin": 196,
+  "tout": 138
  },
  "623": {
   "chance": null,
@@ -5243,8 +5243,8 @@
   "news": "",
   "selected_by": 1.0,
   "status": "a",
-  "tin": 82,
-  "tout": 106
+  "tin": 132,
+  "tout": 161
  },
  "624": {
   "chance": 0,
@@ -5261,8 +5261,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 18,
-  "tout": 28
+  "tin": 34,
+  "tout": 50
  },
  "626": {
   "chance": null,
@@ -5270,8 +5270,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 28,
-  "tout": 202
+  "tin": 36,
+  "tout": 283
  },
  "627": {
   "chance": null,
@@ -5279,8 +5279,8 @@
   "news": "",
   "selected_by": 4.2,
   "status": "a",
-  "tin": 6242,
-  "tout": 942
+  "tin": 9021,
+  "tout": 1349
  },
  "628": {
   "chance": null,
@@ -5288,8 +5288,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 11,
-  "tout": 17
+  "tin": 14,
+  "tout": 25
  },
  "629": {
   "chance": null,
@@ -5297,8 +5297,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 190,
-  "tout": 125
+  "tin": 258,
+  "tout": 186
  },
  "63": {
   "chance": 0,
@@ -5306,7 +5306,7 @@
   "news": "Thigh injury - Expected back 31 Oct",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 3,
+  "tin": 5,
   "tout": 3
  },
  "630": {
@@ -5315,8 +5315,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 16,
-  "tout": 12
+  "tin": 20,
+  "tout": 17
  },
  "631": {
   "chance": null,
@@ -5324,8 +5324,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 94,
-  "tout": 67
+  "tin": 133,
+  "tout": 146
  },
  "632": {
   "chance": 0,
@@ -5333,8 +5333,8 @@
   "news": "Back injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 8,
-  "tout": 12
+  "tin": 10,
+  "tout": 13
  },
  "633": {
   "chance": null,
@@ -5343,7 +5343,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 7,
-  "tout": 4
+  "tout": 7
  },
  "634": {
   "chance": 75,
@@ -5351,8 +5351,8 @@
   "news": "Illness - 75% chance of playing",
   "selected_by": 0.1,
   "status": "d",
-  "tin": 3,
-  "tout": 93
+  "tin": 5,
+  "tout": 135
  },
  "635": {
   "chance": 100,
@@ -5361,7 +5361,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 2,
-  "tout": 2
+  "tout": 3
  },
  "636": {
   "chance": null,
@@ -5370,7 +5370,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 0,
-  "tout": 1
+  "tout": 2
  },
  "637": {
   "chance": 100,
@@ -5378,8 +5378,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 51,
-  "tout": 61
+  "tin": 68,
+  "tout": 94
  },
  "638": {
   "chance": 100,
@@ -5387,8 +5387,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 509,
-  "tout": 160
+  "tin": 687,
+  "tout": 231
  },
  "639": {
   "chance": 100,
@@ -5396,8 +5396,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 26,
-  "tout": 89
+  "tin": 42,
+  "tout": 110
  },
  "64": {
   "chance": null,
@@ -5405,8 +5405,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 300,
-  "tout": 26
+  "tin": 470,
+  "tout": 40
  },
  "640": {
   "chance": null,
@@ -5414,8 +5414,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 52,
-  "tout": 100
+  "tin": 62,
+  "tout": 187
  },
  "641": {
   "chance": null,
@@ -5423,8 +5423,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 4,
-  "tout": 6
+  "tin": 6,
+  "tout": 10
  },
  "642": {
   "chance": null,
@@ -5432,8 +5432,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 18,
-  "tout": 59
+  "tin": 25,
+  "tout": 89
  },
  "643": {
   "chance": 100,
@@ -5441,8 +5441,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 27,
-  "tout": 85
+  "tin": 35,
+  "tout": 144
  },
  "644": {
   "chance": 75,
@@ -5451,7 +5451,7 @@
   "selected_by": 0.0,
   "status": "d",
   "tin": 0,
-  "tout": 64
+  "tout": 100
  },
  "645": {
   "chance": null,
@@ -5460,7 +5460,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 6,
-  "tout": 5
+  "tout": 6
  },
  "646": {
   "chance": null,
@@ -5468,8 +5468,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 13,
-  "tout": 22
+  "tin": 14,
+  "tout": 33
  },
  "647": {
   "chance": null,
@@ -5477,7 +5477,7 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 2,
+  "tin": 3,
   "tout": 1
  },
  "648": {
@@ -5487,7 +5487,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 5,
-  "tout": 10
+  "tout": 14
  },
  "649": {
   "chance": null,
@@ -5495,8 +5495,8 @@
   "news": "",
   "selected_by": 1.4,
   "status": "a",
-  "tin": 92,
-  "tout": 386
+  "tin": 117,
+  "tout": 688
  },
  "65": {
   "chance": 0,
@@ -5504,8 +5504,8 @@
   "news": "Thigh injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 5,
-  "tout": 5
+  "tin": 6,
+  "tout": 6
  },
  "650": {
   "chance": 100,
@@ -5513,8 +5513,8 @@
   "news": "",
   "selected_by": 0.6,
   "status": "a",
-  "tin": 69,
-  "tout": 172
+  "tin": 92,
+  "tout": 449
  },
  "651": {
   "chance": null,
@@ -5522,8 +5522,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 262,
-  "tout": 501
+  "tin": 346,
+  "tout": 778
  },
  "652": {
   "chance": 0,
@@ -5540,8 +5540,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 34,
-  "tout": 35
+  "tin": 50,
+  "tout": 49
  },
  "654": {
   "chance": null,
@@ -5549,8 +5549,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 45,
-  "tout": 32
+  "tin": 64,
+  "tout": 46
  },
  "655": {
   "chance": null,
@@ -5558,8 +5558,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 10,
-  "tout": 7
+  "tin": 13,
+  "tout": 10
  },
  "656": {
   "chance": null,
@@ -5567,8 +5567,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 58,
-  "tout": 55
+  "tin": 98,
+  "tout": 74
  },
  "657": {
   "chance": null,
@@ -5576,8 +5576,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 24,
-  "tout": 19
+  "tin": 36,
+  "tout": 30
  },
  "658": {
   "chance": null,
@@ -5585,8 +5585,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 22,
-  "tout": 19
+  "tin": 30,
+  "tout": 31
  },
  "659": {
   "chance": null,
@@ -5594,8 +5594,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 69,
-  "tout": 56
+  "tin": 99,
+  "tout": 90
  },
  "66": {
   "chance": 100,
@@ -5603,8 +5603,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 80,
-  "tout": 55
+  "tin": 114,
+  "tout": 105
  },
  "660": {
   "chance": null,
@@ -5612,8 +5612,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 17,
-  "tout": 9
+  "tin": 25,
+  "tout": 14
  },
  "661": {
   "chance": null,
@@ -5621,8 +5621,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 56,
-  "tout": 26
+  "tin": 86,
+  "tout": 48
  },
  "662": {
   "chance": null,
@@ -5630,8 +5630,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 12,
-  "tout": 5
+  "tin": 15,
+  "tout": 8
  },
  "663": {
   "chance": null,
@@ -5639,8 +5639,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 15,
-  "tout": 11
+  "tin": 17,
+  "tout": 14
  },
  "664": {
   "chance": null,
@@ -5648,8 +5648,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 250,
-  "tout": 206
+  "tin": 320,
+  "tout": 325
  },
  "665": {
   "chance": null,
@@ -5657,8 +5657,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 12,
-  "tout": 5
+  "tin": 16,
+  "tout": 8
  },
  "666": {
   "chance": null,
@@ -5666,8 +5666,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 12,
-  "tout": 7
+  "tin": 19,
+  "tout": 11
  },
  "667": {
   "chance": null,
@@ -5675,8 +5675,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 184,
-  "tout": 127
+  "tin": 257,
+  "tout": 184
  },
  "668": {
   "chance": null,
@@ -5684,8 +5684,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 4,
-  "tout": 2
+  "tin": 5,
+  "tout": 4
  },
  "669": {
   "chance": null,
@@ -5693,8 +5693,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 256,
-  "tout": 36
+  "tin": 369,
+  "tout": 55
  },
  "67": {
   "chance": null,
@@ -5702,17 +5702,17 @@
   "news": "",
   "selected_by": 2.2,
   "status": "a",
-  "tin": 2297,
-  "tout": 480
+  "tin": 3430,
+  "tout": 849
  },
  "68": {
   "chance": null,
   "cost": 65,
   "news": "",
-  "selected_by": 25.7,
+  "selected_by": 25.9,
   "status": "a",
-  "tin": 49423,
-  "tout": 1257
+  "tin": 76081,
+  "tout": 2085
  },
  "69": {
   "chance": 0,
@@ -5720,8 +5720,8 @@
   "news": "Thigh injury - Expected back 21 Nov",
   "selected_by": 2.3,
   "status": "i",
-  "tin": 25,
-  "tout": 1797
+  "tin": 34,
+  "tout": 2429
  },
  "7": {
   "chance": null,
@@ -5729,8 +5729,8 @@
   "news": "",
   "selected_by": 0.5,
   "status": "a",
-  "tin": 69,
-  "tout": 183
+  "tin": 93,
+  "tout": 245
  },
  "70": {
   "chance": 100,
@@ -5738,8 +5738,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 1655,
-  "tout": 135
+  "tin": 2666,
+  "tout": 229
  },
  "71": {
   "chance": null,
@@ -5747,8 +5747,8 @@
   "news": "",
   "selected_by": 0.2,
   "status": "a",
-  "tin": 50,
-  "tout": 49
+  "tin": 76,
+  "tout": 70
  },
  "72": {
   "chance": null,
@@ -5756,8 +5756,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 13,
-  "tout": 25
+  "tin": 18,
+  "tout": 32
  },
  "73": {
   "chance": 100,
@@ -5765,8 +5765,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 146,
-  "tout": 101
+  "tin": 193,
+  "tout": 143
  },
  "74": {
   "chance": 100,
@@ -5774,8 +5774,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 10,
-  "tout": 31
+  "tin": 13,
+  "tout": 43
  },
  "75": {
   "chance": 100,
@@ -5783,8 +5783,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 25,
-  "tout": 26
+  "tin": 39,
+  "tout": 29
  },
  "76": {
   "chance": 0,
@@ -5793,7 +5793,7 @@
   "selected_by": 0.0,
   "status": "i",
   "tin": 0,
-  "tout": 11
+  "tout": 13
  },
  "77": {
   "chance": 100,
@@ -5801,8 +5801,8 @@
   "news": "",
   "selected_by": 0.0,
   "status": "a",
-  "tin": 93,
-  "tout": 13
+  "tin": 206,
+  "tout": 23
  },
  "78": {
   "chance": 100,
@@ -5810,26 +5810,26 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 2523,
-  "tout": 202
+  "tin": 4542,
+  "tout": 300
  },
  "79": {
   "chance": null,
   "cost": 63,
   "news": "",
-  "selected_by": 15.0,
+  "selected_by": 15.4,
   "status": "a",
-  "tin": 76982,
-  "tout": 734
+  "tin": 121835,
+  "tout": 1133
  },
  "8": {
   "chance": 75,
   "cost": 59,
   "news": "Hip injury - 75% chance of playing",
-  "selected_by": 48.1,
+  "selected_by": 48.0,
   "status": "d",
-  "tin": 993,
-  "tout": 26351
+  "tin": 1444,
+  "tout": 38247
  },
  "80": {
   "chance": 0,
@@ -5838,7 +5838,7 @@
   "selected_by": 0.0,
   "status": "u",
   "tin": 0,
-  "tout": 3
+  "tout": 4
  },
  "81": {
   "chance": 100,
@@ -5846,8 +5846,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 151,
-  "tout": 88
+  "tin": 191,
+  "tout": 121
  },
  "82": {
   "chance": null,
@@ -5855,8 +5855,8 @@
   "news": "",
   "selected_by": 6.2,
   "status": "a",
-  "tin": 429,
-  "tout": 1227
+  "tin": 636,
+  "tout": 1775
  },
  "83": {
   "chance": null,
@@ -5864,8 +5864,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 13,
-  "tout": 13
+  "tin": 17,
+  "tout": 23
  },
  "84": {
   "chance": 100,
@@ -5873,8 +5873,8 @@
   "news": "",
   "selected_by": 0.8,
   "status": "a",
-  "tin": 128,
-  "tout": 195
+  "tin": 170,
+  "tout": 308
  },
  "85": {
   "chance": 100,
@@ -5882,8 +5882,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 79,
-  "tout": 22
+  "tin": 137,
+  "tout": 35
  },
  "86": {
   "chance": null,
@@ -5891,8 +5891,8 @@
   "news": "",
   "selected_by": 2.0,
   "status": "a",
-  "tin": 489,
-  "tout": 923
+  "tin": 706,
+  "tout": 1495
  },
  "87": {
   "chance": null,
@@ -5900,8 +5900,8 @@
   "news": "",
   "selected_by": 4.1,
   "status": "a",
-  "tin": 754,
-  "tout": 928
+  "tin": 1247,
+  "tout": 1520
  },
  "88": {
   "chance": null,
@@ -5909,8 +5909,8 @@
   "news": "",
   "selected_by": 6.9,
   "status": "a",
-  "tin": 366,
-  "tout": 1605
+  "tin": 528,
+  "tout": 2436
  },
  "89": {
   "chance": 0,
@@ -5919,7 +5919,7 @@
   "selected_by": 0.2,
   "status": "i",
   "tin": 3,
-  "tout": 111
+  "tout": 149
  },
  "9": {
   "chance": 100,
@@ -5927,8 +5927,8 @@
   "news": "",
   "selected_by": 0.7,
   "status": "a",
-  "tin": 108,
-  "tout": 85
+  "tin": 143,
+  "tout": 122
  },
  "90": {
   "chance": null,
@@ -5936,8 +5936,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 11,
-  "tout": 13
+  "tin": 13,
+  "tout": 16
  },
  "91": {
   "chance": null,
@@ -5945,8 +5945,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 30,
-  "tout": 43
+  "tin": 42,
+  "tout": 63
  },
  "92": {
   "chance": null,
@@ -5955,7 +5955,7 @@
   "selected_by": 0.0,
   "status": "a",
   "tin": 4,
-  "tout": 0
+  "tout": 3
  },
  "93": {
   "chance": 100,
@@ -5963,17 +5963,17 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 8,
-  "tout": 207
+  "tin": 9,
+  "tout": 365
  },
  "94": {
   "chance": 100,
   "cost": 62,
   "news": "",
-  "selected_by": 14.8,
+  "selected_by": 14.7,
   "status": "a",
-  "tin": 2239,
-  "tout": 9029
+  "tin": 3248,
+  "tout": 15186
  },
  "95": {
   "chance": null,
@@ -5981,8 +5981,8 @@
   "news": "",
   "selected_by": 0.4,
   "status": "a",
-  "tin": 219,
-  "tout": 89
+  "tin": 321,
+  "tout": 145
  },
  "96": {
   "chance": 100,
@@ -5990,8 +5990,8 @@
   "news": "",
   "selected_by": 0.3,
   "status": "a",
-  "tin": 27,
-  "tout": 111
+  "tin": 37,
+  "tout": 161
  },
  "97": {
   "chance": 100,
@@ -5999,8 +5999,8 @@
   "news": "",
   "selected_by": 0.1,
   "status": "a",
-  "tin": 11,
-  "tout": 8
+  "tin": 15,
+  "tout": 21
  },
  "98": {
   "chance": 100,
@@ -6008,8 +6008,8 @@
   "news": "",
   "selected_by": 1.7,
   "status": "a",
-  "tin": 176,
-  "tout": 608
+  "tin": 264,
+  "tout": 821
  },
  "99": {
   "chance": 0,
@@ -6017,7 +6017,7 @@
   "news": "Knee injury - Unknown return date",
   "selected_by": 0.0,
   "status": "i",
-  "tin": 3,
+  "tin": 4,
   "tout": 0
  }
 }
