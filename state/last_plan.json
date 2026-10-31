@@ -1,29 +1,33 @@
 {
  "deadline": "2026-11-06T18:30:00Z",
- "generated": "2026-10-31T20:26:24.177047+00:00",
+ "generated": "2026-10-31T20:33:51.219352+00:00",
  "gw": 10,
  "teams": {
   "Minoux_41": {
    "bench": [
-    82,
+    226,
     155,
     106,
     441
    ],
-   "captain": 427,
+   "captain": 236,
    "chip": null,
    "chip_gain": null,
    "entry": 4896428,
-   "hits": 0,
+   "hits": 2,
    "in": [
-    389
+    60,
+    236,
+    350
    ],
    "out": [
+    82,
+    40,
     200
    ],
    "picks_payload": [
     {
-     "element": 226,
+     "element": 350,
      "is_captain": false,
      "is_vice": false,
      "position": 1
@@ -53,33 +57,33 @@
      "position": 5
     },
     {
-     "element": 389,
+     "element": 60,
      "is_captain": false,
      "is_vice": false,
      "position": 6
     },
     {
-     "element": 40,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 7
-    },
-    {
      "element": 427,
-     "is_captain": true,
-     "is_vice": false,
-     "position": 8
+     "is_captain": false,
+     "is_vice": true,
+     "position": 7
     },
     {
      "element": 480,
      "is_captain": false,
+     "is_vice": false,
+     "position": 8
+    },
+    {
+     "element": 236,
+     "is_captain": true,
      "is_vice": false,
      "position": 9
     },
     {
      "element": 68,
      "is_captain": false,
-     "is_vice": true,
+     "is_vice": false,
      "position": 10
     },
     {
@@ -89,7 +93,7 @@
      "position": 11
     },
     {
-     "element": 82,
+     "element": 226,
      "is_captain": false,
      "is_vice": false,
      "position": 12
@@ -132,33 +136,33 @@
    ],
    "squad_after": [
     4,
+    60,
     68,
     79,
-    82,
     106,
-    40,
     226,
     229,
+    236,
+    350,
     356,
     155,
     388,
-    389,
     427,
     441,
     480
    ],
    "squad_source": "api",
-   "vice": 68,
+   "vice": 427,
    "xi": [
-    226,
+    350,
     4,
     356,
     229,
     388,
-    389,
-    40,
+    60,
     427,
     480,
+    236,
     68,
     79
    ]
