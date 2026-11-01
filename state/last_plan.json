@@ -1,6 +1,6 @@
 {
  "deadline": "2026-11-06T18:30:00Z",
- "generated": "2026-10-31T23:46:11.244256+00:00",
+ "generated": "2026-11-01T06:53:08.739735+00:00",
  "gw": 10,
  "teams": {
   "Minoux_41": {
@@ -69,13 +69,13 @@
      "position": 7
     },
     {
-     "element": 236,
+     "element": 68,
      "is_captain": false,
      "is_vice": false,
      "position": 8
     },
     {
-     "element": 68,
+     "element": 236,
      "is_captain": false,
      "is_vice": false,
      "position": 9
@@ -161,8 +161,8 @@
     388,
     427,
     480,
-    236,
     68,
+    236,
     106,
     79
    ]
