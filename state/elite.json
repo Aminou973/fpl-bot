@@ -1,7 +1,7 @@
 {
  "captains": [
   {
-   "elite": 80.0,
+   "elite": 78.0,
    "field": 78.9,
    "id": 411,
    "name": "Haaland",
@@ -28,7 +28,7 @@
    "team": "CHE"
   },
   {
-   "elite": 4.0,
+   "elite": 6.0,
    "field": 24.9,
    "id": 166,
    "name": "N.Jackson",
@@ -37,7 +37,7 @@
    "team": "AVL"
   }
  ],
- "generated": "2026-11-01T23:06:14+00:00",
+ "generated": "2026-11-02T02:44:46+00:00",
  "gw": 10,
  "gw_read": 9,
  "league": "Overall (top 50)",
@@ -66,15 +66,6 @@
   },
   {
    "elite": 84.0,
-   "field": 27.8,
-   "id": 154,
-   "name": "Palmer",
-   "pos": "MID",
-   "price": 9.8,
-   "team": "CHE"
-  },
-  {
-   "elite": 84.0,
    "field": 24.9,
    "id": 166,
    "name": "N.Jackson",
@@ -83,7 +74,16 @@
    "team": "AVL"
   },
   {
-   "elite": 78.0,
+   "elite": 82.0,
+   "field": 27.8,
+   "id": 154,
+   "name": "Palmer",
+   "pos": "MID",
+   "price": 9.8,
+   "team": "CHE"
+  },
+  {
+   "elite": 74.0,
    "field": 46.8,
    "id": 124,
    "name": "Gro\u00df",
@@ -92,22 +92,13 @@
    "team": "BHA"
   },
   {
-   "elite": 74.0,
+   "elite": 72.0,
    "field": 22.3,
    "id": 31,
    "name": "Konsa",
    "pos": "DEF",
    "price": 4.7,
    "team": "ARS"
-  },
-  {
-   "elite": 70.0,
-   "field": 44.4,
-   "id": 115,
-   "name": "De Cuyper",
-   "pos": "DEF",
-   "price": 5.4,
-   "team": "BHA"
   },
   {
    "elite": 68.0,
@@ -120,6 +111,24 @@
   },
   {
    "elite": 66.0,
+   "field": 10.5,
+   "id": 112,
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "TOT"
+  },
+  {
+   "elite": 64.0,
+   "field": 44.5,
+   "id": 115,
+   "name": "De Cuyper",
+   "pos": "DEF",
+   "price": 5.4,
+   "team": "BHA"
+  },
+  {
+   "elite": 62.0,
    "field": 46.4,
    "id": 1,
    "name": "Raya",
@@ -128,16 +137,7 @@
    "team": "ARS"
   },
   {
-   "elite": 64.0,
-   "field": 10.4,
-   "id": 112,
-   "name": "Van Hecke",
-   "pos": "DEF",
-   "price": 5.0,
-   "team": "TOT"
-  },
-  {
-   "elite": 56.0,
+   "elite": 50.0,
    "field": 47.9,
    "id": 8,
    "name": "Calafiori",
@@ -146,7 +146,7 @@
    "team": "ARS"
   },
   {
-   "elite": 46.0,
+   "elite": 44.0,
    "field": 6.1,
    "id": 334,
    "name": "Muharemovi\u0107",
@@ -155,7 +155,7 @@
    "team": "LEE"
   },
   {
-   "elite": 36.0,
+   "elite": 42.0,
    "field": 6.7,
    "id": 53,
    "name": "Manzambi",
@@ -174,15 +174,6 @@
   },
   {
    "elite": 28.0,
-   "field": 21.1,
-   "id": 346,
-   "name": "Calvert-Lewin",
-   "pos": "FWD",
-   "price": 6.1,
-   "team": "LEE"
-  },
-  {
-   "elite": 26.0,
    "field": 24.2,
    "id": 4,
    "name": "Gabriel",
@@ -191,7 +182,7 @@
    "team": "ARS"
   },
   {
-   "elite": 24.0,
+   "elite": 26.0,
    "field": 14.5,
    "id": 94,
    "name": "Schade",
@@ -201,16 +192,7 @@
   },
   {
    "elite": 24.0,
-   "field": 15.7,
-   "id": 497,
-   "name": "Dubravka",
-   "pos": "GKP",
-   "price": 4.0,
-   "team": "TOT"
-  },
-  {
-   "elite": 22.0,
-   "field": 16.6,
+   "field": 16.7,
    "id": 79,
    "name": "Evanilson",
    "pos": "FWD",
@@ -218,25 +200,7 @@
    "team": "BOU"
   },
   {
-   "elite": 20.0,
-   "field": 15.3,
-   "id": 496,
-   "name": "Kinsky",
-   "pos": "GKP",
-   "price": 4.4,
-   "team": "TOT"
-  },
-  {
-   "elite": 18.0,
-   "field": 20.3,
-   "id": 449,
-   "name": "Hall",
-   "pos": "DEF",
-   "price": 5.3,
-   "team": "NEW"
-  },
-  {
-   "elite": 18.0,
+   "elite": 24.0,
    "field": 2.2,
    "id": 566,
    "name": "Silva",
@@ -245,12 +209,48 @@
    "team": "BOU"
   },
   {
+   "elite": 22.0,
+   "field": 15.3,
+   "id": 496,
+   "name": "Kinsky",
+   "pos": "GKP",
+   "price": 4.4,
+   "team": "TOT"
+  },
+  {
+   "elite": 22.0,
+   "field": 21.1,
+   "id": 346,
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "price": 6.1,
+   "team": "LEE"
+  },
+  {
+   "elite": 20.0,
+   "field": 15.7,
+   "id": 497,
+   "name": "Dubravka",
+   "pos": "GKP",
+   "price": 4.0,
+   "team": "TOT"
+  },
+  {
    "elite": 18.0,
    "field": 7.5,
    "id": 453,
    "name": "Barnes",
    "pos": "MID",
    "price": 6.1,
+   "team": "NEW"
+  },
+  {
+   "elite": 16.0,
+   "field": 20.3,
+   "id": 449,
+   "name": "Hall",
+   "pos": "DEF",
+   "price": 5.3,
    "team": "NEW"
   },
   {
@@ -264,12 +264,12 @@
   },
   {
    "elite": 16.0,
-   "field": 7.2,
-   "id": 504,
-   "name": "Vuskovic",
-   "pos": "DEF",
-   "price": 5.2,
-   "team": "BHA"
+   "field": 9.2,
+   "id": 106,
+   "name": "Thiago",
+   "pos": "FWD",
+   "price": 7.8,
+   "team": "BRE"
   }
  ]
 }
