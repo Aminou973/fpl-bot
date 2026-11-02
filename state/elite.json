@@ -2,7 +2,7 @@
  "captains": [
   {
    "elite": 78.0,
-   "field": 78.9,
+   "field": 79.0,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -10,16 +10,7 @@
    "team": "MCI"
   },
   {
-   "elite": 8.0,
-   "field": 52.0,
-   "id": 40,
-   "name": "Rogers",
-   "pos": "MID",
-   "price": 8.1,
-   "team": "CHE"
-  },
-  {
-   "elite": 8.0,
+   "elite": 10.0,
    "field": 27.9,
    "id": 154,
    "name": "Palmer",
@@ -28,8 +19,17 @@
    "team": "CHE"
   },
   {
-   "elite": 6.0,
-   "field": 25.1,
+   "elite": 8.0,
+   "field": 52.1,
+   "id": 40,
+   "name": "Rogers",
+   "pos": "MID",
+   "price": 8.1,
+   "team": "CHE"
+  },
+  {
+   "elite": 4.0,
+   "field": 25.4,
    "id": 166,
    "name": "N.Jackson",
    "pos": "FWD",
@@ -37,7 +37,7 @@
    "team": "AVL"
   }
  ],
- "generated": "2026-11-02T11:42:10+00:00",
+ "generated": "2026-11-02T20:53:57+00:00",
  "gw": 10,
  "gw_read": 9,
  "league": "Overall (top 50)",
@@ -48,7 +48,7 @@
  "template": [
   {
    "elite": 100.0,
-   "field": 78.9,
+   "field": 79.0,
    "id": 411,
    "name": "Haaland",
    "pos": "FWD",
@@ -57,7 +57,7 @@
   },
   {
    "elite": 98.0,
-   "field": 52.0,
+   "field": 52.1,
    "id": 40,
    "name": "Rogers",
    "pos": "MID",
@@ -66,15 +66,6 @@
   },
   {
    "elite": 84.0,
-   "field": 25.1,
-   "id": 166,
-   "name": "N.Jackson",
-   "pos": "FWD",
-   "price": 7.0,
-   "team": "AVL"
-  },
-  {
-   "elite": 82.0,
    "field": 27.9,
    "id": 154,
    "name": "Palmer",
@@ -83,7 +74,16 @@
    "team": "CHE"
   },
   {
-   "elite": 74.0,
+   "elite": 82.0,
+   "field": 25.4,
+   "id": 166,
+   "name": "N.Jackson",
+   "pos": "FWD",
+   "price": 7.0,
+   "team": "AVL"
+  },
+  {
+   "elite": 76.0,
    "field": 46.8,
    "id": 124,
    "name": "Gro\u00df",
@@ -92,8 +92,8 @@
    "team": "BHA"
   },
   {
-   "elite": 72.0,
-   "field": 22.4,
+   "elite": 76.0,
+   "field": 22.6,
    "id": 31,
    "name": "Konsa",
    "pos": "DEF",
@@ -101,26 +101,8 @@
    "team": "ARS"
   },
   {
-   "elite": 68.0,
-   "field": 26.9,
-   "id": 68,
-   "name": "Tavernier",
-   "pos": "MID",
-   "price": 6.6,
-   "team": "BOU"
-  },
-  {
-   "elite": 66.0,
-   "field": 10.6,
-   "id": 112,
-   "name": "Van Hecke",
-   "pos": "DEF",
-   "price": 5.0,
-   "team": "TOT"
-  },
-  {
-   "elite": 64.0,
-   "field": 44.6,
+   "elite": 72.0,
+   "field": 44.7,
    "id": 115,
    "name": "De Cuyper",
    "pos": "DEF",
@@ -128,7 +110,7 @@
    "team": "BHA"
   },
   {
-   "elite": 62.0,
+   "elite": 70.0,
    "field": 46.5,
    "id": 1,
    "name": "Raya",
@@ -137,7 +119,25 @@
    "team": "ARS"
   },
   {
-   "elite": 50.0,
+   "elite": 66.0,
+   "field": 10.8,
+   "id": 112,
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "TOT"
+  },
+  {
+   "elite": 62.0,
+   "field": 27.1,
+   "id": 68,
+   "name": "Tavernier",
+   "pos": "MID",
+   "price": 6.6,
+   "team": "BOU"
+  },
+  {
+   "elite": 56.0,
    "field": 47.9,
    "id": 8,
    "name": "Calafiori",
@@ -146,22 +146,22 @@
    "team": "ARS"
   },
   {
-   "elite": 44.0,
+   "elite": 40.0,
+   "field": 6.8,
+   "id": 53,
+   "name": "Manzambi",
+   "pos": "MID",
+   "price": 6.1,
+   "team": "AVL"
+  },
+  {
+   "elite": 36.0,
    "field": 6.1,
    "id": 334,
    "name": "Muharemovi\u0107",
    "pos": "DEF",
    "price": 5.1,
    "team": "LEE"
-  },
-  {
-   "elite": 42.0,
-   "field": 6.7,
-   "id": 53,
-   "name": "Manzambi",
-   "pos": "MID",
-   "price": 6.1,
-   "team": "AVL"
   },
   {
    "elite": 30.0,
@@ -173,7 +173,7 @@
    "team": "BHA"
   },
   {
-   "elite": 28.0,
+   "elite": 26.0,
    "field": 24.3,
    "id": 4,
    "name": "Gabriel",
@@ -183,69 +183,6 @@
   },
   {
    "elite": 26.0,
-   "field": 14.5,
-   "id": 94,
-   "name": "Schade",
-   "pos": "MID",
-   "price": 6.2,
-   "team": "BRE"
-  },
-  {
-   "elite": 24.0,
-   "field": 16.9,
-   "id": 79,
-   "name": "Evanilson",
-   "pos": "FWD",
-   "price": 6.4,
-   "team": "BOU"
-  },
-  {
-   "elite": 24.0,
-   "field": 2.3,
-   "id": 566,
-   "name": "Silva",
-   "pos": "DEF",
-   "price": 5.0,
-   "team": "BOU"
-  },
-  {
-   "elite": 22.0,
-   "field": 15.3,
-   "id": 496,
-   "name": "Kinsky",
-   "pos": "GKP",
-   "price": 4.4,
-   "team": "TOT"
-  },
-  {
-   "elite": 22.0,
-   "field": 21.0,
-   "id": 346,
-   "name": "Calvert-Lewin",
-   "pos": "FWD",
-   "price": 6.1,
-   "team": "LEE"
-  },
-  {
-   "elite": 20.0,
-   "field": 15.7,
-   "id": 497,
-   "name": "Dubravka",
-   "pos": "GKP",
-   "price": 4.0,
-   "team": "TOT"
-  },
-  {
-   "elite": 18.0,
-   "field": 7.5,
-   "id": 453,
-   "name": "Barnes",
-   "pos": "MID",
-   "price": 6.1,
-   "team": "NEW"
-  },
-  {
-   "elite": 16.0,
    "field": 20.2,
    "id": 449,
    "name": "Hall",
@@ -254,7 +191,52 @@
    "team": "NEW"
   },
   {
-   "elite": 16.0,
+   "elite": 26.0,
+   "field": 14.4,
+   "id": 94,
+   "name": "Schade",
+   "pos": "MID",
+   "price": 6.2,
+   "team": "BRE"
+  },
+  {
+   "elite": 24.0,
+   "field": 17.2,
+   "id": 79,
+   "name": "Evanilson",
+   "pos": "FWD",
+   "price": 6.4,
+   "team": "BOU"
+  },
+  {
+   "elite": 24.0,
+   "field": 21.0,
+   "id": 346,
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "price": 6.1,
+   "team": "LEE"
+  },
+  {
+   "elite": 22.0,
+   "field": 15.6,
+   "id": 497,
+   "name": "Dubravka",
+   "pos": "GKP",
+   "price": 4.0,
+   "team": "TOT"
+  },
+  {
+   "elite": 20.0,
+   "field": 7.5,
+   "id": 453,
+   "name": "Barnes",
+   "pos": "MID",
+   "price": 6.1,
+   "team": "NEW"
+  },
+  {
+   "elite": 18.0,
    "field": 7.4,
    "id": 249,
    "name": "Barry",
@@ -263,13 +245,31 @@
    "team": "EVE"
   },
   {
+   "elite": 18.0,
+   "field": 15.4,
+   "id": 496,
+   "name": "Kinsky",
+   "pos": "GKP",
+   "price": 4.4,
+   "team": "TOT"
+  },
+  {
    "elite": 16.0,
-   "field": 9.2,
-   "id": 106,
-   "name": "Thiago",
-   "pos": "FWD",
-   "price": 7.8,
-   "team": "BRE"
+   "field": 2.3,
+   "id": 566,
+   "name": "Silva",
+   "pos": "DEF",
+   "price": 5.0,
+   "team": "BOU"
+  },
+  {
+   "elite": 16.0,
+   "field": 7.2,
+   "id": 504,
+   "name": "Vuskovic",
+   "pos": "DEF",
+   "price": 5.2,
+   "team": "BHA"
   }
  ]
 }
