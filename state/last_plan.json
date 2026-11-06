@@ -1,16 +1,16 @@
 {
  "deadline": "2026-11-06T18:30:00Z",
- "generated": "2026-11-05T19:01:52.817118+00:00",
+ "generated": "2026-11-06T00:35:48.441332+00:00",
  "gw": 10,
  "teams": {
   "Minoux_41": {
    "bench": [
-    226,
+    350,
     155,
     106,
     441
    ],
-   "captain": 480,
+   "captain": 236,
    "chip": null,
    "chip_gain": null,
    "entry": 4896428,
@@ -27,7 +27,7 @@
    ],
    "picks_payload": [
     {
-     "element": 350,
+     "element": 226,
      "is_captain": false,
      "is_vice": false,
      "position": 1
@@ -70,7 +70,7 @@
     },
     {
      "element": 480,
-     "is_captain": true,
+     "is_captain": false,
      "is_vice": false,
      "position": 8
     },
@@ -82,7 +82,7 @@
     },
     {
      "element": 236,
-     "is_captain": false,
+     "is_captain": true,
      "is_vice": false,
      "position": 10
     },
@@ -93,7 +93,7 @@
      "position": 11
     },
     {
-     "element": 226,
+     "element": 350,
      "is_captain": false,
      "is_vice": false,
      "position": 12
@@ -154,7 +154,7 @@
    "squad_source": "api",
    "vice": 427,
    "xi": [
-    350,
+    226,
     4,
     356,
     229,
