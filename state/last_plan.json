@@ -1,11 +1,11 @@
 {
  "deadline": "2026-11-06T18:30:00Z",
- "generated": "2026-11-06T07:27:25.837547+00:00",
+ "generated": "2026-11-06T15:25:23.618531+00:00",
  "gw": 10,
  "teams": {
   "Minoux_41": {
    "bench": [
-    350,
+    226,
     155,
     106,
     441
@@ -27,7 +27,7 @@
    ],
    "picks_payload": [
     {
-     "element": 226,
+     "element": 350,
      "is_captain": false,
      "is_vice": false,
      "position": 1
@@ -93,7 +93,7 @@
      "position": 11
     },
     {
-     "element": 350,
+     "element": 226,
      "is_captain": false,
      "is_vice": false,
      "position": 12
@@ -154,7 +154,7 @@
    "squad_source": "api",
    "vice": 427,
    "xi": [
-    226,
+    350,
     4,
     356,
     229,
@@ -170,8 +170,8 @@
   "Minoux_69": {
    "bench": [
     109,
+    498,
     212,
-    346,
     272
    ],
    "captain": 411,
@@ -179,12 +179,8 @@
    "chip_gain": null,
    "entry": 4894622,
    "hits": 0,
-   "in": [
-    115
-   ],
-   "out": [
-    498
-   ],
+   "in": [],
+   "out": [],
    "picks_payload": [
     {
      "element": 1,
@@ -211,44 +207,44 @@
      "position": 4
     },
     {
-     "element": 115,
+     "element": 330,
      "is_captain": false,
      "is_vice": false,
      "position": 5
     },
     {
-     "element": 330,
+     "element": 40,
      "is_captain": false,
      "is_vice": false,
      "position": 6
     },
     {
-     "element": 40,
+     "element": 480,
      "is_captain": false,
      "is_vice": false,
      "position": 7
     },
     {
-     "element": 480,
+     "element": 94,
      "is_captain": false,
      "is_vice": false,
      "position": 8
     },
     {
-     "element": 94,
-     "is_captain": false,
-     "is_vice": false,
-     "position": 9
-    },
-    {
      "element": 124,
      "is_captain": false,
      "is_vice": true,
-     "position": 10
+     "position": 9
     },
     {
      "element": 411,
      "is_captain": true,
+     "is_vice": false,
+     "position": 10
+    },
+    {
+     "element": 346,
+     "is_captain": false,
      "is_vice": false,
      "position": 11
     },
@@ -259,13 +255,13 @@
      "position": 12
     },
     {
-     "element": 212,
+     "element": 498,
      "is_captain": false,
      "is_vice": false,
      "position": 13
     },
     {
-     "element": 346,
+     "element": 212,
      "is_captain": false,
      "is_vice": false,
      "position": 14
@@ -280,10 +276,27 @@
    "squad": [
     1,
     4,
+    229,
+    388,
+    330,
     40,
+    480,
+    94,
+    124,
+    411,
+    346,
+    109,
+    498,
+    212,
+    272
+   ],
+   "squad_after": [
+    1,
+    4,
     94,
     109,
     124,
+    40,
     212,
     229,
     272,
@@ -294,23 +307,6 @@
     480,
     498
    ],
-   "squad_after": [
-    1,
-    4,
-    94,
-    109,
-    115,
-    124,
-    40,
-    212,
-    229,
-    272,
-    330,
-    346,
-    388,
-    411,
-    480
-   ],
    "squad_source": "api",
    "vice": 124,
    "xi": [
@@ -318,13 +314,13 @@
     4,
     229,
     388,
-    115,
     330,
     40,
     480,
     94,
     124,
-    411
+    411,
+    346
    ]
   }
  }
