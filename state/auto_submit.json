@@ -1,7 +1,7 @@
 {
  "gws": {
   "10": {
-   "at": "2026-11-06T07:24:37.200465+00:00",
+   "at": "2026-11-06T15:23:28.170873+00:00",
    "deadline": "2026-11-06T18:30:00Z",
    "mode": "apply",
    "teams": {
@@ -10,16 +10,9 @@
      "status": "login-needed"
     },
     "Minoux_69": {
-     "captain": 411,
      "gw": 10,
-     "in": [
-      4
-     ],
-     "out": [
-      259
-     ],
-     "status": "applied",
-     "team_id": 4894622
+     "note": "1 transfer(s) with 0 free left would cost \u22124 pts \u2014 the bot does not spend points on its own. Make these by hand if you want them.",
+     "status": "refused"
     }
    }
   },
